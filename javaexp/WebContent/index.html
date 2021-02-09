@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h2>안녕하세요! 웹프로그래밍 시작입니다!</h2>
+</body>
+<!--
+		# 웹어플리케이션 서버 연동.
+		1. 구글에서 tomcat 9.0 검색
+		2. 해당 사이트에서 다운로드 압축풀어..
+			D:\박동생\apache-tomcat-9.0.41-windows-x64 위치시킴
+		3. 하단의 server 항목에 추가하여
+			tomcat9.0에 연동하게 처리한다.
+			add javaexp2로 설정하고 finish
+		4. 해당 tomcat v9.0 더블클릭
+			port를 7005/7080으로 변경 처리. 저장
+		5. index.html을 클릭
+			run as(ctrl+f11)
+		
+		
+ 		http://localhost:7080/javaexp/index.html
+ 		http://211.63.89.62:7080/javaexp/index.html
+ 			:다른 컴퓨터 브라우저에서 내 컴퓨터의 서버 내용을 확인할 때
+ 		http://www.gogo.com/javaexp/index.html
+ 			: ip와 매핑하는 도메인을 도메인 기관에 등록하고, 다른 컴퓨터의 브라우저를 통해서 내 컴퓨터의 서버내용을 확인할 때 
+ 		
+ 		http: 프로토콜 - 네트웍 언어	hypertext transport protocol
+ 					- html 문서를 보내는 네트웍 프로토콜
+ 					- ftp, smtp/pop, telnet
+ 		https: 보안 http프로토콜
+ 		localhost: ip주소.. : domain 기관에서 ip(주소)와 도메인명으로 변경
+ 			localhost: 현재 컴퓨터에서 웹서버를 실행시, 확인하고자 할 때 쓰는 loop back 아이피(127.0.0.1)
+ 		7080: port번호
+ 		javaexp: 프로젝트명(context명) - 특정한 자원의 폴드위치
+ 		index.html: 해당 파일명.. (WebContent)하위를 기준 폴드로 실행한다.
+ 		-->
+<!--
+1. Front end(브라우저를 통해서 나타나는 최종화면에서 구현할 내용)
+	- 프로그램이 컴파일을 하는 위치와 실행하는 위치 client(브라우저-크롬)
+	1) html, css: 화면단의 정적 부분
+	2) javascript: 화면단의 동적인 부분(클릭, 움직이는 작업, 동적인 처리)
+	   ==> jquery(lib)
+
+2. Back end(브라우저를 통해서 서버에 요청을 하고 그 요청된 내용을 처리하는 프로그램)
+	- 프로그램 컴파일과 실행하는 위치가 server(웹어플리케이션 서버 - tomcat)
+	1) jsp(java+html): java와 html을 혼합해서 client단에 html을 보내주는 프로그래밍
+	2) java: jsp안에서 순수하게 java프로그램으로 처리 되는 내용
+			 Database를 연동/파일을 서버에 업로드 하는 등 여러가지 작업을 한다.
+	3) Database: 서버의 고정적인 데이터를 저장하는 부분
+
+3. 웹 프로그래밍 처리 방식
+	1) url 주소 호출, 검색해서 클릭: 브라우저
+	2) url 주소에 해당하는 서버(domain명 ==> ip)접속해서
+	   서버의 특정위치에 있는 자원을 url 주소로 호출한 client에 최종 결과물은 web 페이지(html)를 전달한다.
+	3) 클라이언트는 html을 본다.: 브라우저에 html코드를 랜더링
+	
+4. 프로그램으로 처리할 부분
+	1) 보여주는 화면은 html/css/js 이지만,
+	   리스트되는 목록이나 로그인 된 id/pw 를 통한 구매내역/장바구니내역은 조건에 따라서 다르게 보여줘야 한다.
+	2) 조건에 따라서(프로그래밍처리), 리스트 되는 내용, 로그인 정보, 전에 구매했던 장바구니 정보 등등
+	   => 데이터페이스 통해서 처리
+	3) 클릭했을 때, 나타나는 화면 중에서 화면의 전체적인 틀은 동일하지만
+	   이미지, 텍스트정보가 변경된 것을 볼 수 있다.
+	   그래서 이러한 이미지정보, 텍스트정보는 데이터베이스에서 관리한다.
+	   ==> 웹 디자이너는 전체적인 틀을 구현하고, 세부적으로 변경되는 데이터에 대한 프로그래밍 처리는 프로그래머가 처리한다.
+	4) Back end 프로그래밍을 해야 하는 부분
+		클라이언트가 요청해서 서버 안에 프로그램을 호출했을 때, jsp나 html을 호출한다.
+		html을 호출했을 때, 서버에서 html을 그대로 전송해준다.(front end단 범위)
+			front end: html/css, js일부(웹디자이너), js까지 하는 개발자(front 개발자)
+		jsp: html, js, css 전부 포함하고, 자바코드도 포함된다.
+			자바코드: 서버 안에서 컴파일, 조건 반복 로직 처리, Database에 접속해서 데이터를 가져와 화면에 출력.
+			html+java를 javaSevelt.java(서블릿이라는 java로 만든다.)
+			최종 결과로 html을 만든다. "<h3>물건:<%=prod%></h3> ==> <h3>물건:사과</h3>"
+			web 서버를 통해 client에 전달
+			jsp의 근원은 servlet 프로그램이었는데, servlet프로그램이 너무 어려워서 jsp가 탄생
+ -->
+</html>

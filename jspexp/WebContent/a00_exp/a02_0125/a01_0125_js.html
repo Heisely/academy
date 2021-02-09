@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	td{text-align: center;}
+</style>
+<script type="text/javascript">
+
+//
+
+</script>
+</head>
+<body>
+	<h2></h2>
+	<table width="300" height="300" id="ex3" border>
+		<col width="33%"><col width="33%"><col width="33%">
+		<thead>
+			<tr><th>no</th><th>물건명</th><th>개수</th></tr>
+		</thead>
+		<tbody>
+			<tr><td></td><td></td><td></td></tr>
+			<tr><td></td><td></td><td></td></tr>
+			<tr><td></td><td></td><td></td></tr>
+		</tbody>
+	</table>
+	<h3></h3>
+</body>
+<script type="text/javascript">
+/* 
+[하] 1. 가변인자 물건명, 개수 2개단위 총물건 구매내역을 출력하세요.
+	buy1("사과",3,"바나나",5,"오렌지",3);
+	>> 사과 3
+	   바나나 5
+	   오렌지 3
+	   총계 11개
+*/
+
+/*
+[중] 2. 가변인자를 활용하여  물건명과 가격, 갯수 3개 단위로 입력하게 하여, 총물건 구매 내역을 출력하세요.
+        buy2("수박",3000,2,"컴퓨터",1500000,1)
+            수박 3000 2  6000
+            컴퓨터 1500000 1 1500000
+            총 1506000
+ */
+ 
+/*
+[하] 3. addPlayer()라는 선수등록 함수를 정의하되, default로 선수명 :입력되지 않음, 소속사:소속상 없음,
+    성적 : 0으로 처리되게 하세요.
+ */
+function addPlayer(name='입력되지않음',team='소속사없음',score='0'){
+	var ex3="";
+	ex3 = document.querySelectorAll("h3");
+	console.log("# 과제 3번 #");
+	console.log("이름: "+name);
+	console.log("소속사: "+team);
+	console.log("성적: "+score);
+}
+addPlayer();
+addPlayer('홍길동');
+addPlayer('김철수','두산');
+addPlayer('마적두','KT','0.345');
+
+/*
+[중] 4. while()과 prompt()를 이용하여, 물건명과 갯수를 2개단위로 입력하여, 총 3개의 데이터를 아래와 같은 
+    테이블에 출력하되,  두번째 데이터는 반드시 숫자형일 때까지 입력되게 처리하세요.
+        no   물건명  갯수
+        1    사과    3
+        2    바나나   5
+        3    오렌지   3
+ */
+var tds = document.querySelectorAll("#ex3 td");
+var idx=0
+tds.forEach(function(ele,idx,arr){
+	if(idx%3==0){
+		ele.innerHTML=(idx/3+1);
+	}
+});
+function product(pname,pcnt){
+	while(idx<3){
+		var pname = prompt("물건명을 입력하세요.","물건명");
+		var pcnt = prompt("개수를 입력하세요.","개수");
+		if(isNaN(pcnt)){
+			alert("숫자를 입력해주세요.");
+			continue;
+		}
+		idx++;
+	};
+}
+
+tds.forEach(function(ele,idx,arr){
+	if(idx%3==1){
+		ele.innerHTML=product;
+	}
+});
+/*
+[하] 5. json형식으로 음악명, 가수, 발매연도로 초기 선언하고, 추가 속성으로 판매량으로 지정하여, 처리하고
+        for in 구문의 통해서 출력하세요.
+ */
+ var music = {name:"별바람꽃태양",singer:"MAMAMOO",since:"2018.03.07"};
+ music.sellCnt = 500000;
+ for(var idx in music){
+ 	console.log(idx+": "+music[idx]);
+ }
+
+</script>
+</html>

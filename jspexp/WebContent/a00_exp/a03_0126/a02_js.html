@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+/*
+[js]
+[하] 1. json객체의 메서드 속성에 대하여 기술하세요.
+# js의 객체를 사용하기 위한 3가지 형식
+1. json(js object notation): 선언과 동시에 할당하여 사용
+	cvs(콤마,구분자) ==> xml(태그,속성,속성값) ==> json
+	{속성1:속성1값, 속성2:속성2값, 속성3:function(){}} 속성(필드형), 속성(메서드)
+	> 속성할당/삭제가 자유롭다. 
+2. 생성자형 객체(함수형 생성자 객체)
+	1) 선언
+	function Person(매개변수1, 매개변수2){ // 함수와의 차이: 대문자로 선언
+		this.속성 = 속성값; // 객체의 속성은 반드시 this키워드를 이용해서 할당해야 한다.
+		this.속성 = 매개변수1;
+		this.속성 = function(){} // 속성 중 함수를 할당하여 메서드로 사용할 수 있다.
+	}
+	2) 호출
+	var p01 = new Person('홍길동',25);
+	p01.속성;	// 선언된 필드 사용
+	p01.속성();	// 선언된 메서드 사용
+3. class 객체(클래스로 선언하여 호출 및 사용) ecma6
+	1) 선언
+	class Person{
+		constructor(매개변수, 매개변수){
+			this.속성 = 매개변수;
+		}
+		메서드명(){
+			this.속성
+		}
+	}
+	2) 호출
+	var p02 = Person("홍길동",28); // class를 통해 생성자 호출
+	
+# json객체의 메서드 선언
+var 객체명 = {속성:속성값, 속성:function(){}};
+객체명.속성();
+속성에 할당되는 값이 function(){}이면 함수로 사용된다.
+ */
+
+ 
+/*
+[하] 2. json형식으로 좋아하는 연예인 이름 분야 나이, showConsole(), showTable() 로 해서 console에 출력하는 것과 화면 DOM에 테이블로 출력하는 것을 처리하세요.
+*/
+var favorite = {name:"화사", section:"메인보컬", age:"27",
+				showConsole:function(music,genre){
+					console.log("# 좋아하는 연예인 #");
+					console.log("이름: "+this.name);
+					console.log("역할: "+this.section);
+					console.log("나이: "+this.age);
+					console.log("대표솔로곡: "+music);
+					console.log("장르: "+genre);
+				}};
+favorite.showConsole("멍청이","팝");
+
+//
+</script>
+</head>
+
+<body>
+	
+	
+</body>
+
+<script type="text/javascript">
+
+/*
+
+*/
+
+//	document.querySelector("h2").innerHTML="js 시작^^";
+
+//
+</script>
+</html>

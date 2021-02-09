@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+/* 
+
+*/
+//
+
+</script>
+</head>
+<body>
+	<h2></h2>
+	<h3></h3>
+	<h4></h4>
+</body>
+<script type="text/javascript">
+/*
+[js]
+[하] 1. 생성자 함수의 기본형식을 선언하고, weekendSch(주말 계획-날짜/시간/일과내용/shMySche())를 예제로 출력해보세요.
+	> 기본 형식
+	function Object01(param1, param2){
+		this.속성1 = param1
+		this.속성2 = param2
+		this.메서드명 = function(){동작 처리할 내용};
+	}
+	var obj01 = new Object01('데이터1','데이터2');
+	obj01.속성1;
+	obj01.속성2;
+	obj01.메서드명();
+ */
+	function WeekendSch(dates, times, schedule){
+		this.date = dates;
+		this.time = times;
+		this.schedule = schedule;
+		this.shMysche = function(){
+			return '이번 주말인 '+this.date+' '+this.time+'에 '+this.schedule+'를 한다.';
+		};
+ 	}
+	var wsch = new WeekendSch('2021.01.29.', '오전 9시', '리눅스마스터2급 필기 시험응시');
+	document.querySelector("h2").innerHTML=wsch.shMysche();
+ 
+/*
+[하] 2. class 형태로 Car객체를 선언하고,
+	종류, 배기량, 최고 속도, 현재 속도, speedUp(), speedDown() 속성을 선언하고,
+	각 기능에 따라 출력되게 하세요.
+ */
+class Car{
+	constructor(type, cc, maxSpd, nowSpd){
+		this.type = type;
+		this.cc = cc;
+		this.maxSpd = maxSpd;
+		this.nowSpd = nowSpd;
+	}
+	speedUp(){
+		this.nowSpd = this.nowSpd+10;
+		if(this.nowSpd>this.maxSpd){
+			this.nowSpd = this.maxSpd;
+		} 
+		return this.nowSpd;
+	};
+	speedDown(){
+		this.nowSpd = this.nowSpd-10;
+		if(this.nowSpd<0){
+			this.nowSpd = 0;
+		} 
+		return this.nowSpd;
+	};
+}
+const car = new Car('중형세단',2200,160,155);
+document.querySelector("h3").innerHTML = car.speedUp();
+document.querySelector("h4").innerHTML = car.speedDown();
+</script>
+</html>

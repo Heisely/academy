@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>jspexp</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+
+  <!-- 서버 단위 설정값 처리
+	   1. context-param: 서버 단위 정보 할당 태그
+	   2. description: 파라미터 설명(필수 아님)
+	   3. param-name: 매개변수 이름
+	   4. param-value: 매개변수 값				-->
+  <context-param>
+  	<description>로깅 여부</description>
+  	<param-name>logEnabled</param-name>
+  	<param-value>true</param-value>
+  </context-param>
+  <context-param>
+  	<description>디버깅 레벨</description>
+  	<param-name>debugLevel</param-name>
+  	<param-value>5</param-value>
+  </context-param>
+  
+  <!-- a02_jsp/a10_applicationParam.jsp example  
+  	   DBServer: 192.212.42.54
+	   account: himan
+	   pass: 7777	 							-->
+  <context-param>
+  	<description>DB서버</description>
+  	<param-name>DBServer</param-name>
+  	<param-value>192.212.42.54</param-value>
+  </context-param>
+  <context-param>
+  	<description>어카운트</description>
+  	<param-name>account</param-name>
+  	<param-value>himan</param-value>
+  </context-param>
+  <context-param>
+  	<description>비밀번호</description>
+  	<param-name>pass</param-name>
+  	<param-value>7777</param-value>
+  </context-param>
+  
+  <!-- a06_0129/a01_jspExp.jsp homework -->
+  <context-param>
+  	<description>파일관리서버</description>
+  	<param-name>fileServer</param-name>
+  	<param-value>124.243.3.5</param-value>
+  </context-param>
+  <context-param>
+  	<description>이미지경로</description>
+  	<param-name>imgPath</param-name>
+  	<param-value>a01_img</param-value>
+  </context-param>
+  
+  <!--
+   # server단위 에러 처리
+   1. code/class 단위
+   2. location: WebContent를 기준 folder로 하위에 설정
+   -->
+   <error-page>
+      <error-code>404</error-code>
+      <location>/a04_exception/z03_404.jsp</location>
+   </error-page>
+   <error-page>
+      <exception-type>java.lang.NullPointerException</exception-type>
+      <location>/a04_exception/z05_null_exception.jsp</location>
+   </error-page>
+   <error-page>
+      <exception-type>java.lang.Exception</exception-type>
+      <location>/a04_exception/z04_all_exception.jsp</location>
+   </error-page>
+</web-app>

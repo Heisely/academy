@@ -57,7 +57,7 @@ log("이름: "+name);
 %>
 <%
 A01_0209_Dao dao = new A01_0209_Dao();
-ArrayList<Members> mlist = dao.mlist(id,name);
+ArrayList<Members> mlist = dao.mlist(new Members(id,name));
 %>
 	<h3>검색</h3>
 	<form method="post">

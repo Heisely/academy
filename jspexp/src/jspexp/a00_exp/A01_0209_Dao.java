@@ -22,11 +22,13 @@ public class A01_0209_Dao {
 		System.out.println("접속 성공");
 	}
 	
-	public ArrayList<Members> mlist(String id, String name){
+	public ArrayList<Members> mlist(Members sch){
 		ArrayList<Members> mlist = new ArrayList<Members>();
 		try {
 			setCon();
-			String sql = "SELECT * FROM members";
+			String sql = "SELECT * FROM members\r\n"
+					+ "WHERE id LIKE '%'||'"+sch.getId()+"'||'%'\r\n"
+					+ "AND name LIKE '%'||'"+sch.getName()+"'||'%'";
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(sql);
 			
@@ -49,6 +51,6 @@ public class A01_0209_Dao {
 	
 	public static void main(String[] args) {
 		A01_0209_Dao dao = new A01_0209_Dao();
-		dao.mlist("himan","7777");
+		dao.mlist(new Members("",""));
 	}
 }

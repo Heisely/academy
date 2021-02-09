@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+/* 
+[js]
+[하] 1. 함수의 기본형식과 호출방법을 기술하세요.
+function 함수명(매개변수1, 매개변수2){
+	처리프로세스
+	
+	return 리턴데이터;
+}
+함수명(입력값, 입력값); // 호출. 리턴값으로 데이터를 갖고 있다.
+*/
+
+/*
+[하] 2. 1~9숫자 3X3테이블에 해당 셀을 클릭시, 하단 h4 에 클릭시마다,
+       합산한 결과가 출력되게 함수를 정의하고 처리하세요.
+       예를 들어 1, 3 클릭시 4 출력
+ */
+ 	var tot = 0;
+	function func01(num){
+		tot += num;
+		var showQ2 = document.querySelector("#Q2");
+		showQ2.innerHTML += "선택한 숫자: "+num+", "+"합산 값: "+tot+"<br>";
+	}
+/*
+[하] 3. setTimeout, clearTimeout의 기본 생성 코드, 자원해제 코드를 기술하세요.
+1. 시간 관련
+	setTimeout(function(){2번째 매개값의 시간 이후에 처리할 내용}, 1/1000초 시간)
+
+2. 메모리 해제
+	var set01 = setTimeout();
+	clearTimeout(set01);
+ */
+/*
+[중] 4. 시작버튼 클릭시, h2 화면에 구구단 임의의 문제가 출력되고, 10문제 출력시, 끝나게
+        하세요.
+*/
+	function func02(){
+		var testObj = document.querySelector("#Q4");
+		var show="";
+		var time = 1;
+		var set = setInterval(function(){
+			for(var cnt=1; cnt<=1; cnt++){
+				var ran1 = parseInt(Math.random()*8+2);
+				var ran2 = parseInt(Math.random()*9+1);
+				show+= time+") "+ran1+" X "+ran2+" = <input size='3'><br>";
+			}
+			testObj.innerHTML = show;
+			time++;
+			if(time>11){
+				alert("시험 종료");
+				clearInterval(set);
+				testObj.innerHTML = "시험 종료";
+			}
+		},1000);
+	}
+
+//
+
+</script>
+</head>
+<body>
+	<table border>
+		<col width="33%"><col width="33%"><col width="33%">
+		<tr><td onclick="func01(1)">1</td><td onclick="func01(2)">2</td><td onclick="func01(3)">3</td></tr>
+		<tr><td onclick="func01(4)">4</td><td onclick="func01(5)">5</td><td onclick="func01(6)">6</td></tr>
+		<tr><td onclick="func01(7)">7</td><td onclick="func01(8)">8</td><td onclick="func01(9)">9</td></tr>
+	</table>
+	<h4 id="Q2"></h4>
+	<hr>
+	<h2 onclick="func02()">시 작</h2>
+	<h2 id="Q4"></h2>
+</body>
+<script type="text/javascript">
+/* 
+ 
+*/
+//	document.querySelector("h2").innerHTML="js 시작^^";
+//
+</script>
+</html>

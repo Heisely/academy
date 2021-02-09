@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>2021년 01월 06일 HTML 과제</title>
+</head>
+<body>
+<!-- 
+[하] 1. datalist의 기본 형식을 설명하고, 좋아하는 과일항목을 선택하는 예제를 만드세요.
+	datalist id="input의 list속성"
+		option value="데이터1"
+		option value="데이터2"
+	input list="datalist의 id명"
+ -->
+<h3>과제 1번</h3>
+<hr>
+<form>
+	<h3>좋아하는 과일</h3>
+	<input type="text" name="fruit" list="fruits"><br>
+	<datalist id="fruits">
+		<option value="사과">		
+		<option value="청포도">
+		<option value="수박">
+		<option value="바나나">
+	</datalist>
+</form>
+<br><br><br><br><br>
+
+<!--
+[하] 2. input의 type 속성중 button관련 속성값을 나열하고, 해당 내용을 특징을 기술하세요.
+	- value="버튼의 label"
+	- button: 버튼 클릭 시 동적 처리를 위해 사용 - js 함수 호출
+	- submit: name값이 있을 때, form 하위에 있는 모든 입력 요소 객체를 서버로 전송
+	- reset: form 하위에 있는 모든 입력 요소 객체의 입력값을 초기화
+ -->
+
+<!--
+[하] 3. 버튼을 클릭시, alert으로 '안녕하세요!'가 출력되게 처리하세요.
+ -->
+<h3>과제 2번</h3>
+<hr>
+<input type="button" value="클릭해보세요" onclick="alert('안녕하세요')">
+<br><br><br><br><br>
+
+<!--
+[중] 4. 이미지를 처리하는 형식이 두가지가 있다. 두가지 형식에 대하여 기술하고,
+		버튼 클릭시 '클릭클릭!'이라는 메시지가 처리 되게 하세요.
+이미지를 바로 나타내게 하거나, 이미지 요소 객체를 감싸서 버튼 기능을 하게끔 처리할 수 있다.
+ -->
+<h3>과제 4번</h3>
+<hr>
+<button type="button" onclick="alert('클릭클릭!')">
+	<img src="/javaexp/a03_html/media/button.png" alt="클릭">
+</button>
+<br><br><br><br><br>
+
+<!--
+[하] 5. input type의 radio와 checkbox의 차이를 기술하고,
+        여기서 name 속성은 어떤 역할을 하는지 설명하세요.
+checkbox: 여러 개 선택 가능
+radio: name이 동일할 때 그 내용 중 하나만 선택 가능
+name: 서버에 전송할 때 데이터의 이름을 알 수 있게 해줌,,
+ -->
+ 
+<!--
+[하] 6. select의 속성과 option의 속성에 대하여 기술하세요.
+select의 속성
+	- size="숫자": 한 번에 보이는 선택목록의 크기
+	- multiple: 다중 선택을 가능하게 하는 옵션
+option의 속성
+	- value: 선택되었을 때 전송 또는 js로 처리되는 값
+	- selected: 초기에 선택되어서 나오게 할 때 사용
+ -->
+
+<!--
+[하] 7. select를 이용해서 물건(사과/바나나/딸기), 갯수(1~10)를 선택하게 만들고,
+        해당 내용을 선택했을 때, 값을 출력하게 하세요.
+<<jsp파일 - result.jsp>>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>2021/01/06 7번과제 결과</title>
+</head>
+<body>
+<h2>2021/01/06 7번과제 결과</h2>
+<hr>
+	<h3>선택한 과일의 이름: ${param.prod}</h3>
+	<h3>선택한 과일의 갯수: ${param.cnt}</h3>
+</body>
+</html>
+ -->
+<h3>과제 7번</h3>
+<hr>
+<h2>과일 구매</h2>
+<form name="purchase" method="get" action="result.jsp">
+	<select name="prod">
+		<option value="사과">사과</option>
+		<option value="바나나">바나나</option>
+		<option value="딸기">딸기</option>
+	</select>
+	<select name="cnt">
+		<option value="1개">1</option>
+		<option value="2개">2</option>
+		<option value="3개">3</option>
+		<option value="4개">4</option>
+		<option value="5개">5</option>
+		<option value="6개">6</option>
+		<option value="7개">7</option>
+		<option value="8개">8</option>
+		<option value="9개">9</option>
+		<option value="10개">10</option>
+	</select>
+	<button type="submit">등록</button>
+</form>
+</body>
+</html>

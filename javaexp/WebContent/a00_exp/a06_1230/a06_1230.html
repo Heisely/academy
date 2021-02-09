@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<!-- 
+[하]1. a 태그에 target속성에 있어서 속성값에 대한 연관관계를 간단한 예제로 설명하세요.
+# frame과 target
+1. target="right"을 설정하면 상단의 <iframe의 name="right">에 mapping된 frame이 변경된다.
+2. _self: 현재페이지 변경 ==> 현재 프레임 변경
+3. _top: 최상위 윈도우 변경 ==> 이 프레임을 포함하고 있는 페이지 전체가 변경
+4. _blank: 새창에서 해당페이지 로딩
+
+<<예제>>
+상위 프레임
+<iframe src="a19_list.html" name="left" width="200" height="300"></iframe>
+<iframe src="http://www.w3c.org" name="right" width="300" height="300"></iframe>
+
+하위프레임
+<ul>
+	<li><a href="http://www.w3c.org" target="right">W3C</a></li>
+	<li><a href="http://www.etnews.com" target="_self">전자신문</a></li>
+	<li><a href="http://www.mk.co.kr" target="_top">매일경제신문</a></li>
+	<li><a href="http://www.w3c.org" target="_blank">새 창에 W3C</a></li>
+</ul>
+
+하위프레임의 target="right"로 인해 상위 프레임의 name="right" 부분의 내용이 바뀐다.
+ -->
+ 
+ 
+<!-- 
+[하]2. 비디오/오디오 관련 속성을 기본 예제와 함께 설명하세요.
+<video src="해당비디오파일" width="" height="" controls autoplay muted="muted">
+	- src="해당비디오파일"
+	- width: 너비
+	- height: 높이
+	- controls: 하단 실행관련 제어 툴
+	- autoplay: 자동 실행(크롬에서는 지원 안 함)
+	- muted: 음소거
+	
+<audio src="해당음악파일" controls autoplay="autoplay" loop>
+	- loop: 반복
+ -->
+
+<!-- 
+[중]3. 프로젝트형 과제의 메인화면을 iframe으로 구성하여 link 이동까지 처리해보세요.
+[a20_top.html]
+<h4 align="center">탑메뉴입니다</h4>
+	<a href="a21_login.html" target="_blank">로그인</a>&nbsp;&nbsp;&nbsp;
+	<a href="a22_prod01.html" target="main">물건리스트</a>&nbsp;&nbsp;&nbsp;
+	<a href="a23_admin.html" target="main">관리자</a>&nbsp;&nbsp;&nbsp;
+	<a href="a24_main.html" target="main">메인화면</a>
+
+[a21_login.html - 새창연결]
+<h3>로그인 페이지입니다.</h3> 
+
+[a22.prod01.html - 하단 메인부분에 연결]
+<h3>물건리스트 페이지입니다.</h3>
+
+[a23_admin.html - 하단 메인에 연결]
+<h3>관리자 페이지입니다.</h3>
+
+[a24_main.html - 하단 메인에 연결]
+<h3>메인페이지입니다.</h3>
+-->
+<iframe src="../a02_html/a20_top.html" name="top" width="100%" height="50%"></iframe>
+<iframe src="../a02_html/a24_main.html" name="main" width="100%" height="50%"></iframe>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>2021년 01월 05일 HTML 8번 과제</title>
+</head>
+<body>
+<!-- 
+[중] 8. 위 form의 input/textarea를 이용해서 아래와 같은 구매물품 명세서를
+        작성해보세요
+        구매 물품 명세서
+        물품명:[     ]
+        가격 :[     ]
+        갯수 :[     ]
+        기타요청사항
+        [다중입력textarea]
+           [등 록]
+ -->
+<h3>2021년 01월 05일 HTML 8번 과제</h3>
+<hr>
+	<h2 align="center">구매 물품 명세서</h2>
+	<form name="form" method="get" action="result.jsp">
+	<table align="center" border>
+		<tr><th>물품명</th><td><input name="prod" type="text"></td></tr>
+		<tr><th>가격</th><td><input name="price" type="text"></td></tr>
+		<tr><th>개수</th><td><input name="count" type="text"></td></tr>
+		<tr><th>기타요청사항</th><td><textarea name="memory" rows="10" cols="30"></textarea></td></tr>
+		<tr><td style="text-align:center;" colspan="2"><input type="submit" value="등록"></td></tr>
+	</table>
+	</form>
+</body>
+</html>

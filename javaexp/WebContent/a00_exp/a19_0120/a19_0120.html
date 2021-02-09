@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+// [js]
+// [하] 1. 익명함수와 선언적 함수의 차이점을 기술하세요.
+// 익명함수는 함수가 선언된 후 이후의 라인에서 호출 및 사용이 가능하지만, 선언적 함수는 함수가 선언되기 전에 호출해서 사용할 수 있다.
+
+// [하] 2. h3로 구매할 3개를 물건으로 선언하고 각 h3 클릭시, 익명함수를 호출하여 구매할 물건을 누적시켜 alert()에 출력 처리하세요.
+	var addName="";
+	function prod(name){
+		//addName += name+" ";
+		//alert(addName);
+		
+		var tab01 = document.querySelector("#tab01");
+		// <table id="tab01">을 객체로 선택
+		tab01.innerHTML +="<tr><td>"+name+"</td><tr>";
+	}
+
+// [하] 3. 3X3테이블에 각각 물건명과 물건 가격이 표기되어 있고, 클릭시 마다 선언적 함수를 통해 물건명을 alert()을 통해 출력하세요.
+	function call(pname,price){
+		alert("물건명: "+pname+", 가격: "+price+"원");
+		document.querySelector("div").innerHTML +="<h3>물건명: "+arguments[0]+", 가격: "+arguments[1]+"원";
+	}
+/*
+[중] 4. 3X3테이블에 각각 물건명과 물건 가격이 표기되어 있고, 클릭시 마다 선언적 함수를 통해 아래 table에 추가하여 출력하게 하세요.
+        테이블
+        no 물건명 가격 갯수 계
+
+        h3 총계 @@ 형식으로
+*/
+	function call2(obj){
+		// onclick="call2(this)"
+	}
+	
+	
+//
+
+</script>
+</head>
+<body>
+   <h2></h2>
+   <h3 onclick="prod('사과')">사과</h3>
+   <h3 onclick="prod('배')">배</h3>
+   <h3 onclick="prod('바나나')">바나나</h3>
+   <hr>
+   <h2>과제3번</h2>
+   <table border>
+   		<tr><th>no</th><th>물건명</th><th>가격</th></tr>
+   		<tr onclick="call('사과', 3000)"><td>1</td><td>사과</td><td>3000</td></tr>
+   		<tr onclick="call('배', 5000)"><td>2</td><td>배</td><td>5000</td></tr>
+   		<tr onclick="call('바나나', 6000)"><td>3</td><td>바나나</td><td>6000</td></tr>
+   </table>
+   <hr>
+   <h2>과제4번</h2>
+   <table border>
+   		<tr><th>no</th><th>물건명</th><th>가격</th></tr>
+   		<tr onclick="call2('사과', 3000)"><td>1</td><td>사과</td><td>3000</td></tr>
+   		<tr onclick="call2('배', 5000)"><td>2</td><td>배</td><td>5000</td></tr>
+   		<tr onclick="call2('바나나', 6000)"><td>3</td><td>바나나</td><td>6000</td></tr>
+   </table>
+   
+   <table id="tab01" border>
+   		<tr><th>구매물건</th></tr>
+   </table>
+   <h3></h3>
+</body>
+<script type="text/javascript">
+/* 
+ 
+*/
+	
+//
+</script>
+</html>

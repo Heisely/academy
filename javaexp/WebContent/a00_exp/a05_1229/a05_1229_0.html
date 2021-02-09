@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>12월29일 html 과제</title>
+<style type="text/css">
+	td{text-align:center; border:1px solid blue}
+	.a{text-align:right}
+	table{border-collapse:collapse; border: 2px solid red;}
+</style>
+</head>
+<body>
+<!-- 
+1. [하]table의 cell과 두께 관련 속성을 예제를 통해서 기술하세요.
+ - cell: 각각 테이블 구성요소로 만들어지는 것을 이 단위로 하여
+ 	 cellpadding: 셀 안에 있는 글자와 border사이의 간격을 설정해준다.
+	 cellspacing: 셀과 셀 간의 간격을 설정해준다.
+ - border: 테두리의 굵기 설정
+-->
+<h2 align="center">1229 html 과제 1번</h2>
+<table align="center" width="200" height="200" border="10" cellpadding="15" cellspacing="20" bgcolor="yellow">
+	<col width="33%">	<col width="33%">	<col width="33%">
+	<tr><td>1</td><td>2</td><td>3</td></tr>
+	<tr><td>4</td><td>5</td><td>6</td></tr>
+	<tr><td>7</td><td>8</td><td>9</td></tr>
+</table> 
+
+<!-- 
+2. [하]css을 사용하는 이유와 테이블 내부 글자의 정렬과 cell을 병합하는 속성과 속성값 기술하세요.
+==> css 사용 이유: 태그마다 고유의 속성을 가지고 있는데 이를 더 확장해 크기나 색상이나 모양을 처리할 때 주로 사용
+
+1) 정렬 처리: 테이블 내의 글자에 대한 정렬은 기본속성으로 지원되지 않기 때문에 css를 선언해 정렬처리한다.
+		선택자{정렬속성:정렬속성값;}
+		- td{text-align: 정렬방식}
+2) border에 대한 1라인 표시
+	border-collapse:collapse;
+		border의 2라인으로 입체감있게 표현되는 내용을 collapse(병합/붕괴) 처리하는 css 속성
+	border: 선의굵기 형식 색상;
+		border가 있는 요소(태그)의 외곽선에 대한 옵션으로 매개값으로 굵기 형식 색상을 지정할 수 있다.
+		ex) border:1px solid green;
+			굵기를 1px로 형식을 단일라인으로 색상을 green으로 처리
+
+ex)
+<style type="text/css">
+	td{text-align:center; border:2px solid green;}
+	table{border-collapse:collapse;
+		  border: 2px solid red;} 
+</style>
+-->
+
+<!--
+3. [중]아래와 같은 테이블을 만드세요.
+               성 적 표
+    번호    이름   국어  영어  수학  => 타이틀 중앙정렬
+     1   홍길동    90   90   70
+     2   김길동    80   90   80
+     3   신길동    70   80   70
+    1) 테이블 전체 한 line표시 
+    2) 번호와 이름은 중앙 정렬, 점수는 오른쪽 정렬
+    3) 기타 화면상 적절한 색상과 cell간격 설정 통해 데이터 출력 처리.
+-->
+<h2 align="center">1229 html 과제 3번</h2>>
+<h2 align="center">성 적 표</h2>
+<table align="center" width="400" height="300" border cellpadding="5px" bgcolor="lightblue">
+	<col width="20%">	<col width="20%">	<col width="20%">	<col width="20%">	<col width="20%">
+	<tr><td>번호</td><td>이름</td><td>국어</td><td>영어</td><td>수학</td></tr>
+	<tr><td>1</td><td>홍길동</td><td class="a">90</td><td class="a">90</td><td class="a">70</td></tr>
+	<tr><td>2</td><td>김길동</td><td class="a">80</td><td class="a">90</td><td class="a">80</td></tr>
+	<tr><td>3</td><td>신길동</td><td class="a">70</td><td class="a">80</td><td class="a">70</td></tr>
+</table>
+
+<!-- 
+4. [하]a 태그의 주요 속성값과 의미를 기술하고, 내부페이지와 외부페이지 이동 예제를 만드세요.
+1) 현재 서버에 있는 html페이지의 특정 위치로 이동
+	ex) a href="a01_start.html" 현재 폴더에 있는 특정 페이지로 이동
+2) 외부서버에 있는 페이지로 이동
+	ex) a href="http://www.naver.com" 네이버
+3) 이미지로 링크
+	ex) ahref="" img
+-->
+<h3>외부 페이지로 이동처리</h3>
+<hr>
+포털사이트
+<ul>
+	<li><a href="http://www.naver.com">네이버</a></li>
+	<li><a href="http://www.daum.net">다음</a></li>
+</ul>
+<br><br>
+노래가사
+<hr>
+<ul>
+ 	<li><a id="love" href="a05_1229_4.html#love">Love me tender(외부페이지 이동)</a>
+	<li><a id="can" href="a05_1229_4.html#can">Can't help falling in love(외부페이지 이동)</a>
+	<li><a id="it" href="a05_1229_4.html#it">It's now or never(외부페이지 이동)</a>
+</ul>
+<br><br>
+<h3>내부페이지로 이동처리</h3>
+<hr>
+<ul>
+	<li><a href="#happy">Happy</a>
+	<li><a href="#new">New</a>
+	<li><a href="#year">Year</a>
+</ul>
+<br><br><br><br><br><br><br><br><br>
+<h3 id="happy">행복한 연말보내세요</h3>
+<br><br><br><br><br><br><br><br><br>
+<h3 id="new">새해</h3>
+<br><br><br><br><br><br><br><br><br>
+<h3 id="year">복 많이 받으세요</h3>
+<br><br><br><br><br><br><br><br><br>
+
+<!-- 
+5. [하]로그인메뉴 클릭시 로그인 화면 로딩화면 구현
+-->
+<h2 id="ex5">로그인</h2>
+<a href="a05_1229_5.html#login" target="_blank"><input type="button" value="로그인"></a>
+<!-- 
+a05_1229_5.html
+<body>
+<h2 id="login">로그인 화면입니다.</h2>
+<hr>
+<input value="ID: "><br>
+<input value="PW: "><br>
+<a href="a05_1229_0.html#ex5"><input type="botton" value="되돌아가기"></a>
+</body>
+ -->
+
+<!-- 
+6. [중]물품리스트화면과  특정 물품를 클릭시 특정한 상세화면페이지 등 이동 처리하는 화면을 구현해 보세요.
+   (frame 사용하지 않음.) 
+    번호 물건명  가격  갯수               
+    1   사과   3000 2    ==> 클릭시 페이지 이동 ==>      사과 상세정보
+    2   바나나  4000 5                                가격  3000
+                                                    구매할 갯수  5 
+                                                     창닫기 ==> 클릭시 원페이지 이동
+-->
+<h2 align="center">1229 html 과제 6번</h2>
+<h3 align="center">물품리스트</h3>
+<table align="center" width="300" height="200" id="ex6">
+	<col width="20%"><col width="20%"><col width="20%"><col width="20%"><col width="20%">
+	<tr><td>번호</td><td>물건명</td><td>가격</td><td>갯수</td><td></td></tr>
+	<tr><td>1</td><td>사과</td><td>3000</td><td>2</td><td><a href="a05_1229_6_1.html#apple">선택</a></td></tr>
+	<tr><td>2</td><td>바나나</td><td>4000</td><td>5</td><td><a href="a05_1229_6_2.html#banana">선택</a></td></tr>
+</table>
+<!-- 
+a05_1229_6_1.html
+<body>
+<h2 id="apple">사과 상세정보</h2>
+가격: 3000 <br>
+수량: 2 <br>
+<a href="a05_1229_0.html#ex6"><input type="button" value="창닫기"></a>
+</body>
+
+a05_1229_6_2.html
+<body>
+<h2 id="banana">바나나 상세정보</h2>
+가격: 4000 <br>
+수량: 5 <br>
+<a href="a05_1229_0.html#ex6"><input type="button" value="창닫기"></a>
+</body>
+ -->
+
+<!-- 
+7. [하]frame의 계층 관계에 대하여 간단한 예제로 설명하세요.
+1. 브라우저 윈도우와 프레임과의 관계는 부모 자식 관계이다.
+	1) a17_hiraFrame.html 파일에서 만들어져서 실행한 화면은 최상위 브라우저 윈도우이다.
+	2) 이 화면에서 포함되어있는 leftframe.html를 가진 frame과,
+	   rightframe.html를 가진 frame이 자식 프레임(child)으로
+	3) 현재 창에서 leftframe.html 화면(left 프레임)은 child 윈도우이고,
+	4) leftframe.html 화면에서 현재 창(최상위 윈도우)은 parent 윈도우이다.
+	5) rightframe.html 안에 있는 페이지들(etnews, mk)은 rightframe.html의 child 윈도우이고,
+	   etnews 페이지에서 현재페이지는 top 윈도우이다.
+-->
+<h3>2개의 &lt;iframe&gt; 윈도우를 가집니다</h3>
+<hr>
+<iframe src="../a02_html/leftframe.html" name="left" width="100" height="500"></iframe>
+<iframe src="../a02_html/rightframe.html" name="right" width="400" height="500"></iframe>
+
+<!-- 
+8. [중]iframe을 이용해서 상단/왼쪽/하단/메인 구조의 메인화면을 만들어 보세요.
+ -->
+<h2>1229 html 과제 8번</h2>
+<hr>
+<hr>
+	<iframe src="a05_1229_8_1.html" name="top" width="100%" height="200"></iframe>
+ 	<iframe src="a05_1229_8_2.html" name="left" width="20%" height="800"></iframe>
+ 	<iframe src="a05_1229_8_3.html" name="main" width="78%" height="800"></iframe>
+ 	<iframe src="a05_1229_8_4.html" name="bottom" width="100%" height="200"></iframe>
+<!-- 
+a05_1229_8_1.html
+<body>
+<h4>top iframe</h4>
+<hr>
+상단 프레임입니다.
+</body>
+
+a05_1229_8_2.html
+<h4>left iframe</h4>
+<hr>
+왼쪽 프레임입니다.
+
+a05_1229_8_3.html
+<body>
+<h4>main iframe</h4>
+<hr>
+메인 프레임입니다.
+
+a05_1229_8_4.html
+<body>
+<h4>bottom iframe</h4>
+<hr>
+하단 프레임입니다.
+</body>
+ -->
+</body>
+</html>

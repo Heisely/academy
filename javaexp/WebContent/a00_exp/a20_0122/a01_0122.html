@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+table{
+   text-align:center;
+}
+</style>
+<script type="text/javascript">
+
+</script>
+</head>
+<body>
+   <table width="500" height="500" border>
+      <tr><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
+      <tr><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr>
+      <tr><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td></tr>
+      <tr><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td></tr>
+      <tr><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td></tr>     
+   </table>
+   <br><br>
+   <input type="button" value="주사위" onclick="dice()">
+   <h3 class="dice">주사위를 던집니다</h3>
+   <h3 class="m"></h3>
+</body>
+<script type="text/javascript">
+   /* 
+    [중] 1. 주사위를 던지고(숫자 text로 출력), 나온 수 만큼 말이 움직이게 처리하세요.(5X5테이블에서)
+    */
+   var tds = document.querySelectorAll("td");
+   var i;
+   var cnt=0;
+   var a=0;
+   
+   function dice() {
+      i = parseInt(Math.random() * 6) + 1;
+      document.querySelector("h3.dice").innerHTML = "주사위를 던집니다 : " + i;
+      document.querySelector("h3.m").innerHTML = i+"칸 이동합니다.";
+      a+=i
+      if(cnt==0){
+         tds[i-1].style.background="blue";
+      }else{
+         if(a>25){
+            document.querySelector("h3.dice").innerHTML = "게임을 종료합니다.";
+            document.querySelector("h3.m").innerHTML = "";
+         }else
+         tds[a-1].style.background="blue";
+         tds[a-1-i].style.background="white";
+      }
+      cnt++;
+   }
+</script>
+</html>

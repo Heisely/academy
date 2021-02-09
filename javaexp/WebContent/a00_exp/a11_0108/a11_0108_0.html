@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>2021년 01월 08일 과제</title>
+</head>
+<body>
+<!-- [하] 1. css란 무엇인가? 개념과 기본 구성에 대하여 기술하세요.
+>> # CSS(Cascading Style Sheet)
+	1. html문서의 색이나 모양 등 외관을 꾸미는 언어
+	2. html의 기본 태그에서 지원하지 않는 확장된 기능을 지원하기 위해 사용
+	3. 주요 기능
+		1) 색상과 배경, 텍스트 형태 변경, 폰트 형태 크기 변경, 박스 모델 변경
+		2) 리스트, 테이블 처리
+	4. css 스타일 시트 구성
+		선택자{속성1:속성1값; 속성2:속성2값; ...}
+		1) 선택자(selectot): body안에 여러 가지 요소객체를 선택할 때 사용
+			ex) 태그명, #아이디명, .클래스명, 태그명[속성=속성값]
+		2) 속성(property): 스타일의 속성을 지정
+		3) 속성값(value): 스타일의 속성에 해당하는 값 지정
+	5. 기타 선언 규칙
+		1) 주석문은 *사이에 사용하여 쓴다.
+		2) 대소문자 구분이 없다.
+
+[하] 2. css 사용 형식 3가지(외부,내부,인라인)는 예제를 통해서 설명하세요.
+>> # 외부CSS
+	1. css파일을 따로 생성한다. 예) mystyle.css
+		<<mystyle.css>>
+		body {background-color:linen; color: blueviolet;
+	  		  margin-left: 30px; margin-right: 30px;}
+		h3{text-align: center; color: darkred;}
+	2. <link href="mystyle.css"> 로 호출해 사용한다.
+	
+	# 내부CSS: head부분에 style로 선언하고 해당 페이지에 적용할 CSS 선언
+	
+	# 인라인CSS: <요소태그 style="속성:속성값;"...> 형식으로 선언
+
+[하] 3. css 선택자 선언의 우선 순위를 기술하세요.
+>> 1) 인라인
+   2) 페이지선언 style / 외부 css style: 선언된 순서대로 우선순위 설정
+   	  ==> 보통 외부 style을 선언 후, 페이지 style을 선언하여 우선순위를 잡는 경우가 많다.
+-->
+</body>
+</html>

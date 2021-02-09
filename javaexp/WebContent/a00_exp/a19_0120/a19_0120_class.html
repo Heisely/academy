@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+/* 
+
+*/
+//
+	function call(num){ // call(25)를 통해 넘겨온 데이터를 num이라는 변수에 할당하고 num을 다시 하단에 출력처리
+		alert("호출된다"+num);
+	}
+	// var obj = document.querySelector("h3");
+	// 모든 h3를 넘기는 것이 아니고 클릭한 h3 함수를 통해 전달
+	function call2(obj){
+		//alert(obj+"객체 전달됨");
+		obj.innerHTML="성공 클릭하셨습니다.";
+		obj.align="center";
+		obj.style.backgroundColor="yellow";
+	}
+	
+	function call3(prod){
+		alert(prod);
+	}
+</script>
+</head>
+<body>
+   <h2></h2>
+   <h3 align="center">화면에 있는 태그 내용입니다.</h3>
+   <!-- onclick="함수()": 클릭이라는 이벤트를 실행했을때 함수 호출 -->
+   <h3 onclick="call(25)">클릭해볼까요?</h3>
+   <!-- this: 클릭한 현재 객체를 전달 -->
+   <h3 onclick="call2(this)">클릭해볼까요?(h3객체)</h3>
+   
+   <!-- ex) 클릭했을 때 사과가 alert로 출력되게 해보기
+   	1) 함수를 정의
+   		alert("함수호출")
+   	2) h3에 onclick="정의된함수()"
+   	3) 함수에 매개변수 전달하기 함수명(매개변수)
+   	4) 매개변수로 넘긴 내용 alert로 출력
+    -->
+   <h3 onclick="call3('사과')">사과</h3>
+</body>
+<script type="text/javascript">
+/* 
+# css나 태그로 구성된 내용을 js는 각 태그들을 DOM(Document Object Model)을 통해 객체화 하여
+  이벤트 등을 통해 동적으로 변경할 수 있게 해준다.
+*/
+	// h2 태그를 선택해서 h2Obj라는 변수에 할당. 객체 변수 선언
+	var h2Obj = document.querySelector("h2");
+	// 객체 속성
+	// .innerHTML: 출력내용이 있는 부분을 태그로 랜더링해줌
+	h2Obj.innerHTML="js 시작^^";
+	// .align="속성값": 정렬속성 선언
+	h2Obj.align="center";
+	// .style.css속성="css속성값"
+	h2Obj.style.backgroundColor="pink";
+//
+</script>
+</html>

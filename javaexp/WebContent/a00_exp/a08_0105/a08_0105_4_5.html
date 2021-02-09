@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>2021년 01월 05일 HTML 4번 5번 과제</title>
+</head>
+<body>
+<!-- [하] 4. form의 속성과 하위에 태그의 기능에 대하여 기술하세요. -->
+<!-- [하] 5. 하위 태그 중에 input type="submit"는 어떤 기능을 하는가? -->
+<!-- 4번 
+# form의 속성과 속성값
+1. 속성
+	1) method: get/post의 속성값을 가지고 있고, 전송 방식을 지정해준다.
+	2) action: 문자열로 지정한 페이지 하위 input|select|textarea 속성으로 name으로 지정한 키와 입력값을 전송
+		ex)
+		<form action="gogo.jsp">
+		<input name="id" value="himan" />
+		==> value는 입력된 값이나 초기값 지정
+		==> gogo.jsp?id=himan 형식으로 서버에 데이터를 전송
+2. 속성값
+	form 하위에 하위요소 태그들에 사용자가 입력한 데이터를 서버에 전달할 목적으로 사용
+ -->
+<!-- 하위의 기본 입력태그 input
+1. 속성 type에 따라 입력되는 형식에 차이가 있음.
+	1) text: 기본 문자열 입력
+	2) password: 패스워드형식 입력
+	3) submit: 버튼 모양으로 해당 내용을 클릭하는 순간 form에서 지정하는 페이지로 입력된 데이터 전송
+
+<form name="form" method="get" action="result.jsp">
+사용자 ID: <input type="text" name="id" size="15" value=""><br>
+비밀 번호: <input type="password" name="pass" size="15" value="">
+<input type="submit" value="완료">
+
+위처럼 코드를 작성하면,
+submit을 클릭 시, ?id=himan&pass=7777 형식(query string)으로 form객체에 입력한 값을 서버로 전송
+http://localhost:7080/javaexp/a00_html/a08_0105/a08_0105_4.html?id=himan&pass=7777
+ -->
+
+<!-- 5번
+ 버튼모양으로 해당 내용을 클릭하는 순간 form에서 action으로 지정한 페이지에 데이터를 전송
+ -->
+</body>
+</html>

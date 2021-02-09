@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Insert title here</title>
+
+<script type="text/javascript">
+
+/*
+
+*/
+
+//
+
+
+
+</script>
+
+</head>
+
+<body>
+
+   <h2></h2>
+
+</body>
+
+<script type="text/javascript">
+
+/*
+
+*/
+
+//   document.querySelector("h2").innerHTML="js 시작^^";
+
+//
+/* 
+[js]
+[하] 1. if문, if else문,switch문, for문/while 기본형식
+   >> if(조건식){출력할 내용}
+   >> if(조건식1){출력할내용} else{조건식1 이외의 조건에서 출력할 내용}
+   >> switch(조건){case: ;}
+   >> for(초기;반복조건;증감연산자){}
+   >> while(조건){}
+   >> do{}while(조건);
+ */
+/*
+[하] 3 * 3 테이블을 생성해보세요
+ */
+var show1 = "";
+show1 += "<table border>";
+for(var i = 1; i<=9; i++){
+   if(i%3==1){
+      show1 += "<tr>";
+   }
+   show1 += "<td>"+i+"</td>";
+   if(i%3==0){
+      show1 += "</tr>";
+   }
+}
+show1 += "</table>";
+document.body.innerHTML += show1;
+/*
+[중] 행과 열의 값을 받아서 테이블을 생성해보세요! 특정한 컬럼(랜덤)은 배경색을 노랑색(3단계)
+*/
+var show2 = "";
+var colrow = prompt("col/row수를 입력하세요","1");
+
+show2 += "<table width='30%' border>";
+for(var i=1; i<=colrow*colrow; i++){
+   if(i%colrow==1){
+      show2 += "<tr>";
+   }
+   if(i%2==0){
+      show2 += "<td bgcolor='yellow'>"+i+"</td>";
+   } else {
+      show2 += "<td>"+i+"</td>";
+   }
+   if(i%colrow==0){
+      show2 +="</tr>";
+   }
+}
+show2 += "</table>";
+document.body.innerHTML += show2;
+
+
+
+</script>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+/* 
+
+*/
+//
+	var tot=0;
+	var no=1;
+	function buy(pname, price, cnt){
+		//최하단에 보여줄 총계 처리
+		tot +=price*cnt;
+		var buyList = document.querySelector("#buyList");
+		buyList.innerHTML+="<tr><th>"+(no++)+"</th><td>"
+			+pname+"</td><td>"+price+"</td><td>"+cnt+
+			"</td><td>"+(price*cnt)+"</td></tr>";
+		
+		document.querySelector("#totShow").innerHTML="총계: "+tot;
+	}
+</script>
+</head>
+<body>
+   <h2 align="center"></h2>
+   <table align="center" width="300" height="300" border>
+   		<tr><th>no</th><th>물건명</th><th>가격</th><th>개수</th></tr>
+   		<tr onclick="buy('사과', 3000,5)"><td>1</td><td>사과</td><td>3000</td><td>5</td></tr>
+   		<tr onclick="buy('바나나', 4000,2)"><td>2</td><td>바나나</td><td>4000</td><td>2</td></tr>
+   		<tr onclick="buy('딸기', 12000,3)"><td>3</td><td>딸기</td><td>12000</td><td>3</td></tr>
+   		<tr onclick="buy('수박',15000,4)"><td>4</td><td>수박</td><td>15000</td><td>4</td></tr>
+   		<tr onclick="buy('오렌지', 2000,1)"><td>5</td><td>오렌지</td><td>2000</td><td>1</td></tr>
+   		<tr onclick="buy('키위', 5000,3)"><td>6</td><td>키위</td><td>5000</td><td>3</td></tr>
+   		<tr onclick="buy('포도', 15000,2)"><td>7</td><td>포도</td><td>15000</td><td>2</td></tr>
+   		<tr onclick="buy('단감', 5000,1)"><td>8</td><td>단감</td><td>5000</td><td>1</td></tr>
+   		<tr onclick="buy('멜론', 12000,3)"><td>9</td><td>멜론</td><td>12000</td><td>3</td></tr>
+   </table>
+   <table id="buyList" align="center" width="500" border>
+   		<tr><th>no</th><th>물건명</th><th>가격</th><th>개수</th><th>계</th></tr>
+   </table>
+   <h3 align="center" id="totShow"></h3>
+</body>
+<script type="text/javascript">
+/* 
+ 
+*/
+   document.querySelector("h2").innerHTML="물건 클릭해서 구매하기";
+//
+</script>
+</html>

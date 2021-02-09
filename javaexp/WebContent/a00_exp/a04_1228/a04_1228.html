@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<!-- 
+1. table에서 rowspan, colspan의 의미와 col태그의 의미를 기본 예제(3X3 테이블)와 함께 기술하세요.
+	colspan = "열단위 병합할 갯수": colume(열)+span(확장)
+		확장이 된 경우, 옆에 있는 cell을 확장 개수만큼 삭제해야 한다.
+	rowspan = "행단위 병합할 갯수": row(행)+span(확장)
+	col : 열의 비율 설정(width="25%" : 너비를 25%로 설정)
+-->
+<h3 align="center">12월28일 HTML 과제 1번</h3>
+<table width="200" height="200" align="center" border>
+	<col width="25%">
+	<col width="25%">
+	<col width="25%">
+	<tr><td>1</td><td colspan="2">2,3</td></tr>
+	<tr><td>4</td><td rowspan="2">5,8</td><td>6</td></tr>
+	<tr><td>7</td><td>9</td></tr>
+</table>
+
+<!--
+2. 3*3테이블에서
+       1  2  3    
+       4  5  6
+       7  8  9
+       1,4,7 병합처리, 2,3병합, 8,9병합 
+-->
+<h3 align="center">12월28일 HTML 과제 2번</h3>
+<table width="200" height="200" align="center" border>
+	<col width="25%">
+	<col width="25%">
+	<col width="25%">
+	<tr><td rowspan="3">1,4,7</td><td colspan="2">2,3</td></tr>
+	<tr><td>5</td><td>6</td></tr>
+	<tr><td colspan="2">8,9</td></tr>
+</table>
+
+<!--
+3. 4*4테이블에서 
+    1  2  3  4
+    5  6  7  8
+    9 10 11 12
+   13 14 15 16   1,5,9,13 병합, 6,7,10,11 병합, 14,15,16 병합 처리하세요.
+-->
+<h3 align="center">12월28일 HTML 과제 3번</h2>
+<table width="200" height="200" align="center" border>
+	<col width="25%">
+	<col width="25%">
+	<col width="25%">
+	<col width="25%">
+	<tr><td rowspan="4">1</td><td>2</td><td>3</td><td>4</td></tr>
+	<tr><td colspan="2" rowspan="2">6,7,10,11</td><td>8</td></tr>
+	<tr><td>12</td></tr>
+	<tr><td colspan="3">14,15,16</td></tr>
+</table>
+
+<!--
+4. 5*5 테이블 만들어 모두의 마블 같은 모양으로 테두리를 1부터시작하여 번호를 넘버링하고, 중간을 비운 테이블을 구성하세요.
+ -->
+<h3 align="center">12월28일 HTML 과제 4번</h3>
+<table width="200" height="200" align="center" border>
+	<col width="20%">
+	<col width="20%">
+	<col width="20%">
+	<col width="20%">
+	<col width="20%">
+	<tr><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
+	<tr><td>16</td><td colspan="3" rowspan="3"></td><td>6</td></tr>
+	<tr><td>15</td><td>7</td></tr>
+	<tr><td>14</td><td>8</td></tr>
+	<tr><td>13</td><td>12</td><td>11</td><td>10</td><td>9</td></tr>
+</table>
+</body>
+</html>

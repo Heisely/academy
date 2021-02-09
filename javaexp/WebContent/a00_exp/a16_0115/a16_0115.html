@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+/*
+[하] 1. js의 기본 출력 형식을 기본 예제를 통해서 기술하세요.
+1. 경고창
+alert("안녕!");
+
+2. js 명령어
+document.write("<h2>Hello</h2>");
+
+3. console.log(); console 창
+console.log("콘솔 출력");
+ */
+
+/*
+[하] 2. js의 기본 데이터 유형에 데이터를 할당해서 확인하고, 데이터유형을 확인 하는 함수를 통해서 유형을 확인하세요.
+1. 문자열 데이터: ''/"" 둘 다 문자열로 처리
+var stringVar = 'himan';
+
+2. 숫자형 데이터
+var numberVar = 222;
+
+3. boolean 데이터: true/false
+var booleanVar = true;
+
+4. 함수형데이터
+var functionVar = function(){};
+
+5. 객체형 데이터
+var objectVar = {};
+
+>> 데이터 유형 확인함수 : typeof(변수명)
+console.log("typeof(stringVar): "+typeof(stringVar));
+console.log("typeof(numberVar): "+typeof(numberVar));
+console.log("typeof(booleanVar): "+typeof(booleanVar));
+console.log("typeof(functionVar): "+typeof(functionVar));
+console.log("typeof(objectVar): "+typeof(objectVar));
+ */
+
+/*
+[하] 3. js의 입력/출력 형식과 해당 기능에 대하여 기술하세요.
+# js에서 기본 입력 함수
+1. confirm("메시지"): alert형식으로 출력되며, 확인/취소로 리턴되는 값을 boolean으로 가져온다.
+
+var isAdult = confirm("성인입니까?"); 
+console.log("isAdult:"+isAdult);
+if(isAdult){
+	console.log("성인 인증");
+} else {
+	console.log("미성년");
+}
+
+2. prompt("메시지","초기값"): 메시지: 확인/취소로 리턴되는 값이 입력된 값 / 초기값: null값
+
+var name=prompt("이름을 입력하세요","여기에");
+console.log("입력된 이름: "+name);
+ */
+
+/*
+[중] 4. 기본 입력/출력 형식을 이용해서 학생의 이름, 국어, 영어, 수학 점수를 입력 받아서, 해당 내용을 h3로 화면에
+    출력하되, 마지막에 평균 출력 여부를 확인하여 확인시에 평균값을 출력하고 취소시 총액을 출력하세요.
+ */  
+/* var name = prompt("이름을 입력하세요","여기에");
+var kor = prompt("국어 점수를 입력하세요.","숫자만 입력하세요.");
+var eng = prompt("영어 점수를 입력하세요.","숫자만 입력하세요.");
+var math = prompt("수학 점수를 입력하세요.","숫자만 입력하세요.");
+var avg = confirm("평균을 출력하시겠습니까?");
+
+document.write("<h3>이름: "+name+"</h3>");
+document.write("<h3>국어점수: "+kor+"</h3>");
+document.write("<h3>영어점수: "+eng+"</h3>");
+document.write("<h3>수학점수: "+math+"</h3>");
+
+if(avg){
+	document.write("<h3>평균점수: "+(parseInt(kor)+parseInt(eng)+parseInt(math))/3+"</h3>")
+} else {
+	document.write("<h3>총 점수: "+(parseInt(kor)+parseInt(eng)+parseInt(math))+"</h3>");
+} */
+
+/*
+[중] 5. 물건명/가격/갯수를 입력받아, 출력형식을 선택하게 하여 1:alert(), 2:console, 3:웹화면 로 하여
+    해당 형식으로 화면에 출력하세요.
+ */
+/* var prod = prompt("물건명을 입력하세요","예)사과");
+var price = prompt("가격을 입력하세요","예)3000");
+var cnt = prompt("개수를 입력하세요","예)3");
+alert("물건명: "+prod);
+console.log("가격: "+price+"원");
+document.write("<h4>개수: "+cnt+"개</h4>"); */
+
+/*
+[하] 6. let/var 변수의 차이를 기본예제를 통해서 기술하세요.
+>> 차이점 : 지역변수와 전역변수의 구분여부
+>> var변수는 선언할 때부터 전역 변수로만 활용됨
+>> let변수는 지역변수와 전역변수의 명확한 구분을 함
+ */
+// var
+/* {
+	var variable = 273;
+}
+{
+	console.log("다른 블럭 variable: "+variable);
+}
+console.log("전역 블럭 variable: "+variable);
+
+// let
+{
+	let variable2 = 273;
+	console.log("같은 블럭 variable: "+variable2);
+}
+{
+// console.log("다른 블럭 variable: "+variable2); // 윗 블럭에서 let 변수가 선언됐으므로 여기서는 출력 안 됨
+}
+// console.log("전역 블럭 variable: "+variable2); // 블럭 내에서 let 변수가 선언돼서 전역에서는 출력 안 됨
+ */
+</script>
+</head>
+<body>
+	<h2></h2>
+	<h2></h2>
+	<h2></h2>
+	<h2></h2>
+	<h2></h2>
+</body>
+<script type="text/javascript">
+/* 
+ 
+ 
+*/
+//   document.querySelector("h2").innerHTML="js 시작^^";
+//
+// window.onload=runction(){}
+// : 윈도우 화면(BOM)이 다 로딩 후 실행할 내용 정의.
+// head javascript에서 DOM객체를 인식할 수 있다.
+window.onload = function(){
+	var name = prompt("이름을 입력하세요","여기에");
+	var kor = prompt("국어 점수를 입력하세요.","숫자만 입력하세요.");
+	var eng = prompt("영어 점수를 입력하세요.","숫자만 입력하세요.");
+	var math = prompt("수학 점수를 입력하세요.","숫자만 입력하세요.");
+	var avg = confirm("평균을 출력하시겠습니까?");
+	document.querySelectorAll("h2")[0].innerHTML="이름: "+name;
+	document.querySelectorAll("h2")[1].innerHTML="국어: "+kor;
+	document.querySelectorAll("h2")[2].innerHTML="영어: "+eng;
+	document.querySelectorAll("h2")[3].innerHTML="수학: "+math;
+	// 입력값은 문자열이므로 변환함수 처리 해줘야 함
+	var tot = Number(kor)+Number(eng)+Number(math);
+	if(avg){
+		document.querySelectorAll("h2")[4].innerHTML="평균: "+tot/3;
+	}else{
+		document.querySelectorAll("h2")[4].innerHTML="총합: "+tot;
+	}
+}
+</script>
+</html>

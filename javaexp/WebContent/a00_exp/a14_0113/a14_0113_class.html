@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+div {
+	display: inline-block;
+	height: 50px;
+	width: 50px;
+	border: 2px solid lightgray;
+	text-align: center;
+	background: pink;
+}
+
+.ch:hover{
+	position: absolute;
+	left:50%;
+	top: 50%;
+	color: red;
+	background: yellow;
+}
+
+nav {background: orange;}
+nav ul{
+	margin: 0;
+	padding: 0;
+	width: 600px;
+	background:pink;
+}
+nav ul li{
+	display: inline-block;
+	list-style-type: none;
+}
+nav ul li a {
+	text-decoration: none;
+}
+
+</style>
+<script type="text/javascript">
+	var isVisible=true;
+	function ch(btn){
+		var obj = document.querySelector("img");
+		if(isVisible){
+			obj.style.visibility="hidden";
+			btn.value="view";
+			isVisible=false;
+		} else {
+			obj.style.visibility="visible";
+			btn.value="hidden";
+			isVisible=true;
+		}
+	}
+</script>
+</head>
+<body>
+<!-- 
+[html]
+[하] 1. position의 속성과 속성값의 내용에 대하여 설명하세요.
+1. position의 속성을 통해 div box의 위치를 상대적/절대적으로 설정할 수 있다.
+2. 속성값
+	1) static(기본) ex) div{position: static;}
+	2) relative: 상대적 배치 - 이전 요소 객체(태그)를 기준으로 위치 지정
+	3) absolute: 절대적 배치 - 전체 화면 기준으로 위치 지정
+	4) fixed: 고정 위치
+	5) float: 유동 위치
+3. 함께 사용되는 위치 속성
+	>> top, bottom, left, rifht, height
+		left:20px; >> 왼쪽으로부터 오른쪽으로 20px만큼 떨어져서 x축 위치를 지정
+		bottom:50px; >> 밑으로부터 위쪽으로 50px만큼 떨어져서 y축 위치 지정 
+		ex) div{top:20px; left:30px; position:relative;}
+-->
+
+<!--
+[하] 2. hello를 글자로 div 속성으로 만들고, 모든 div가 가상클래스 속성으로 마우스 오버했을 때,
+	   절대적 위치로 중앙에 위치가 되고 배경색상과 글자 색상이 변경 되게 하세요.
+-->
+<div class="ch">H</div>
+<div class="ch">e</div>
+<div class="ch">l</div>
+<div class="ch">l</div>
+<div class="ch">o</div>
+
+<!--
+[하] 3. display:fixed;와 float:right|left;의 차이점을 기술하세요.  
+>> display:fixed: 브라우저 특정 위치에 화면이 고정이 되어 스크롤하거나 크기를 조정해도 해당 위치가 고정됨
+>> float:right|left  : 해당 내용에 대해 위치를 지정하여 출력. 뷰포트의 오른쪽/왼쪽에 붙임
+		fixed 속성과의 차이점을 겹치지지는 않는다 (강사님이 이렇게 적어주셨는데 무슨 의미인지 해석이 되지 않습니다..)
+-->
+
+<!--
+[하] 4. visibility와 overflow의 공통 속성과 다른 속성을 기술하세요.
+>> 공통속성
+	hidden: 내용 숨김
+	visible: 내용 보임
+>> 다른 속성(overflow에만 있음)
+	scroll: scrolling이 만들어져서 scroll로 확인할 수 있게 처리
+-->
+
+<!--
+[중] 5. botton으로 클릭시, 특정 이미지가 보였다가 보이지 않기를 반복처리 되게 하세요.
+-->
+<h2>예제5</h2>
+<br>
+<input type="button" value="hidden" onclick="ch(this)"/><br>
+<img src="media/apple.png" width="200" height="200"/>
+<!--
+[하] 6. 메뉴항목을 ul,li, a로 상단에 왼쪽으로 리스트 처리하고 iframe으로 해당 내용이 변경되게 처리하세요.
+ -->
+<hr>
+<nav>
+	<ul>
+		<li><a href="#" target="main">홈</a></li>
+		<li><a href="a14_0113_1.html" target="main">물품</a></li>
+		<li><a href="a14_0113_2.html" target="main">장바구니</a></li>
+		<li><a href="a14_0113_3.html" target="main">관리자</a></li>
+	</ul>
+</nav>
+<iframe name="main" width="600" height="400"></iframe>
+
+</body>
+</html>

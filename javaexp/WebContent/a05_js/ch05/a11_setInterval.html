@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+/* 
+# 시간 간격으로 수행하는 내장 함수
+1. 기본 형식
+	setInterval(function(){해당마다 수행할내용},1/1000);
+	clearInterval(변수); 메모리 해제
+*/
+//
+	function start01(){
+		var obh4 = document.querySelector("h4");
+		var cnt = 1;
+		var set01 = setInterval(function(){
+			obh4.innerHTML = cnt;
+			if(cnt==1000){ // 1000초일때는 종료
+				clearInterval(set01);
+			}
+			cnt++;
+		},10); // 0.1초마다 카운트 증가
+	}
+	// ex) 카운트다운 10~0까지 카운트다운 클릭 시 출력. 0이 되면 발사 출력
+	function start02(){
+		var cnt = 10;
+		var cntdown = document.querySelector("#cntdown");
+		var set = setInterval(function(){
+			cntdown.innerHTML = cnt;
+			cnt--;
+			if(cnt<0){
+				alert("발사");
+				clearInterval(set);
+				cntdown.innerHTML = "발사";
+			}
+		},1000);
+	}
+</script>
+</head>
+<body>
+	<h2></h2>
+	<h3 onclick="start01()">시 작</h3>
+	<h4>0</h4>
+	<h3 onclick="start02()">카운트다운</h3>
+	<h4 id="cntdown"></h4>
+</body>
+<script type="text/javascript">
+/* 
+ 
+*/
+//	document.querySelector("h2").innerHTML="js 시작^^";
+//
+</script>
+</html>

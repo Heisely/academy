@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+/* 
+# document.getElementById("아이디명")
+1. 태그의 속성으로 id를 설정한 것에 대해 호출하여 처리
+
+# document.getElementsByTagName("태그")
+1. 해당 태그를 기준으로 호출
+2. 기본적으로 배열로 각각의 요소객체에 접근
+
+*/
+//
+	window.onload=function(){ // 화면이 다 로딩된 이후로 처리할 이벤트
+		document.querySelector("h2").innerHTML = "JS 시작";
+		// 문서 객체를 가져옴
+		var header1 = document.getElementById('header-1');
+		var header2 = document.getElementById('header-2');
+		// 문서 객체의 속성 변경
+		header1.textContent = 'with getElementById()';
+		header2.textContent = 'with getElementById()';
+		
+		var headers = document.getElementsByTagName('h3');
+		headers[0].textContent = 'with getElementsByTagName()';
+		headers[1].textContent = 'with getElementsByTagName()';
+		
+		var headers4 = document.getElementsByTagName('h4');
+		// getElementsByTagName은 배열이므로 loop를 사용해 처리 가능
+		for(var i=0; i<headers4.length; i++){
+			// 문서 객체의 속성 변경
+			headers4[i].textContent = (i+1)+'번째 with getElementsByTagName()';
+		}
+		
+		// ex5) h5에 영문으로 무지개 색상 7개를 textnode로 표시하고
+		//		getElementsByTagName()으로 접근하되, 반복문으로 접근하여 배열색상을 무지개색상으로 처리
+		var h5Obj = document.getElementsByTagName('h5');
+		for(var idx=0; idx<h5Obj.length; idx++){
+			h5Obj[idx].style.backgroundColor = h5Obj[idx].textContent;
+		}
+
+/*
+# DOM 객체의 style 접근
+1. DOM객체명.style.css속성 = "css속성값";
+ */
+		var header = document.getElementById('header');
+ 		// 문서 객체의 스타일을 바꿔줍니다.
+ 		header.style.border = '2px solid black';
+ 		header.style.color = 'orange';
+ 		header.style.fontFamily = '궁서체';
+	};
+</script>
+</head>
+<body>
+	<h1 id="header">안녕하세요</h1>
+	<h2></h2>
+	<h1 id="header-1">Header</h1>
+	<h1 id="header-2">Header</h1>
+	<h3>Header</h3>
+	<h3>Header</h3>
+	<h4></h4>
+	<h4></h4>
+	<h4></h4>
+	<h4></h4>
+	<h4></h4>
+	<h5>red</h5><h5>orange</h5><h5>yellow</h5>
+	<h5>green</h5><h5>blue</h5><h5>navy</h5><h5>purple</h5>
+</body>
+</html>

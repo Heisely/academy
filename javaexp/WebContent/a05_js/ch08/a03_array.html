@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+/*
+# 배열
+1. 배열 처리 객체
+	1) 배열명 = []
+	2) 생성자 함수: var arr = new Array();
+		Array(): 빈 배열
+		Array(크기)
+		Array(데이터1, 데이터2, 데이터3, ...)
+2. 속성과 메서드
+	length: 배열 요소의 개수
+	concat(): 배열 요소를 이어줌
+	join(): 모든 요소 문자열로
+	pop(): 마지막 요소 제거, 삭제할 요소 리턴
+	push(): 마지막 요소 추가
+	reverse(): 순서 뒤집기
+	slice(): 지정 부분 리턴
+	sort(): 정렬
+		ex) 배열.sort(function(left, right){return left - right});
+	splice(): 지정 부분 삭제, 삭제한 요소 리턴
+		ex) splice(삭제할 시작위치, 개수)
+			반복적으로 삭제할 때에는 해당위치에서 갯수가 삭제되므로 구조가 변경된다.
+			마지막 index위치 부터 삭제해야 정상적으로 삭제가 가능하다.
+3. 배열정렬 처리
+	1) 기본형식: 배열.sort(function(left, right){});
+	2) 오름 차순
+		function(left,right){return left - right}
+	3) 내림 차순
+		function(left, right){return right - left}
+4. 요소 제거
+특정 요소 제거 메서드 없음
+	프로토타입 추가
+	Array.prototype.remove=function(index){
+		return this.splice(index-1);
+	}
+*/
+// 변수 선언
+var array1 = [52, 273, 103, 57, 32];
+var array2 = new Array();
+var array3 = new Array(10); // 배열의 크기 지정
+var array4 = new Array(52, 273, 103, 57, 32); // 구성요소
+console.log(array1);
+console.log(array2);
+console.log(array3);
+console.log(array4);
+
+// 변수 선언
+var array = ['A', 'B', 'C', 'D'];
+// 출력
+var output = '';
+for(var i=0; i<array.length; i++){
+	output += i+' : '+array[i]+'\n';
+}
+console.log(output);
+console.log(array);
+
+// 변수 선언 및 정렬
+var array = [52, 273, 103, 32];
+array.sort(); // 맨 첫글자만 비교해서 정렬함
+// 출력(배열 정렬처리의 한계)
+console.log("# 정렬1 #");
+console.log(array);
+
+// 변수 선언 및 정렬
+var array = [52, 273, 103, 32];
+array.sort(function(left, right){
+	return left - right; // 오름차순
+});
+// 출력
+console.log("# 정렬2(오름차순) #");
+console.log(array);
+
+//변수 선언 및 정렬
+var array = [52, 273, 103, 32];
+array.sort(function(left, right){
+	return right - left; // 내림차순
+});
+// 출력
+console.log("# 정렬2(내림차순) #");
+console.log(array);
+
+//ex1) 임의로 과일가격 3000, 2000, 5000 을 선언하고, 내림차순으로 처리
+var price = [3000, 2000, 5000];
+price.sort(function(left,right){
+	return right - left;
+});
+console.log("# ex1 #");
+console.log(price);
+//ex2) 1~100까지 임의의 값이 배열 5개로 들어가게 하고, 오름차순으로 정렬
+var ranArray=[];
+for(cnt=1;cnt<=5;cnt++){
+   ranArray.push(Math.floor(Math.random()*100+1));
+}
+console.log("#임의의 값 오름차순#");
+ranArray.sort(function(left,right){
+   return left-right;
+});
+console.log(ranArray);
+
+/*
+# 객체형 배열에서 특정 속성으로 비교해서 정렬처리
+1. 학생 이름/국어/영어/수학을 가진 객체가 배열로 리스팅 될 때
+	학생의 속성값인 국어점수를 기준으로 정렬,
+	또는 학생의 속성값인 영어점수를 기준으로 정렬 등
+2. 배열의 구성요소 기준으로 정렬
+	배열명.sort(function(left,right){
+		left.속성 - right.속성;
+	}); ==> 특정 속성기준으로 전체 배열의 오름차순으로 처리된다.
+	ex)
+	studlist.sort(function(left,right){
+		left.국어 - right.국어; // 학생배열의 국어점수 기준으로 내림차순 처리
+	});
+ */
+// 생성자 함수 선언
+function Student(name, korean, math, english, science){
+	// 속성
+	this.이름 = name;
+	this.국어 = korean;
+	this.수학 = math;
+	this.영어 = english;
+	this.과학 = science;
+	// 메서드
+	this.getSum = function(){
+		return this.국어 + this.수학 + this.영어 + this.과학;
+	};
+	this.getAverage = function(){
+		return this.getSum()/4;
+	};
+	this.toString = function(){
+		return this.이름+'\t'+this.getSum()+'\t'+this.getAverage();
+	}
+}
+
+// 학생 정보 배열 생성
+var students = [];
+students.push(new Student('윤인성', 87, 98, 88, 95));
+students.push(new Student('연하진', 92, 98, 96, 98));
+students.push(new Student('구지연', 76, 96, 94, 90));
+students.push(new Student('나선주', 98, 92, 96, 92));
+students.push(new Student('윤아린', 95, 98, 98, 98));
+students.push(new Student('윤명월', 64, 88, 92, 92));
+students.push(new Student('김미화', 82, 86, 98, 88));
+students.push(new Student('김연화', 88, 74, 78, 92));
+students.push(new Student('박아현', 97, 92, 88, 95));
+students.push(new Student('서준서', 45, 52, 72, 78));
+
+// 1. 총점 기준으로 내림차순 정렬처리
+// 2. slice(index, 순서1부터 시작): 해당 인덱스로부터 개수 호출
+//		slice(0부터, 1부터): 특정 위치를 추출해서 배열을 return
+//		['사과','바나나','딸기,'오렌지'].slice(0,1) ==> ['사과']
+//		['사과','바나나','딸기,'오렌지'].slice(1,3) ==> ['바나나','딸기']
+// 학생의 1~3등까지 추출
+students = students.sort(function(left, right){
+	return right.getSum() - left.getSum();
+}).slice(0,3);
+// 출력
+var output = '이름\t총점\t평균\n';
+for(var i in students){
+	output += students[i].toString()+'\n';
+}
+console.log(output);
+// ex1) 국어점수 기준으로 끝에서 3명 출력
+var korlist = students.sort(function(left,right){
+	return left.국어 - right.국어;
+}).slice(0,3);
+var output = '이름\t국어\n';
+for(var i in korlist){
+	output+=korlist[i].이름+"\t"+korlist[i].국어+'\n';
+}
+console.log(output);
+// ex2) 영어점수 기준으로 4~7등 출력
+var englist = students.sort(function(left, right){
+	return right.영어 - left.영어;
+}).slice(3,7);
+var output2 = '이름\t영어\n';
+for(var i in englist){
+	output+=englist[i].이름+"\t"+englist[i].영어+'\n';
+}
+console.log(output2);
+</script>
+</head>
+<body>
+	<h2></h2>	
+</body>
+<script type="text/javascript">
+</script>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<!-- 
+# hyperlink 만들기
+1. hyperlink: 다른 html페이지와 연결
+	1) 현재 서버에 있는 html페이지의 특정 위치로 이동
+		ex) a href="a01_start.html" 현재 폴더에 있는 특정 페이지로 이동
+	2) 외부서버에 있는 페이지로 이동
+		ex) a href="http://www.naver.com" 네이버
+	3) 이미지로 링크
+		ex) ahref="" img
+2. 기본 형식
+	a href="이동할 페이지"	 target="페이지가 출력할 이름"
+3. 하이퍼링크 텍스트색상
+	1) 초기색상: 파란색+밑줄
+	2) 방문 후: 보라색
+	3) 마우스 클릭 시: 누르고 있는 동안 색상은 빨강
+		cf)css로 색상 변경이 가능하다.
+ -->
+<h3>링크만들기</h3>
+<hr>
+포털사이트
+<ul><!-- 외부 페이지로 이동 처리 -->
+	<li><a href="http://www.naver.com">네이버</a></li>
+	<li><a href="http://www.daum.net">다음</a></li>
+</ul>
+신문 사이트
+<ul><!-- 이미지로 외부사이트 연결 -->
+	<li><a href="http://www.etnews.com">
+		<img src="media/iconetnews.png" alt="전자신문">
+		</a>
+	</li>
+	<li><a href="http://www.chosun.com">
+		<img src="media/iconchosun.png" ale="조선일보">
+		</a>
+	</li>
+</ul>
+<hr><!--
+	# 상대적 절대적 위치로 서버에 있는 특정한 페이지로 이동 처리
+	1) 현재 파일과 동일할 때 - 파일명
+	2) 현재 폴더 하위 - 폴드명/파일명
+	3) 상위폴드 - ../파일명 ../폴더명/파일명
+	4) /프로젝트명/폴드명/파일명
+ 	-->
+<a href="a01_start.html">a01_start.html 페이지로 이동</a>
+<a href="a02_init.html">a02_init.html 페이지로 이동</a>
+
+
+
+<h3>링크의 target 속성 활용</h3>
+<hr>
+<ul>
+<!-- 
+# a 태그의 target 속성
+0. 형식: <a href="" target="속성값">
+1. 속성값
+	_blank: 새로운 탭/창으로 페이지 로딩
+	_self: 현재 페이지를 변경처리
+	_parent: window.open()(js), iframe으로 페이지 호출시 사용
+			 하위프레임 안에서 링크로 상위 프레임의 내용을 변경할 때
+	_top: window.open()(js), iframe으로 페이지 호출 시 최고 레벨 창을 변경 처리
+		  하위프레임 안 또는 계층 구조상 그 하위 프레임 안에서 최상위 초기 화면을 변경대상으로 할 때
+	프레임이름: 해당 프레임의 페이지를 변경
+ -->
+	<li><a href="http://www.w3.org" target="_blank">W3C(새 윈도우, _blank)</a>
+	<li><a href="http://www.enews.com" target="_self">전자신문(현재 윈도우, _self)</a>
+	<li><a href="http://www.naver.com" target="_parent">네이버(부모 윈도우, _parent)</a>
+	<li><a href="http://www.mk.co.kr" target="_top">매일경제신문(브라우저 윈도우, _top)</a>
+</ul>
+
+
+
+<!-- 
+# 페이지 내의 특정한 위치로 이동
+1. 특정 위치를 태그의 속성으로 id="아이디명"으로 설정하고, href="외부페이지#아이디"로 처리하면 특정한 페이지의 특정위치로 이동한다.
+
+ -->
+<!-- 
+특정한 페이지에서 특정한 위치로 이동할 때
+
+1. 현재 페이지
+href="#해당위치의 id명" > 클릭 시, 해당 id가 있는 태그의 위치로 이동
+태그명 id="id명"
+
+2. 다른 페이지에서 특정 위치
+href="페이지명#id명" > 클릭 시, 해당 페이지에 id가 있는 태그 위치로 이동
+ -->
+<h3>외부페이지 이동</h3>
+<hr>
+<ul>
+ 	<li><a href="a14_link.html#love">Love me tender(외부페이지 이동)</a>
+	<li><a href="a14_link.html#can">Can't help falling in love(외부페이지 이동)</a>
+	<li><a href="a14_link.html#it">It's now or never(외부페이지 이동)</a>
+</ul>
+</body>
+</html>

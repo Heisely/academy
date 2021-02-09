@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>폰트</title>
+<style>
+/*
+# css의 표준 단위
+1. em: 배수	ex) 기본적으로 지원하는 크기에서 배수로 처리할 때 활용
+				font-size:3em;
+2. %: 퍼센트	ex) 해당 지원하는 크기의 %로 크기 설정
+				font-size:200%
+3. px: 픽셀수	ex) 절대적인 픽셀단위 크기 설정
+4. pt: 포인트, 1pt = (1/72)in
+5. cm | mm: ex) 절대적 cm/mm 크기로 설정
+6. in: 인치 = 2.54cm = 96px	ex) margin:2in; 왼쪽 여백 2인치
+7. pc: 피카소(picas) 1pc = 12pt
+8. deg: 각도	ex) transform:rotate(20deg): 시계방향으로 20도 회전
+
+# 폰트 관련 속성들
+1. 폰트의 종류 font-family: 굴림체, 궁서체, 맑은고딕, Arial 등
+		ex) h2{font-family:궁서체;}
+2. 폰트의 크기 font-size: 표준 단위로 크기를 설정
+		ex) h1{font-size:2.0em;}
+3. 폰트의 스타일 font-style: 기울임(italic), oblique 등
+4. 폰트의 굵기 font-weight: bold, boder, light 등, 100~900범위 굵기
+5. 폰트의 속성을 한번에 지정
+	font:font-style font-weight font-size font-family
+	ex) p{font: italic bold 20px consolas,sans-serif;}
+	ex) h4{font: 20px consolas,sans-serif;}
+		font-size, font-family 외 생략 가능
+ */
+body {
+	font-family: "times New Roman", serif;
+	font-size: large;
+}
+
+h3 {
+	font: italic bold 40px 궁서체, sans-serif;
+}
+</style>
+</head>
+<body>
+	<h3>궁서체</h3>
+	<hr>
+	<p style="font-weight: 900">font-weight 900</p>
+	<p style="font-weight: 100">font-weight 100</p>
+	<p style="font-weight: italic">italic Style</p>
+	<p style="font-weight: Oblique">Oblique Style</p>
+	<p>
+		현재 크기의 <span style="font-size: 1.5em">1.5배</span> 크기로 </p>
+</body>
+</html>

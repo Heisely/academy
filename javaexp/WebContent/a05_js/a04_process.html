@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+/* 
+# 조건문/반복문/배열
+1. if(boolean) 조건문
+   switch(){case: ;//}
+2. for(초기;반복조건;증감연산자){}
+   while(){}, do{}while();
+3. 배열
+	1) 선언
+	var 배열명 = [];
+	배열명[index번호] =  데이터할당;
+	배열명.push("추가할 데이터"); >> js에서는 동적 배열을 허용. 배열의 마지막 데이터에서 추가
+	배열명.pop(): 배열의 마지막 데이터를 return하면서 배열에서 삭제처리
+	배열명[index]=null;
+	
+	var 배열명 = [데이터1, 데이터2, 데이터3, ...];
+*/
+//
+
+</script>
+</head>
+<body>
+   <h2></h2>
+</body>
+<script type="text/javascript">
+/* 
+ document.body.innerHTML: 화면에 출력할 내용
+ +=: 기존 내용에 덧붙여서 처리 
+*/
+	// 반복문 처리
+	for(var cnt=1;cnt<=10;cnt++){
+		document.body.innerHTML+="<h3>번호: "+cnt+"</h3>";
+	}
+// ex) h1을 이용해서 카운트다운 10~1까지 출력
+	for(var cnt=10;cnt>=1;cnt--){
+		document.body.innerHTML+="<h1>카운트다운: "+cnt+"</h1>";
+	}
+	
+// ex2) ul li를 이용해서 list내용 선택1~선택5까지 출력하기
+	document.body.innerHTML+="<ul>"
+	for(var cnt=1;cnt<=5;cnt++){	
+		document.body.innerHTML+=`<li>선택:${cnt}</li>`;	
+	}
+	document.body.innerHTML+="</ul>";
+
+// ex3) 테이블의 td를 이용해서 1~16까지 출력하기(if도 들어감)
+//		document.body.innerHTML로만 진행하면 메모리 한계로 불가능 ==> 변수선언 후 마지막에 할당!
+//		1) table을 출력하는 화면 구현
+//			<table border><tr><td>테이블</td></tr></table>
+	var show = "<table border><tr><td>테이블</td></tr></table>";
+//		2) 반복문이 들어갈 부분 확인
+//			- 반복하지 않을 부분과 반복할 부분 분리
+//			- 1~16(반복할 부분)
+//			- 옆으로 나열된 1~16 셀을 만들어 보자.
+//		3) 조건문으로 tr이 추가될 부분과 tr이 닫힐 부분을 구분하여 처리
+	var show2 ="";
+	show2 += "<table border>";
+
+	for(var cnt=1;cnt<=16;cnt++){
+		if(cnt%4==1){
+			show2 +="<tr>";
+		}
+		show2 +="<td>"+cnt+"</td>";
+		if(cnt%4==0){
+			show2 +="</tr>";
+		}
+	}
+	show2 +="</table>";
+	document.body.innerHTML += show2;
+	
+	var show3 ="";
+	var colrow = prompt("단위 col/row수를 입력하세요","1");
+	show3 += "<table width='30%' border>";
+	for(var cnt=1; cnt<=colrow*colrow; cnt++){
+		if(cnt%colrow==1){
+			show3 +="<tr>";
+		}
+		show3 +="<td>"+cnt+"</td>";
+		if(cnt%colrow==0){
+			show3 +="</tr>";
+		}
+	}
+	show3 += "</table>";
+	document.body.innerHTML += show3;
+
+/* 	 */
+</script>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+/* 
+# Date
+1. 날짜와 시간을 표시하는 객체
+2. 생성
+	1) 현재일자
+		var 변수명 = new Date()
+	2) 특정일자
+		Date("영문월 날짜")
+		Date("영문월 날짜, 년도")
+		Date("영문월 날짜, 년도 시:분:초")
+		Date("년도, 월index, 날짜")
+		Date("년도, 월index, 날짜, 시, 분, 초")
+		Date("년도, 월index, 날짜, 시, 분, 초, 1/1000초")
+3. 메서드
+	getXXX(): 호출
+	setXXX(저장데이터)
+		> XXX: Date, Day, FullYear, Hours, Milliseconds, Minutes, Month, Seconds, Time
+		ex) date01.getDate(), date01.getHours()
+			date01.getTime(): 1970.1.1.기준 이후로 1/1000초를 계산
+			date01.getDay(): 요일(0~6) index
+			date01.getMonth(): 월(0~11)
+		ex) 일주일 후: date.setDate(date.getDate()+7)
+			getdate()를 통해서 현재 날짜를 가져오고 setDate()를 통해서 저장
+			현재 날짜가 1/28이면 7일 이후 2/4로 날짜 처리 규칙에 의해 저장
+	toOOOString()
+		> OOO: Date, GMT, ISO, JSON, LocaleDate, Locale, LocaleTime, Time
+		ex) date.toISOString(): iso 형태 날짜 출력
+			date.toLocaleDate(): 해당 지역(한국식) 날짜 출력
+			date.toLocaleTime(): 해당 지역(한국식) 시간 출력
+			date.toLocaleString(): 해당 지역(한국식) 날짜/시간 출력
+*/
+// 변수 선언
+var date = new Date();
+// 현재 날짜 출력
+console.log(date);
+// 영문으로 선언한 특정 날짜와 시간 표기
+var date1 = new Date('December 9, 1991');
+var date2 = new Date('December 9, 1991 02:24:23');
+console.log(date1);
+console.log(date2);
+// 매개변수에 의한 날짜 표현
+var date3 = new Date(1991, 11, 9); // 1991년 12월 9일 
+var date4 = new Date(1991, 11, 9, 2, 24, 23); 
+var date5 = new Date(1991, 11, 9, 2, 24, 23, 1);
+console.log(date3);
+console.log(date4);
+console.log(date5);
+
+// 변수 선언
+var date = new Date();
+// 현재 시각에서 7일을 더함
+date.setDate(date.getDate()+7);
+// 출력
+console.log(date);
+
+// 변수 생성
+var date = new Date(2021, 4, 29);
+// 출력
+var output = '';
+// 날짜 형식에 따른 출력 내용
+output += '★toDateString: '+date.toDateString()+'\n'; // Sat May 29 2021
+output += '★toGMTString: '+date.toGMTString()+'\n'; // Sat May 29 2021 15:00:00 GMT
+output += '★toLocaleDateString: '+date.toLocaleDateString()+'\n'; // 2021. 5. 29.
+output += '★toLocaleString: '+date.toLocaleString()+'\n'; // 2021.5.29. 오전 12:00:00
+output += '★toLocaleTimeString: '+date.toLocaleTimeString()+'\n'; // 오전 12:00:00
+output += '★toString: '+date.toString()+'\n'; // Sat May 29 2021 00:00:00 GMT +0900 (대한민국 표준시)
+output += '★toTimeString: '+date.toTimeString()+'\n'; // 00:00:00 GMT +0900 (대한민국 표준시)
+output += '★toUTCString: '+date.toUTCString()+'\n'; // Fri, 28, May 2021 15:00:00 GMT
+console.log(output);
+
+</script>
+</head>
+<body>
+	<h2></h2>
+	<h3></h3>
+	<script type="text/javascript">
+	// ex1) 영문으로 2021년 02월 1일을 입력하여 화면 h2에 출력
+		var date6 = new Date('February 1, 2021');
+		document.querySelector("h2").innerHTML = date6;
+	// ex2) 매개변수에 의해서 오늘 오후 17:50 15초를 입력하고 h3에 출력
+		var date7 = new Date(2021, 2, 3, 17, 50, 15);
+		document.querySelector("h3").innerHTML = date7;
+	</script>
+	
+	<!-- ex1) 기념일 출력: 오늘 이후 [100] [기념일확인] ==> 클릭 시 해당 날짜 출력 -->
+	<h2>오늘 이후 기념일</h2>
+	<input type="text" name="date01" size="3"/>일
+	<input type="button" value="기념일 확인" onclick="calcuDate()"/>
+	<h4 id="ann"></h4>
+	<script type="text/javascript">
+		function calcuDate(){
+			var date01 = Number(document.querySelector("[name=date01]").value);
+			var todate = new Date();
+			todate.setDate(todate.getDate()+date01);
+			var show1 = document.querySelector("#ann");
+			show1.innerHTML = todate.toLocaleDateString();
+		}
+	</script>
+	
+	<!-- ex2) 특정일 기념일 처리: [	]년 [	]월 [	]일 기준 [	]일 [이전/이후] -->
+	<h2>특정일 기념일 처리</h2>
+	<input type="text" name="yy" size="3">년
+	<input type="text" name="mm" size="3">월
+	<input type="text" name="dd" size="3">일 기준
+	<input type="text" name="date02" size="3"/>일
+	<!-- onchange="dateCalc()": 변경할 때 함수 호출 -->
+	<select id="sel" onchange="dateCalc()">
+		<option value="">선택</option>
+		<option value="0">이전</option>
+		<option value="1">이후</option>
+	</select>
+	<h4 id="show2"></h4>
+	<script>
+		function dateCalc(){
+			var yy = Number(document.querySelector("[name=yy]").value);
+			var mm = Number(document.querySelector("[name=mm]").value);
+			var dd = Number(document.querySelector("[name=dd]").value);
+			var date02 = Number(document.querySelector("[name=date02]").value);
+			var sel = document.querySelector("#sel").value;
+				if(sel=='0') date02 = -(date02);
+				if(sel=='1') date02 = date02;
+				if(sel=='') date02 = 0;
+			
+			var calDate = new Date(yy, mm-1, dd);
+			calDate.setDate(calDate.getDate()+date02);
+			document.querySelector("#show2").innerHTML = calDate.toLocaleDateString();
+		}
+	</script>
+</body>
+<script type="text/javascript">
+// 변수 선언
+var now = new Date();
+var before = new Date('December 9, 1991');
+// 날짜 간격
+// getTime(): 1970.1.1. 기준으로 1/1000초 단위로 할당하여 처리
+//	> 1*1000: 1초
+//	> 1*1000*60: 1분
+var interval = now.getTime() - before.getTime();
+// 오늘과 특정기준일의 차이를 계산하고 1일단위(=1000*60*60*24)로 변경
+// 36시간 ==> 1.5일 ==> 1일로 계산(Math.floor())
+interval = Math.floor(interval/(1000*60*60*24));
+// 출력
+console.log('Interval: '+interval+'일');
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

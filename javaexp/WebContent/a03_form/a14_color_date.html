@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	h3{color:#8A2BE2;}
+</style>
+</head>
+<body>
+<h3>컬러다이얼로그로 색 입력</h3>
+<!-- 
+# 색상 처리
+1. 색상 코드 값
+	#rrggbb: red, green blue 3원색을 16진수로 처리하여(0~255) 각 색상의 농도를 설정하고 혼합해 전체 색상을 만들어 갈 수 있다.
+	#FFD700: gold 색상으로 처리
+	이러한 색상 코드 값은 css에서 색상을 설정할 때 사용된다.
+2. default 값: input type = "color"
+3. 색상 입력 폼 요소: <input type="color" value="#RGB코드값">
+ -->
+<hr>
+색 선택 <input type="color" value="#00BFFF"
+		onchange="document.body.style.color=this.value">
+		<!--
+		onchange: 데이터를 변경했을 때 js로 특정한 기능을 처리하는 속성
+		document.body.style.color=this.value
+		==> css기준으로 body의 모든 글자 색상을 현재 요소객체인 input의 value값색상(this.value)으로 변경
+		 -->
+
+<br><br><br><br><br><br>
+
+<h3>시간 정보 입력 HTML5 폼 요소들</h3>
+초기세팅: 2016년 9월 1일 밤 9시30분(10초 32)<br>
+시간을 변경해 보세요
+<hr>
+<!-- 
+# 날짜 시간 정보 처리
+html5에서 지원되는 각 type에 따른 캘린더 선택을 할 수 있게 해준다.
+1. 형식
+	input type="month|week|date|time|datetime-local"
+2. 속성값
+	month: 년/월
+	week: 년/몇 번째 주
+	date: 년/월/일
+	time: 시/분
+	datetime-local: 년/월/일/오전.오후/시/분/초 100분의 1초
+ -->
+<pre>
+month: <input type="month" value="2016-09"><br>
+week: <input type="week" value="2016-W36"><br>
+date: <input type="date" value="2016-09-01"><br>
+time: <input type="time" value="21:30"><br>
+local: <input type="datetime-local" value="2016-09-01T21:30:10.32"><br>
+</pre>
+</body>
+</html>

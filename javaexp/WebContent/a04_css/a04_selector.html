@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>셀렉터 만들기</title>
+<style>
+h3, li { /* 태그 이름 셀렉터 */
+	color: brown;
+}
+/*
+ 가상클래스: 내장된 기능적 선택 h3이고 첫번째 글자에 대한 적용
+ */
+div>div>strong { /* 자식 셀렉터 */
+	background: yellow;
+}
+/*
+상위요소 하위요소: 부모관계를 포함해서 계층레벨에 상관없이 하위에 있으면 그 하위 요소에 적용.
+중간 추가적인 요소가 있더라도 적용된다.
+ */
+ul strong { /* 자손 셀렉터 */
+	color: dodgerblue;
+}
+
+.warning { /* class="warning"이라는 클래스만 있으면 선택된다. class 셀렉터
+			  클래스는 한 페이지에 여러 클래스를 둘 수 있다.(그룹설정) */
+	color: red;
+}
+
+body.main { /* body태그에 속성으로 클래스를 선언했을 때. class 셀렉터 */
+	background: aliceblue;
+}
+
+#list { /* id 셀렉터 */
+	background: mistyrose;
+}
+
+#list span { /* id가 list인 요소객체의 자손 중에 span태그로 된 것에 대하여 적용.
+				자손 셀렉터: 한 페이지에 하나만 사용할 수 있게 선언 >> id(identifier)*/
+	color: forestgreen;
+}
+
+h3:first-letter { /* 가상클래스 = 내장된 기능적 선택 
+				   h3이고 첫 번째 글자에 대한 적용
+				   가상 클래스 셀렉터*/
+	color: red;
+}
+
+li:hover { /* li이고 마우스 커서를 위치 시켰을 때. 가상클래스 셀렉터 */
+	background: yellowgreen;
+}
+</style>
+</head>
+<body class="main">
+	<!-- 선택자 body.main{} -->
+	<h3>Web Programming</h3>
+	<hr>
+	<div>
+		<div>
+			2학기 <strong>학습 내용</strong>입니다.
+		</div>
+		<ul id="list">
+			<li><span>HTML5</span></li>
+			<li><strong>CSS</strong></li>
+			<li>JAVASCRIPT</li>
+		</ul>
+		<div class="warning">60점 이하는 F</div><!-- .warning{} -->
+		<div class="warning">안녕</div>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+/* 
+
+*/
+//
+
+</script>
+</head>
+<body>
+	<h2></h2>
+	<table border></table>
+</body>
+<script type="text/javascript">
+/* 
+# 생성자 객체
+1. 함수 모양의 객체를 말한다.
+	this.@@ 로 현재 객체의 멤버변수를 설정한다.
+2. 기본 형식
+	function Object01(param1, param2){
+		this.속성1 = param1
+		this.속성2 = param2
+		this.메서드명 = function(){동작 처리할 내용};
+	}
+	var obj01 = new Object01('데이터1','데이터2');
+	obj01.속성1;
+	obj01.속성2;
+	obj01.메서드명();
+3. 생성자(함수형) 객체의 배열 사용
+	1) 생성자 객체 선언
+	2) 배열 선언과 할당
+	ex)
+	function Person(name, age, loc){
+		this.name = name;
+		this.age = age;
+		this.loc = loc;
+	}
+	var plist = [new Person("홍길동,25,"제주")]; // 배열생성으로 추가
+	plist[1] = new Person("김길동",27,"광주"); // 인덱스로 추가
+	plist.push(new Person("마길동",27,"부산")); // push로 추가
+	plist.forEach(function(p01, idx, arry){
+		console.log(idx+1+"\t"+p01.name+"\t"+p01.age+"\t"+p01.loc);
+	});
+*/
+	function Student(name, korean, math, english, science){
+		// 속성
+		this.이름 = name;
+		this.국어 = korean;
+		this.수학 = math;
+		this.영어 = english;
+		this.과학 = science;
+		// 메서드
+		this.getSum = function(){
+			return this.국어 + this.수학 + this.영어 + this.과학;
+		};
+		this.getAverage = function(){
+			return this.getSum()/4;
+		};
+		this.toString = function(){
+			return this.이름 + '\t' + '국어: ' + this.국어 + '\t' + '수학: ' + this.수학
+					+ '\t' + '영어: ' + this.영어 + '\t' + '과학: ' + this.과학
+					+ '\t' + '합계: ' + this.getSum() + '\t' + '평균' + this.getAverage();
+		};
+	}
+	var stud = new Student('구지연', 76, 96, 94, 90);
+
+	document.querySelector("h2").innerHTML=stud;
+// ex) 생성자형 객체를 product로 선언하고, 필드에 물건명/가격/갯수를 선언,
+//		추가함수로 tot()총계/toString()함수 선언,
+//		테이블 tr로 출력되게 하여 화면에 table객체에 출력
+	function Product(pname, price, cnt){
+		this.pname = pname;
+		this.price = price;
+		this.cnt = cnt;
+		this.tot = function(){
+			return (this.price*this.cnt);
+		};
+		this.toString = function(){
+			return '<tr><th>물건명</th><td>'+this.pname+'</td></tr>'+
+					'<tr><th>가격</th><td>'+this.price+'</td></tr>'+
+					'<tr><th>개수</th><td>'+this.cnt+'</td></tr>'+
+					'<tr><th>총계</th><td>'+this.tot()+'</td></tr>';
+		};
+	}
+	var prod = new Product('사과',2000,7);
+	document.querySelector("table").innerHTML = prod;
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</html>

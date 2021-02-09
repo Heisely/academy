@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+/* 
+1. DOM(Document Object Model) 주요 용어
+	1) 문서객체: html의 안의 tag를 객체로 만든 것
+		<h1>Text Node</h1>
+	2) 요소 노드: html 태그를 의미
+	3) 텍스트 노드: 요소 노드 안에 들어있는 글자
+	4) 정적 문서 객체 생성: 기존 html 페이지에 tag를 읽어 들이는 것
+		document.getElementsByTagName("h1")
+	5) 동적 문서 객체 생성: 기존 html 페이지에 없었던 문서 객체를 생성하는 것
+		document.createElement("h1")
+2. 문서 객체 만들기 패턴
+	1) 텍스트 노드를 갖는 것(패턴1)
+		ex) h1~h6, div, td, ...
+	2) 텍스트 노드를 갖지 않는 것(패턴2)
+		ex) <img src="@@@.jpg" width=500" height="200"/>
+	3) document 객체의 노드 생성 메서드
+		- createElement(tagName)
+		- createTextNode(txt)
+			> 생성: 객체명 = document.createElement("img")
+			> 상위 객체 연결: 상위.appendChild(하위)
+			> 속성 지정: 객체명.속성="속성값";
+				>> .setAttribute(속성명, 속성값): 속성에 속성값 저장
+				>> .getAttribute(속성명): 해당 속성값을 가져올 때
+	4) document 객체 연결 메서드
+		- appendChild(node)
+	5) innerHTML 속성 활용
+		<태그 시작>innerHTML에 할당</태그 끝>
+		ex) <h1> hello DOM </h1>
+			document.body.innerHTML="태그";
+			document.body.textContent="태그로 넣지 않고 단순 글자";
+3. html 태그를 가져오는 방법
+	단일객체 = document.getElementById("id")
+		ex)
+		<h1 id="himan">안녕</h1>
+		document.getElementById("himan");
+	배열객체 = document.getElementsByTagName("tagName")
+	배열객체 = document.getElementsByClassName("className")
+	배열객체 = document.getElementsByName("속성name")
+		ex) <input name="id"/>
+			document.getElementsByName("id")[0]
+	선택자:
+	Id	#id명,	tag		태그명,	class	.클래스명
+	단일객체 = document.querySelector(선택자)
+	배열객체 = document.querySelectorAll(선택자)
+*/
+//
+
+</script>
+</head>
+<body>
+	<h1 id="header">HEADER</h1>
+	<h2></h2>
+</body>
+<script type="text/javascript">
+/* 
+ 
+*/
+	var header = document.getElementById('header');
+	header.innerHTML = "안녕하세요(변경)";
+	document.querySelector("h2").innerHTML="js 시작^^";
+	
+	// 변수 선언
+	// 1. h1객체를 js코드에서 생성
+	var header = document.createElement('h1');
+	// 2. h1안에 들어갈 문자열 객체 생성
+	var textNode = document.createTextNode('Hello DOM');
+	// 노드 연결
+	// 3. 상위.appendChild(하위);
+	header.appendChild(textNode);
+	document.body.appendChild(header);	
+//	ex) "좋은 하루 시작"이라는 textNode를 h2에 할당하고 body객체에 다시할당해 최종 화면에 출력
+	var msgObj = document.createTextNode('좋은 하루 시작');
+	var h2Obj = document.createElement('h2');
+	h2Obj.appendChild(msgObj);
+	document.body.appendChild(h2Obj);
+	
+	// 변수 선언
+	var img = document.createElement('img');
+	img.src = 'ex3.jpg';
+	img.width = 500;
+	img.height = 350;
+	// 노드 연결
+	document.body.appendChild(img);
+	
+	// 변수 선언
+	var img2 = document.createElement('img');
+	// setAttribute("속성","속성값");
+	img2.setAttribute('src','banana.png');
+	img2.setAttribute('width',500);
+	img2.setAttribute('height',350);
+	// 노드 연결
+	document.body.appendChild(img2);
+	
+//	ex1) img를 하나 만들어 아래에 속성값(setAttribute)로 설정해 추가하기
+	var img3 = document.createElement('img');
+	img3.setAttribute('src','ex2.jpg');
+	img3.setAttribute('width',500);
+	img3.setAttribute('height',350);
+	document.body.appendChild(img3);
+//	ex2) <div>객체에 h2 좋은 이미지 img객체를 추가해 화면에 출력
+//		 body - div - h2 - textnode
+//					- img
+	var h2Obj2 = document.createElement('h2');
+	var h2Txt = document.createTextNode('좋은 이미지');
+	h2Obj2.appendChild(h2Txt);
+	var img4 = document.createElement('img');
+	img4.setAttribute('src','ex1.jpg');
+	img4.setAttribute('width',300);
+	img4.setAttribute('height',300);
+	var divObj1 = document.createElement("div");
+	divObj1.appendChild(h2Obj2);
+	divObj1.appendChild(img4);
+	divObj1.setAttribute('height',600);
+	divObj1.setAttribute('style','background-color:skyblue;');
+	document.body.appendChild(divObj1);
+
+
+	document.body.appendChild(img4);
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

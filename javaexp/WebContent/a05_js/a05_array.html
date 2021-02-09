@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+   #bbRank{visibility:hidden;}
+</style>
+<script type="text/javascript">
+/*
+
+*/
+
+//
+</script>
+
+</head>
+
+<body>
+
+   <h2 align='center'>좋아하는 음식</h2>
+   <table align="center" border>
+      <tr><th>순위</th><th>음식</th></tr>
+   </table>
+   
+   <ul id="list01">
+   </ul>
+   
+   <h2 align="center" onclick="show1()">2020 KBO 순위</h2>
+   <table id="bbRank" align = "center" border>
+      <tr><th>순위</th><th>팀명</th></tr>
+   </table>
+</body>
+
+<script type="text/javascript">
+
+/*
+# 배열과 반복문, 객체와 반복문
+1. js의 배경의 기본 형식
+   1) 기본 배열 선언과 할당
+*/
+   // 선언1
+   var array01 = [];
+   // 할당: 배열명[index번호] = 데이터
+   //      배열명.push(데이터);
+   // ex) jsp: java server page (javascript programming(x))
+   array01[0] = 25;
+   array01.push(30);
+   console.log("array01: "+array01);
+   console.log("#array01#");
+   console.log(array01);
+   // 배열명.length: 배열의 크기 확인
+   
+   // 선언2(선언과 할당)
+   var array02 = ["사과","바나나","딸기"];
+   console.log("#array02#");
+   console.log(array02);
+   
+   // ex1) 배열로 물건가격을 할당하고, console.log에 출력하기
+   var array03 = [3000,4000];
+   console.log("## 배열 ##");
+   console.log(array03);
+   
+   // ex2) 배열로 학생이름을 할당하고 출력(화면 h3)로
+   var array04 = ["홍길동", "김길동", "신길동"];
+   var show = ""
+   for(var idx=0; idx<array04.length; idx++){
+      show += "<h3>"+array04[idx]+"</h3>";
+   }
+//   document.body.innerHTML = show;
+   
+/*
+2. js의 배열의 특징
+   1) 동적으로 구조의 변경이 가능 >> 동적 배열을 지원
+   2) 배열에 여러 가지 type을 한 번에 저장 가능
+ */
+   var array05 = [25000,"안녕하세요",function(){return "리턴값";},
+               true, {name:"홍길동",age:25}, [20,50,30]];
+   console.log("#여러 가지 데이터 유형을 할당한 배열#");
+   console.log(array05);
+   console.log("3번째 데이터: "+array05[2]); // 해당 함수값
+   console.log("5번째 데이터: "+array05[4].name); // 객체이므로 속성값
+   console.log("6번째 데이터: "+array05[5][1]); // 배열 안의 배열 출력
+   
+/*
+3. 배열과 여러 형식의 for문
+   1) 배열 선언: var 배열명 = [데이터1, 데이터2];
+   2) 배열 호출
+      - for(var idx=0; idx<배열명.length; idx++){}
+      - for(var idx in 배열명){
+            idx: 배열의 index 값
+            배열명[idx]: 배열의 값
+        }
+ */
+    console.log("#배열의 2번째 for");
+    for(var idx in array02){
+       console.log(idx+": "+array02[idx]);
+    }
+   
+    // ex) for in 구문을 활용해서 좋아하는 음식 3개 배열을 테이블로 출력해 보세요
+    var food = ["순댓국","족발","치킨"];
+    var show = "";
+//    var show = "<table border>";
+//    show += "<tr><td>순위</td><td>음식</td></tr>";
+    
+    for(var i in food){
+       // i: 문자열 '1',.. ==> 연산 처리 시 숫자형으로 변경
+       show += "<tr>"
+       show += "<th>"+(Number(i)+1)+"</th>";
+       show += "<td>"+food[i]+"</td>"
+       show += "</tr>";
+    }
+//    show += "</table>";
+//   alert(show);
+//   alert(document.querySelector("table").innerHTML);
+    document.querySelector("table").innerHTML += show;   
+   
+   var show2 = "";
+   // 배열명.forEach(function(단위객체, index값, 배열){});
+   food.forEach(function(food,idx,array){
+      show2 += "<li>"+(idx+1)+": "+food+"</li>";
+   });
+   document.querySelector("#list01").innerHTML = show2;
+   
+// ex) 2020 KBO 순위를 테이블로 출력하세요.   
+/*    var show3 ="";
+   var kbo = ["NC","두산","KT"];
+   kbo.forEach(function(team, idx, array){
+      show3 += "<tr><td>"+(Number(idx)+1)+"</td><td>"+team+"</td></tr>";
+   })
+   document.querySelector("#bbRank").innerHTML += show3; */
+   function show1(){
+	      var bbRank = document.querySelector("#bbRank");
+	      var teams = ["NC","두산","KT"];
+	      var show = "";
+	      teams.forEach(function(team,idx,array){
+	         show += "<tr><th>"+(idx+1)+"</th><td>"+team+"</td></tr>";
+	      })
+	      document.querySelector("#bbRank").innerHTML += show;
+//	      console.log(bbRank);
+	      bbRank.style.visibility = "visible";
+	   }
+
+// ECMA6에서 처리하는 for문
+// for(const 단위데이터 of 배열) vs java for(단위데이터: 배열) 
+	var array10 = [1000,2000,3000];
+	for(const element of array10){
+		console.log(element);
+	}
+</script>
+</html>

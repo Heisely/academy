@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+	table{border-collapse: collapse;}
+	th{background-color:yellow;}
+</style>
+<title>콤보박스 만들기</title>
+</head>
+<body>
+<!-- 
+# select
+1. 드롭다운 리스트에 목록을 출력하여 하나 또는 다중을 선택할 수 있게 한다.
+2. 기본형식과 속성값
+	1) 기본 형식
+		<select name="" size="" multiple>
+			<option value="전송/내부 데이터">화면에 보이는 선택</option>
+			<option value="전송/내부 데이터" selected>화면에 보이는 선택</option>
+	2) select의 속성
+		- size="숫자": 한 번에 보이는 선택목록의 크기
+		- multiple: 다중 선택을 가능하게 하는 옵션
+	3) option의 속성
+		- value: 선택되었을 때 전송 또는 js로 처리되는 값
+		- selected: 초기에 선택되어서 나오게 할 때 사용
+		ps) type="checkbox|radio"는 checked 속성으로 사용
+ -->
+<h3>오늘 점심은?</h3>
+<hr>
+<form>
+	<select name="china">
+		<option value="1">짜장면</option>
+		<option value="2" selected>짬뽕</option>
+		<option value="3">탕수육</option>
+	</select>
+	<select name="china1" size="2">
+		<option value="1">짜장면</option>
+		<option value="2" selected>짬뽕</option>
+		<option value="3">탕수육</option>
+	</select>
+	<!-- 
+	# size는 보이는 항목의 갯수, multiple은 그 중에서 선택할 수 있는지 여부(서버 전송시 다중전송가능)
+	 -->
+	<select name="china2" size="3" multiple>
+		<!-- ctrl을 눌러서 다중 선택 가능 -->
+		<option value="1">짜장면</option>
+		<option value="2" selected>짬뽕</option>
+		<option value="3">탕수육</option>
+	</select>
+	<input type="submit">
+	<!-- 
+	서버에 전송되는 데이터는 name과 선택되어진 값이 전달된다.
+	a12_select.html?china=2&china1=1&china2=1&china2=2&china2=3
+	-->
+</form>
+<br><br><br><br><br>
+<!-- 
+아래와 같은 화면을 만들어 보세요(table로 정렬처리까지 포함)
+		회원가입
+	아이디 : [	]
+	패스워드: [	]
+	이름: [	]
+	성별: select처리 남/여
+	취미: checkbox []음악 []게임 []운동 []기타
+	거주지: radio ()수도권 ()광역시 ()제주도 ()기타지역
+		[초기화] [등록]
+-->
+<h3>예제</h3>
+<hr>
+	<h2 align="center">회원 가입</h2>
+	<form name="sign" method="get">
+	<table align="center" border>
+		<tr><th>아이디</th><td><input name="id" type="text"></td></tr>
+		<tr><th>패스워드</th><td><input name="pw" type="password"></td></tr>
+		<tr><th>이름</th><td><input name="name" type="text"></td></tr>
+		<tr><th>성별</th><td><select name="gender">
+								<option value="여">여자</option>
+								<option value="남">남자</option>
+							</select></td></tr>
+		<tr><th>취미</th><td>음악<input type="checkbox" name="hobby" value="음악">
+							게임<input type="checkbox" name="hobby" value="게임">
+							운동<input type="checkbox" name="hobby" value="운동">
+							기타<input type="checkbox" name="hobby" value="기타">
+						</td></tr>
+		<tr><th>거주지</th><td><input type="radio" name="loc" value="수도권">수도권
+							 <input type="radio" name="loc" value="광역시">광역시
+							 <input type="radio" name="loc" value="제주도">제주도
+							<input type="radio" name="loc" value="기타지역">기타지역
+						</td></tr>
+		<tr><td colspan="2" align="center"><button type="reset">초기화</button>
+							<button type="submit">등록</button>
+			</td></tr>
+	</table>
+	</form>
+	<!-- a12_select.html?id=himan&pw=7777&name=홍길동&gender=남&hobby=음악&hobby=운동&loc=광역시 -->
+</body>
+</html>

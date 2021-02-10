@@ -63,7 +63,7 @@ public class A01_Dao { // DAO: Database Access Object
 //			1. 공통 연결 메서드 호출
 			setCon();
 //			2. Statement 객체 생성(연결객체 - Connection)
-			String sql = "SELECT * FROM emp22\r\n"
+			String sql = "SELECT * FROM emp2\r\n"
 					+ "WHERE ename LIKE '%'||upper('"+ename+"')||'%'\r\n"
 					+ "AND job LIKE '%'||upper('"+job+"')||'%'";
 			stmt = con.createStatement();
@@ -150,7 +150,7 @@ public class A01_Dao { // DAO: Database Access Object
 	//			1. 공통 연결 메서드 호출
 				setCon();
 	//			2. Statement 객체 생성(연결객체 - Connection)
-				String sql = "SELECT * FROM emp22";
+				String sql = "SELECT * FROM emp2";
 				stmt = con.createStatement();
 	//			3. ResultSet 객체 생성(대화객체 - Statement)
 				rs = stmt.executeQuery(sql);
@@ -441,6 +441,48 @@ WHERE mod(empno,2)=0;
 	// 등록
 	// 수정
 	// 삭제
+/*
+ INSERT INTO emp2 VALUES (
+ emp21_seq.nextval, '홍길동', '사원', 7780,
+ TO_DATE('2021/05/01','YYYY/MM/DD'), 3500, 100, 10)	
+ */
+	public void insertEmp(Emp ins) {
+		// 1. 접속 autocommit(false)
+		try {
+			setCon();
+			// 2. 대화
+			stmt = con.createStatement();
+			String sql = "INSERT INTO emp2 VALUES (\r\n"
+					+ " emp21_seq.nextval, '"+ins.getEname()+"', '"+ins.getJob()+"', "+ins.getMgr()+",\r\n"
+					+ " TO_DATE('"+ins.getHiredate_s()+"'), "+ins.getSal()+", "+ins.getComm()+", "+ins.getDeptno()+")";
+			System.out.println("###");
+			System.out.println(sql);
+			stmt.execute(sql); // update
+			// 3. commit
+			con.commit();
+			stmt.close();
+			con.close();
+			
+			
+			// 4. 예외처리
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("db처리 에러");
+			try {
+				con.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("기타 에러");
+		}
+		
+	}
+		
+		
 	public static void main(String[] args) {
 		A01_Dao dao = new A01_Dao();
 //		try {
@@ -452,6 +494,8 @@ WHERE mod(empno,2)=0;
 //		dao.deptList(); // dept list 출력 되게 처리
 //		dao.deptList(new Dept("",""));
 //		dao.jobSalList(0);
-		dao.memberList("", "");
+//		dao.memberList("", "");
+		Emp ins = new Emp(0,"김길동2","대리",7800,"2010/12/12",4000.0,100.0,20);
+		dao.insertEmp(ins);
 	}
 }

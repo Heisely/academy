@@ -8,6 +8,7 @@ public class Emp {
 	private String job;
 	private int mgr;
 	private Date hiredate;
+	private String hiredate_s;
 	private double sal;
 	private double comm;
 	private int deptno;
@@ -15,6 +16,18 @@ public class Emp {
 	// default 생성자
 	public Emp() {
 		super();
+	}
+
+	public Emp(int empno, String ename, String job, int mgr, String hiredate_s, double sal, double comm, int deptno) {
+		super();
+		this.empno = empno;
+		this.ename = ename;
+		this.job = job;
+		this.mgr = mgr;
+		this.hiredate_s = hiredate_s;
+		this.sal = sal;
+		this.comm = comm;
+		this.deptno = deptno;
 	}
 
 	// 전체 매개변수가 있는 생성자
@@ -28,6 +41,14 @@ public class Emp {
 		this.sal = sal;
 		this.comm = comm;
 		this.deptno = deptno;
+	}
+
+	public String getHiredate_s() {
+		return hiredate_s;
+	}
+
+	public void setHiredate_s(String hiredate_s) {
+		this.hiredate_s = hiredate_s;
 	}
 
 	// 검색에 필요한 매개변수 ename, job이 있는 생성자
@@ -101,8 +122,5 @@ public class Emp {
 	public void setDeptno(int deptno) {
 		this.deptno = deptno;
 	}
-	
-	
-	
 
 }

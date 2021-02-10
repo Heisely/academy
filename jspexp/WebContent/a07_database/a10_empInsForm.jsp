@@ -24,6 +24,42 @@
 
 --%>
 <body>
+<%
+	String ename = request.getParameter("ename");
+	if(ename==null) ename="";
+	log("#ename: "+ename);
+	
+	String job = request.getParameter("job"); 
+	if(job==null) job="";
+	log("#job: "+job);
+	
+	String mgr = request.getParameter("mgr"); 
+	if(mgr==null||mgr.trim().equals("")) mgr="0";
+	log("#mgr: "+mgr);	
+	
+	String hiredate_s = request.getParameter("hiredate_s"); 
+	if(hiredate_s==null) hiredate_s="";
+	log("#hiredate_s: "+hiredate_s);
+	
+	String sal = request.getParameter("sal"); 
+	if(sal==null||sal.trim().equals("")) sal="0";
+	log("#sal: "+sal);	
+	
+	String comm = request.getParameter("comm"); 
+	if(comm==null||comm.trim().equals("")) comm="0";
+	log("#comm: "+comm);	
+	
+	String deptno = request.getParameter("deptno"); 
+	if(deptno==null||deptno.trim().equals("")) deptno="0";
+	log("#deptno: "+deptno);
+	
+	// 입력할 객체 완성.
+	if(!ename.equals("")){ // 초기 화면과 구분하기 위해서
+		Emp ins = new Emp(0, ename, job, new Integer(mgr), hiredate_s, 
+							new Double(sal), new Double(comm), new Integer(deptno));
+		log("#입력 내용 확인: "+ins.getEname());
+	}
+%>
 	<h3>사원등록페이지</h3>
 	<form method="post">
 	<table>

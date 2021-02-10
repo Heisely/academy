@@ -36,9 +36,12 @@ WHERE id LIKE '%'||'a'||'%'
 AND name LIKE '%'||'철수'||'%';
 
 CREATE TABLE emp2 AS SELECT * FROM emp;
-SELECT * FROM emp2;
+SELECT * FROM emp2 ORDER BY empno desc;
+SELECT * FROM emp21;
 
-
+SELECT TO_DATE('2021/05/01','YYYY/MM/DD') FROM dual;
+INSERT INTO emp2 VALUES (emp21_seq.nextval, '홍길동', '사원', 7780,TO_DATE('2021/05/01','YYYY/MM/DD'), 3500, 100, 10);
+INSERT INTO emp2 VALUES (emp21_seq.nextval, '김길동','대리',7800,'2010/12/12',4000.0,100.0,20);
 
 
 

@@ -3,6 +3,7 @@ package jspexp.a00_exp;
 import java.sql.*;
 import java.util.*;
 import jspexp.a00_exp.*;
+import jspexp.a00_exp.z01_vo.Member;
 import jspexp.z01_vo.Emp;
 
 public class A01_0208_DAO {

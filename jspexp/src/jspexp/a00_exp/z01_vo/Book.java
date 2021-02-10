@@ -1,4 +1,4 @@
-package jspexp.a00_exp;
+package jspexp.a00_exp.z01_vo;
 
 public class Book {
 	private String name;

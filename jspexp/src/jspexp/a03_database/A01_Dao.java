@@ -2,6 +2,8 @@ package jspexp.a03_database;
 
 import java.sql.*;
 import java.util.*;
+
+import jspexp.a00_exp.z01_vo.Member5;
 import jspexp.z01_vo.*;
 
 public class A01_Dao { // DAO: Database Access Object
@@ -368,7 +370,77 @@ WHERE mod(empno,2)=0;
 	}
 		
 		
-		// 등록
+		/*
+		 1. SQL 작성
+		 2. VO 객체 생성
+		 3. 기능 메서드 선언
+		 	1) 요청에 의한 입력: 매개변수로 활용
+		 	2) 데이터의 결과에 따라 리턴값 지정
+		 		- insert, update, delete: void 사용
+		 			ex) public void insertEmp(Emp ins)
+		 		- 단위 변수나 한 개의 데이터
+		 			> 회원 등록 여부: SELECT * FROM member where ...
+		 				public boolean void isMember(String id, String pass)
+		 			> 상품 개수: SELECT count(*) FROM member where ...
+		 				public int memCount(Member sch)
+		 			> 회원 상세 정보: SELECT * FROM member where id=@@@
+		 				public Member getMember(String id)
+		 		- 여러 개의 데이터
+		 			ex)
+		 			> 공지사항
+		 				public ArrayList<Board> boardList(Board sch)
+		 			> 회원정보리스트
+		 				public ArrayList<Member> mlist(Member sch)
+		 		
+		 */
+		
+		
+		
+		// 0209 과제2번
+		public ArrayList<Member5> memberList(String id, String name){
+			ArrayList<Emp> list = new ArrayList<Emp>();
+			try {
+	//			1. 공통 연결 메서드 호출
+				setCon();
+	//			2. Statement 객체 생성(연결객체 - Connection)
+				String sql = "SELECT * FROM member5\r\n"
+						+ "WHERE id LIKE '%'||'"+id+"'||'%'\r\n"
+						+ "AND name LIKE '%'||'"+name+"'||'%'";
+				stmt = con.createStatement();
+	//			3. ResultSet 객체 생성(대화객체 - Statement)
+				rs = stmt.executeQuery(sql);				
+				while(rs.next()) { 		
+					// 1. 객체 생성과 할당
+					//		int empno, String ename, String job, int mgr, Date hiredate, double sal, double comm, int deptno
+					Emp e = new Emp(rs.getInt("empno"), rs.getString(2), rs.getString(3),
+							rs.getInt(4), rs.getDate("hiredate"), rs.getDouble(6),
+							rs.getDouble(7), rs.getInt(8));
+					// 2. ArrayList에 할당
+					list.add(e);
+				}
+				System.out.println("객체의 개수: "+list.size());
+				System.out.println("두 번째의 행의 ename: "+list.get(1).getEname());
+	//				> next(): 행단위 변경
+	//				> getXXX("컬럼명"): 열단위 호출
+	//				==> 1개의 데이터인 경우: VO(단일)
+	//				==> 다중행단위 여러 데이터인 경우: ArrayList<VO>, 마지막에 객체의 참조변수 return;
+	//			4. 자원의 해제
+				rs.close();
+				stmt.close();
+				con.close();
+	//			5. 예외 처리
+			} catch (SQLException e) {
+				e.printStackTrace();
+				System.out.println(e.getMessage());
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			return list;
+		}
+
+
+
+	// 등록
 	// 수정
 	// 삭제
 	public static void main(String[] args) {

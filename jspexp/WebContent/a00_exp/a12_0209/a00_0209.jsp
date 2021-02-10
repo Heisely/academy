@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     import="java.util.*"
-    import="jspexp.z01_vo.*"%>
+    import="jspexp.a00_exp.z01_vo.*"
+    import="jspexp.a00.exp.*"
+    import="jspexp.a03_database.*"%>
 <% request.setCharacterEncoding("UTF-8");%>
 <% String path = request.getContextPath();%>
 <!DOCTYPE html>
@@ -60,6 +62,10 @@
 	if(id==null) id = ""; log("## 입력한 id: "+id);
 	if(name==null) name = ""; log("## 입력권한 name: "+name);
 %>
+<%
+	A01_Dao dao = new A01_Dao();
+	ArrayList<Member5> mlist = dao.memberList(id,name);
+%>
 	<h3>회원정보리스트</h3>
 	<form method="post">
 	<table>
@@ -71,14 +77,14 @@
 	<hr>
 	<table>
 		<tr><th>아이디</th><th>패스워드</th><th>이름</th><th>포인트</th><th>주소</th><th>등록일</th><th>권한</th></tr>
-		<% for(Members m:mlist) {%>	
+		<% for(Member5 m:mlist) {%>	
 			<tr><td><%=m.getId()%></td>
 				<td><%=m.getPw()%></td>
 				<td><%=m.getName()%></td>
 				<td><%=m.getPoint()%></td>
 				<td><%=m.getAddress()%></td>
 				<td><%=m.getRegdte()%></td>
-				<td><%=m.isAble() %></td>
+				<td><%=m.getAuth() %></td>
 			</tr>
 		<%}%>
 	</table>

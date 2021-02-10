@@ -63,7 +63,7 @@ public class A01_Dao { // DAO: Database Access Object
 //			1. 공통 연결 메서드 호출
 			setCon();
 //			2. Statement 객체 생성(연결객체 - Connection)
-			String sql = "SELECT * FROM emp\r\n"
+			String sql = "SELECT * FROM emp22\r\n"
 					+ "WHERE ename LIKE '%'||upper('"+ename+"')||'%'\r\n"
 					+ "AND job LIKE '%'||upper('"+job+"')||'%'";
 			stmt = con.createStatement();
@@ -150,7 +150,7 @@ public class A01_Dao { // DAO: Database Access Object
 	//			1. 공통 연결 메서드 호출
 				setCon();
 	//			2. Statement 객체 생성(연결객체 - Connection)
-				String sql = "SELECT * FROM emp";
+				String sql = "SELECT * FROM emp22";
 				stmt = con.createStatement();
 	//			3. ResultSet 객체 생성(대화객체 - Statement)
 				rs = stmt.executeQuery(sql);
@@ -275,7 +275,7 @@ public class A01_Dao { // DAO: Database Access Object
 		return dlist;
 	}
 	
-	// ex2) select * from emp where empno = 7780 (empno는 유일키)를 처리하는 메서드 선언
+	// ex2) select * FROM emp2 where empno = 7780 (empno는 유일키)를 처리하는 메서드 선언
 	public Emp getEmp(int empno) {
 		Emp e = null;
 		
@@ -286,7 +286,7 @@ public class A01_Dao { // DAO: Database Access Object
 -- VO 포함 출력 int deptno, double msal, double asal
 -- 		  하나의 데이터일 경우 메서드 매개변수로 double msal 사용
 SELECT deptno, max(sal) msal, avg(sal) asal
-FROM EMP
+FROM emp2
 GROUP BY DEPTNO 
 HAVING max(sal) >= 3000;
  */
@@ -298,7 +298,7 @@ HAVING max(sal) >= 3000;
 -- ex2) String ename, Date hiredate, int workdate
 --		메서드 매개변수로 int fromDte, int toDate 사용
 SELECT ename, hiredate, floor(MONTHS_BETWEEN(sysdate, hiredate)) workdate
-FROM emp
+FROM emp2
 WHERE floor(MONTHS_BETWEEN(sysdate, hiredate)) BETWEEN 470 AND 480;
  */
 	public ArrayList<Emp4> elist(int fromDte, int toDate){
@@ -309,7 +309,7 @@ WHERE floor(MONTHS_BETWEEN(sysdate, hiredate)) BETWEEN 470 AND 480;
 -- ex3) empno, ... , int part
 --		메서드 매개변수로 int part 사용
 SELECT e.*, mod(empno, 2) part
-FROM emp e
+FROM emp2 e
 WHERE mod(empno,2)=0;
  */
 	public ArrayList<Emp5> elist2(int part){
@@ -343,7 +343,7 @@ WHERE mod(empno,2)=0;
 		try {
 			setCon();
 			String sql = "SELECT job, count(*) 사원수, round(avg(sal)) avg\r\n"
-					+ "FROM EMP\r\n"
+					+ "FROM emp2\r\n"
 					+ "GROUP BY job\r\n"
 					+ "HAVING ROUND(avg(sal))>=2000\r\n"
 					+ "ORDER BY job";
@@ -398,7 +398,7 @@ WHERE mod(empno,2)=0;
 		
 		// 0209 과제2번
 		public ArrayList<Member5> memberList(String id, String name){
-			ArrayList<Emp> list = new ArrayList<Emp>();
+			ArrayList<Member5> mlist = new ArrayList<Member5>();
 			try {
 	//			1. 공통 연결 메서드 호출
 				setCon();
@@ -411,15 +411,13 @@ WHERE mod(empno,2)=0;
 				rs = stmt.executeQuery(sql);				
 				while(rs.next()) { 		
 					// 1. 객체 생성과 할당
-					//		int empno, String ename, String job, int mgr, Date hiredate, double sal, double comm, int deptno
-					Emp e = new Emp(rs.getInt("empno"), rs.getString(2), rs.getString(3),
-							rs.getInt(4), rs.getDate("hiredate"), rs.getDouble(6),
-							rs.getDouble(7), rs.getInt(8));
+					Member5 m = new Member5(rs.getString(1), rs.getString(2), rs.getString(3),
+							  rs.getInt(4), rs.getString(5), rs.getDate(6), rs.getString(7));
 					// 2. ArrayList에 할당
-					list.add(e);
+					mlist.add(m);
 				}
-				System.out.println("객체의 개수: "+list.size());
-				System.out.println("두 번째의 행의 ename: "+list.get(1).getEname());
+				System.out.println("객체의 개수: "+mlist.size());
+				System.out.println("두 번째의 행의 ename: "+mlist.get(1).getName());
 	//				> next(): 행단위 변경
 	//				> getXXX("컬럼명"): 열단위 호출
 	//				==> 1개의 데이터인 경우: VO(단일)
@@ -435,7 +433,7 @@ WHERE mod(empno,2)=0;
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
-			return list;
+			return mlist;
 		}
 
 
@@ -453,6 +451,7 @@ WHERE mod(empno,2)=0;
 //		dao.empList("A","A");
 //		dao.deptList(); // dept list 출력 되게 처리
 //		dao.deptList(new Dept("",""));
-		dao.jobSalList(0);
+//		dao.jobSalList(0);
+		dao.memberList("", "");
 	}
 }

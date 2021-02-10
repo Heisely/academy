@@ -3,7 +3,8 @@
     import="java.util.*"
     import="jspexp.z01_vo.*" 
     import="jspexp.a00_exp.A01_0209_Dao"
-    import="jspexp.a00_exp.*"%>
+    import="jspexp.a00_exp.*"
+    import="jspexp.a00_exp.z01_vo.*"%>
 <% request.setCharacterEncoding("UTF-8");
    String path = request.getContextPath();%>    
 <!DOCTYPE html>

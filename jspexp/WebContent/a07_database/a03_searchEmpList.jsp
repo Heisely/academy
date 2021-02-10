@@ -53,7 +53,10 @@ ArrayList<Emp> elist = dao.empList(ename,job);
 	<table>
 		<tr><th>사원명</th><td><input type="text" name="ename" value="<%=ename%>"/></td></tr>
 		<tr><th>직책명</th><td><input type="text" name=job value="<%=job%>"/></td></tr>
-		<tr><td colspan="2"><input type="submit" value="검색"/></td></tr>
+		<tr><td colspan="2">
+			<input type="submit" value="검색"/>
+			<input type="button" value="등록" onclick="location.href='a10_empInsForm.jsp'"/>
+		</td></tr>
 	</table>
 	</form>
 	

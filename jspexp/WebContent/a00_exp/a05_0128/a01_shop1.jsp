@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     import="java.util.*"
-    import="jspexp.a00_exp.*"%>
+    import="jspexp.a00_exp.z01_vo.*"%>
 <% request.setCharacterEncoding("UTF-8");%>
 <% String path = request.getContextPath();%>
 <!DOCTYPE html>

@@ -138,6 +138,27 @@
 				<tr><td><%=m.getPoint()%>
 			}
 
+6. 등록
+	1) 화면 interface 구현
+		등록 버튼을 통해 등록페이지 이동
+	2) 등록페이지 화면 구성
+		등록할 항목
+		form객체를 통해서 등록
+		요청값 확인
+	3) 데이터처리
+		SQL 작성
+		DAO 공통
+		기능메서드 public void insertEmp(Emp e){}
+			(1) 접근, con의 autoCommit(false)로 처리
+			(2) 대화객체: 대화객체.executeUpdate(sql)
+			(3) commit() 확정명령
+			(4) 자원해제
+			(5) 예외 처리: 예외 발생 시 rollback()
+	4) JSP
+		(0) 요청 처리 페이지 구현
+		(1) DAO객체 호출
+		(2) 요청값을 EMP에 할당
+		(3) DAO기능 메서드 호출 완료
 	
 	
 	

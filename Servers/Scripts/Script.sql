@@ -35,7 +35,8 @@ SELECT * FROM member5
 WHERE id LIKE '%'||'a'||'%'
 AND name LIKE '%'||'철수'||'%';
 
-
+CREATE TABLE emp2 AS SELECT * FROM emp;
+SELECT * FROM emp2;
 
 
 

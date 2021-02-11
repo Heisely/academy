@@ -31,6 +31,90 @@ public class A01_Dao { // DAO: Database Access Object
 		System.out.println("접속 성공");
 	}
 	/*
+		 1. SQL 작성
+		 2. VO 객체 생성
+		 3. 기능 메서드 선언
+		 	1) 요청에 의한 입력: 매개변수로 활용
+		 	2) 데이터의 결과에 따라 리턴값 지정
+		 		- insert, update, delete: void 사용
+		 			ex) public void insertEmp(Emp ins)
+		 		- 단위 변수나 한 개의 데이터
+		 			> 회원 등록 여부: SELECT * FROM member where ...
+		 				public boolean void isMember(String id, String pass)
+		 			> 상품 개수: SELECT count(*) FROM member where ...
+		 				public int memCount(Member sch)
+		 			> 회원 상세 정보: SELECT * FROM member where id=@@@
+		 				public Member getMember(String id)
+		 		- 여러 개의 데이터
+		 			ex)
+		 			> 공지사항
+		 				public ArrayList<Board> boardList(Board sch)
+		 			> 회원정보리스트
+		 				public ArrayList<Member> mlist(Member sch)
+		 		
+		 */
+		
+		
+		
+		// 조회(매개변수 없는 것)
+		public ArrayList<Emp> empList(){
+			ArrayList<Emp> list = new ArrayList<Emp>();
+			try {
+	//			1. 공통 연결 메서드 호출
+				setCon();
+	//			2. Statement 객체 생성(연결객체 - Connection)
+				String sql = "SELECT * FROM emp2 ORDER BY empno desc";
+				stmt = con.createStatement();
+	//			3. ResultSet 객체 생성(대화객체 - Statement)
+				rs = stmt.executeQuery(sql);
+				/*
+				 * System.out.println(rs.next()); // 1행에 데이터가 있는지 여부 확인 및 사용할 준비 //
+				 * rs.get데이터유형(컬럼의 순서) System.out.println("1행 1열: " + rs.getInt(1));
+				 * System.out.println("1행 2열: " + rs.getString(2));
+				 * 
+				 * System.out.println(rs.next()); // 2행에 데이터가 있는지 여부를 확인 및 사용할 준비 //
+				 * rs.get데이터유형(컬럼명) System.out.println("2행 JOB열: " + rs.getString("JOB"));
+				 * System.out.println("2행 SAL열: " + rs.getDouble("SAL"));
+				 */
+				
+				 int cnt=1; while(rs.next()) { 
+				 /* System.out.print(cnt+++":"+rs.getInt(1)+"\t");
+				 * // 1을 "empno"로 바꿔도 같은 결과 System.out.print(rs.getString("ename")+"\t");
+				 * System.out.print(rs.getString("job")+"\t");
+				 * System.out.print(rs.getInt("mgr")+"\t");
+				 * System.out.print(rs.getDate("hiredate")+"\t");
+				 * System.out.print(rs.getDouble("sal")+"\t");
+				 * System.out.print(rs.getDouble("comm")+"\t");
+				 * System.out.print(rs.getInt("deptno")+"\n"); }
+				 */
+					// 1. 객체 생성과 할당
+					//		int empno, String ename, String job, int mgr, Date hiredate, double sal, double comm, int deptno
+					Emp e = new Emp(rs.getInt("empno"), rs.getString(2), rs.getString(3),
+							rs.getInt(4), rs.getDate("hiredate"), rs.getDouble(6),
+							rs.getDouble(7), rs.getInt(8));
+					// 2. ArrayList에 할당
+					list.add(e);
+				}
+				System.out.println("객체의 개수: "+list.size());
+				System.out.println("두 번째의 행의 ename: "+list.get(1).getEname());
+	//				> next(): 행단위 변경
+	//				> getXXX("컬럼명"): 열단위 호출
+	//				==> 1개의 데이터인 경우: VO(단일)
+	//				==> 다중행단위 여러 데이터인 경우: ArrayList<VO>, 마지막에 객체의 참조변수 return;
+	//			4. 자원의 해제
+				rs.close();
+				stmt.close();
+				con.close();
+	//			5. 예외 처리
+			} catch (SQLException e) {
+				e.printStackTrace();
+				System.out.println(e.getMessage());
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			return list;
+		}
+	/*
 	 1. SQL 작성
 	 2. VO 객체 생성
 	 3. 기능 메서드 선언
@@ -117,40 +201,15 @@ public class A01_Dao { // DAO: Database Access Object
 		return list;
 	}
 	
-	/*
-		 1. SQL 작성
-		 2. VO 객체 생성
-		 3. 기능 메서드 선언
-		 	1) 요청에 의한 입력: 매개변수로 활용
-		 	2) 데이터의 결과에 따라 리턴값 지정
-		 		- insert, update, delete: void 사용
-		 			ex) public void insertEmp(Emp ins)
-		 		- 단위 변수나 한 개의 데이터
-		 			> 회원 등록 여부: SELECT * FROM member where ...
-		 				public boolean void isMember(String id, String pass)
-		 			> 상품 개수: SELECT count(*) FROM member where ...
-		 				public int memCount(Member sch)
-		 			> 회원 상세 정보: SELECT * FROM member where id=@@@
-		 				public Member getMember(String id)
-		 		- 여러 개의 데이터
-		 			ex)
-		 			> 공지사항
-		 				public ArrayList<Board> boardList(Board sch)
-		 			> 회원정보리스트
-		 				public ArrayList<Member> mlist(Member sch)
-		 		
-		 */
-		
-		
-		
-		// 조회(매개변수 없는 것)
-		public ArrayList<Emp> empList(){
+	// SELECT * FROM emp2 WHERE empno=7369
+	
+		public ArrayList<Emp> empList(String job){
 			ArrayList<Emp> list = new ArrayList<Emp>();
 			try {
 	//			1. 공통 연결 메서드 호출
 				setCon();
 	//			2. Statement 객체 생성(연결객체 - Connection)
-				String sql = "SELECT * FROM emp2";
+				String sql = "SELECT * FROM emp2 ORDER BY empno desc";
 				stmt = con.createStatement();
 	//			3. ResultSet 객체 생성(대화객체 - Statement)
 				rs = stmt.executeQuery(sql);
@@ -211,7 +270,7 @@ public class A01_Dao { // DAO: Database Access Object
 		try {
 			setCon();
 			// 2. 대화
-			String sql = "SELECT * FROM DEPT";
+			String sql = "SELECT * FROM DEPT2";
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(sql);
 			// 3. 결과
@@ -275,12 +334,7 @@ public class A01_Dao { // DAO: Database Access Object
 		return dlist;
 	}
 	
-	// ex2) select * FROM emp2 where empno = 7780 (empno는 유일키)를 처리하는 메서드 선언
-	public Emp getEmp(int empno) {
-		Emp e = null;
-		
-		return e;
-	}
+
 /*
 -- ex1) 하위 구문을 통해서 만들어질 VO와 DAO단에 들어갈 메서드를 선언
 -- VO 포함 출력 int deptno, double msal, double asal
@@ -481,7 +535,74 @@ WHERE mod(empno,2)=0;
 		}
 		
 	}
+	
+	public void insertDept(Dept dins) {
+		try {
+			setCon();
+			// 2. 대화
+			stmt = con.createStatement();
+			String sql = "INSERT INTO dept2 VALUES ("+dins.getDeptno()+", '"+dins.getDname()+"', '"+dins.getLoc()+"')";
+			System.out.println("###");
+			System.out.println(sql);
+			stmt.execute(sql); // update
+			// 3. commit
+			con.commit();
+			stmt.close();
+			con.close();
+			
+			
+			// 4. 예외처리
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("db처리 에러");
+			try {
+				con.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("기타 에러");
+		}
+	}
 		
+	// SELECT * FROM emp2 WHERE empno=7369
+
+	public Emp getEmp(int empno){
+		Emp emp = null;
+		try {
+			setCon();
+			String sql = "SELECT * FROM emp2 WHERE empno= "+empno;
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(sql);
+			if(rs.next()) {
+			emp = new Emp(rs.getInt("empno"),
+							rs.getString(2), rs.getString(3),
+							rs.getInt(4), rs.getDate("hiredate"),
+							rs.getDouble(6), rs.getDouble(7),
+							rs.getInt(8));
+			}
+			rs.close();
+			stmt.close();
+			con.close();
+//			5. 예외 처리
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("# DB 관련 에러 #");
+			System.out.println(e.getMessage());
+		} catch (Exception e) {
+			System.out.println("# 기타 에러 #");
+			System.out.println(e.getMessage());
+		}
+			
+		return emp;
+	}
+
+
+
+	// SELECT * FROM emp2 WHERE empno=7369
 		
 	public static void main(String[] args) {
 		A01_Dao dao = new A01_Dao();
@@ -495,7 +616,9 @@ WHERE mod(empno,2)=0;
 //		dao.deptList(new Dept("",""));
 //		dao.jobSalList(0);
 //		dao.memberList("", "");
-		Emp ins = new Emp(0,"김길동2","대리",7800,"2010/12/12",4000.0,100.0,20);
-		dao.insertEmp(ins);
+//		Emp ins = new Emp(0,"김길동3","대리",7800,"2010/12/12",4000.0,100.0,20);
+//		dao.insertEmp(ins);
+		Dept dins = new Dept(50,"인사과","서울 서초구");
+		dao.insertDept(dins);
 	}
 }

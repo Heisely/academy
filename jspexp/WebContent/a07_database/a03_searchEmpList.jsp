@@ -61,18 +61,38 @@ ArrayList<Emp> elist = dao.empList(ename,job);
 	</form>
 	
 	<table>
-		<tr><th>사원번호</th><th>사원명</th><th>직책명</th><th>관리자번호</th>
-			<th>입사일</th><th>급여</th><th>보너스</th><th>부서번호</th></tr>
+		<tr><th>사원번호</th><th>사원명</th>
+			<th>직책명</th>
+			<th>부서번호</th>
+		</tr>
 		<% for(Emp e:elist){ %>
-		<tr><td><%=e.getEmpno() %></td>
+		<tr ondblclick="detail(<%=e.getEmpno()%>)"><td><%=e.getEmpno() %></td>
 			<td><%=e.getEname() %></td>
 			<td><%=e.getJob() %></td>
-			<td><%=e.getMgr() %></td>
-			<td><%=e.getHiredate() %></td>
-			<td><%=e.getSal() %></td>
-			<td><%=e.getComm() %></td>
 			<td><%=e.getDeptno() %></td></tr>
 		<%} %>
 	</table>
+	<script>
+		function detail(empno){
+//			alert("요청할 번호: "+empno);
+			location.href="a11_empDetail.jsp?empno="+empno;
+		}
+	</script>
 </body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </html>

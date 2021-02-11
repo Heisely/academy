@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     import="java.util.*"
+    import="jspexp.a03_database.*"
     import="jspexp.z01_vo.*"%>
 <% request.setCharacterEncoding("UTF-8");%>
 <% String path = request.getContextPath();%>
@@ -56,10 +57,21 @@
 	// 입력할 객체 완성.
 	if(!ename.equals("")){ // 초기 화면과 구분하기 위해서
 		Emp ins = new Emp(0, ename, job, new Integer(mgr), hiredate_s, 
-							new Double(sal), new Double(comm), new Integer(deptno));
+				new Double(sal), new Double(comm), new Integer(deptno));
 		log("#입력 내용 확인: "+ins.getEname());
+		A01_Dao dao = new A01_Dao();
+		dao.insertEmp(ins);
 	}
 %>
+	<script>
+		var ename = "<%=ename%>";
+		if(ename!=""){
+			alert("등록 성공");
+			if(confirm("등록 성공\n조회페이지로 이동하시겠습니까?")){
+				location.href="a03_searchEmpList.jsp";
+			}
+		}
+	</script>
 	<h3>사원등록페이지</h3>
 	<form method="post">
 	<table>

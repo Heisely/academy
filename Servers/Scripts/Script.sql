@@ -43,6 +43,10 @@ SELECT TO_DATE('2021/05/01','YYYY/MM/DD') FROM dual;
 INSERT INTO emp2 VALUES (emp21_seq.nextval, '홍길동', '사원', 7780,TO_DATE('2021/05/01','YYYY/MM/DD'), 3500, 100, 10);
 INSERT INTO emp2 VALUES (emp21_seq.nextval, '김길동','대리',7800,'2010/12/12',4000.0,100.0,20);
 
+CREATE TABLE dept2 AS SELECT * FROM dept;
+SELECT * FROM dept2;
+INSERT INTO dept2 VALUES (50, '인사과', '서울 강남구');
+
 
 
 

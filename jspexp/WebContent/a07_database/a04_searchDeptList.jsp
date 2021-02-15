@@ -87,8 +87,13 @@
 	<table>
 		<tr><th>부서번호</th><th>부서명</th><th>부서위치</th></tr>
 		<%for(Dept d: dlist){ %>
-		<tr><td><%=d.getDeptno()%></td><td><%=d.getDname()%></td><td><%=d.getLoc()%></td></tr>
+		<tr onclick="detail(<%=d.getDeptno()%>)"><td><%=d.getDeptno()%></td><td><%=d.getDname()%></td><td><%=d.getLoc()%></td></tr>
 		<%} %>
 	</table>
 </body>
+<script type="text/javascript">
+	function detail(deptno){
+		location.href="a21_deptDetail.jsp?deptno="+deptno;
+	}
+</script>
 </html>

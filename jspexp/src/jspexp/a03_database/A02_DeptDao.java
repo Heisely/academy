@@ -102,6 +102,39 @@ public class A02_DeptDao {
 		}
 	}
 	
+	public Dept getDept(int deptno){
+		Dept d=null;
+		// 1. 연결
+		try {
+			setCon();
+			// 2. 대화 SQL
+			String sql="SELECT * \r\n"
+					+ "FROM DEPT10 WHERE DEPTNO="+deptno+"\r\n";
+			stmt = con.createStatement();			
+			// 3. 결과
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				d = new Dept(rs.getInt(1), rs.getString(2), rs.getString(3));
+			}
+			// 4. 자원해제
+			rs.close();
+			stmt.close();
+			con.close();
+			// 5. 예외처리
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("# DB 예외 처리 #");
+			System.out.println(e.getMessage());
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("# 기타 예외 처리 #");
+			System.out.println(e.getMessage());
+		}
+		
+		return d;
+	}
+
 	public static void main(String[] args) {
 		A02_DeptDao dao = new A02_DeptDao();
 		dao.insertDept(new Dept(70,"IT part","경기 수원"));

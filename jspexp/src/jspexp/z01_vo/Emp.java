@@ -7,8 +7,8 @@ public class Emp {
 	private String ename;
 	private String job;
 	private int mgr;
-	private Date hiredate;
-	private String hiredate_s;
+	private Date hiredate; // 가져올 날짜 데이터
+	private String hiredate_s; // 입력할 날짜 데이터
 	private double sal;
 	private double comm;
 	private int deptno;

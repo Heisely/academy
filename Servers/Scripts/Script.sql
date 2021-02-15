@@ -61,7 +61,3 @@ INSERT INTO dept2 VALUES (50, '인사과', '서울 강남구');
 
 
 
-
-
-
-

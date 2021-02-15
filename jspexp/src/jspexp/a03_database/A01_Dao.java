@@ -11,7 +11,7 @@ public class A01_Dao { // DAO: Database Access Object
 	private Connection con;
 	// 2. 대화
 	private Statement stmt;
-	private PreparedStatement pstmt;
+	private PreparedStatement pstmt; // 0215 수업
 	// 3. 결과값 받는 객체
 	private ResultSet rs;
 
@@ -203,6 +203,92 @@ public class A01_Dao { // DAO: Database Access Object
 	
 	// SELECT * FROM emp2 WHERE empno=7369
 	
+		// SELECT * FROM emp2 WHERE empno=7369
+		
+	/*
+		 1. SQL 작성
+		 2. VO 객체 생성
+		 3. 기능 메서드 선언
+		 	1) 요청에 의한 입력: 매개변수로 활용
+		 	2) 데이터의 결과에 따라 리턴값 지정
+		 		- insert, update, delete: void 사용
+		 			ex) public void insertEmp(Emp ins)
+		 		- 단위 변수나 한 개의 데이터
+		 			> 회원 등록 여부: SELECT * FROM member where ...
+		 				public boolean void isMember(String id, String pass)
+		 			> 상품 개수: SELECT count(*) FROM member where ...
+		 				public int memCount(Member sch)
+		 			> 회원 상세 정보: SELECT * FROM member where id=@@@
+		 				public Member getMember(String id)
+		 		- 여러 개의 데이터
+		 			ex)
+		 			> 공지사항
+		 				public ArrayList<Board> boardList(Board sch)
+		 			> 회원정보리스트
+		 				public ArrayList<Member> mlist(Member sch)
+		 		
+		 */
+		
+		
+		
+		// 조회(매개변수 없는 것)
+
+/*
+ # PreparedStatement 객체 활용하기
+ 1. SQL의 틀을 미리 정해 놓고 나중에 값을 지정하는 방식
+ 	select * from emp
+ 	where ename like '%'||?||'%'
+ 	and job like '%'||?||'%'
+ 	pstmt.setString(1, "홍"); >> ?의 순서 1부터 붙여서 사용
+ 	pstmt.setStirng(2, "A");
+ 2. 왜 사용하는가?
+ 	1) SQL injection을 막기 위해 사용
+ 	2) DB 서버의 SQL 해석 속도를 향상시켜 빠른 처리를 한다.
+ */
+		public ArrayList<Emp> empList2(String ename, String job){
+			ArrayList<Emp> list = new ArrayList<Emp>();
+			try {
+	//			1. 공통 연결 메서드 호출
+				setCon();
+	//			2. Statement 객체 생성(연결객체 - Connection)
+				String sql = "SELECT * FROM emp2\r\n"
+						+ "WHERE ename LIKE '%'||upper( ? )||'%'\r\n"
+						+ "AND job LIKE '%'||upper( ? )||'%' ORDER BY empno desc";
+				System.out.println(sql);
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, ename);
+				pstmt.setString(2, job);				
+	//			stmt = con.createStatement();
+	//			3. ResultSet 객체 생성(대화객체 - Statement)
+				rs = pstmt.executeQuery();
+				int cnt=1; while(rs.next()) { 
+					Emp e = new Emp(rs.getInt("empno"), rs.getString(2), rs.getString(3),
+							rs.getInt(4), rs.getDate("hiredate"), rs.getDouble(6),
+							rs.getDouble(7), rs.getInt(8));					
+					list.add(e);
+				}
+				System.out.println("객체의 개수: "+list.size());
+				System.out.println("두 번째의 행의 ename: "+list.get(1).getEname());
+	//				> next(): 행단위 변경
+	//				> getXXX("컬럼명"): 열단위 호출
+	//				==> 1개의 데이터인 경우: VO(단일)
+	//				==> 다중행단위 여러 데이터인 경우: ArrayList<VO>, 마지막에 객체의 참조변수 return;
+	//			4. 자원의 해제
+				rs.close();
+				pstmt.close();
+				con.close();
+	//			5. 예외 처리
+			} catch (SQLException e) {
+				e.printStackTrace();
+				System.out.println(e.getMessage());
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			return list;
+		}
+
+
+
 		public ArrayList<Emp> empList(String job){
 			ArrayList<Emp> list = new ArrayList<Emp>();
 			try {
@@ -335,7 +421,76 @@ public class A01_Dao { // DAO: Database Access Object
 	}
 	
 
-/*
+// SELECT * FROM emp2 WHERE empno=7369
+		
+	/*
+		 1. SQL 작성
+		 2. VO 객체 생성
+		 3. 기능 메서드 선언
+		 	1) 요청에 의한 입력: 매개변수로 활용
+		 	2) 데이터의 결과에 따라 리턴값 지정
+		 		- insert, update, delete: void 사용
+		 			ex) public void insertEmp(Emp ins)
+		 		- 단위 변수나 한 개의 데이터
+		 			> 회원 등록 여부: SELECT * FROM member where ...
+		 				public boolean void isMember(String id, String pass)
+		 			> 상품 개수: SELECT count(*) FROM member where ...
+		 				public int memCount(Member sch)
+		 			> 회원 상세 정보: SELECT * FROM member where id=@@@
+		 				public Member getMember(String id)
+		 		- 여러 개의 데이터
+		 			ex)
+		 			> 공지사항
+		 				public ArrayList<Board> boardList(Board sch)
+		 			> 회원정보리스트
+		 				public ArrayList<Member> mlist(Member sch)
+		 		
+		 */
+		
+		
+		
+		public ArrayList<Dept> deptList2(String dname, String loc){
+		ArrayList<Dept> dlist = new ArrayList<Dept>();
+		// 1. 연결
+		try {
+			setCon();
+			// 2. 대화 SQL
+			String sql="SELECT * FROM dept \r\n"
+					+ "WHERE dname LIKE '%'||?||'%'\r\n"
+					+ "AND loc LIKE '%'||?||'%'";
+			System.out.println(sql);
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, dname);
+			pstmt.setString(2, loc);
+			
+			// 3. 결과
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				dlist.add(new Dept(rs.getInt(1), rs.getString(2), rs.getString(3)));
+			}
+			System.out.println("데이터 크기: "+dlist.size());
+			// 4. 자원해제
+			rs.close();
+			pstmt.close();
+			con.close();
+			// 5. 예외처리
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("# DB 예외 처리 #");
+			System.out.println(e.getMessage());
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("# 기타 예외 처리 #");
+			System.out.println(e.getMessage());
+		}
+		
+		return dlist;
+	}
+
+
+
+	/*
 -- ex1) 하위 구문을 통해서 만들어질 VO와 DAO단에 들어갈 메서드를 선언
 -- VO 포함 출력 int deptno, double msal, double asal
 -- 		  하나의 데이터일 경우 메서드 매개변수로 double msal 사용
@@ -585,7 +740,7 @@ WHERE mod(empno,2)=0;
 							rs.getInt(8));
 			}
 			rs.close();
-			stmt.close();
+			pstmt.close();
 			con.close();
 //			5. 예외 처리
 		} catch (SQLException e) {
@@ -604,7 +759,33 @@ WHERE mod(empno,2)=0;
 
 	// SELECT * FROM emp2 WHERE empno=7369
 		
-	public static void main(String[] args) {
+	/*
+		 1. SQL 작성
+		 2. VO 객체 생성
+		 3. 기능 메서드 선언
+		 	1) 요청에 의한 입력: 매개변수로 활용
+		 	2) 데이터의 결과에 따라 리턴값 지정
+		 		- insert, update, delete: void 사용
+		 			ex) public void insertEmp(Emp ins)
+		 		- 단위 변수나 한 개의 데이터
+		 			> 회원 등록 여부: SELECT * FROM member where ...
+		 				public boolean void isMember(String id, String pass)
+		 			> 상품 개수: SELECT count(*) FROM member where ...
+		 				public int memCount(Member sch)
+		 			> 회원 상세 정보: SELECT * FROM member where id=@@@
+		 				public Member getMember(String id)
+		 		- 여러 개의 데이터
+		 			ex)
+		 			> 공지사항
+		 				public ArrayList<Board> boardList(Board sch)
+		 			> 회원정보리스트
+		 				public ArrayList<Member> mlist(Member sch)
+		 		
+		 */
+		
+		
+		
+		public static void main(String[] args) {
 		A01_Dao dao = new A01_Dao();
 //		try {
 //			dao.setCon();
@@ -616,9 +797,19 @@ WHERE mod(empno,2)=0;
 //		dao.deptList(new Dept("",""));
 //		dao.jobSalList(0);
 //		dao.memberList("", "");
+		
 //		Emp ins = new Emp(0,"김길동3","대리",7800,"2010/12/12",4000.0,100.0,20);
 //		dao.insertEmp(ins);
-		Dept dins = new Dept(50,"인사과","서울 서초구");
-		dao.insertDept(dins);
+		
+//		Dept dins = new Dept(50,"인사과","서울 서초구");
+//		dao.insertDept(dins);
+		
+//		ArrayList<Emp> elist = dao.empList2("","");
+//		System.out.println("크기: "+elist.size());
+//		System.out.println("첫 번째: "+elist.get(0).getEname());
+
+		ArrayList<Dept> dlist = dao.deptList2("","");
+		System.out.println("크기: "+dlist.size());
+		System.out.println("첫 번째: "+dlist.get(0).getDname());
 	}
 }

@@ -27,7 +27,7 @@
 <%
 String empno = request.getParameter("empno");
 A01_Dao dao = new A01_Dao();
-// 1개의 단위 객체
+// 1개의 단위 객체: 전체 list 화면에서 key인 empno를 요청값으로 호출해서 상세내용을 가져올 때 사용
 Emp emp = dao.getEmp(new Integer(empno));
 %>
 <body>

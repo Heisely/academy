@@ -824,6 +824,7 @@ WHERE mod(empno,2)=0;
 				System.out.println("db처리 에러");
 				try {
 					con.rollback();
+					System.out.println();
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -834,6 +835,71 @@ WHERE mod(empno,2)=0;
 			}
 			
 		}
+
+
+
+		// SELECT * FROM emp2 WHERE empno=7369
+			
+		/*
+			 1. SQL 작성
+			 2. VO 객체 생성
+			 3. 기능 메서드 선언
+			 	1) 요청에 의한 입력: 매개변수로 활용
+			 	2) 데이터의 결과에 따라 리턴값 지정
+			 		- insert, update, delete: void 사용
+			 			ex) public void insertEmp(Emp ins)
+			 		- 단위 변수나 한 개의 데이터
+			 			> 회원 등록 여부: SELECT * FROM member where ...
+			 				public boolean void isMember(String id, String pass)
+			 			> 상품 개수: SELECT count(*) FROM member where ...
+			 				public int memCount(Member sch)
+			 			> 회원 상세 정보: SELECT * FROM member where id=@@@
+			 				public Member getMember(String id)
+			 		- 여러 개의 데이터
+			 			ex)
+			 			> 공지사항
+			 				public ArrayList<Board> boardList(Board sch)
+			 			> 회원정보리스트
+			 				public ArrayList<Member> mlist(Member sch)
+			 		
+			 */
+			
+			
+			// 수정
+			// ex) 부서정보 상세화면에서 수정 처리
+			public void deleteEmp(int empno) {
+				try {
+					setCon();
+					con.setAutoCommit(false);
+					
+					String sql = "DELETE FROM emp2 WHERE empno = ?";
+					pstmt = con.prepareStatement(sql);					
+					pstmt.setInt(1, empno);
+					pstmt.executeUpdate();
+					
+					con.commit();
+					pstmt.close();
+					con.close();
+					
+					
+					// 4. 예외처리
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					System.out.println("db처리 에러");
+					try {
+						con.rollback();
+						System.out.println();
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+					System.out.println("기타 에러");
+				}
+				
+			}
 
 
 

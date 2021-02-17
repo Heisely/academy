@@ -17,45 +17,79 @@
 </style>
 <script>
 	window.onload=function(){
+		document.querySelector("form").onsubmit = function(){
+			//
+			var deptnoVal = document.querySelector("[name=deptno]").value
+			if(deptnoVal==""||isNaN(deptnoVal)){
+				alert("부서번호를 숫자로 입력해주세요.");
+				return false;
+			}
+			// 기타 유효성 check;
+		};
 		var uptBtn = document.querySelector("#uptBtn");
 		uptBtn.onclick = function(){
-			document.querySelector("[name=proc]").value = "upt";
+			// 처리할 process 구분 설정
+			document.querySelector("[name=proc]").value="upt";
+			// form의 submit버튼과 동일한 JS
+			document.querySelector("form").submit();
+		}
+		var delBtn = document.querySelector("#delBtn");
+		delBtn.onclick = function(){
+			document.querySelector("[name=proc]").value="del";
 			document.querySelector("form").submit();
 		}
 	};
 </script>
 </head>
 <%--
-
+# 부서정보 수정 처리
+1. 이벤트로 수정처리 클릭 시 요청값 전송
+2. 전달한 요청값 확인, VO객체로 할당
+3. 수정 sql 작성/확인
+4. DAO에서 수정 기능 메서드 선언
+5. JSP DAO 수정 기능메서드 호출 / VO 객체 할당
+6. JS로 수정처리 완료. confirm 계속 수정/ 조회화면 이동 선택
+	location.href = "초기 리스트 페이지";
 --%>
 <body>
 <%
+int deptno=0;
+String deptnoS = request.getParameter("deptno");
+if(deptnoS!=null&&!deptnoS.equals("")) deptno = Integer.parseInt(deptnoS);
+
 String proc = request.getParameter("proc");
 String dname = request.getParameter("dname");
 String loc = request.getParameter("loc");
-String deptno = request.getParameter("deptno");
-
-log("#"+proc);
-log("#"+deptno);
-log("#"+dname);
-log("#"+loc);
 
 A02_DeptDao dao = new A02_DeptDao();
 
 if(proc!=null){
 	if(proc.equals("upt")){
-		Dept upt = new Dept(Integer.parseInt(deptno), dname, loc);
+		Dept upt = new Dept(deptno, dname, loc);
+		log("# 수정 준비 #");
+		log("# 번호: "+upt.getDeptno());
+		log("# 부서명: "+upt.getDname());
+		log("# 위치: "+upt.getLoc());
 		
 		dao.updateDept(upt);
 	}
+	if(proc.equals("del")){
+		System.out.println("삭제준비완료: "+deptno);
+		dao.deleteDept(deptno);
+	}
 }
 
-Dept d = dao.getDept(new Integer(deptno));
+Dept d = dao.getDept(deptno);
 %>
 <script type="text/javascript">
 	var proc = "<%=proc%>";
 	if(proc=="upt"){
 		if(confirm("수정성공\n메인화면으로 이동하시겠습니까?")){
+			location.href = 'a04_searchDeptList.jsp';
+		}
+	}
+	if(proc=="del"){
+		if(confirm("삭제성공\n메인화면으로 이동하시겠습니까?")){
 			location.href = 'a04_searchDeptList.jsp';
 		}
 	}

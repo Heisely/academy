@@ -19,23 +19,27 @@ WHERE empno = 7369;
 		deptno = ?
 WHERE empno = ?*/
 
-SELECT * FROM DEPT2;
-UPDATE DEPT2 
-	SET dname = dname||'(변경)',
-		loc = loc||'(변경)'
-WHERE deptno = 50;
-/*UPDATE DEPT2 
-	SET dname = ?,
-		loc = ?,
-WHERE deptno = ?*/
+SELECT * FROM DEPT10;
+UPDATE dept10
+	SET dname='총무',
+		loc = '제주'
+WHERE deptno = 70;
+DELETE FROM dept10 WHERE deptno = 70;
+/*
+UPDATE dept10
+	SET dname=?,
+		loc = ?
+WHERE deptno = ?;
+DELETE FROM dept10 WHERE deptno = ?
+ */
 
 SELECT * FROM PRODUCT2;
 UPDATE product2
 	SET name = name||'(변경)',
 		price = price - 2000,
-		CREDTE = to_date(CREDTE, 'YY-MM-DD'),
+		CREDTE = to_date(CREDTE, 'YYYY-MM-DD'),
 		COMPANY = COMPANY||'(변경)',
-		INCOMEDTE = to_date(INCOMEDTE, 'YY-MM-DD'),
+		INCOMEDTE = to_date(INCOMEDTE, 'YYYY-MM-DD'),
 		INMANAGER = INMANAGER
 WHERE pno = 10040;
 /*UPDATE product2
@@ -46,3 +50,9 @@ WHERE pno = 10040;
 		INCOMEDTE = to_date(?, 'YY-MM-DD'),
 		INMANAGER = ? ||'(변경)'
 WHERE pno = ?;*/
+
+SELECT * FROM emp2;
+DELETE FROM emp2 WHERE empno = 7975;
+
+DELETE FROM product2 WHERE pno = 10000;
+SELECT * FROM product2;

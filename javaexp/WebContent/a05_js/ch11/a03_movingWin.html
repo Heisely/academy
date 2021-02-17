@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	/* 
+
+	 */
+	//
+	window.onload = function() { // 화면이 다 로딩된 이후로 처리할 이벤트
+		document.querySelector("h2").innerHTML = "JS 시작";
+		// 변수 선언
+		var child = window.open('', '', 'width=300, height=200');
+		child.document.write("<h3>이동하는 창</h3>");
+		child.moveTo(0, 0); // 절대적 위치. x,y 왼쪽 상단
+		// 1초마다 함수를 실행
+		setInterval(function() {
+			child.moveBy(10, 10); // 1초마다 상대적 위치로 이동
+		}, 1000);
+
+		// ex1) 왼쪽 이동 버튼, 아래 이동 버튼을 만들어 버튼 클릭 시 윈도우 창이 뜨고 각 방향으로 이동하게 하기
+/* 		var ex1 = window.open('', '', 'width=300, height=200');
+		ex1.document.write("<h3>ex1</h3>");
+		ex1.moveTo(1000, 0);
+		var leftBtn = document.querySelector("#leftBtn");
+		leftBtn.onclick = function() {
+			ex1.moveBy(-10, 0);
+		}
+		var downBtn = document.querySelector("#downBtn");
+		downBtn.onclick = function() {
+			ex1.moveBy(0, 10);
+		} */
+	};
+	function goLeft(){
+		var child1 = window.open('', '', 'width=300, height=200');
+		child1.document.write("<h3>왼쪽으로 이동하는 창</h3>");
+		child1.moveTo(600, 0);
+		setInterval(function(){
+			child1.moveBy(-10,0);
+		},1000);
+	}
+	function goDown(){
+		var child2 = window.open('', '', 'width=300, height=200');
+		child2.document.write("<h3>아래로 이동하는 창</h3>");
+		child2.moveTo(0, 0);
+		setInterval(function(){
+			child2.moveBy(0,10);
+		},1000);
+	}
+</script>
+</head>
+<body>
+	<h2></h2>
+	<input type="button" value="왼쪽으로" onclick="goLeft()" />
+	<input type="button" value="아래로" onclick="goDown()"/>
+</body>
+</html>

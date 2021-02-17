@@ -67,7 +67,7 @@
 	log("#### loc: "+loc);
 
 	A02_DeptDao dao = new A02_DeptDao();
-	ArrayList<Dept> dlist = dao.deptList(new Dept());
+	ArrayList<Dept> dlist = dao.deptList2(new Dept());
 %>
 	<h3>부서정보검색</h3>
 	<form method="post">

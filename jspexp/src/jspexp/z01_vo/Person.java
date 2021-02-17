@@ -6,6 +6,11 @@ public class Person {
 	private int age;
 	private String loc;
 
+	public Person() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public Person(String name, int age, String loc) {
 		super();
 		this.name = name;

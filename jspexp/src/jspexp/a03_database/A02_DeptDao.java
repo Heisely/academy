@@ -71,7 +71,7 @@ public class A02_DeptDao {
 		
 		return dlist;
 	}
-	public ArrayList<Dept> deptList2(String dname, String loc){
+	public ArrayList<Dept> deptList2(Dept sch){
 		ArrayList<Dept> dlist = new ArrayList<Dept>();
 		// 1. 연결
 		try {
@@ -82,8 +82,8 @@ public class A02_DeptDao {
 					+ "AND loc LIKE '%'||?||'%'"
 					+ " ORDER BY deptno DESC";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, dname);
-			pstmt.setString(2, loc);
+			pstmt.setString(1, sch.getDname());
+			pstmt.setString(2, sch.getLoc());
 			// 3. 결과
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
@@ -172,16 +172,21 @@ public class A02_DeptDao {
 		
 		return d;
 	}
-
+/*
+UPDATE dept10
+	SET dname=?,
+		loc = ?
+WHERE deptno = ?
+ */
 	public void updateDept(Dept upt){
 		// 연결
 		try {
 			setCon();
 			con.setAutoCommit(false);
 			// 대화
-			String sql = "UPDATE DEPT2 \r\n"
-					+ "	SET dname = ?,\r\n"
-					+ "		loc = ?,\r\n"
+			String sql = "UPDATE dept10\r\n"
+					+ "	SET dname=?,\r\n"
+					+ "		loc = ?\r\n"
 					+ "WHERE deptno = ?";
 			pstmt = con.prepareStatement(sql);
 			
@@ -189,7 +194,7 @@ public class A02_DeptDao {
 			pstmt.setString(2, upt.getLoc());
 			pstmt.setInt(3, upt.getDeptno());
 			pstmt.executeUpdate();
-			
+			System.out.println(sql);
 			con.commit();
 			pstmt.close();
 			con.close();
@@ -209,6 +214,43 @@ public class A02_DeptDao {
 			System.out.println("기타에러");
 		}
 	}
+
+	/*
+	UPDATE dept10
+		SET dname=?,
+			loc = ?
+	WHERE deptno = ?
+	 */
+		public void deleteDept(int deptno){
+			// 연결
+			try {
+				setCon();
+				con.setAutoCommit(false);
+				// 대화
+				String sql = "DELETE FROM dept10 WHERE deptno = ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, deptno);
+				pstmt.executeUpdate();
+				System.out.println(sql);
+				con.commit();
+				pstmt.close();
+				con.close();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				System.out.println("db에러");
+				try {
+					con.rollback();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("기타에러");
+			}
+		}
 
 	public static void main(String[] args) {
 		A02_DeptDao dao = new A02_DeptDao();

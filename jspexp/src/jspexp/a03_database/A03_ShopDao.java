@@ -143,24 +143,28 @@ public class A03_ShopDao {
 	 */
 	public void updateProduct(Product2 upt) {
 		try {
+			System.out.println("날짜1:"+upt.getCredte_s());
+			System.out.println("날짜2:"+upt.getIncomdte_s());
 			setCon();
 			con.setAutoCommit(false);
 			String sql = "UPDATE product2\r\n"
-					+ "	SET name = ?||'(변경)',\r\n"
-					+ "		price = ? - 2000,\r\n"
-					+ "		CREDTE = to_date(?, 'YYYY-MM-DD'),\r\n"
-					+ "		COMPANY = ?||'(변경)',\r\n"
-					+ "		INCOMEDTE = to_date(?, 'YYYY-MM-DD'),\r\n"
-					+ "		INMANAGER = ? ||'(변경)'\r\n"
+					+ "	SET name = ?,\r\n"
+					+ "		price = ?,\r\n"
+					+ "		cnt = ?,\r\n"
+					+ "		CREDTE = to_date( ?, 'YYYY-MM-DD'),\r\n"
+					+ "		COMPANY = ?,\r\n"
+					+ "		INCOMEDTE = to_date( ?, 'YYYY-MM-DD'),\r\n"
+					+ "		INMANAGER = ?\r\n"
 					+ "WHERE pno = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, upt.getName());
 			pstmt.setInt(2, upt.getPrice());
-			pstmt.setString(3, upt.getCredte_s());
-			pstmt.setString(4, upt.getCompany());
-			pstmt.setString(5, upt.getIncomdte_s());
-			pstmt.setString(6, upt.getInmanager());
-			pstmt.setInt(7, upt.getPno());
+			pstmt.setInt(3, upt.getCnt());
+			pstmt.setString(4, upt.getCredte_s());
+			pstmt.setString(5, upt.getCompany());
+			pstmt.setString(6, upt.getIncomdte_s());
+			pstmt.setString(7, upt.getInmanager());
+			pstmt.setInt(8, upt.getPno());
 			pstmt.executeUpdate();
 			
 			con.commit();
@@ -183,8 +187,8 @@ public class A03_ShopDao {
 
 	public static void main(String[] args) {
 		A03_ShopDao dao = new A03_ShopDao();
-		dao.shopList(new Product2("", 1000, 9999));
-//		dao.insertProduct(new Product2(0, "딸기", 12000, 50, null, "딸기마을", null, "딸기맨"));
-		dao.getProd(10000);
+//		dao.shopList(new Product2("", 1000, 9999));
+		dao.insertProduct(new Product2(0, "딸기", 12000, 50, "", "딸기마을", null, "딸기맨"));
+//		dao.getProd(10000);
 	}
 }

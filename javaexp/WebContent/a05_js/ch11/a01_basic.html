@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+/* 
+# BOM(Browser Object Model)
+	팝업으로 브라우저 창을 띄우고, 그것을 객체로 인식하여 js에서 프로그래밍 하는 것
+
+# 기본 코드
+1. var win01 = window.open("url","이름","option")
+	1) option
+		- width: 너비, height: 높이
+2. 위치 이동
+	- 절대 위치 이동: win01.moveTo(x위치, y위치);
+	- 상대 위치 이동: 현재 위치에서 이동될 범위 지정
+		> win01.moveBy(x현재위치+, y현재위치+);
+3. 크기 변경
+	- 절대적 윈도우 창 크기 변경: win01.resizeTo(x축크기, y축크기)
+	- 상대적 윈도우 창 크기 변경: win01.resizeBy(x축크기, y축크기)
+*/
+// 기본 속성
+	var output = '';
+	for(var key in window) {
+		output += '●' + key + ': ' + window[key] + '\n';
+	}
+	console.log(output);
+
+	window.onload=function(){ // 화면이 다 로딩된 이후로 처리할 이벤트
+		var h2Obj = document.querySelector("h2");
+		h2Obj.innerText = "열려라 윈도우";
+		h2Obj.onclick=function(){
+			window.open('a01_basic.html','child','width=600, height=300',true);
+		}
+	};
+</script>
+</head>
+<body>
+	<h2></h2>
+</body>
+</html>

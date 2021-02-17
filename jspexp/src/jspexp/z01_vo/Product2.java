@@ -38,27 +38,18 @@ public class Product2 {
 		this.inmanager = inmanager;
 	}
 
-	public Product2(int pno, String name, int price, int fr_price, int to_price, int cnt, Date credte, String company,
-			Date incomedte, String inmanager) {
+	public Product2(int pno, String name, int price, int cnt, String credte_s, String company, Date incomedte,
+			String incomdte_s, String inmanager) {
 		super();
 		this.pno = pno;
 		this.name = name;
 		this.price = price;
-		this.fr_price = fr_price;
-		this.to_price = to_price;
 		this.cnt = cnt;
-		this.credte = credte;
+		this.credte_s = credte_s;
 		this.company = company;
 		this.incomedte = incomedte;
+		this.incomdte_s = incomdte_s;
 		this.inmanager = inmanager;
-	}
-
-	public Product2(String name, int fr_price, int to_price) {
-		super();
-		this.name = name;
-		this.fr_price = fr_price;
-		this.to_price = to_price;
-
 	}
 
 	public Product2(int pno, String name, int price, int cnt, Date credte, String company, Date incomedte,
@@ -72,6 +63,23 @@ public class Product2 {
 		this.company = company;
 		this.incomedte = incomedte;
 		this.inmanager = inmanager;
+	}
+
+	public Product2(int pno, String name, int price, int cnt, String company, String inmanager) {
+		super();
+		this.pno = pno;
+		this.name = name;
+		this.price = price;
+		this.cnt = cnt;
+		this.company = company;
+		this.inmanager = inmanager;
+	}
+
+	public Product2(String name, int fr_price, int to_price) {
+		super();
+		this.name = name;
+		this.fr_price = fr_price;
+		this.to_price = to_price;
 	}
 
 	public int getPno() {
@@ -130,6 +138,14 @@ public class Product2 {
 		this.credte = credte;
 	}
 
+	public String getCredte_s() {
+		return credte_s;
+	}
+
+	public void setCredte_s(String credte_s) {
+		this.credte_s = credte_s;
+	}
+
 	public String getCompany() {
 		return company;
 	}
@@ -146,22 +162,6 @@ public class Product2 {
 		this.incomedte = incomedte;
 	}
 
-	public String getInmanager() {
-		return inmanager;
-	}
-
-	public void setInmanager(String inmanager) {
-		this.inmanager = inmanager;
-	}
-
-	public String getCredte_s() {
-		return credte_s;
-	}
-
-	public void setCredte_s(String credte_s) {
-		this.credte_s = credte_s;
-	}
-
 	public String getIncomdte_s() {
 		return incomdte_s;
 	}
@@ -170,4 +170,12 @@ public class Product2 {
 		this.incomdte_s = incomdte_s;
 	}
 
+	public String getInmanager() {
+		return inmanager;
+	}
+
+	public void setInmanager(String inmanager) {
+		this.inmanager = inmanager;
+	}
+	
 }

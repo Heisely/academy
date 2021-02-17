@@ -17,6 +17,13 @@
 </style>
 <script>
 	window.onload=function(){
+		document.querySelector("form").onsubmit = function(){
+			var pnoVal = document.querySelecotr("[name=pno]").value
+			if(pnoVal =="" || isNaN(pnoVal)){
+				alert("상품번호를 숫자로 입력해주세요.");
+				return false;
+			}
+		}
 		var uptBtn = document.querySelector("#uptBtn");
 		uptBtn.onclick = function(){
 			document.querySelector("[name=proc3]").value = "upt";
@@ -31,23 +38,26 @@
 <body>
 <%
 	String proc3 = request.getParameter("proc3");
-	String name = request.getParameter("name");
-	String price = request.getParameter("price");
-	String cnt = request.getParameter("cnt");
-	String company = request.getParameter("company");
-	String inmanager = request.getParameter("inmanager");
-	String credteS = request.getParameter("credteS");
-	String incomedteS = request.getParameter("incomedteS");
-	String pno = request.getParameter("pno");
+	int pno = 0;
+	String pnoS = request.getParameter("pno");
+	if(pnoS!=null&&!pnoS.equals("")) pno = Integer.parseInt(pnoS);
 	A03_ShopDao dao = new A03_ShopDao();
 	if(proc3!=null){
+		String name = request.getParameter("name");
+		int price = Integer.parseInt(request.getParameter("price"));
+		int cnt = Integer.parseInt(request.getParameter("cnt"));
+		String company = request.getParameter("company");
+		String inmanager = request.getParameter("inmanager");
+		String credteS = request.getParameter("credteS");
+		String incomedteS = request.getParameter("incomedteS");
 		if(proc3.equals("upt")){
-			Product2 upt = new Product2(Integer.parseInt(pno),name,Integer.parseInt(price),
-										Integer.parseInt(cnt),company, inmanager, credteS,incomedteS);
+			
+			// int pno, String name, int price, int cnt, String credte_s, String company, String incomdte_s,String inmanager) 
+			Product2 upt = new Product2(pno,name, price, cnt ,credteS, company,incomedteS, inmanager);
 			dao.updateProduct(upt);
 		}
 	}
-	Product2 pro = dao.getProd(new Integer(pno));
+	Product2 pro = dao.getProd(pno);
 %>
 <script>
 	var proc3 = "<%=proc3%>";
@@ -68,8 +78,8 @@
 		<tr><th>재고량</th><td><input type="text" name="cnt" value="<%=pro.getCnt()%>"/></td></tr>
 		<tr><th>제조사</th><td><input type="text" name="company" value="<%=pro.getCompany()%>"/></td></tr>
 		<tr><th>책임자</th><td><input type="text" name="inmanager" value="<%=pro.getInmanager()%>"/></td></tr>
-		<tr><th>신규등록일</th><td><input type="text" name="credteS" value="<%=pro.getCredte()%>"/></td></tr>
-		<tr><th>최근입고일</th><td><input type="text" name="incomedteS" value="<%=pro.getIncomedte()%>"/></td></tr>
+		<tr><th>신규등록일</th><td><input type="date" name="credteS" value="<%=pro.getCredte()%>"/></td></tr>
+		<tr><th>최근입고일</th><td><input type="date" name="incomedteS" value="<%=pro.getIncomedte()%>"/></td></tr>
 		<%} else{ %>
 		<tr><td colspan="2">Data is not exist.</td></tr>
 		<%} %>

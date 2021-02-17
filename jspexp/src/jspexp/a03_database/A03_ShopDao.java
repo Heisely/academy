@@ -185,6 +185,36 @@ public class A03_ShopDao {
 		}
 	}
 
+	/*
+	 * - 등록메서드 public insertProduct(ShopProd ins)
+	 */
+	public void delProduct(int pno) {
+		try {
+			setCon();
+			con.setAutoCommit(false);
+			String sql = "DELETE FROM product2 WHERE pno = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, pno);
+			pstmt.executeUpdate();
+			
+			con.commit();
+			pstmt.close();
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("입력 에러: " + e.getMessage());
+			try {
+				con.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		} catch (Exception e) {
+			System.out.println("일반 에러: " + e.getMessage());
+		}
+	}
+
 	public static void main(String[] args) {
 		A03_ShopDao dao = new A03_ShopDao();
 //		dao.shopList(new Product2("", 1000, 9999));

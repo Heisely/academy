@@ -29,6 +29,11 @@
 			document.querySelector("[name=proc3]").value = "upt";
 			document.querySelector("form").submit();
 		}
+		var delBtn = document.querySelector("#delBtn");
+		delBtn.onclick = function(){
+			document.querySelector("[name=proc3]").value = "del";
+			document.querySelector("form").submit();
+		}
 	};
 </script>
 </head>
@@ -56,6 +61,9 @@
 			Product2 upt = new Product2(pno,name, price, cnt ,credteS, company,incomedteS, inmanager);
 			dao.updateProduct(upt);
 		}
+		if(proc3.equals("del")){
+			dao.delProduct(pno);
+		}
 	}
 	Product2 pro = dao.getProd(pno);
 %>
@@ -63,6 +71,11 @@
 	var proc3 = "<%=proc3%>";
 	if(proc3=="upt"){
 		if(confirm("수정성공\n메인화면으로 이동하시겠습니까?")){
+			location.href = 'a00_0210.jsp';
+		}
+	}
+	if(proc3=="del"){
+		if(confirm("삭제성공\n메인화면으로 이동하시겠습니까?")){
 			location.href = 'a00_0210.jsp';
 		}
 	}

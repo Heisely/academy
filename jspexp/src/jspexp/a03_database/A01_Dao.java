@@ -663,7 +663,7 @@ WHERE mod(empno,2)=0;
 			stmt = con.createStatement();
 			String sql = "INSERT INTO emp2 VALUES (\r\n"
 					+ " emp21_seq.nextval, '"+ins.getEname()+"', '"+ins.getJob()+"', "+ins.getMgr()+",\r\n"
-					+ " TO_DATE('"+ins.getHiredate_s()+"'), "+ins.getSal()+", "+ins.getComm()+", "+ins.getDeptno()+")";
+					+ " TO_DATE('"+ins.getHiredate_s()+"','YYYY-MM-DD'), "+ins.getSal()+", "+ins.getComm()+", "+ins.getDeptno()+")";
 			System.out.println("###");
 			System.out.println(sql);
 			stmt.execute(sql); // update
@@ -784,7 +784,59 @@ WHERE mod(empno,2)=0;
 		 */
 		
 		
-		
+		// 수정
+		// ex) 부서정보 상세화면에서 수정 처리
+		public void updateEmp(Emp upt) {
+			try {
+				setCon();
+				con.setAutoCommit(false);
+				
+				String sql = "UPDATE emp2\r\n"
+						+ "	SET ename = ?,\r\n"
+						+ "		job = ?,\r\n"
+						+ "		mgr = ?,\r\n"
+						+ "		hiredate = to_date(?,'YYYY-MM-DD'),\r\n"
+						+ "		sal = ?,\r\n"
+						+ "		comm = ?,\r\n"
+						+ "		deptno = ?\r\n"
+						+ "WHERE empno = ?";
+				pstmt = con.prepareStatement(sql);
+				
+				pstmt.setString(1, upt.getEname());				
+				pstmt.setString(2, upt.getJob());
+				pstmt.setInt(3, upt.getMgr());
+				pstmt.setString(4, upt.getHiredate_s());
+				pstmt.setDouble(5, upt.getSal());
+				pstmt.setDouble(6, upt.getComm());
+				pstmt.setInt(7, upt.getDeptno());
+				pstmt.setInt(8, upt.getEmpno());
+				pstmt.executeUpdate();
+				
+				con.commit();
+				pstmt.close();
+				con.close();
+				
+				
+				// 4. 예외처리
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				System.out.println("db처리 에러");
+				try {
+					con.rollback();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("기타 에러");
+			}
+			
+		}
+
+
+
 		public static void main(String[] args) {
 		A01_Dao dao = new A01_Dao();
 //		try {

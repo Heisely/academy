@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+/* 
+# form 하위 요소 객체 데이터 전송 전 유효성 체크 이벤트
+1. 대상객체: form 객체
+	document.querySelector("폼선택자")
+2. 이벤트명: submit
+3. 이벤트속성: onsubmit
+4. 이벤트 핸들러 할당
+	document.querySelector("폼선택자").onsubmit = function(){
+		이벤트를 통해 처리할 핸들러 함수 선언
+	}
+5. return값 처리
+	1) return값이 없거나 true일 때는 정상적으로 서버에 form하위 요소의 값이 전송된다.
+	2) 조건문에 의해 return 값이 false일 때, 해당 라인에서 더이상 진행을 하지 않는다.
+	>> 이러한 특성때문에 전체적인 유효성 메시지를 처리할 때는 마지막 라인에서 return값에 대한 처리를 해야 한다.
+*/
+//
+   window.onload=function(){ // 화면이 다 로딩된 이후로 처리할 이벤트
+      document.querySelector("h2").innerHTML="form 요청 유효 체크";
+      //이벤트를 연결합니다
+      document.getElementById('my-form').onsubmit = function(){
+         var name = document.getElementById("name").value;
+         if(name==""){
+            alert("이름을 입력하세요.");
+            return false;
+         }
+         //변수 선언
+         var pass= document.getElementById('pass').value;
+         var passCheck = document.getElementById('pass-check').value;
+         //비밀번호가 같은지 확인
+         if(pass==passCheck){
+            alert('성공');
+         }else{
+            alert('다시 입력해 주세요.');
+            return false;
+         }
+      };
+      
+      
+      /*
+      function(){
+         
+         return false를 하면 그 다음 라인부터 수행하지 않는다.
+         //유효성 check에 메세지가 있으면 마지막에 처리하는 것이 좋다.
+         
+         return false;   //submit() 전송 x
+         return true;   //submit() 전송
+      }
+      
+      
+      */
+      //ex) 회원가입 유효성 check
+      //id : [   ] 8~16(문자열.length)
+      //포인트 : [   ] 숫자로 등록(isNaN)
+      //[등록] =>a06_mem_success.jsp 등록 성공 id : @@, 포인트 : @@
+      
+       document.getElementById('mem-form').onsubmit = function(){
+         var idVal = document.querySelector("#id").value;
+         var idCk = document.querySelector("#idCk");
+         var ptVal = document.querySelector("#point").value;
+         var ptCk = document.querySelector("#ptCk");
+         var isValid = true;
+         if(idVal==""||idVal.length>16||idVal.length<8){
+            idCk.innerText="아이디는 8~16자의 문자로 입력해주세요."
+            idCk.style.color="red";
+            isValid=false; // 리턴값이 false이면 전송을 하지 못한다.
+         }else{
+            idCk.innerText="정상입력";
+            idCk.style.color="blue";
+         }
+        if(ptVal==""||isNaN(ptVal)){
+              ptCk.innerText="포인트는 숫자로 입력해주세요."
+            ptCk.style.color="red";
+              isValid=false;           
+        }else{
+              ptCk.innerText="정상입력";
+           ptCk.style.color="blue"; 
+        }
+        return isValid;
+      }
+   };
+
+</script>
+</head>
+<body>
+   <h2></h2>
+   <form id="my-form" action="a05_success.jsp">
+      <label for="name">이름</label><br/>
+      <input type="text" name="name" id="name"/><br/>
+      <label for="pass">비밀번호</label><br/>
+      <input type="password" name="pass" id="pass"/><br/>      
+      <label for="pass-check">비밀번호확인</label><br/>
+      <input type="password" id="pass-check"/><br/>   
+      <input type="submit" value="제출"/>   
+   </form>
+   <br><br><br>
+   <form id="mem-form" action="a06_mem_success.jsp">
+         <label for="id">아이디</label><br>
+         <input type="text" name="id" id="id"/><span id="idCk"></span><br>
+         <label for="point">포인트</label><br>
+         <input type="text" name="point" id="point"/><span id="ptCk"></span><br>
+         <input type="submit" value="전송"/>   
+   </form>
+</body>

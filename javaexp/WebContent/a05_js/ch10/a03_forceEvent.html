@@ -4,10 +4,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-/* 
-
-*/
-//
 	window.onload=function(){
 		// 화면이 다 로딩된 이후로 처리할 이벤트
 		// window.onload이벤트는 JS가 하단에 선언된 것과 동일한 효과를 준다.
@@ -25,28 +21,43 @@
 		};
 		buttonB.onclick = function(){
 			counterB.innerHTML = Number(counterB.innerHTML) + 1;
+			// buttonA의 선언된 내용을 강제적으로 수행하여
+			// 이벤트가 발생하지 않더라도, 코드상 이벤트가 수행된 것과 동일한 효과를 처리할 수 있다.
+			buttonA.onclick();
+		};		
+		// ex) ButtonC, ButtonD를 만들고
+		//	   ButtonC를 클릭했을 때 첫 번째 h3에 ★이 하나씩 추가되게 처리하고
+		// 	   ButtonD를 클릭했을 때 두 번째 h3에 ♣이 하나씩 추가되게 처리한다.
+		//	   결과를 확인한 후, ButtonD의 이벤트 핸들러에 ButtonC이벤트 강제처리를 수행하게 하기
+		var buttonC = document.querySelector("#button-c");
+		var buttonD = document.querySelector("#button-d");
+		var h3Arr = document.querySelectorAll("h3");
+		var h3_01 = h3Arr[0];
+		var h3_02 = h3Arr[1];
+		buttonC.onclick=function(){
+			h3_01.innerText += "★";
 		};
-		// 객체.onclick속성 = 함수호출
-		// ex) <h3 id="">에 숫자 0을 넣어 놓고, h3을 클릭하면 카운트가 업되게 처리
-		var h3Obj = document.getElementById("h3Obj");
-		h3Obj.onclick = function(){
-			// this.:클릭한 대상 객체
-			this.textContent = Number(this.textContent)+1;
+		buttonD.onclick = function(){
+			h3_02.innerHTML += "♣";
+//			buttonC.onclick();
 		};
-		
+		// 1초 단위로 강제 수행 처리
+		setInterval(function(){
+			buttonC.onclick();
+			buttonD.onclick();
+		},1000)
 	};
-	function call(){
-		alert('호출');
-	}
-	
 </script>
 </head>
 <body>
-	<h2 onclick="call()"></h2>
+	<h2></h2>
 	<button id="button-a">ButtonA</button>
 	<button id="button-b">ButtonB</button>
+	<button id="button-c">ButtonC</button>
+	<button id="button-d">ButtonD</button>
 	<h1>Button A - <span id="counter-a">0</span></h1>
 	<h1>Button B - <span id="counter-b">0</span></h1>
-	<h3 id="h3Obj">0</h3>
+	<h3></h3>
+	<h3></h3>
 </body>
 </html>

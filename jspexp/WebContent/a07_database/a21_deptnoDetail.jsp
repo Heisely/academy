@@ -17,7 +17,11 @@
 </style>
 <script>
 	window.onload=function(){
-
+		var uptBtn = document.querySelector("#uptBtn");
+		uptBtn.onclick = function(){
+			document.querySelector("[name=proc]").value = "upt";
+			document.querySelector("form").submit();
+		}
 	};
 </script>
 </head>
@@ -26,14 +30,39 @@
 --%>
 <body>
 <%
-int deptno = 0;
-String deptnoS = request.getParameter("deptno");
-if(deptnoS!=null && !deptnoS.equals("")) deptno = Integer.parseInt(deptnoS);
+String proc = request.getParameter("proc");
+String dname = request.getParameter("dname");
+String loc = request.getParameter("loc");
+String deptno = request.getParameter("deptno");
+
+log("#"+proc);
+log("#"+deptno);
+log("#"+dname);
+log("#"+loc);
+
 A02_DeptDao dao = new A02_DeptDao();
-Dept d = dao.getDept(deptno);
+
+if(proc!=null){
+	if(proc.equals("upt")){
+		Dept upt = new Dept(Integer.parseInt(deptno), dname, loc);
+		
+		dao.updateDept(upt);
+	}
+}
+
+Dept d = dao.getDept(new Integer(deptno));
 %>
-	<h3>부서정보[<%=request.getParameter("deptno")%>]</h3>
+<script type="text/javascript">
+	var proc = "<%=proc%>";
+	if(proc=="upt"){
+		if(confirm("수정성공\n메인화면으로 이동하시겠습니까?")){
+			location.href = 'a04_searchDeptList.jsp';
+		}
+	}
+</script>
+	<h3>부서정보[<%=deptno%>]</h3>
 	<form method="post">
+	<input type="hidden" name="proc" value=""/>
 	<table>
 		<%if(d!=null){ %>
 		<tr><th>부서번호</th><td><input type="text" name="deptno" value="<%=d.getDeptno()%>"/></td></tr>
@@ -44,8 +73,8 @@ Dept d = dao.getDept(deptno);
 		<%} %>
 		<tr><td colspan="2">
 			<input type="button" value="메인화면" onclick="location.href='a04_searchDeptList.jsp'">
-			<input type="button" value="수정">
-			<input type="button" value="삭제">
+			<input type="button" value="수정" id="uptBtn">
+			<input type="button" value="삭제" id="delBtn">
 		</td></tr>
 	</table>
 	</form>

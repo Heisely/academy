@@ -84,7 +84,11 @@
 		<tr><th>급여</th><td><input type="text" name="sal"/></td></tr>
 		<tr><th>보너스</th><td><input type="text" name="comm"/></td></tr>
 		<tr><th>부서번호</th><td><input type="text" name="deptno"/></td></tr>
-		<tr><td colspan="2"><input type="button" onclick="validCk()" value="등록"/></td></tr>
+		<tr><td colspan="2">
+		<input type="button" value="수정"/>
+		<input type="button" value="삭제"/>
+		<input type="button" onclick="validCk()" value="등록"/>
+		<input type="button" value="메인페이지이동" onclick="location.href='a03_searchEmpList.jsp'"/></td></tr>
 	</table>
 	</form>
 	<script type="text/javascript">

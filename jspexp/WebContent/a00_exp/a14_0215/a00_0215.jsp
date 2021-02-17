@@ -15,28 +15,35 @@
 <style>
 
 </style>
+<script>
+	window.onload=function(){
+
+	};
+</script>
 </head>
 <%--
 [JSP]
 [하] 1. PreparedStatement를 사용하는 이유를 기술하세요.
 	1) SQL injection을 막기 위해
+		- SQL injection: 해킹방법의 하나
+			동적인 SQL(문자열과 문자열을 조합시켜 SQL 처리)
+			이 화면에서 입력 form 요소객체로 만들어서 서버에서 원하지 않는,,
  	2) DB 서버의 SQL 해석 속도를 향상시켜 빠른 처리를 하기 위해
  	
 [하] 2. 부서정보조회를 위 PreparedStatement를 활용하여 처리하세요.
-	public ArrayList<Dept> deptList2(String dname, String loc){
+	public ArrayList<Dept> deptList2(Dept sch){
 		ArrayList<Dept> dlist = new ArrayList<Dept>();
 		// 1. 연결
 		try {
 			setCon();
 			// 2. 대화 SQL
-			String sql="SELECT * FROM dept \r\n"
+			String sql="SELECT * FROM dept10 \r\n"
 					+ "WHERE dname LIKE '%'||?||'%'\r\n"
-					+ "AND loc LIKE '%'||?||'%'";
-			System.out.println(sql);
+					+ "AND loc LIKE '%'||?||'%'"
+					+ " ORDER BY deptno DESC";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, dname);
-			pstmt.setString(2, loc);
-			
+			pstmt.setString(1, sch.getDname());
+			pstmt.setString(2, sch.getLoc());
 			// 3. 결과
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
@@ -62,11 +69,6 @@
 		return dlist;
 	}
 
-	public static void main(String[] args){
-		ArrayList<Dept> dlist = dao.deptList2("","");
-		System.out.println("크기: "+dlist.size());
-		System.out.println("첫 번째: "+dlist.get(0).getDname());
-	}
 --%>
 <%--
 [js]
@@ -101,53 +103,36 @@
         버튼을 클릭할 때 마다, 카운트가 업되고, 하단의 출력내용을 변경하게 처리하세요
         단) 대상객체.이벤트 = 핸들러함수 형식으로 처리하세요.
 --%>
-<body>
-<script>
+<script type="text/javascript">
 	window.onload = function(){
-		var button = document.getElementById("button");
-		var button2 = document.getElementById("button2");
-		var cnt = document.getElementById("cnt");
-		var cnt2 = document.getElementById("cnt2");
-		button.onclick = function(){
-			cnt.innerHTML = Number(cnt.innerHTML)+1;
-			cnt2.innerHTML = Number(cnt2.innerHTML)+1;
+		var h3Obj = document.getElementsByTagName("h3")[0];
+		// h3Obj: 이벤트를 처리할 대상 객체
+		// click: 이벤트
+		// 대상객체.onclick: 이벤트를 대상객체의 속성으로 지정
+		// function(){}: 이벤트가 수행될 때 처리할 handler 함수
+		h3Obj.onclick = function(){
+			// this: 함수 안에서 이벤트를 처리하는 대생객체를 지정
+			this.style.backgroundColor="yellow";
+			this.innerText = "이벤트 완료";
 		}
-		button2.onclick = function(){
-			cnt.innerHTML = Number(cnt.innerHTML)-1;
-			cnt2.innerHTML = Number(cnt2.innerHTML)-1;
+		
+		var pname = document.querySelector("[name=pname]");
+		var price = document.querySelector("[name=price]");
+		var btn01 = document.querySelector("#btn01");
+		btn01.onclick = function(){
+			this.value = Number(this.value) + 1;
+			var prn = pname.value+"를 "+price.value+"원에 "+this.value+"개 구매하여 총 "+(price.value * this.value)+"원 입니다.";
+			show.innerText = prn;
 		}
-	}
-	
+	};
 </script>
-<%
-		String pname = request.getParameter("pname");
-		if(pname==null) pname="";
-		String priceS = request.getParameter("price");
-		
-		int price = 0;
-		if(priceS==null) priceS="";
-		if(priceS!=null && !priceS.equals("")) price = Integer.parseInt(priceS);
-		
-		String cntS = request.getParameter("cnt");
-		int cnt = 0;
-		if(cntS!=null && !cntS.equals("")) cnt = Integer.parseInt(cntS);
-		int tot = price * cnt;
-%>
-	<h3>JS Ex2</h3>
-	<form method="post">
+<body>
+	<h3>제목</h3>
 	<table>
-		<tr><th>물건명</th><td colspan="2"><input type="text" name="pname"></td></tr>
-		<tr><th>가격</th><td colspan="2"><input type="text" name="price"></td></tr>
-		<tr><th>개수</th><td><span id="cnt">0</span></td>
-						<td><input type="button" id="button" value="수량증가"/>
-							<input type="button" id="button2" value="수량감소"/></td>
-		</tr>
-		<tr><td colspan="3">수량을 변경하시려면 수량증가버튼을 클릭하시면 됩니다.</td></tr>
-		<tr><td colspan="3"><input type="submit" value="구매"/></td></tr>
-		<%if(pname!=null&&!pname.equals("")){ %>
-		<tr><td colspan="3"><%=pname%>을 <%=price%>원에 <%=cnt%>개 구매하여 총 <%=tot%>원 입니다.</td></tr>
-		<%} %>
+		<tr><th>물건명</th><td><input type="text" name="pname"/></td></tr>
+		<tr><th>가격</th><td><input type="text" name="price"/></td></tr>
+		<tr><th>개수</th><td><input type="button" value="0" id="btn01" style="width:80%;"/></td></tr>
+		<tr><td colspan="2" id="show">내용</td></tr>
 	</table>
-	</form>
 </body>
 </html>

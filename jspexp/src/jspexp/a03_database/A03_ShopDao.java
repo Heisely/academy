@@ -138,10 +138,53 @@ public class A03_ShopDao {
 		return pro;
 	}
 
+	/*
+	 * - 등록메서드 public insertProduct(ShopProd ins)
+	 */
+	public void updateProduct(Product2 upt) {
+		try {
+			setCon();
+			con.setAutoCommit(false);
+			String sql = "UPDATE product2\r\n"
+					+ "	SET name = ?||'(변경)',\r\n"
+					+ "		price = ? - 2000,\r\n"
+					+ "		CREDTE = to_date(?, 'YYYY-MM-DD'),\r\n"
+					+ "		COMPANY = ?||'(변경)',\r\n"
+					+ "		INCOMEDTE = to_date(?, 'YYYY-MM-DD'),\r\n"
+					+ "		INMANAGER = ? ||'(변경)'\r\n"
+					+ "WHERE pno = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, upt.getName());
+			pstmt.setInt(2, upt.getPrice());
+			pstmt.setString(3, upt.getCredte_s());
+			pstmt.setString(4, upt.getCompany());
+			pstmt.setString(5, upt.getIncomdte_s());
+			pstmt.setString(6, upt.getInmanager());
+			pstmt.setInt(7, upt.getPno());
+			pstmt.executeUpdate();
+			
+			con.commit();
+			pstmt.close();
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("입력 에러: " + e.getMessage());
+			try {
+				con.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		} catch (Exception e) {
+			System.out.println("일반 에러: " + e.getMessage());
+		}
+	}
+
 	public static void main(String[] args) {
 		A03_ShopDao dao = new A03_ShopDao();
 		dao.shopList(new Product2("", 1000, 9999));
-		dao.insertProduct(new Product2(0, "딸기", 12000, 50, null, "딸기마을", null, "딸기맨"));
+//		dao.insertProduct(new Product2(0, "딸기", 12000, 50, null, "딸기마을", null, "딸기맨"));
 		dao.getProd(10000);
 	}
 }

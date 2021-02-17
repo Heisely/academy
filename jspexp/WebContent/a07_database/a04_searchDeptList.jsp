@@ -12,7 +12,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="<%=path%>/a00_com/a00_com.css">
 <style>
-
+	tr:hover{background-color:yellow;}
 </style>
 <script>
    window.onload=function(){
@@ -61,16 +61,13 @@
 --%>
 <body>
 <%
-	String dname = request.getParameter("dname");
-	if(dname==null) dname="";
-	String loc = request.getParameter("loc");
-	if(loc==null) loc="";
+	String dname = request.getParameter("dname");	if(dname==null) dname="";
+	String loc = request.getParameter("loc");	if(loc==null) loc="";
 	log("#### dname: "+dname);
 	log("#### loc: "+loc);
-%>
-<%	
+
 	A02_DeptDao dao = new A02_DeptDao();
-	ArrayList<Dept> dlist = dao.deptList(new Dept(dname, loc));
+	ArrayList<Dept> dlist = dao.deptList(new Dept());
 %>
 	<h3>부서정보검색</h3>
 	<form method="post">
@@ -93,7 +90,7 @@
 </body>
 <script type="text/javascript">
 	function detail(deptno){
-		location.href="a21_deptDetail.jsp?deptno="+deptno;
+		location.href="a21_deptnoDetail.jsp?deptno="+deptno;
 	}
 </script>
 </html>

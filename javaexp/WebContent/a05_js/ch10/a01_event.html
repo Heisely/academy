@@ -10,6 +10,18 @@
 	load: 이벤트 이름/타입
 	onload: 이벤트 속성
 	function(){}: 이벤트 리스트/핸들러
+		this: 이벤트를 처리하는 대상 객체를 지칭 :window
+		ex) var h1Obj = document.querySelector("h1");
+			h1Obj.onclick = function(){
+				// this = h1Obj
+				this.innerText = "이벤트 수행 됨";
+				this.style.backgroundColor = "yellow";
+			}
+			<h1 onclick="call()"></h1>
+			function call(){
+				this.innerText = "이벤트 수행 됨";
+				this.style.backgroundColor = "yellow";
+			}
 2. 이벤트 설정과 해제
 	이벤트 연결: 이벤트객체.onXXX = function(){}
 	이벤트 삭제: 이벤트객체.onXXX = null;
@@ -29,6 +41,11 @@
 	전달을 막는 방법
 	인터넷 익스플로러: 이벤트 객체의 cancelBubble 속성을 true
 	그 외의 브라우저: 이벤트 객체의 stopPropagation() 메서드 사용
+	<div>
+		<p>
+			<h1>
+	상위 포함객체에 하위에 종속된 객체의 이벤트가 전달된다.(h1(이벤트대상객체) -> p -> div)
+	그래서 이벤트를 특정한 경우에 전달되지 못하게 하기위해서는 stopPropagation()을 사용한다.
 */
 	window.onload = function() { // 화면이 다 로딩된 이후로 처리할 이벤트
 		document.querySelector("h2").innerHTML = "JS 시작";

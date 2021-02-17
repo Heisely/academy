@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+/* 
+# JS에 주로 사용되는 이벤트
+1. click
+2. mouseover: 마우스의 커서가 해당 요소객체 위로 지나갈 때
+3. mouseout: 마우스 커서가 해당 요소객체 위로 갔다가 밖으로 나갈 때
+4. focus: 해당 요소 객체를 클릭해서 위치시켰을 때
+5. keyup/keydown: 키보드의 키를 눌렀을 때 / 떼었을 때
+	1) event.keyCode: 어떤 키를 눌렀을 때 해당 키코드값
+ */
+	//
+	window.onload = function() { // 화면이 다 로딩된 이후로 처리할 이벤트
+		var h2Obj = document.querySelector("h2");
+		var eventObj = document.querySelector("#eventObj");
+		var divObj = document.querySelector("div");
+		h2Obj.innerHTML = "여러 가지 이벤트";
+		eventObj.onclick = function() {
+			h2Obj.innerText = "클릭이벤트";
+			divObj.innerHTML += "클릭이벤트<br>";
+		}
+		eventObj.onmouseover = function() {
+			h2Obj.innerText = "마우스 오버 이벤트";
+			divObj.innerHTML += "마우스 오버 이벤트<br>";
+		}
+		eventObj.onmouseout = function() {
+			h2Obj.innerText = "마우스 아웃 이벤트";
+			divObj.innerHTML += "마우스 아웃 이벤트<br>";
+		}
+		eventObj.onkeydown = function() {
+			h2Obj.innerText = "키보드 키를 눌렀을 때";
+			divObj.innerHTML += "keydown 이벤트<br>";
+		}
+		eventObj.onkeyup = function() {
+			h2Obj.innerText = "키보드 키["+event.keyCode+"]를 떼었을 때";
+			divObj.innerHTML += "keyup 이벤트<br>";
+		}
+		eventObj.onfocus = function() {
+			h2Obj.innerText = "포커스를 위치 시켰을 때";
+			divObj.innerHTML += "focus 이벤트<br>";
+		}
+	};
+</script>
+</head>
+<body>
+	<h2></h2>
+	<input type="text" id="eventObj" />
+	<br>
+	<div></div>
+</body>
+</html>

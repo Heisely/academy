@@ -14,13 +14,28 @@ public class Product2 {
 	private int to_price;
 	private int cnt;
 	private Date credte;
+	private String credte_s;
 	private String company;
 	private Date incomedte;
+	private String incomdte_s;
 	private String inmanager;
 
 	public Product2() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	public Product2(int pno, String name, int price, int cnt, String credte_s, String company, String incomdte_s,
+			String inmanager) {
+		super();
+		this.pno = pno;
+		this.name = name;
+		this.price = price;
+		this.cnt = cnt;
+		this.credte_s = credte_s;
+		this.company = company;
+		this.incomdte_s = incomdte_s;
+		this.inmanager = inmanager;
 	}
 
 	public Product2(int pno, String name, int price, int fr_price, int to_price, int cnt, Date credte, String company,
@@ -137,6 +152,22 @@ public class Product2 {
 
 	public void setInmanager(String inmanager) {
 		this.inmanager = inmanager;
+	}
+
+	public String getCredte_s() {
+		return credte_s;
+	}
+
+	public void setCredte_s(String credte_s) {
+		this.credte_s = credte_s;
+	}
+
+	public String getIncomdte_s() {
+		return incomdte_s;
+	}
+
+	public void setIncomdte_s(String incomdte_s) {
+		this.incomdte_s = incomdte_s;
 	}
 
 }

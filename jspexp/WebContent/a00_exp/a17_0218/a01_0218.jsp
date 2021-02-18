@@ -60,7 +60,7 @@
 	<script type="text/javascript">
 	var isExist = <%=isExist%>;
 	if(isExist){
-		alert("존재하지 않는 회원입니다.");
+		alert("회원등록이 가능한 아이디입니다.");
 		$("[name=id]").focus();
 	}
 	</script>
@@ -71,6 +71,7 @@
 
 */
 //
+	alert("등록된 회원입니다.\n회원정보를 불러옵니다.");
 	$(document).ready(function(){
 		$("h3").text("회원정보");
 	});

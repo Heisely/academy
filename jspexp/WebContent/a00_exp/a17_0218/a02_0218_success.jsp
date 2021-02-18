@@ -21,6 +21,7 @@
 
 */
 //
+	alert("등록된 회원입니다.\n회원정보를 불러옵니다.");
 	$(document).ready(function(){
 		$("h3").text("회원정보");
 	});

@@ -3,12 +3,12 @@ package jspexp.z01_vo;
 public class Member {
 	private String id;
 	private String pass;
-	private String name;
 	private int point;
+	private String name;
 	private String auth;
 
 	// 0217 과제를 위한 생성자
-	public Member(String id, String pass, String name, int point, String auth) {
+	public Member(String id, String pass, int point,String name, String auth) {
 		super();
 		this.id = id;
 		this.pass = pass;

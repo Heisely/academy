@@ -3,22 +3,74 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript" src="/jspexp/a00_com/jquery-3.5.1.js"></script>
 <script type="text/javascript">
 /* 
 # js 라이브러리 사용하기
 1. CDN(Content Delivery Network)
 	src = "http://code.jquery.com/jquery-3.5.1.js"
-2.
+2. lib(jquery-3.5.1.js)를 다운로드해서 서버 특정 위치
 */
-//
-	$(document).ready(function(){
+/*
+1. 기본 코드
+	$(document).ready(함수/익명함수)
+	window.onload = function(){};와 동일한 처리
+2. $: jquery 식별자
+	window.jQuery = window.$=jQuery
+3. 기본적인 선택자
+	- 기본 형태
+		> $("h1").css("color","red");
+	- 선택자, 메서드
+		> 전체 선택자: $("*")
+		> 태그 선택자: $("h1, p")
+		> 아이디 선택자: $("#target")
+		> 클래스 선택자: $(".item"), $(".item.select")
+5. 자손/후손 선택자
+		> $("부모 > 자손"): 객체 상하위 관계에 있을 때, 바로 위와 바로 밑에 있는 계층 관계에 있을 때 하위 객체 지정
+		> $("부모   자손"): 객체 상하위 관계에 있을 때, 해위 객체의 깊이에 상관 없이 자손 객체가 있기만 하면 해당 자손 객체 지정
+		> $("요소1 + 요소2"): 요소1을 앞세운 요소2 객체를 선택	
+			ex) $("lable + input").css("color","blue").val("Labeled!");
+		> $("요소1 ~ 요소2"): 요소1 이후의 같은 계층의 모든 요소2를 선택
+			ex) $("prev ~ div").css("border", "3px proove blue");
+*/
+	$(document).ready(function() {
 		$("h2").text("jquery 시작");
+		$("*").css("color", "red");
+		console.log("첫 번째 div 값: " + $("div")[0].innerHTML);
+		console.log("두 번째 div 값: " + $("div")[1].innerHTML);
+		$("#target").css("color","black");
+		// .html(): 읽기와 저장 가능 메서드. html 코드 랜더링
+		// .text(): 읽기와 저장 가능 메서드. text 문자 그대로 출력 및 저장
+		console.log("#target 값: " + $("#target").text());
+		$(".myClass").css("color","blue");
+		// .first(): 대상 객체의 첫 번째
+		// .last(): 화면 기준 대상 객체의 마지막 객체
+		// .eq(index): 대상 객체의 index번째 객체
+		console.log("첫 번째 .myClass 값: " + $(".myClass").first().text());
+		console.log("마지막 .myClass 값: " + $(".myClass").last().text());
+		// ex) h3 7개를 출력 및
+		// 짝수번째 class를 cls01, 홀수번째 class를 cls02로 지정하여 해당 label을 짝수/홀수로 표기하고,
+		// 글자색상을 orange와 pink로 jquery 지정
+		$(".cls01").text("짝수").css("color","orange");
+		$(".cls02").text("홀수").css("color","pink");
 	});
 </script>
 </head>
 <body>
 	<h2></h2>
+	<div>DIV1</div>
+	<div>DIV2</div>
+	<span>SPAN</span>
+	<div id="target">DIV3 TARGET</div>
+	<div class="notMe">DIV class="notMe"</div>
+	<div class="myClass">DIV class="myClass"</div>
+	<span class="myClass">span class="myClass"</span>
+	<h3 class="cls02"></h3>
+	<h3 class="cls01"></h3>
+	<h3 class="cls02"></h3>
+	<h3 class="cls01"></h3>
+	<h3 class="cls02"></h3>
+	<h3 class="cls01"></h3>
+	<h3 class="cls02"></h3>
 </body>
 </html>

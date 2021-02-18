@@ -62,6 +62,7 @@
 			dao.updateProduct(upt);
 		}
 		if(proc3.equals("del")){
+			System.out.println("# 삭제 처리: "+pno);
 			dao.delProduct(pno);
 		}
 	}

@@ -35,10 +35,13 @@
 	> 삭제처리 정상적으로 이루어짐
 	
 [하] 3. useBean에서 property와 필드를 구분하여 기술하세요.
-	> 필드: 값을 저장하기 위한 곳
-	> property: 자바빈에 저장/호출되는 값을 가져와 표현
+	> 필드: useBean의 대상이 되는 클래스의 class변수/상수를 의미하고
+			일반적으로 접근제어자가 private이기에 직접적인 접근을 할 수 없다.
+	> property: useBean의 대상이 되는 setXXX()메서드와 getXXX()메서드로
+				JSP에서 호출할 때에는 set과 get은 빼고, 나머지 메서드명을 소문자로 만들어 지칭
+				접근제어자는 일반적으로 public으로 접근하여 사용할 수 있다.
 
-[하] 4. 아이디, 패스워드, 이름, 포인트, 권한이 있는 Member Vo객체를 만들고,
+[하] 4. 아이디, 패스워드, 이름, 포인트, 권한이 있는 Member VO객체를 만들고,
         회원등록페이지와 useBean을 이용해서, 등록버튼 클릭시 등록 회원을
         확인할 수 있게 처리하세요.
         > 정상 작동 확인 완료
@@ -87,9 +90,35 @@
 --%>
 <script>
 	window.onload=function(){
-		var child = window.open('','','width=300, height=200');
-		child.document.write("<h3>2월17일 JS 과제2번</h3>");
-		child.moveTo(0,0);
+		var win = window.open('','','width=300, height=300');
+		win.document.write("<h2>움직이는 창!</h2>");
+		var xpos = 0;
+		var ypos = 0;
+		var cnt = 0;
+		var setIntv = setInterval(function(){
+			cnt++;
+/* 			if(cnt<=20) {	// 1~20: x축 오른쪽으로 이동
+				xpos += 10;
+			} else if(cnt<=40) { // 21~40: y축 아래로 이동
+				ypos += 10;
+			} else if(cnt<=60) { // 41~60: x축 왼쪽으로 이동
+				xpos -= 10;
+			} else if(cnt<=80){ // 61~80: y축 위로 이동
+				ypos -= 10;
+			} else { // 80 초과일 때 반복처리 중단
+				clearInterval(setInt);
+			} */
+			if(cnt<=40){
+				xpos += 10;
+				ypos += 10;
+			} else if(cnt<=80){
+				xpos -= 10;
+				ypos -= 10;
+			} else {
+				clearInterval(setInt);
+			}
+			win.moveTo(xpos, ypos);
+		},100);
 		
 	};
 </script>

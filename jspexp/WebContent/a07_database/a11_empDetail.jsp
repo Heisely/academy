@@ -24,6 +24,8 @@
 		var delBtn = document.querySelector("#delBtn");
 		delBtn.onclick = function(){
 			if(confirm("삭제하시겠습니까?")){
+				// var empno = document.querySelector("[name=empno]").value;
+				// location.href = "a11.empDetail.jsp?proc=del&empno="+empno;
 				document.querySelector("[name=proc]").value = "del";
 				document.querySelector("form").submit();
 			}

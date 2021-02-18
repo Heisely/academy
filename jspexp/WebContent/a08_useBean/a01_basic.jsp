@@ -39,6 +39,9 @@
 	1) JSP에서 자바빈 객체를 생성할 때 사용
 	2) <jsp:useBean id="빈이름" class="자바빈클래스명" scope="session범위">
 		자바빈클래스명	빈이름=new 자바빈 클래스명();
+		ex)
+		Person p = new Person();
+		<jsp:uweBean id="p" class="패키지명.Person"/>
 5. property의 활용
 	1) set 프로퍼티
 		<jsp:setProperty name="bean의 id명" property="프로퍼티명" value="저장할 데이터"/>

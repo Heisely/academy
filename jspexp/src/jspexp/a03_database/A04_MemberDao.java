@@ -139,6 +139,31 @@ public class A04_MemberDao {
 		}
 		return m;
 	}
+	
+	// 데이터가 있는 지 여부를 boolean으로 확인
+	public boolean hasMember(String id) {
+		boolean hasMem = false;
+		try {
+			setCon();
+			String sql = "select * from member5 where id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			hasMem = rs.next();			
+			System.out.println("## 데이터가 있을까? "+hasMem);
+			rs.close();
+			pstmt.close();
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("db에러 : " + e.getMessage());
+		} catch (Exception e) {
+			System.out.println("일반에러 : " + e.getMessage());
+		}
+		return hasMem;
+	}
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 

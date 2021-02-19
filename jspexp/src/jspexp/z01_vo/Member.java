@@ -8,7 +8,7 @@ public class Member {
 	private String auth;
 
 	// 0217 과제를 위한 생성자
-	public Member(String id, String pass, int point,String name, String auth) {
+	public Member(String id, String pass, int point, String name, String auth) {
 		super();
 		this.id = id;
 		this.pass = pass;

@@ -48,6 +48,11 @@
    </table>
    </form>
    <jsp:useBean id="m" class="jspexp.z01_vo.Member" scope="session"/>
+   <%--
+   # useBean을 활용하면 setProperty를 통해서 
+   request.getParameter("요청키")와 VO객체에 요청값을 할당하는 처리까지 해주고,
+   session scope를 이용하여 해당 Bean이 저장되는 단위까지 처리할 수 있다.
+   --%>
    <jsp:setProperty property="*" name="m"/>
    <%
    boolean isLogFail=false;

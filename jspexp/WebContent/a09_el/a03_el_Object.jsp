@@ -75,7 +75,7 @@
 	</form>
 	<h4>${param.pname}을 ${param.cnt}개 구매하여 총 ${param.cnt * param.price}원</h4>
 	<%--
-	ex2) 주말의 취미생활 []@@@ []@@@ []@@@ [확인
+	ex2) 주말의 취미생활 []@@@ []@@@ []@@@ [확인]
 		 el의 요청값으로 @@@ 출력
 	--%>
 	<form method="post">

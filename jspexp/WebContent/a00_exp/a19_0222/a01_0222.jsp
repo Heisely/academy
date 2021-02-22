@@ -102,14 +102,14 @@
 --%>
 	<form>
 	<table>
-	<tr><th>물건명</th><td><input size="5" name="name"/></td><td rowspan="2"><input type="submit" value="10개까지 출력"/></td></tr>
-	<tr><th>단가</th><td><input size="5" name="price"/></td></tr>
+		<tr><th>물건명</th><td><input size="5" name="name"/></td><td rowspan="2"><input type="submit" value="10개까지 출력"/></td></tr>
+		<tr><th>단가</th><td><input size="5" name="price"/></td></tr>
 	</table>
 	</form>
 	<c:forEach var="cnt" begin="1" end="10">
-	<c:if test="${not empty param.name && not empty param.price}">
-		<h4>${param.name}  ${cnt}개  ${param.price*cnt}원</h4>
-	</c:if>
+		<c:if test="${not empty param.name && not empty param.price}">
+			<h4>${param.name}  ${cnt}개  ${param.price*cnt}원</h4>
+		</c:if>
 	</c:forEach>
 </body>
 </html>

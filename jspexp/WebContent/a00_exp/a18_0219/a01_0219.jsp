@@ -50,6 +50,7 @@ request.setAttribute("prod02", new Product("바나나",4000,2));
 [하] 2. el에서 사용되는 조건논리연산자를 활용하여, 임의의 값에 정답을 입력한 후, 정답 여부를 true/false로 출력하세요.
         [ @@] * [ @@  ] = [ 정답입력  ] [정답확인]
             정답여부 @@@
+    >> 조건문에서 해결이 안 됩니다ㅠ
 --%>
 <%
 	request.setAttribute("num1", (int)(Math.random()*10+1));
@@ -65,6 +66,7 @@ if(answerS==null) answerS="0";
 int answer = Integer.parseInt(answerS);
 %>
 <h4>${(empty answer)? "" : (answer==(num1 * num2)? "정답":"오답")}</h4>
+
 <%--            
 [하] 3. useBean과 el을 이용하여 회원가입 정보입력과 가입된 정보를 출력 처리하세요.~
 --%>

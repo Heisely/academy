@@ -46,16 +46,15 @@ public class A03_ShopDao {
 	/*
 	 * - 조회메서드 public ArrayList<ShopProd> shopList(ShopProd sch)
 	 */
-	public ArrayList<Product2> shopList(Product2 sch) {
+	public ArrayList<Product2> shopList(String name) {
 		ArrayList<Product2> list = new ArrayList<Product2>();
 		try {
 			setCon();
-			String sql = "SELECT * FROM product2 WHERE name LIKE '%'||'" + sch.getName() + "'||'%' AND price BETWEEN "
-					+ sch.getFr_price() + " AND " + sch.getTo_price() + " ORDER BY pno DESC";
-			System.out.println("# 조회리스트 #");
-			System.out.println(sql);
-			stmt = con.createStatement();
-			rs = stmt.executeQuery(sql);
+			String sql = "SELECT * FROM product2 WHERE name LIKE '%'|| ? ||'%' ORDER BY pno DESC";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, name);
+			rs = pstmt.executeQuery();
 			/*
 			 * Product2(int pno, String name, int price, int cnt, Date credte, String
 			 * company, Date incomedte, String inmanager)
@@ -65,7 +64,7 @@ public class A03_ShopDao {
 						rs.getString(6), rs.getDate(7), rs.getString(8)));
 			}
 			rs.close();
-			stmt.close();
+			pstmt.close();
 			con.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" 
+   href="/jspexp/a00_com/a00_com.css">
+<script type="text/javascript" src="/jspexp/a00_com/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+/* 
+ 
+ 
+*/
+//
+	$(document).ready(function(){
+		$("h2").text("입력 비동기 통신");
+		$("[name=data01]").keyup(function(){
+			var xhr = new XMLHttpRequest();
+			xhr.open("get","z04_data.txt", true);
+			xhr.onreadystatechange = function(){
+				if(xhr.readyState==4 && xhr.status==200){ // 정상상황
+					$("div").text($("div").text()+xhr.responseText);
+				}
+			};
+			xhr.send();
+		});
+	});
+</script>
+</head>
+<body>
+   <h2></h2>
+   입력데이터: <input type="text" name="data01"/>
+   <div></div>
+</body>

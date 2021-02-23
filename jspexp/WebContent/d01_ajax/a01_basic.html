@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" 
+   href="/jspexp/a00_com/a00_com.css">
+<script type="text/javascript" src="/jspexp/a00_com/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+/* 
+# ajax(asynchronized javascript) 비동기 자바스크립트 통신 방식
+1. 화면 JS의 이벤트를 통해서 XMLHttpRequest객체를 생성하고,
+	XMLHttpRequest객체가 화면 전환 없이 요청값을 통해서 서버에 특정한 데이터를 받아서 다시 html 화면에 처리해주는 방식
+*/
+//
+	$(document).ready(function(){
+		$("h2").text("ajax처리");
+		// 1. XMLHttpRequest객체를 통해 화면전환 없이 동기통신 처리
+		$("h2").click(function(){
+			alert("1. 이벤트 처리");
+			// XMLHttpRequest 객체 생성 - 주석처리하면 2번째 alert는 발생하지 않는다.
+			var xhr = new XMLHttpRequest();
+			alert("2. XMLHttpRequest 객체 호출: "+xhr);
+		// 2. 서버에 있는 특정 페이지를 client에 가져오기
+		// xhr.open("get/post", "서버에 있는 파일", 비동기 여부); false:동기
+//			xhr.open("get","z01_data01.html", false); // 동기방식으로 호출
+			xhr.open("get","z03_data03.txt", false); // 동기방식으로 호출
+		// 3. 호출
+			xhr.send();
+		// 4. 서버에서 해당 결과값을 받음
+			alert(xhr.responseText); // 문자열로 결과값을 받음.
+		// 5. 받은 결과를 현재 화면 특정 요소객체에 출력
+			$('div').html(xhr.responseText);
+// ex) z01_data02.html == 인사말 메시지
+//	   a02_callSyn.html로 동기식으로 클릭 시 화면 출력
+		});
+	});
+</script>
+</head>
+<body>
+   <h2></h2>
+   <div></div>
+</body>

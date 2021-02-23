@@ -42,11 +42,21 @@
 			request.setAttribute("p", new Person("홍길동", 25, "서울신림동");
 			%>
 			<c:set var="p01" value="${p}" />
+			
+			# property: 객체의 속성에 접근하는 메서드를 사용하는 것을 말한다.
+					set/get을 제외하고 모두 소문자로 변경하여 활용한다.
+					public void setName(String name){} 메서드가 있고,
+					이 객체의 property name을 호출한다는 것은 위 기능 메서드를 호출해서 처리한다는 것이다.
+					setName ==> Name ==> name. 즉, 최종 name이 property를 의미한다.
+					el이나 jstl에서 호출할 때, 필드명과 동일해서 필드로 오인하는 경우가 많은데,
+					필드는 private 접근제어자가 붙어있어 접근하지 못 한다.
 	2) 객체의 값의 변경
-		<c:set target="객체명" property="프로퍼티이름/set메서드명" value="할당할 값"/>
+		<c:set target="객체명(bean의 it, session scope의 변수명, c:set의 var=변수명)" 
+			   property="프로퍼티이름/set메서드명" value="할당할 값"/>
 		${객체명.프로퍼티명}
-		ex) <c:set teger="p01" property="name" value="마길동" />
+		ex) <c:set target="p01" property="name" value="마길동" />
 			${p01.name}: 변경된 데이터 확인(홍길동 --> 마길동)
+		
 	3) 조건문 처리
 		- 단일조건문
 			<c:if test="boolean">boolean이 true일 때 수행할 내용</c:if>
@@ -57,6 +67,7 @@
 				<c:when test="조건3인경우">조건3이 true일 때, </c:when>
 				<c:otherwise>위의 조건을 제외한 나머지..</c:otherwise>
 			</c:choose>
+			※ 주의 - when test 구문은 앞의 조건을 제외한 내용이다.
 --%>
 	$(document).ready(function(){
 		//$("h3").text("시작");
@@ -65,6 +76,23 @@
 </head>
 <body>
 	<c:set var="name" value="홍길동" scope="request"/>
+	<%--
+	# 객체 설정하는 3가지 형식
+	1. pageContext/request/session/application
+	--%>
+	<%
+	pageContext.setAttribute("m01", new Member());
+	%>
+	<c:set target="${m01}" property="id" value="goodman"/>
+	아이디: ${m01.id}
+	<%--
+	2. <c: set var="변수명" value="<%=new 객체명()%>"/>
+	--%>
+	<c:set var="m02" value="<%=new Member() %>"/>
+	<c:set target="${m02}" property="id" value="higirl"/>
+	<%--
+	3. jsp:useBean...>
+	--%>
 	<jsp:useBean id="mem" class="jspexp.z01_vo.Member"/>
 	<%-- property 형식으로 변경 > mem.setId("himan") --%>
 	<c:set target="${mem}" property="id" value="himan"/>

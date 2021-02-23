@@ -1,11 +1,43 @@
 package jspexp.z01_vo;
 
+import java.util.Date;
+
 public class Member {
 	private String id;
 	private String pass;
-	private int point;
 	private String name;
+	private int point;
+	private String address;
+	private Date regdte;
 	private String auth;
+
+	// 0223 추가
+	public Member(String id, String pass, String name, int point, String address, Date regdte, String auth) {
+		super();
+		this.id = id;
+		this.pass = pass;
+		this.name = name;
+		this.point = point;
+		this.address = address;
+		this.regdte = regdte;
+		this.auth = auth;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public Date getRegdte() {
+		return regdte;
+	}
+
+	public void setRegdte(Date regdte) {
+		this.regdte = regdte;
+	}
 
 	// 0217 과제를 위한 생성자
 	public Member(String id, String pass, int point, String name, String auth) {

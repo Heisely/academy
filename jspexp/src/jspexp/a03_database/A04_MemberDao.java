@@ -46,21 +46,24 @@ public class A04_MemberDao {
 			// 연결
 			setCon();
 			// 대화
-			String sql = "SELECT *\r\n" + "FROM MEMBER5\r\n"
-						+ "WHERE id LIKE '%'||'" + id + "'||'%'\r\n"
-						+ "AND name LIKE '%'||'" + name + "'||'%'";
-			stmt = con.createStatement();
+			String sql = "SELECT * \r\n"
+						+ "FROM MEMBER5 \r\n"
+						+ "WHERE id LIKE '%'|| ? ||'%' \r\n"
+						+ "AND name LIKE '%'|| ? ||'%'";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, name);
 			// 결과
-			rs = stmt.executeQuery(sql);
+			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				Member m = new Member(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5));
+				Member m = new Member(rs.getString(1), rs.getString(2), rs.getString(3),
+										rs.getInt(4), rs.getString(5), rs.getDate(6),
+										rs.getString(7));
 				mlist.add(m);
 			}
-			System.out.println("데이터 건수 : " + mlist.size());
-			System.out.println("두 번째 행 데이터 : " + mlist.get(1).getName());
 			// 해제
 			rs.close();
-			stmt.close();
+			pstmt.close();
 			con.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

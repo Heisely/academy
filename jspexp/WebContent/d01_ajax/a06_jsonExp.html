@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" 
+   href="/jspexp/a00_com/a00_com.css">
+<script type="text/javascript" src="/jspexp/a00_com/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+/* 
+ 
+ 
+*/
+//
+	$(document).ready(function(){
+		$("h2").text("json 예제").click(function(){
+			var xhr = new XMLHttpRequest();
+			xhr.open("get","z06_json.txt",true);
+			xhr.onreadystatechange = function(){
+				if(xhr.readyState == 4 && xhr.status == 200){
+					/* $("div").eq(0).text(xhr.responseText);
+					// 1. 객체로 변경
+					var ex01 = eval('('+xhr.responseText+')');
+					console.log(ex01);
+					var show = "<h3>물건명: "+ex01.pname+"</h3>";
+					show += "<h3>가격: "+ex01.price+"</h3>";
+					show += "<h3>개수: "+ex01.cnt+"</h3>";
+					$("div").eq(1).html(show); */
+					var prod = eval('('+xhr.responseText+')');
+					$("td").eq(0).text(prod.pname);
+					$("td").eq(1).text(prod.price);
+					$("td").eq(2).text(prod.cnt);
+					// .hide() 보이지 않게 처리, .show() 보이게 처리
+					$("table").show();
+				}
+			};
+			xhr.send();
+		});
+	});
+	function ajaxFun(){
+	   var xhr = new XMLHttpRequest();
+	   xhr.open("get","",true);
+	   xhr.onreadystatechange=function(){
+	      if(xhr.readyState==4&&xhr.status==200){
+	         //alert(xhr.responseText);
+	         var prod = eval("("+xhr.responseText+")");
+	      }
+	   };
+	   xhr.send();
+	}
+</script>
+</head>
+<body>
+   <h2></h2>
+   <div></div>
+   <table>
+	<col width="50%">
+		<tr><th>물건명</th><td></td></tr>
+		<tr><th>가격</th><td></td></tr>
+		<tr><th>개수</th><td></td></tr>
+   </table>
+</body>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" 
+   href="/jspexp/a00_com/a00_com.css">
+<script type="text/javascript" src="/jspexp/a00_com/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+/* 
+# 요청 값을 post방식으로 처리
+1. 요청 페이지와 요청값 호출을 분리 처리
+2. 추가 속성
+	open("post","주소",true);
+	sendRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+	send("요청1=요청값1&요청2=요청값2")
+*/
+//
+	var xhr = new XMLHttpRequest();
+	$(document).ready(function(){
+		$("[name=passwd]").keyup(function(){
+			if(event.keyCode==13){
+				ajaxFun();
+			}
+		});
+		$("[name=name],[name=price],[name=cnt]").keyup(function(){
+			if(event.keyCode==13){
+				ajaxProdFun();
+			}
+		});
+	});
+	function ajaxFun(){		
+		var userid = $("[name=userid]").val();
+		var passwd = $("[name=passwd]").val();
+		var qstr = "userid="+userid+"&passwd="+passwd;		
+		xhr.open("post","z12_postData.jsp?",true);
+		xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+		xhr.onreadystatechange=function(){
+			if(xhr.readyState==4&&xhr.status==200){
+				$("div").html(xhr.responseText);
+			}	
+		};
+		xhr.send(qstr);
+	}
+// ex) 물건등록 post방식으로 전송해서 하단에 json형식으로 데이터를 출력
+	function ajaxProdFun(){
+		var name = $("[name=name]").val();
+		var price = $("[name=price]").val();
+		var cnt = $("[name=cnt]").val();
+		var qstr = "name="+name+"&price="+price+"&cnt="+cnt;
+		xhr.open("post","z13_postData.jsp?",true);
+		xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+		xhr.onreadystatechange=function(){
+			if(xhr.readyStat==4 && xhr.status==200){
+				// JSON.parse("문자열형 json 데이터"): 객체로 변환
+				var prod = JSON.parse(xhr.responseText);
+				var show = "<h4>물건명: "+prod.name+"</h4>";
+				show += "<h4>가격: "+prod.price+"</h4>";
+				show += "<h4>개수: "+prod.cnt+"</h4>";
+				$("#prodDiv").html(show);
+			}
+		};
+		shr.send(qstr);	
+	}
+</script>
+</head>
+<body>
+	<h2>로그인</h2>
+	<table>
+		<tr><th>아이디</th><td><input type="text" name="userid"/></td></tr>
+		<tr><th>패스워드</th><td><input type="password" name="passwd"/></td></tr>
+	</table>
+	<div></div>
+	<div id="prodDiv"></div>
+</body>

@@ -43,6 +43,8 @@
 	?ename=@@&job=@@
 	${param.ename}, ${param.job}으로 값을 받아줌
 	
+	el에서 사용하는 요청값이 null일때에는 ""으로 자동 변환 처리하여 NullPointerException을 방지
+	
 	useBean을 통해서 DAO 객체 생성
 	<c:set var="empList" value="${dao.empList2(param.name, param.job)}"/>
 	
@@ -50,6 +52,10 @@
 	--%>
 	<jsp:useBean id="dao" class="jspexp.a03_database.A01_Dao"/>
 	<c:set var="empList" value="${dao.empList2(param.name, param.job)}"/>
+	<%--
+	A01_Dao dao = new A01_Dao();
+	ArrayList<Emp> empList = dao.empList2(request.getParameter("name"), request.getParameter("job"));
+	--%>
 	<table>
 		<caption style="text-align:left">총 건수: ${empList.size()}</caption>
 		<tr><th>사원번호</th><th>사원명</th><th>직책</th><th>관리자번호</th>

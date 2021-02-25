@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" 
+   href="/jspexp/a00_com/a00_com.css">
+<script type="text/javascript" src="/jspexp/a00_com/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+/* 
+# ajax로 json데이터 로딩
+1. 서버단에 있는 핵심 json형식의 데이터를 ajax로 가져오는 것을 말한다.
+2. ajax처리 json데이터 필수 형식
+	1) {속성:속성값}, [{속성:속성값,...}]
+	2) 웹서비스상 json형식은 다음과 같은 형식을 준수해야 정상적으로 객체화 하여 사용할 수 있다.
+	4) 형식
+		{"속성":"문자열데이터","속성":숫자형/boolean형데이터}
+		> 속성은 반드시 ""(쌍따옴표) 사이에 입력해야 한다.
+		> 문자열 데이터 역시 "" 사이에 입력해야 한다.
+			cf) ''사이에 입력하거나 없이 입력하면 정상처리가 되지 않는다.
+		> 숫자형/boolean형 데이터는 반드시 ""/'' 없이 그대로 입력해야 한다.
+3. responseText로 받은 데이터는 문자열형 json데이터이므로 객체로 사용하려면
+	eval('('+xhr+')') 함수나 JSON.parse(xhr) 함수를 이용해야 한다.
+*/
+//
+	$(document).ready(function(){
+		$("h2").text("JSON 데이터 로딩").click(function(){
+			var xhr = new XMLHttpRequest();
+			xhr.open("get","z05_json.txt",true);
+			xhr.onreadystatechange = function(){
+				if(xhr.readyState == 4 && xhr.status == 200){
+					$("div").eq(0).text(xhr.responseText);
+					// 1. 객체로 변경
+					var p01 = eval('('+xhr.responseText+')');
+					console.log(p01);
+					var show = "<h3>이름: "+p01.name+"</h3>";
+					show += "<h3>나이: "+p01.age+"</h3>";
+					show += "<h3>사는곳: "+p01.loc+"</h3>";
+					show += "<h3>결혼유무: "+(p01.isMarried?"기혼":"미혼")+"</h3>";
+					$("div").eq(1).html(show);
+				}
+			};
+			xhr.send();
+		});
+	});
+</script>
+</head>
+<body>
+   <h2></h2>
+   <div></div>
+   <div></div>
+</body>

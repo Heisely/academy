@@ -47,9 +47,11 @@ CREATE TABLE dept2 AS SELECT * FROM dept;
 SELECT * FROM dept2;
 INSERT INTO dept2 VALUES (50, '인사과', '서울 강남구');
 
+SELECT * FROM product2
+WHERE name LIKE '%'||'딸기'||'%'
+AND price BETWEEN 4000 AND 5000;
 
-
-
+SELECT * FROM MEMBER5;
 
 
 

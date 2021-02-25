@@ -46,25 +46,31 @@ public class A03_ShopDao {
 	/*
 	 * - 조회메서드 public ArrayList<ShopProd> shopList(ShopProd sch)
 	 */
-	public ArrayList<Product2> shopList(String name) {
+	public ArrayList<Product2> shopList(Product2 sch) {
+		// null에 대한 default 처리
+		if(sch.getName()==null) sch.setName("");
+		if(sch.getTo_price()==0) sch.setTo_price(99999);
+		
 		ArrayList<Product2> list = new ArrayList<Product2>();
 		try {
 			setCon();
-			String sql = "SELECT * FROM product2 WHERE name LIKE '%'|| ? ||'%' ORDER BY pno DESC";
+			String sql = "SELECT * FROM product2 WHERE name LIKE '%'||'"+sch.getName()+"'||'%'\r\n"
+					+ " AND PRICE BETWEEN "+sch.getFr_price()+
+					 " AND "+ sch.getTo_price() +" ORDER BY pno DESC";
 			
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, name);
-			rs = pstmt.executeQuery();
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(sql);
 			/*
 			 * Product2(int pno, String name, int price, int cnt, Date credte, String
 			 * company, Date incomedte, String inmanager)
 			 */
 			while (rs.next()) {
-				list.add(new Product2(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getDate(5),
-						rs.getString(6), rs.getDate(7), rs.getString(8)));
+				list.add(new Product2(rs.getInt(1), rs.getString(2), 
+										rs.getInt(3), rs.getInt(4),
+										rs.getDate(5),	rs.getString(6), rs.getDate(7), rs.getString(8)));
 			}
 			rs.close();
-			pstmt.close();
+			stmt.close();
 			con.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -217,7 +223,7 @@ public class A03_ShopDao {
 	public static void main(String[] args) {
 		A03_ShopDao dao = new A03_ShopDao();
 //		dao.shopList(new Product2("", 1000, 9999));
-		dao.insertProduct(new Product2(0, "딸기", 12000, 50, "", "딸기마을", null, "딸기맨"));
+		dao.insertProduct(new Product2(0, "포도", 5000, 50, "", "포도마을", null, "포도맨"));
 //		dao.getProd(10000);
 	}
 }

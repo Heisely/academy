@@ -1,0 +1,1 @@
+SELECT * FROM product2 WHERE pno = 10080;

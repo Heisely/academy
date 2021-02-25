@@ -220,10 +220,40 @@ public class A03_ShopDao {
 		}
 	}
 
+	
+	// 0225 과제용
+	public ArrayList<Product2> pList(int pno) {
+		ArrayList<Product2> list = new ArrayList<Product2>();
+		try {
+			setCon();
+			String sql = "SELECT * FROM product2 WHERE pno = "+pno;
+			System.out.println(sql);
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				list.add(new Product2(rs.getInt(1), rs.getString(2), 
+										rs.getInt(3), rs.getInt(4),
+										rs.getDate(5),	rs.getString(6),
+										rs.getDate(7), rs.getString(8)));
+			}
+			rs.close();
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("DB 에러: " + e.getMessage());
+		} catch (Exception e) {
+			System.out.println("일반 에러: " + e.getMessage());
+		}
+		return list;
+	}
+
 	public static void main(String[] args) {
 		A03_ShopDao dao = new A03_ShopDao();
 //		dao.shopList(new Product2("", 1000, 9999));
-		dao.insertProduct(new Product2(0, "포도", 5000, 50, "", "포도마을", null, "포도맨"));
+//		dao.insertProduct(new Product2(0, "포도", 5000, 50, "", "포도마을", null, "포도맨"));
 //		dao.getProd(10000);
+		dao.pList(10080);
 	}
 }

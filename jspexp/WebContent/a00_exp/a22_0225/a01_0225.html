@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" 
+   href="/jspexp/a00_com/a00_com.css">
+<script type="text/javascript" src="/jspexp/a00_com/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+/* 
+ 
+ 
+*/
+//
+	var xhr = new XMLHttpRequest();
+	$(document).ready(function(){
+		$("[name=prodnum]").keyup(function(){
+			if(event.keyCode==13){
+				ajaxFun();
+			}
+		});
+		
+		$("[name=dname],[name=loc]").keyup(function(){
+			if(event.keyCode==13){
+				ajaxFun2();
+			}
+		});
+	});
+	
+	function ajaxFun(){
+		var prodnum = $("[name=prodnum]").val();
+		var qstr = "prodnum="+prodnum;
+		xhr.open("get","z01_0225.jsp?"+qstr,true);
+		xhr.onreadystatechange=function(){
+			if(xhr.readyState==4 && xhr.status==200){
+				alert(xhr.responseText);
+				$("div").html(xhr.responseText);
+			}	
+		};
+		xhr.send();
+	}
+	
+	function ajaxFun2(){
+		var dnameV = $("[name=dname]").val();
+		var locV = $("[name=loc]").val();
+		var qstr = "dname="+dnameV+"&loc="+locV;
+		xhr.open("get","z02_daptData.jsp?"+qstr,true);
+		xhr.onreadystatechange = function(){
+			if(xhr.readyState==4 && xhr.status==200){
+				console.log(xhr.responseText);
+				/* var dept = JSON.parse(responseText);
+				var show = "<h5>총 건수: "+dept.tot+"</h5>";
+				show+="<table><tr><th>부서번호</th><th>부서명</th><th>위치</th></tr>";
+				$(dept.deptList).each(function(idx,dept){
+					show +="<tr>";
+					show +="<td>"+dept.deptno+"</td>";
+					show +="<td>"+dept.dname+"</td>";
+					show +="<td>"+dept.loc+"</td>";
+					show +="</tr>";
+				});
+				show+="</table>";
+				
+				$("#jsonDiv").html(show); */
+				
+			}
+		};
+		xhr.send();
+	}
+</script>
+</head>
+<body>
+<!-- 
+[ajax]
+[하] 1. ajax의 post방식 선언 속성을 기술하세요.
+		open("post","주소",true);
+		sendRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+		send("요청1=요청값1&요청2=요청값2")
+		
+[중] 2. 물건 번호:[   ] 입력 후, enter키를 입력시, 물건 정보가 있으면
+        상세내용을 출력 하세요.
+        error.,....
+        
+[하] 3. deptlist를 json형식으로 로딩하여 ajax로 가져와서 출력하세요.
+		[z02_deptData.jsp]
+		<jsp:useBean id="dao" class="jspexp.a03_database.A01_Dao"/>
+		<c:set var="deptList" value="${dao.deptList2(param.dname, param.loc)}"/>
+		{"tot":${deptList.size()}, "deptList":[
+			<c:forEach var="dept" items="${deptList}" varStatus="sts">
+				{"deptno":${dept.deptno}, "dname":"${dept.dname}", "loc":"${dept.loc}"}
+				<c:if test="${!sts.last}">,</c:if>
+			</c:forEach>
+		]}
+ -->
+	<h2>물건 검색</h2>
+	<table>
+		<tr><th>물건번호</th><td><input type="text" name="prodnum"/></td></tr>
+	</table>
+	<div></div>
+	
+	<h2>deptList(JSON)</h2>
+	<table>
+		<tr><th>부서명</th><td><input type="text" name="dname"/></td></tr>
+		<tr><th>위치</th><td><input type="text" name="loc"/></td></tr>
+	</table>
+	<div id="jsonDiv"></div>
+</body>

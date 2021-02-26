@@ -14,7 +14,7 @@
 //
 	var xhr = new XMLHttpRequest();
 	$(document).ready(function(){		
-		$("[name=id], [name=name]").keyup(function(){
+		$("[name=id],[name=name]").keyup(function(){
 			if(event.keyCode==13){
 				ajaxFun();
 			}

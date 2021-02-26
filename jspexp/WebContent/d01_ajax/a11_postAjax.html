@@ -10,12 +10,13 @@
 /* 
 # 요청 값을 post방식으로 처리
 1. 요청 페이지와 요청값 호출을 분리 처리
+	> 서버단에 파일을 전송할 때 활용
 2. 추가 속성
 	open("post","주소",true);
 	sendRequestHeader("Content-Type", "application/x-www-form-urlencoded")
 	send("요청1=요청값1&요청2=요청값2")
 */
-//
+// 초기에 한 개의 인스턴스 객체를 만들고 여러 번 사용하려면 상단에 선언해야 함.
 	var xhr = new XMLHttpRequest();
 	$(document).ready(function(){
 		$("[name=passwd]").keyup(function(){
@@ -48,12 +49,18 @@
 		var price = $("[name=price]").val();
 		var cnt = $("[name=cnt]").val();
 		var qstr = "name="+name+"&price="+price+"&cnt="+cnt;
+		// 페이지 호출과 요청값 전달의 분리
 		xhr.open("post","z13_postData.jsp?",true);
+		// xhr.open("get/post","url",true/false)
+		// url을 통해서 공공 json 데이터를 받아서 활용할 수 있다.
 		xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+		// client에서 server로 데이터를 전송할 때 형식 선언
+		//	ex) 일반 데이터, 한글데이터, 파일(binary 데이터)등 여러 형식을 설정하여 서버에 전송 가능
 		xhr.onreadystatechange=function(){
 			if(xhr.readyStat==4 && xhr.status==200){
 				// JSON.parse("문자열형 json 데이터"): 객체로 변환
 				var prod = JSON.parse(xhr.responseText);
+				// 최소한 핵심 데이터만 서버에서 전송하고 나머지는 client단에 js로 만들어서 출력
 				var show = "<h4>물건명: "+prod.name+"</h4>";
 				show += "<h4>가격: "+prod.price+"</h4>";
 				show += "<h4>개수: "+prod.cnt+"</h4>";

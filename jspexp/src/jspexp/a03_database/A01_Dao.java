@@ -138,9 +138,19 @@ public class A01_Dao { // DAO: Database Access Object
 	 		
 	 */
 	
-	
-	
-	// 조회(매개변수 없는 것)
+		// 0226 과제용 - 실패
+		/*
+		 * public ArrayList<Emp> elist(){ ArrayList<Emp> list = new ArrayList<Emp>();
+		 * try { setCon(); String sql =
+		 * "SELECT deptno, avg(sal), max(hiredate) FROM emp2 GROUP BY DEPTNO"; stmt =
+		 * con.createStatement(); rs = stmt.executeQuery(sql);
+		 * 
+		 * while(rs.next()) { Emp e = new Emp(rs.getInt(1), rs.getInt(2),
+		 * rs.getDate(3)); list.add(e); } rs.close(); stmt.close(); con.close(); } catch
+		 * (SQLException e) { e.printStackTrace(); System.out.println(e.getMessage()); }
+		 * catch (Exception e) { System.out.println(e.getMessage()); } return list; }
+		 */
+	// 조회(매개변수 있는것)
 	public ArrayList<Emp> empList(String ename, String job){
 		ArrayList<Emp> list = new ArrayList<Emp>();
 		try {
@@ -926,8 +936,8 @@ WHERE mod(empno,2)=0;
 //		System.out.println("크기: "+elist.size());
 //		System.out.println("첫 번째: "+elist.get(0).getEname());
 
-		ArrayList<Dept> dlist = dao.deptList2("","");
-		System.out.println("크기: "+dlist.size());
-		System.out.println("첫 번째: "+dlist.get(0).getDname());
+//		ArrayList<Dept> dlist = dao.deptList2("","");
+//		System.out.println("크기: "+dlist.size());
+//		System.out.println("첫 번째: "+dlist.get(0).getDname());
 	}
 }

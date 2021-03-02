@@ -25,6 +25,11 @@ public class Product2 {
 		// TODO Auto-generated constructor stub
 	}
 
+	public Product2(String name) {
+		super();
+		this.name = name;
+	}
+
 	public Product2(int pno, String name, int price, int cnt, String credte_s, String company, String incomdte_s,
 			String inmanager) {
 		super();
@@ -177,5 +182,5 @@ public class Product2 {
 	public void setInmanager(String inmanager) {
 		this.inmanager = inmanager;
 	}
-	
+
 }

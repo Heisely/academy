@@ -81,6 +81,41 @@ public class A03_ShopDao {
 		}
 		return list;
 	}
+	public ArrayList<Product2> shopList2(Product2 sch) {
+		// null에 대한 default 처리
+		if(sch.getName()==null) sch.setName("");
+		if(sch.getTo_price()==0) sch.setTo_price(99999);
+		
+		ArrayList<Product2> list = new ArrayList<Product2>();
+		try {
+			setCon();
+			String sql = "SELECT * FROM product2 WHERE name = ? ORDER BY pno DESC";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, sch.getName());
+			rs = pstmt.executeQuery();
+		
+			/*
+			 * Product2(int pno, String name, int price, int cnt, Date credte, String
+			 * company, Date incomedte, String inmanager)
+			 */
+			while (rs.next()) {
+				list.add(new Product2(rs.getInt(1), rs.getString(2), 
+										rs.getInt(3), rs.getInt(4),
+										rs.getDate(5),	rs.getString(6), rs.getDate(7), rs.getString(8)));
+			}
+			rs.close();
+			pstmt.close();
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("DB 에러: " + e.getMessage());
+		} catch (Exception e) {
+			System.out.println("일반 에러: " + e.getMessage());
+		}
+		return list;
+	}
 
 	/*
 	 * - 등록메서드 public insertProduct(ShopProd ins)

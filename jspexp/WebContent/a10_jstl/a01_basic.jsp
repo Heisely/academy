@@ -51,9 +51,17 @@
 					el이나 jstl에서 호출할 때, 필드명과 동일해서 필드로 오인하는 경우가 많은데,
 					필드는 private 접근제어자가 붙어있어 접근하지 못 한다.
 	2) 객체의 값의 변경
+		<jsp:useBean id="객체참조명" class="@@@"/>
+		<% mvc의 컨트롤러에서 선언된 코드, jsp의 sciptlet 코드
+		request.setAttribute("객체참조명", new 객체명(@@@));
+		%>
+		<c:set var="변수명" value="${참조명}/new 객체명("")"/>
+	
 		<c:set target="객체명(bean의 it, session scope의 변수명, c:set의 var=변수명)" 
 			   property="프로퍼티이름/set메서드명" value="할당할 값"/>
 		${객체명.프로퍼티명}
+		
+		cf) 바로 el코드로 처리해도 된다. ${객체명.setName("홍길동")}
 		ex) <c:set target="p01" property="name" value="마길동" />
 			${p01.name}: 변경된 데이터 확인(홍길동 --> 마길동)
 		
@@ -63,7 +71,7 @@
 		- 다중조건문
 			<c:choose>
 				<c:when test="조건1인경우">조건1이 true일 때, </c:when>
-				<c:when test="조건2인경우">조건2이 true일 때, </c:when>
+				<c:when test="조건2인경우">조건2이 true일 때, </c:when> // else if가 포함되어 조건1이 아니고, 조건2인 경우
 				<c:when test="조건3인경우">조건3이 true일 때, </c:when>
 				<c:otherwise>위의 조건을 제외한 나머지..</c:otherwise>
 			</c:choose>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" 
+   href="/jspexp/a00_com/a00_com.css">
+<script type="text/javascript" src="/jspexp/a00_com/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+/* 
+[js]
+[하] 1. 이벤트의 기본 형식을 기술하세요
+		1) $("선택자").이벤트명(function(){처리할 내용});
+		2) $("선택자").on("이벤트명",function(){});
+		   $("선택자").on({"이벤트1":function(){}, "이벤트2":function(){}})
+		   
+[하] 2. 커져라, 작아져라 버튼을 통해서, 특정이미지의 크기를 상대적으로 점점 커지거나,
+        작아지게 처리하세요.
+        >> 점점 작게, 크게는 잘 모르겠습니다.
+        
+[하] 3. checkbox의 checked 속성 처리 형식 2가지를 기술하세요.
+		$("선택자").prop("checked",true);
+		$("선택자").prop("checked",false);
+		
+[하] 4. h3로 무지개 색상이 나오고, 클릭시, 바로 밑에 h4로 해당 RE:색상형식으로 추가되어
+        클릭시, 글자 색상이 변경되게 하세요.
+*/
+//
+	$(document).ready(function(){
+		$("h2").text("0302 JQUERY 과제");
+		$("#btn1").on("click",function(){
+			$("img").attr({
+				width: 300,
+				height: 300
+			});
+		});
+		$("#btn2").on("click",function(){
+			$("img").attr({
+				width: 50,
+				height: 50
+			});
+		});
+	});
+</script>
+</head>
+<body>
+	<h2></h2>
+	<img src="banana.png" width="100" height="100"/>
+	<button id="btn1">커져라</button>
+	<button id="btn2">작아져라</button>
+	<br><br>
+</body>

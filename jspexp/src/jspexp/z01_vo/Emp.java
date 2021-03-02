@@ -18,6 +18,13 @@ public class Emp {
 		super();
 	}
 
+	public Emp(int deptno, Date hiredate, double sal) {
+		super();
+		this.deptno = deptno;
+		this.hiredate = hiredate;
+		this.sal = sal;		
+	}
+
 	public Emp(int empno, String ename, String job, int mgr, String hiredate_s, double sal, double comm, int deptno) {
 		super();
 		this.empno = empno;

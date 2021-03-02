@@ -30,6 +30,9 @@
 			<h2><%=cnt%></h2>
 		<% } %>
 2. 기타 옵션
+	<c:forEach var="cnt" varStatus="sts">
+		<h2>${sts.index}
+	</c:forEach>
 	1) varStatus = "sts"
 		${sts.index}: 반복문 0부터 시작하는 index를 출력
 		${sts.count}: 반복문 1부터 시작하는 count를 출력

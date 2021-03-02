@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" 
+   href="/jspexp/a00_com/a00_com.css">
+<script type="text/javascript" src="/jspexp/a00_com/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+/* 
+ 
+ 
+*/
+//
+	$(document).ready(function(){
+		$("h2").text("시작");
+		/*
+		ex1) 아래와 같은 화면에서 상단의 선택해제에 따라서 전체선택/해제가 처리되게 하세요.
+		
+		[]	물건명	가격
+		[]	사과		3000
+		[]	바나나	4000
+		[]	딸기		12000
+		*/
+		$("#check").on("click",function(){
+			// $(this).prop("checked"): 대상객체의 속성을 boolean 값으로 가져오기 때문에
+			// 바로 설정해서 전체선택/해제가 가능
+			$("input").prop("checked",$(this).prop("checked"));
+		});
+	});
+</script>
+</head>
+<body>
+	<h2></h2>
+	<h3>예제</h3>
+	<table>
+	<tr><th><input type="checkbox" id="check"/></th><th>물건명</th><th>가격</th></tr>
+	<tr><td><input type="checkbox"/></td><td>사과</td><td>3000</td></tr>
+	<tr><td><input type="checkbox"/></td><td>바나나</td><td>4000</td></tr>
+	<tr><td><input type="checkbox"/></td><td>딸기</td><td>12000</td></tr>
+	</table>
+</body>

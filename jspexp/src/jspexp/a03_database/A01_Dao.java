@@ -115,6 +115,63 @@ public class A01_Dao { // DAO: Database Access Object
 			return list;
 		}
 	/*
+		 1. SQL 작성
+		 2. VO 객체 생성
+		 3. 기능 메서드 선언
+		 	1) 요청에 의한 입력: 매개변수로 활용
+		 	2) 데이터의 결과에 따라 리턴값 지정
+		 		- insert, update, delete: void 사용
+		 			ex) public void insertEmp(Emp ins)
+		 		- 단위 변수나 한 개의 데이터
+		 			> 회원 등록 여부: SELECT * FROM member where ...
+		 				public boolean void isMember(String id, String pass)
+		 			> 상품 개수: SELECT count(*) FROM member where ...
+		 				public int memCount(Member sch)
+		 			> 회원 상세 정보: SELECT * FROM member where id=@@@
+		 				public Member getMember(String id)
+		 		- 여러 개의 데이터
+		 			ex)
+		 			> 공지사항
+		 				public ArrayList<Board> boardList(Board sch)
+		 			> 회원정보리스트
+		 				public ArrayList<Member> mlist(Member sch)
+		 		
+		 */
+		
+		
+		
+		// 조회(매개변수 없는 것)
+	      public ArrayList<Emp> deptAvgSal(){
+	          ArrayList<Emp> list = new ArrayList<Emp>();
+	          try {
+	             setCon();
+	             String sql = "SELECT deptno, max(hiredate) hiredate, avg(sal)\r\n"
+	                   + "FROM EMP2 e \r\n"
+	                   + "GROUP BY DEPTNO \r\n"
+	                   + "ORDER BY deptno";
+	             stmt = con.createStatement();
+	             rs = stmt.executeQuery(sql);
+	             
+	             while(rs.next()) {
+	                 Emp e = new Emp(rs.getInt(1), rs.getDate(2), rs.getDouble(3));
+	                 list.add(e);
+	             }
+	             rs.close();
+	             stmt.close();
+	             con.close();
+
+	          } catch (SQLException e) {
+	             e.printStackTrace();
+	             System.out.println(e.getMessage());
+	          } catch (Exception e) {
+	             System.out.println(e.getMessage());
+	          }
+	          return list;
+	       }
+	/*
+	 
+	 */
+	/*
 	 1. SQL 작성
 	 2. VO 객체 생성
 	 3. 기능 메서드 선언
@@ -465,7 +522,7 @@ public class A01_Dao { // DAO: Database Access Object
 		try {
 			setCon();
 			// 2. 대화 SQL
-			String sql="SELECT * FROM dept \r\n"
+			String sql="SELECT * FROM dept10 \r\n"
 					+ "WHERE dname LIKE '%'||?||'%'\r\n"
 					+ "AND loc LIKE '%'||?||'%'";
 			System.out.println(sql);

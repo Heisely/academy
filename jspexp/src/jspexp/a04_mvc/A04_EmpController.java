@@ -45,6 +45,8 @@ public class A04_EmpController extends HttpServlet {
 		if(job==null) job="";
 		// DB접속 메서드를 통해 모델 데이터 처리
 		A01_Dao dao = new A01_Dao();
+		// DB에서 온 ArrayList<Emp>데이터의 모델명을 empList로 선언한다.
+		// 이 모델명 empList는 view단에서 el ${empList}로 활용된다.
 		request.setAttribute("empList", dao.empList2(ename, job));
 		
 		// 3. View 처리

@@ -32,6 +32,7 @@
 		<form method="post">
 	<table>
 		<tr><th>사원명</th><td><input type="text" name="ename" value="${param.ename}"/></td></tr>
+		<%-- 데이터를 입력 후 요청한 다음, 다시 화면에서 확인하려면 value값을 mappling 시켜주는 것이 반드시 필요 --%>
 		<tr><th>직책명</th><td><input type="text" name=job value="${param.job}"/></td></tr>
 		<tr><td colspan="2">
 			<input type="submit" value="검색"/>
@@ -47,6 +48,10 @@
 			<th>급여</th>
 			<th>부서번호</th>
 		</tr>
+		<%--
+		controller에서 넘겨온 model 데이터 empList
+		request.setAttribute("empList", dao.empList2(...));
+		--%>
 		<c:forEach var="emp" items="${empList}">
 		<tr><td>${emp.empno}</td>
 			<td>${emp.ename}</td>

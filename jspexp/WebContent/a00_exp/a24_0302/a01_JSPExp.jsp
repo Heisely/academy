@@ -28,6 +28,30 @@
 </script>
 </head>
 <body>
+<%--
+[JSP]
+[하] 1. MVC 패턴으로 물건 list 조회하는 화면을 만드세요.
+	[servlet]
+	protected void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		// 0. encoding
+		request.setCharacterEncoding("utf-8");
+		// 1. 요청값
+		String name = request.getParameter("name");
+
+		// 2. 모델
+		if (name == null) name = "";
+		
+		A03_ShopDao dao = new A03_ShopDao();
+		request.setAttribute("plist", dao.shopList2(new Product2(name)));
+
+		// 3. view
+		String page = "a00_exp\\a24_0302\\a01_JSPExp.jsp";
+		RequestDispatcher rd = request.getRequestDispatcher(page);
+		rd.forward(request, response);
+	}
+--%>
 	<h3>물품리스트(MVC)</h3>
 	<form method="post">
 	<table>

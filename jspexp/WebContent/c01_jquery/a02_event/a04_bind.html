@@ -11,7 +11,12 @@
 # bind를 통한 이벤트 처리
 1. $("요소객체").bind("이벤트",function(event){핸들러 함수})
 2. 핸들러 함수의 매개변수를 통한 속성값 전달
-	event.data.
+	event.data. 포함한 속성값
+	$("요소객체").bind("이벤트", 이벤트전달데이터json, function(event){
+		event.data.두번째매개변수json데이터;
+		// event.data = 두 번째 매개변수 데이터
+		// event.data = {속성:속성값...}
+	})
 */
 //
 	$(document).ready(function(){

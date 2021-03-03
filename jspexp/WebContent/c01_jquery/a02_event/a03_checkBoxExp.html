@@ -26,6 +26,16 @@
 			// $(this).prop("checked"): 대상객체의 속성을 boolean 값으로 가져오기 때문에
 			// 바로 설정해서 전체선택/해제가 가능
 			$("input").prop("checked",$(this).prop("checked"));
+			// ps)이벤트 핸들러 함수에 있는 $(this)는 이벤트가 일어나는 대상객체를 말한다.
+			// - 이벤트와 대상객체 1:1 $("#아이디")
+			// - 이벤트와 대상객체 1:다 $(".클래스명"), $("태그")로 여러 개일 때
+			//	 해당 이벤트가 일어난 대상객체를 따로 지정할 필요가 있다. 이 때 $(this)를 반드시 해주어야 한다.
+			/*	 ex) h4가 여러 개 나열되어 있고, 클릭한 h4만 배경색상을 변경할 때 $(this)를 활용한다.
+					 $("h4").on("click", function(){
+						$(this).css("background-color","yellow");
+						// $("h4").css("background-color","yellow"); 전체 변경 시
+					 });
+			*/
 		});
 	});
 </script>

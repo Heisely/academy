@@ -23,7 +23,18 @@
 --%>
 //
 	$(document).ready(function(){
-		
+		$("#regBtn").on("click",function(){
+			$(location).attr("href","${path}/deptInsert.do");
+		});
+		$(".data").on("dblclick",function(){
+			// $(this): 클릭한 class data를 지정
+			// .children(): 바로 밑 하위 td들을 지정
+			// .eq(0): tr하위의 첫 번째 td.
+			var deptno = $(this).children().eq(0).text();
+			// /empDetail.do
+			location.href="${path}/deptDetail.do?deptno="+deptno;
+			//alert(empno);
+		});
 	});
 </script>
 </head>
@@ -35,7 +46,7 @@
 		<tr><th>지역</th><td><input type="text" name="loc" value="${param.loc}"/></td></tr>
 		<tr><td colspan="2">
 			<input type="submit" value="검색"/>
-			<input type="button" value="등록"/>	
+			<input type="button" value="등록" id="regBtn"/>	
 		</td></tr>
 	</table>
 	</form>
@@ -43,7 +54,7 @@
 	<table>
 		<tr><th>부서번호</th><th>부서명</th><th>부서위치</th></tr>
 		<c:forEach var="dept" items="${deptList}">
-		<tr><td>${dept.deptno}</td><td>${dept.dname}</td><td>${dept.loc}</td></tr>
+		<tr class="data"><td>${dept.deptno}</td><td>${dept.dname}</td><td>${dept.loc}</td></tr>
 		</c:forEach>
 	</table>
 </body>

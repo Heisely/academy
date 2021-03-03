@@ -328,7 +328,7 @@ public class A01_Dao { // DAO: Database Access Object
 	//			stmt = con.createStatement();
 	//			3. ResultSet 객체 생성(대화객체 - Statement)
 				rs = pstmt.executeQuery();
-				int cnt=1; while(rs.next()) { 
+				while(rs.next()) { 
 					Emp e = new Emp(rs.getInt("empno"), rs.getString(2), rs.getString(3),
 							rs.getInt(4), rs.getDate("hiredate"), rs.getDouble(6),
 							rs.getDouble(7), rs.getInt(8));					

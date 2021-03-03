@@ -115,9 +115,7 @@ Emp emp = dao.getEmp(new Integer(empno));
 	}
 </script>
 <body>
-	<h3>
-		사원상세정보[<%=empno%>]
-	</h3>
+	<h3>사원상세정보[<%=empno%>]</h3>
 	<form method="post">
 		<input type="hidden" name="proc" value="" />
 	<table>

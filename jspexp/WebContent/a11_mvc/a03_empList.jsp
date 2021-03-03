@@ -23,7 +23,20 @@
 --%>
 //
 	$(document).ready(function(){
-		
+		$("#regBtn").on("click",function(){
+			// location.href = "${path}/empInsert.do";
+			// # jquery에서는 js코드 사용 가능
+			$(location).attr("href","${path}/empInsert.do");
+		});
+		$(".data").on("dblclick",function(){
+			// $(this): 클릭한 class data를 지정
+			// .children(): 바로 밑 하위 td들을 지정
+			// .eq(0): tr하위의 첫 번째 td.
+			var empno = $(this).children().eq(0).text();
+			// /empDetail.do
+			location.href="${path}/empDetail.do?empno="+empno;
+			//alert(empno);
+		});
 	});
 </script>
 </head>
@@ -36,7 +49,7 @@
 		<tr><th>직책명</th><td><input type="text" name=job value="${param.job}"/></td></tr>
 		<tr><td colspan="2">
 			<input type="submit" value="검색"/>
-			<input type="button" value="등록"/>
+			<input type="button" value="등록" id="regBtn"/>
 		</td></tr>
 	</table>
 	</form>
@@ -53,11 +66,13 @@
 		request.setAttribute("empList", dao.empList2(...));
 		--%>
 		<c:forEach var="emp" items="${empList}">
-		<tr><td>${emp.empno}</td>
+		<tr class="data">
+			<td>${emp.empno}</td>
 			<td>${emp.ename}</td>
 			<td>${emp.job}</td>
 			<td>${emp.sal}</td>
-			<td>${emp.deptno}</td></tr>
+			<td>${emp.deptno}</td>
+		</tr>
 		</c:forEach>
 	</table>
 </body>

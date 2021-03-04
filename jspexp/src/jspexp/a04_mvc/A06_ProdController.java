@@ -46,9 +46,11 @@ public class A06_ProdController extends HttpServlet {
 		int to_price = Integer.parseInt(to_priceS);
 		A03_ShopDao dao = new A03_ShopDao();
 		request.setAttribute("plist", dao.shopList(new Product2(name, fr_price, to_price)));
+		
 		// 3. view
 		String page="a00_exp\\a24_0302\\a35_proList.jsp";
 		RequestDispatcher rd = request.getRequestDispatcher(page);
+		rd.forward(request, response);
 	}
 
 }

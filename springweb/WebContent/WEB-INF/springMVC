@@ -1,0 +1,28 @@
+# 스프링 핵심 구현
+1. front controller 선언
+	DispatcherServlet
+	
+2. 사용할 container 선언
+	DispatcherServlet의 설정값 처리 xml
+	dispatcher-servlet.xml
+	bean클래스 선언을 통해 tomcat이 시작되어 첫 번째 호출 될 때 사용할 객체 메모리로 로딩
+	- Controller를 등록 처리
+
+3. MVC
+	- Controller: Java 클래스로 선언
+	- Model: controller 안에 선언
+	- View: JSP 파일을 controller에서 호출
+			스프링의 view는 외부에서 url로 접근하지 못하고, controller를 통해서만 접근 가능
+			WebContent\WEB-INF: 아무나 접근 불가.
+	
+# 환경 설정 순서
+1. lib 복사
+2. http://localhost:7080/springweb/start.do
+	- 호출되었을 때, 스프링 프레임웍에 의해서 controller가 호출되고, view단이 호출되게 처리한다.
+	- 사용하게 될 controller를 컨테이너에 등록 dispatcher-servlet.xml
+	- controller에 @Controller를 선언
+	
+3. 스프링 프레임웍의 첫 단추인 front 컨트롤단 호출
+	.do를 통해 
+4. /start.do url을 통해 mapping되어 있는 controller의 기능 메서드 호출
+5. controller단에서는 해당 기능 메서드의 return "view 자원 위치"; 를 통해 view를 호출 

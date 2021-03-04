@@ -1,6 +1,7 @@
 package jspexp.a04_mvc;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import jspexp.a03_database.A01_Dao;
+import jspexp.z01_vo.Emp;
 
 /**
  * Servlet implementation class A04_EmpController
@@ -41,13 +43,18 @@ public class A04_EmpController extends HttpServlet {
 		System.out.println("## 직책: "+job);
 		
 		// 2. 모델
+		// ================== service단계 시작 ======================
 		if(ename==null) ename="";
 		if(job==null) job="";
 		// DB접속 메서드를 통해 모델 데이터 처리
+		// --------- DAO 단계 시작
 		A01_Dao dao = new A01_Dao();
+		// dao.empList2(ename, job);
+		ArrayList<Emp> list = dao.empList2(ename, job);
+		// ================== service단계 끝 ======================
 		// DB에서 온 ArrayList<Emp>데이터의 모델명을 empList로 선언한다.
 		// 이 모델명 empList는 view단에서 el ${empList}로 활용된다.
-		request.setAttribute("empList", dao.empList2(ename, job));
+		request.setAttribute("empList", list);
 		
 		// 3. View 처리
 		String page = "a11_mvc\\a03_empList.jsp";

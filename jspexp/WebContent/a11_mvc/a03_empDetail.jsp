@@ -21,7 +21,16 @@
   src="${path}/a00_com/jquery-3.5.1.js"></script>
 <script type="text/javascript">
 <%--
-
+js코드와 java코드에 대한 처리는 순서를 생각하면서 처리해야 한다.
+특히, 초기값이 없을 때를 감안해서 문제가 발생하지 않게 처리해야 한다.
+1. 요청값이나 모델데이터를 받아서 처리할 때, 공백을 감안해서 처리
+2. var 숫자형 = ${모델숫자형};
+	숫자형이나 boolean이라도 없을 때를 대비해서 ""로 처리해야 한다.
+	ex) var num = 25;
+		var num1 = ;
+3. 프로세스 흐름이
+	server(backend)단에서 만들어진 내용(html, js, css)을 최종적으로 client(frontend)단에 전달하여
+	소스코드가 화면에 만들어진다는 사실을 잊지 말자. 
 --%>
 //
 	var proc = "${param.proc}";

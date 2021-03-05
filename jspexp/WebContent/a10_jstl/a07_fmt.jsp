@@ -92,7 +92,7 @@ pageContext.setAttribute("num01", 99999.75); // 숫자데이터
 	<%-- dao를 이용해서 emplist를 가져와서 forEach 구문으로 아래 내용을 출력하되
 		hiredate를 both full 형식으로, sal을 천단위 원으로 표기, comm/sal 로 보너스 %를 표기
 		사원명 입사일 급여 보너스(%) --%>
-	<jsp:useBean id="dao" class="jspexp.a03_database.A01_Dao"/>
+	<jsp:useBean id="dao" class="springweb.a03_database.A01_Dao"/>
 	<c:set var="emplist" value="${dao.empList()}"/>
 	<table>
 		<tr><th>사원명</th><th>입사일</th><th>급여</th><th>보너스</th><th>보너스(%)</th></tr>

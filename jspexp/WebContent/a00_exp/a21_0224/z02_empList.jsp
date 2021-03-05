@@ -5,11 +5,12 @@
     import="jspexp.a03_database.*"  %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
-<% request.setCharacterEncoding("UTF-8");
-   String path = request.getContextPath();
-%>    
+<%
+    request.setCharacterEncoding("UTF-8");
+       String path = request.getContextPath();
+    %>    
 
-   <jsp:useBean id="dao" class="jspexp.a03_database.A01_Dao"/>
+   <jsp:useBean id="dao" class="springweb.a03_database.A01_Dao"/>
    <c:set var="emp" value="${dao.getEmp(param.empno)}"/>
    <h3>사원 상세화면</h3>
    <table>

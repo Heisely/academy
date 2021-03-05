@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 
+	xmlns="http://www.springframework.org/schema/beans"
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/aop
+						http://www.springframework.org/schema/aop/spring-aop.xsd
+						http://www.springframework.org/schema/context
+						http://www.springframework.org/schema/context/spring-context.xsd
+						http://www.springframework.org/schema/mvc
+						http://www.springframework.org/schema/mvc/spring-mvc.xsd
+						http://www.springframework.org/schema/util
+						http://www.springframework.org/schema/util/spring-util.xsd
+						http://www.springframework.org/schema/websocket
+						http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
+	<bean id="cpu01" class="springdi.z01_vo.Cpu">
+		<constructor-arg value="i5"/>
+		<constructor-arg value="3.3GHz"/>
+	</bean>
+	<bean id="ram01" class="springdi.z01_vo.Ram">
+		<constructor-arg value="램"/>
+		<constructor-arg value="16G"/>
+	</bean>
+	<bean id="hdd01" class="springdi.z01_vo.Hdd">
+		<constructor-arg value="SAMSUNG HD130SJ"/>
+		<constructor-arg value="1TB"/>
+	</bean>
+	<bean id="com01" class="springdi.z01_vo.Computer">
+		<constructor-arg value="코딩전용컴퓨터"/>
+		<property name="cpu" ref="cpu01"/>
+		<property name="ram" ref="ram01"/>
+		<property name="hdd" ref="hdd01"/>
+	</bean>
+</beans>

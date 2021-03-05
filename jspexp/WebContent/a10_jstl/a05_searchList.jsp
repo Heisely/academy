@@ -5,7 +5,8 @@
     import = "jspexp.a03_database.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<% request.setCharacterEncoding("UTF-8");
+<%
+request.setCharacterEncoding("UTF-8");
    String path = request.getContextPath();
 %>    
 <!DOCTYPE html>
@@ -50,7 +51,7 @@
 	
 	새로운 변수 empList에 요청값과 DAO의 검색메서드를 통해서 결과 ArrayList<emp>를 할당 처리
 	--%>
-	<jsp:useBean id="dao" class="jspexp.a03_database.A01_Dao"/>
+	<jsp:useBean id="dao" class="springweb.a03_database.A01_Dao"/>
 	<c:set var="empList" value="${dao.empList2(param.name, param.job)}"/>
 	<%--
 	A01_Dao dao = new A01_Dao();
@@ -77,7 +78,7 @@
 	</table>
 	</form>
 	
-	<jsp:useBean id="dao2" class="jspexp.a03_database.A04_MemberDao"/>
+	<jsp:useBean id="dao2" class="springweb.a03_database.A04_MemberDao"/>
 	<c:set var="memList" value="${dao2.memberList(param.id, param.name)}"/>
 	<table>
 		<!-- id, pass, name, point, address, regdte, auth -->

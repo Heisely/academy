@@ -29,7 +29,7 @@
 </head>
 <body>
 	<h3>부서별 최근입사일/평균연봉</h3>
-	<jsp:useBean id="dao" class="jspexp.a03_database.A01_Dao"/>
+	<jsp:useBean id="dao" class="springweb.a03_database.A01_Dao"/>
 	<c:set var="dlist" value="${dao.deptAvgSal()}"/>
 	<table>
 		<tr><th>부서번호</th><th>가장최근입사일</th><th>평균연봉</th></tr>

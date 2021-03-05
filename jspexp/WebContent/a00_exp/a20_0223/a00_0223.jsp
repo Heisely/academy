@@ -5,7 +5,8 @@
     import = "jspexp.a03_database.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<% request.setCharacterEncoding("UTF-8");
+<%
+request.setCharacterEncoding("UTF-8");
    String path = request.getContextPath();
 %>    
 <!DOCTYPE html>
@@ -34,7 +35,7 @@
         물건명(가격)  형식으로 한 셀에 표기하세요.
 --%>
 <%
-	pageContext.setAttribute("pnames", new String[]{"사과","바나나","딸기"});
+pageContext.setAttribute("pnames", new String[]{"사과","바나나","딸기"});
 	pageContext.setAttribute("prices", new int[]{2000,3000,4000});
 %>
 	<h3>과일판매정보</h3>
@@ -52,7 +53,7 @@
 		4) <c:set var="처리한데이터변수">
 		5) <c:forEach>를 통해 ArrayList<VO> 출력 처리
 --%>
-<jsp:useBean id="dao" class="jspexp.a03_database.A03_ShopDao"/>
+<jsp:useBean id="dao" class="springweb.a03_database.A03_ShopDao"/>
 <jsp:useBean id="prod" class="jspexp.z01_vo.Product2"/>
 <jsp:setProperty property="*" name="prod"/>
 <%-- DB검색에 null 방지 --%>

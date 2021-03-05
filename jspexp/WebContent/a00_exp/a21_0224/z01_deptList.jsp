@@ -5,11 +5,12 @@
     import = "jspexp.a03_database.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<% request.setCharacterEncoding("UTF-8");
+<%
+request.setCharacterEncoding("UTF-8");
    String path = request.getContextPath();
 %>    
 <link rel="stylesheet" href="<%=path%>/a00_com/a00_com.css">
-<jsp:useBean id="dao" class="jspexp.a03_database.A01_Dao"/>
+<jsp:useBean id="dao" class="springweb.a03_database.A01_Dao"/>
 <c:set var="deptList" value="${dao.deptList2(param.dname, param.loc)}"/>
 <body>
 	<h3>부서정보</h3>

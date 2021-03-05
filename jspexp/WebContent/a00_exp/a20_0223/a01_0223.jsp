@@ -5,7 +5,8 @@
     import = "jspexp.a03_database.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<% request.setCharacterEncoding("UTF-8");
+<%
+request.setCharacterEncoding("UTF-8");
    String path = request.getContextPath();
 %>    
 <!DOCTYPE html>
@@ -65,7 +66,7 @@
         물건명(가격)  형식으로 한 셀에 표기하세요.
 --%>
 <%
-	pageContext.setAttribute("prod", new String[]{"사과","바나나","딸기"});
+pageContext.setAttribute("prod", new String[]{"사과","바나나","딸기"});
 	pageContext.setAttribute("price", new String[]{"2000","5000","7500"});
 %>
 	<table>
@@ -88,7 +89,7 @@
 		<tr><td colspan="2"><input type="submit" value="검색"/></td></tr>
 	</table>
 	</form>
-	<jsp:useBean id="dao" class="jspexp.a03_database.A03_ShopDao"/>
+	<jsp:useBean id="dao" class="springweb.a03_database.A03_ShopDao"/>
 	<c:set var="prodlist" value="${dao.shopList(param.name)}"/>
 	<table>
 		<tr><th>상품번호</th><th>상품명</th><th>가격</th>

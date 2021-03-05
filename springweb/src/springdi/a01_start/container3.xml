@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 
+	xmlns="http://www.springframework.org/schema/beans"
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/aop
+						http://www.springframework.org/schema/aop/spring-aop.xsd
+						http://www.springframework.org/schema/context
+						http://www.springframework.org/schema/context/spring-context.xsd
+						http://www.springframework.org/schema/mvc
+						http://www.springframework.org/schema/mvc/spring-mvc.xsd
+						http://www.springframework.org/schema/util
+						http://www.springframework.org/schema/util/spring-util.xsd
+						http://www.springframework.org/schema/websocket
+						http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
+	<!-- 
+	# 객체 vs 객체 관계 설정 #
+	[main]
+	Product p01 = new Product("사과", 3000, 2);
+	Mart m01 = new Mart("행복");
+	m01.setProduct(p01);
+	m01.buy();
+	-->
+	<bean id="p01" class="springdi.z01_vo.Product">
+		<constructor-arg value="사과"/>
+		<constructor-arg value="3000"/>
+		<constructor-arg value="2"/>
+	</bean>
+	<!-- m01.setProduct(p01);와 같이 객체를 할당할 때에는 
+		 객체의 참조변수를 할당한다는 의미로 ref(reference)라는 속성을 사용 (value X) -->
+	<bean id="m01" class="springdi.z01_vo.Mart">
+		<constructor-arg value="행복"/>
+		<property name="prod" ref="p01"/>
+	</bean>
+</beans>

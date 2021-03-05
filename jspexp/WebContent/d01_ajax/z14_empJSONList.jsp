@@ -5,10 +5,11 @@
     import = "jspexp.a03_database.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<% request.setCharacterEncoding("UTF-8");
+<%
+request.setCharacterEncoding("UTF-8");
    String path = request.getContextPath();
 %>
-<jsp:useBean id="dao" class="jspexp.a03_database.A01_Dao"></jsp:useBean>
+<jsp:useBean id="dao" class="springweb.a03_database.A01_Dao"></jsp:useBean>
 <c:set var="empList" value="${dao.empList(param.ename,param.job) }"/>
 {"tot":${empList.size() },"empList" : [
    <c:forEach var="emp" items="${empList }" varStatus="sts">

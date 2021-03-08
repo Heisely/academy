@@ -1,7 +1,9 @@
-package springdi.z01_vo;
+package springdi.z03_vo;
 // springdi.z01_vo.Computer
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Component;
+@Component("computer")
 public class Computer {
 	private String company;
 	private ArrayList<Compart> partList;

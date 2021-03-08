@@ -20,21 +20,9 @@
 						http://www.springframework.org/schema/util/spring-util.xsd
 						http://www.springframework.org/schema/websocket
 						http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
-	<!-- 스프링에서 사용하게 될 초기 로딩객체를 선언 
-	<bean class="springweb.a01_start.A01_StartController"/>
-	<bean class="springweb.z01_exp.A01_ExpController"/>
-	<bean class="springweb.z01_exp.A02_MemberController"/>
-	<bean class="springweb.a01_start.A02_EmpController"/>
-	<bean class="springweb.a01_start.A03_DeptController"/>
-	-->
 	<!-- 
-	특정한 패키지의 Controller단에 대한 객체 메모리 로딩
-	include-filter type="annotation"
-		expression="org.springframework.stereotype.Controller"
+	ex) springdi.z02_vo에 Person, Product 파일을 넣고, 해당 패키지에 있는 내용을 호출 및 사용할 수 있게 하세요.
+	Person: 이름 p02, Product 이름 prod03으로 설정하여 처리
 	-->
-	<context:component-scan base-package="springweb">
-		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
-		<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
-	</context:component-scan>
+	<context:component-scan base-package="springdi.z02_vo"/>
 </beans>

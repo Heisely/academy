@@ -1,44 +1,134 @@
 # 스프링 화면 처리 프로세스
+[클라이언트]
 1. http://localhost:7080/sprintweb/start.do url
-2. web.xml
+
+[서버]
+2. [설정] web.xml
 	.do를 확인해서 front controller인 DispatcherServlet.java(framework)
-3. dispatcher-servlet.xml을 호출하여, 
+	
+3. [설정] dispatcher-servlet.xml을 호출하여, 
 	해당하는 컨테이너에 등록된 객체를 확인하고, 메모리에 로딩된 객체를 찾는다.
-4. 위에 등록된 객체 안에서 url 패턴이 /start.do인 것의 기능 메서드를 찾는다
+	
+4. [Controller:주소호출] 위에 등록된 객체 안에서 url 패턴이 /start.do인 것의 기능 메서드를 찾는다
 	@RequestMapping("/start.do")
 	해당 controller의 기능 메서드를 수행해준다.
-5. 해당 기능 메서드에서 요청값과 model값 설정은 매개변수로 받을 수 있다.
+	
+5. [Controller:요청값처리] 해당 기능 메서드에서 요청값과 model값 설정은 매개변수로 받을 수 있다.
 	public String start(@RequestParam("name") String name, Model d)
-6. 해당 기능 메서드에 문자열로 리턴된 view단으로 화면이 호출된다.
+	
+6. [Controller:모델데이터처리]
+	public String start(Model d)
+	d.addObject("모델key",모델객체);
+	
+7. 해당 기능 메서드에 문자열로 리턴된 view단으로 화면이 호출된다.
 	return "JSP파일 위치";
+	
+8. [View]
+	${모델명.프로퍼티}
+
+[클라이언트]
+9. 서버에서 만들어진 화면을 response객체로 전달받아 client에 HTML로 전달하면,
+	브라우저에서는 해당 JS/HTML/CSS코드를 실행 및 랜더릴ㅇ하여 출력한다.
+
+
+
 
 
 # 스프링 핵심 구현
 1. front controller 선언
 	DispatcherServlet	
+	
 2. 사용할 container 선언
-	DispatcherServlet의 설정값 처리 xml
+	DispatcherServlet의 설정값 처리 xml: IOC(Inversion Object Controller)
+		- DI(Dependency Injection): 의존성 주입
+		- DL(Dependency Lookup): 의존된 내용을 이용해 id/name으로 설정된 객체를 찾는 작업
 	dispatcher-servlet.xml: 여기에 선언하는 객체 활용방식을 정확하게 파악하고 설정할 수 있어야 원활하게 스프링을 코딩하고 설정할 수 있다.
 	bean클래스 선언을 통해 tomcat이 시작되어 첫 번째 호출 될 때 사용할 객체 메모리로 로딩
 	- Controller를 등록 처리
-3. MVC
+	
+3. spring MVC
 	- Controller: Java 클래스로 선언
+		Controller --> service --> DAO
+		Controller <-- service <-- DAO
 	- Model: controller 안에 선언
+		화면단에 보내줄 핵심 데이터 처리
+		# Model데이터를 만들기 위해 도와주는 process 객체들
+		- service: 핵심 비즈니스 로직 정리
+			> 등록/수정/삭제/DB가져오기 등, 사용될 핵심 로직을 처리한다.(조건/반복문 활용)
+			> 모델데이터를 만들기 위한 작업 처리
+		- DAO(Database Access Object)
 	- View: JSP 파일을 controller에서 호출
 			스프링의 view는 외부에서 url로 접근하지 못하고, controller를 통해서만 접근 가능
 			WebContent\WEB-INF: 아무나 접근 불가.
+			
+4. DI
+	컨테이너에 사용할 객체 선언방법, 여러 가지 효과적인 기능처리 선언 방법
+	
+5. 데이터베이스 처리(DAO-MyBatis프레임웍 활용)
+	1) 컨테이너 선언 방법(connection)
+	2) MyBatis 공통 설정 XML
+	3) 기능별 SQL XML 설정 방법
+	
+6. MVC 중급
+	1) 여러 가지 Viewer 활용
+		- AJAX를 통한 JSON처리
+		- 파일업/다운로드
+		- 엑셀 다운로드
+	2) 유효성 처리 / 예외 처리
+	3) session 처리
+	4) 다국어 처리: 하나의 페이지에서 설정값에 의해 여러 나라의 언어를 지원처리
+	
+7. AOP:	관점 지향적 프로그래밍
+
+8. 실무 예제
+	1) 답변형 게시판
+		- 계층 구조 테이블 설계
+		- 파일을 첨부하여 게시물 작성과 등록
+		- 페이지 처리 로직
+		- 답글에 따른 계층적 list 처리
+	2) 메일 발송
+	3) AJAX를 통한 FullCalendar(JQuery lib활용) 처리
+	4) Vue와 연동하여 데이터 처리
+
+
+
 	
 	
 # 환경 설정 순서
 1. lib 복사
+
 2. http://localhost:7080/springweb/start.do
 	- 호출되었을 때, 스프링 프레임웍에 의해서 controller가 호출되고, view단이 호출되게 처리한다.
 	- 사용하게 될 controller를 컨테이너에 등록 dispatcher-servlet.xml
 	- controller에 @Controller를 선언
+	
 3. 스프링 프레임웍의 첫 단추인 front 컨트롤단 호출
 	.do를 통해 
+	
 4. /start.do url을 통해 mapping되어 있는 controller의 기능 메서드 호출
+
 5. controller단에서는 해당 기능 메서드의 return "view 자원 위치"; 를 통해 view를 호출 
+
+
+
+
+
+# Controller의 세부 사항
+1. 요청값
+	- 한 개의 요청값 받기
+	- 객체로 요청값 받기
+2. 모델데이터 처리
+3. 뷰 단 호출
+	- 문자열로 실행할 view단 호출 및 forward처리(request,response 전달)
+	- 선언된 Controller의 Mapping된 기능 메서드 호출
+		> Redirect: /선언된url.do
+		> forward: /선언된url.do
+	- 여러 가지 viewer 호출
+4. 요청값 + 모델 : ModelAttribute
+5. 모델 + 뷰 단: ModelAndView
+
+
+
 
 
 # 요청값 처리

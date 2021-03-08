@@ -20,21 +20,25 @@
 						http://www.springframework.org/schema/util/spring-util.xsd
 						http://www.springframework.org/schema/websocket
 						http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
-	<!-- 스프링에서 사용하게 될 초기 로딩객체를 선언 
-	<bean class="springweb.a01_start.A01_StartController"/>
-	<bean class="springweb.z01_exp.A01_ExpController"/>
-	<bean class="springweb.z01_exp.A02_MemberController"/>
-	<bean class="springweb.a01_start.A02_EmpController"/>
-	<bean class="springweb.a01_start.A03_DeptController"/>
-	-->
-	<!-- 
-	특정한 패키지의 Controller단에 대한 객체 메모리 로딩
-	include-filter type="annotation"
-		expression="org.springframework.stereotype.Controller"
-	-->
-	<context:component-scan base-package="springweb">
-		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
-		<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
-	</context:component-scan>
+<!-- 
+# 외부파일로 설정된 데이터 가져오기
+1. 특정한 property를 key=value으로 설정된 파일을 Java 코드상이나 컨테이너에서 활용할 수 있다.
+2. 기본형식
+	context:property-placeholder location="classpath:/특정한 경로의 파일명(src하위가 기준 폴더)"
+3. 경로파일
+	key1=value
+	key2=value
+4. 컨테이너에서 호출
+	${key}: 로 호출하면 지정된 데이터가 할당됨.
+5. Java Code에서 활용 
+	@Value("${key}")
+	String key;
+-->
+	<context:property-placeholder location="classpath:/springdi/a01_start/Info"/>
+	<bean id="p01" class="springdi.z01_vo.Person">
+		<!-- Info 파일에 설정된 key=value의 key값을 설정하면 value값을 가져올 수 있다. -->
+		<property name="name" value="${name}"/>
+		<property name="age" value="${age}"/>
+		<property name="loc" value="${loc}"/>
+	</bean>
 </beans>

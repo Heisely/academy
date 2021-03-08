@@ -1,9 +1,9 @@
-package springdi.z01_vo;
+package springdi.z02_vo;
 
 import org.springframework.stereotype.Component;
 
 // springdi.z01_vo.Person
-@Component("person")
+@Component("p02")
 public class Person {
 	private String name;
 	private int age;

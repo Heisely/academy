@@ -1,5 +1,8 @@
 package springdi.z01_vo;
 
+import org.springframework.stereotype.Component;
+
+@Component("book")
 public class Book {
 	private String name;
 	private int price;

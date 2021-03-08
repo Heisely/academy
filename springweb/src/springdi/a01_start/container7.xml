@@ -20,22 +20,24 @@
 						http://www.springframework.org/schema/util/spring-util.xsd
 						http://www.springframework.org/schema/websocket
 						http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
-	<bean id="cpu01" class="springdi.z01_vo.Cpu">
-		<constructor-arg value="i5"/>
-		<constructor-arg value="3.3GHz"/>
-	</bean>
-	<bean id="ram01" class="springdi.z01_vo.Ram">
-		<constructor-arg value="램"/>
-		<constructor-arg value="16G"/>
-	</bean>
-	<bean id="hdd01" class="springdi.z01_vo.Hdd">
-		<constructor-arg value="SAMSUNG HD130SJ"/>
-		<constructor-arg value="1TB"/>
-	</bean>
-	<bean id="com01" class="springdi.z01_vo.Computer">
-		<constructor-arg value="코딩전용컴퓨터"/>
-		<property name="cpu" ref="cpu01"/>
-		<property name="ram" ref="ram01"/>
-		<property name="hdd" ref="hdd01"/>
-	</bean>
+	<!-- 
+	# Component-scan 옵션
+	1. 특정한 package를 지정하고 해당 패키지에 포함되어 있는 객체를 선택하여 container메모리에 로딩하는 것을 말한다.
+	2. 해당 객체들의 id값은 자동으로 클래스명의 소문자형태로 지정이 된다.
+		id="book" class="springdi.z01_vo.Book"
+	-->
+	<context:component-scan base-package="springdi.z01_vo"/>
+	<!-- 
+	ex) springdi.z02_vo에 Person, Product 파일을 넣고, 해당 패키지에 있는 내용을 호출 및 사용할 수 있게 하세요.
+	Person: 이름 p02, Product 이름 prod03으로 설정하여 처리
+	-->
+	<context:component-scan base-package="springdi.z02_vo"/>
+	
+	<context:component-scan base-package="springdi.z03_vo">
+		<!-- 
+		scan의 형식을 type="regex" 정규식으로 정의
+		expression=".*": 하위에 있는 모든 클래스들을 객체화하여 처리
+		-->
+		<context:include-filter type="regex" expression=".*"/>
+	</context:component-scan>
 </beans>

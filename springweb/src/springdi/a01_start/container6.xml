@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 
+	xmlns="http://www.springframework.org/schema/beans"
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/aop
+						http://www.springframework.org/schema/aop/spring-aop.xsd
+						http://www.springframework.org/schema/context
+						http://www.springframework.org/schema/context/spring-context.xsd
+						http://www.springframework.org/schema/mvc
+						http://www.springframework.org/schema/mvc/spring-mvc.xsd
+						http://www.springframework.org/schema/util
+						http://www.springframework.org/schema/util/spring-util.xsd
+						http://www.springframework.org/schema/websocket
+						http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
+	<!-- 
+	ex) Restore VO 객체 생성
+	1. ArrayList<String>, Set<String>, Properties, Map<String, String>을 
+		할당할 수 있는 필드와 set메서드를 선언하고, 
+		toString()메서드를 통해 해당 저장된 내용을 출력되게 처리
+	2. 위 정의된 내용을 DI로 선언, DL로 호출.
+	-->
+	<bean id="restore" class="springdi.z01_vo.Restore">
+		<property name="list">
+			<list value-type="java.lang.String">
+				<value>사과</value>
+				<value>사과</value>
+				<value>바나나</value>
+				<value>바나나</value>
+				<value>딸기</value>
+			</list>
+		</property>
+		<property name="sets">
+			<set>
+				<value>사과</value>
+				<value>사과</value>
+				<value>바나나</value>
+				<value>바나나</value>
+				<value>딸기</value>
+			</set>
+		</property>
+		<property name="props">
+			<props>
+				<prop key="1">홍길동</prop>
+				<prop key="2">김길동</prop>
+				<prop key="3">신길동</prop>
+			</props>
+		</property>
+		<property name="maps">
+		<!-- map객체의 key는 유일 처리된다. 마지막에 저장된 key value값으로 설정이 된다. -->
+			<map>
+				<entry key="홍길동" value="100"/>
+				<entry key="김길동" value="80"/>
+				<entry key="신길동" value="90"/>
+				<entry key="홍길동" value="90"/>
+			</map>
+		</property>
+	</bean>
+</beans>

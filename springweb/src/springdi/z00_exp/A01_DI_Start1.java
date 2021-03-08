@@ -1,4 +1,4 @@
-package springdi.z02_exp;
+package springdi.z00_exp;
 
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;

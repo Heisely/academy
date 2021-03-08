@@ -1,10 +1,10 @@
-package springdi.z01_vo;
+package springdi.z02_vo;
 
 import org.springframework.stereotype.Component;
 
 // springdi.z01_vo.Product
 // <bean id="prod" class="springdi.z01_vo.Product">
-@Component("prod")
+@Component("prod03")
 public class Product {
 	private String name;
 	private int price;

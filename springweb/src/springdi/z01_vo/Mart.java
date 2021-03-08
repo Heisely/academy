@@ -1,8 +1,15 @@
 package springdi.z01_vo;
+
+import java.util.ArrayList;
+
+import org.springframework.stereotype.Component;
+
 // springdi.z01_vo.Mart
+@Component("mart")
 public class Mart {
 	private String name;
 	private Product prod;
+	private ArrayList<String> blist;
 
 	public Mart() {
 		super();
@@ -12,6 +19,23 @@ public class Mart {
 	public Mart(String name) {
 		super();
 		this.name = name;
+		blist = new ArrayList<String>();
+	}
+
+	public void setBlist(ArrayList<String> blist) {
+		this.blist = blist;
+	}
+
+	public void buyStrList() {
+		System.out.println(name + "마트에 장보러 갑니다.");
+		if (blist.size() > 0) {
+			System.out.println("# 물건을 구매했습니다 #");
+			for (String fruit : blist) {
+				System.out.println(fruit);
+			}
+		} else {
+			System.out.println("# 살 물건이 없네요 #");
+		}
 	}
 
 	// 추가메서드

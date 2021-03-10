@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 
+	xmlns="http://www.springframework.org/schema/beans"
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/aop
+						http://www.springframework.org/schema/aop/spring-aop.xsd
+						http://www.springframework.org/schema/context
+						http://www.springframework.org/schema/context/spring-context.xsd
+						http://www.springframework.org/schema/mvc
+						http://www.springframework.org/schema/mvc/spring-mvc.xsd
+						http://www.springframework.org/schema/util
+						http://www.springframework.org/schema/util/spring-util.xsd
+						http://www.springframework.org/schema/websocket
+						http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
+	
+	<bean id="part1" class="springdi.z01_vo.Compart">
+		<constructor-arg value="RAM"/>
+		<constructor-arg value="64GB"/>
+	</bean>
+	<!-- byType일때는 둘 중에 하나라도 식별자를 선언하지 않으면 에러 발생 -->
+	<bean id="part2" class="springdi.z01_vo.Compart">
+		<constructor-arg value="RAM"/>
+		<constructor-arg value="16GB"/>
+	</bean>
+	<bean id="part3" class="springdi.z01_vo.Compart">
+		<constructor-arg value="RAM"/>
+		<constructor-arg value="32GB"/>
+	</bean>
+	<!-- autowire="byName"이면, 해당 id값과 설정하는 property와 동일한 것을 객체에 할당 -->
+	<bean id="com" class="springdi.z01_vo.Computer2" autowire="byName">
+		<constructor-arg value="삼성"/>
+	</bean>
+</beans>

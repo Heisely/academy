@@ -10,7 +10,7 @@ request.setCharacterEncoding("UTF-8");
    String path = request.getContextPath();
 %>    
 <link rel="stylesheet" href="<%=path%>/a00_com/a00_com.css">
-<jsp:useBean id="dao" class="springweb.a03_database.A04_MemberDao"/>
+<jsp:useBean id="dao" class="jspexp.a03_database.A04_MemberDao"/>
 <c:set var="memList" value="${dao.memberList(param.id, param.name)}"/>
 <body>
 	<h3>회원 정보</h3>

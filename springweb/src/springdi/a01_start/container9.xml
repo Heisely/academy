@@ -33,6 +33,14 @@
 5. Java Code에서 활용 
 	@Value("${key}")
 	String key;
+	
+로컬에서 개발환경 ==> 개발서버(WAS/DB/UNIX/file서버) ==> test서버(WAS/DB/UNIX/file서버) ==> 운영서버(WAS/DB/UNIX/file서버)
+외부연계서버(e-mail서버, ftp, telnet서버, 다른 웹서비스 연동)
+
+# 필요 정보
+1. IP/Port/ID/Pass/SID
+2. 소스 내부에 위 정보들이 곳곳에 필요한데, 이것을 서버가 변경 될 때마다 소스를 찾아서 변경하는 것보다
+	특정 파일/DB에 key/value 형식으로 처리하는 것이 효과적이다.
 -->
 	<context:property-placeholder location="classpath:/springdi/a01_start/Info"/>
 	<bean id="p01" class="springdi.z01_vo.Person">

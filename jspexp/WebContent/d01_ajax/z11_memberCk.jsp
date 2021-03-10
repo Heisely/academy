@@ -9,6 +9,6 @@
 request.setCharacterEncoding("UTF-8");
    String path = request.getContextPath();
 %>
-<jsp:useBean id="dao" class="springweb.a03_database.A04_MemberDao"/>
+<jsp:useBean id="dao" class="jspexp.a03_database.A04_MemberDao"/>
 <c:set var="hasMember" value="${dao.hasMember(param.id)}"/>
 {"hasMember":${hasMember}}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/jspexp/a00_com/a00_com.css">
+<script type="text/javascript" src="/jspexp/a00_com/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+/* 
+# key이벤트
+1. keydown: 키보드의 특정 키를 입력하고 있는 순간 이벤트 발생
+2. keyup: 키보드의 특정 키를 입력하고 눌렀다가 떼는 순간 이벤트 발생
+3. event.keyCode: 이벤트가 발생한 키의 코드값
+*/
+//
+	$(document).ready(function(){
+		$("h2").text("key이벤트");
+		$("#target").keydown(function(event){
+			// 누르는 순간 키코드값
+			$("#div01").text(event.keyCode);
+		});
+		$("#target").keyup(function(){
+			// 눌렀다 떼는 순간 입력한 문자의 크기
+			$("#div02").text($(":text").val().length);
+		});
+		
+		// ex)
+		// 등록할 id:[	] [입력/유효/유효X]
+		// 입력하는 순간 글자수가 8~14일 때 유효합니다 표기, 아닐 때 유효하지 않습니다 표기
+		$("#target2").keyup(function(){
+			var len = $(this).val().length;
+			var show="";
+			var color="";
+			if(len==0){
+				show="id를 입력하세요";
+				color="black";
+			} else if(len>=8 && len<=14){
+				show = "유효합니다.";
+				color= "blue";
+			} else {
+				show="유효하지 않습니다.";
+				color="red";
+			}
+			$("span").css("color",color).text(show);
+		});
+	});
+</script>
+</head>
+<body>
+	<h3>회원등록</h3>
+	등록할 id: <input id="target2"/><span>id를 입력하세요</span>
+	<h2></h2>
+	<form>
+		<input type="text" id="target"/>
+	</form>
+	<div id="div01"></div>
+	<div id="div02"></div>
+</body>

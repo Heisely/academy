@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 
+	xmlns="http://www.springframework.org/schema/beans"
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/aop
+						http://www.springframework.org/schema/aop/spring-aop.xsd
+						http://www.springframework.org/schema/context
+						http://www.springframework.org/schema/context/spring-context.xsd
+						http://www.springframework.org/schema/mvc
+						http://www.springframework.org/schema/mvc/spring-mvc.xsd
+						http://www.springframework.org/schema/util
+						http://www.springframework.org/schema/util/spring-util.xsd
+						http://www.springframework.org/schema/websocket
+						http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
+
+<!-- 
+	springdi.z05_vo 패키지 내 두 개의 클래스를 이용해서
+	Product 클래스를 prod01, prod02, prod03으로 선언하고
+	autowire 옵션으로 할당하여 출력처리 하세요.
+-->
+	<bean id="prod01" class="springdi.z05_vo.Product">
+		<constructor-arg value="사과"/>
+		<constructor-arg value="3000"/>
+		<constructor-arg value="3"/>
+	</bean>
+	<bean id="prod02" class="springdi.z05_vo.Product">
+		<constructor-arg value="바나나"/>
+		<constructor-arg value="2000"/>
+		<constructor-arg value="2"/>
+	</bean>
+	<bean id="prod03" class="springdi.z05_vo.Product">
+		<constructor-arg value="키위"/>
+		<constructor-arg value="4000"/>
+		<constructor-arg value="5"/>
+	</bean>
+	<bean id="buyer" class="springdi.z05_vo.Buyer" autowire="byName">
+		<constructor-arg value="박혜선"/>
+	</bean>
+</beans>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 
+	xmlns="http://www.springframework.org/schema/beans"
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/aop
+						http://www.springframework.org/schema/aop/spring-aop.xsd
+						http://www.springframework.org/schema/context
+						http://www.springframework.org/schema/context/spring-context.xsd
+						http://www.springframework.org/schema/mvc
+						http://www.springframework.org/schema/mvc/spring-mvc.xsd
+						http://www.springframework.org/schema/util
+						http://www.springframework.org/schema/util/spring-util.xsd
+						http://www.springframework.org/schema/websocket
+						http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
+<!-- 
+# 자동 주입 선언(autowire)
+1. 스프링이 빈의 요구사항과 매칭되는 어플리케이션 컨텍스상
+   다른 빈을 찾아 빈 간의 의존성을 자동으로 만족시키도록 하는 처리를 말한다.
+2. 컨테이너에 해당 객체가 있으면 메소드를 통해서 자동으로 할당처리
+   ex)Product객체가 이 컨테이너에 생성되어 있고, Mart의 setProduct(Product p)
+      로 선언되어 있는 경우에, autowire="byType"으로 선언되면,
+      컨테이너에서 자동으로 찾아서 객체를 할당한다.
+3. autowire 할당값
+   autowire="할당값"
+   1) byType : 메소드를 통해서 해당 type이 정의될 떄,
+             자동으로 할당된다.
+   2) byName : 메소드를 통해서 해당 type이 있고, 
+            참조변수가 메소드의 property와 동일할떄..
+            자동으로 할당된다.
+   3) constructor : 생성자가 정의에 해당 type있을 때
+   4) autodetect : 생성자나 메소드에 해당 type이 있을때, 자동으로 할당된다.
+		- 우선 생성자에 매개변수로 해당 type이 있는지를 먼저 찾고,
+		  그 다음 메서드에 매개변수로 해당 type이 있는지를 확인하는 처리를 말한다.
+-->
+<!-- 1. autowire="byType"일 때 -->
+	<bean class="springdi.z01_vo.Product">
+		<constructor-arg value="사과"/>
+		<constructor-arg value="3000"/>
+		<constructor-arg value="2"/>
+	</bean>
+	
+	<bean id="mart" class="springdi.z01_vo.Mart" autowire="byType">
+		<constructor-arg value="행복"/>
+	</bean>
+	
+<!-- Computer.java의 public void setPart(Compart compart)를 활용해서
+	 자동으로 type할당으로 컴퓨터에 자동 할당된 부품을 출력 -->
+	 <bean class="springdi.z01_vo.Compart">
+	 	<constructor-arg value="RAM"/>
+	 	<constructor-arg value="64GB"/>
+	 </bean>
+	 
+	 <bean id="com" class="springdi.z01_vo.Computer" autowire="byType">
+	 	<constructor-arg value="삼성"/>
+	 </bean>
+</beans>

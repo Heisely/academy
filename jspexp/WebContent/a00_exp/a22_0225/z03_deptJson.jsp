@@ -8,7 +8,7 @@
 <%
 request.setCharacterEncoding("UTF-8");
 %>    
-<jsp:useBean id="dao" class="springweb.a03_database.A02_DeptDao"/>
+<jsp:useBean id="dao" class="jspexp.a03_database.A02_DeptDao"/>
 <jsp:useBean id="dept" class="jspexp.z01_vo.Dept"/>
 <jsp:setProperty property="*" name="dept"/>
 <c:set var="dlist" value="${dao.deptList2(dept)}"/>

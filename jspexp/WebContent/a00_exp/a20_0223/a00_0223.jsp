@@ -53,7 +53,7 @@ pageContext.setAttribute("pnames", new String[]{"사과","바나나","딸기"});
 		4) <c:set var="처리한데이터변수">
 		5) <c:forEach>를 통해 ArrayList<VO> 출력 처리
 --%>
-<jsp:useBean id="dao" class="springweb.a03_database.A03_ShopDao"/>
+<jsp:useBean id="dao" class="jspexp.a03_database.A03_ShopDao"/>
 <jsp:useBean id="prod" class="jspexp.z01_vo.Product2"/>
 <jsp:setProperty property="*" name="prod"/>
 <%-- DB검색에 null 방지 --%>

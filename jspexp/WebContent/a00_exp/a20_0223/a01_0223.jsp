@@ -89,7 +89,7 @@ pageContext.setAttribute("prod", new String[]{"사과","바나나","딸기"});
 		<tr><td colspan="2"><input type="submit" value="검색"/></td></tr>
 	</table>
 	</form>
-	<jsp:useBean id="dao" class="springweb.a03_database.A03_ShopDao"/>
+	<jsp:useBean id="dao" class="jspexp.a03_database.A03_ShopDao"/>
 	<c:set var="prodlist" value="${dao.shopList(param.name)}"/>
 	<table>
 		<tr><th>상품번호</th><th>상품명</th><th>가격</th>

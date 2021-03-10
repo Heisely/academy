@@ -10,7 +10,7 @@
        String path = request.getContextPath();
     %>    
 
-   <jsp:useBean id="dao" class="springweb.a03_database.A01_Dao"/>
+   <jsp:useBean id="dao" class="jspexp.a03_database.A01_Dao"/>
    <c:set var="emp" value="${dao.getEmp(param.empno)}"/>
    <h3>사원 상세화면</h3>
    <table>

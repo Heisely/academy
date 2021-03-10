@@ -9,7 +9,7 @@
 request.setCharacterEncoding("UTF-8");
    String path = request.getContextPath();
 %>    
-<jsp:useBean id="dao" class="springweb.a03_database.A01_Dao"/>
+<jsp:useBean id="dao" class="jspexp.a03_database.A01_Dao"/>
 <c:set var="deptList" value="${dao.deptList2(param.dname, param.loc)}"/>
 {"tot":${deptList.size()}, "deptList":[
 	<c:forEach var="dept" items="${deptList}" varStatus="sts">

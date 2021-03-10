@@ -8,7 +8,7 @@
 <%
 request.setCharacterEncoding("UTF-8");
 %>    
-<jsp:useBean id="dao" class="springweb.a03_database.A03_ShopDao"/>
+<jsp:useBean id="dao" class="jspexp.a03_database.A03_ShopDao"/>
 <c:set var="prod" value="${dao.getProd(param.pno)}"/>
 {"pno":${empty prod.pno? 0 : prod.pno}, "name":"${prod.name}", 
  "price":${empty prod.price? 0 : prod.price}, "cnt":${empty prod.cnt? 0 : prod.cnt}, 

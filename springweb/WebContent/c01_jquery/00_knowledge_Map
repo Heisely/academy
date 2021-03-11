@@ -1,0 +1,25 @@
+# front end단 knowledge map
+1. html/css ==> bootstrap
+2. javascript ==> jquery ==> jquery ui ==> jquery plugin ==> vue.js를통한 화면처리
+3. jquery
+	1) 선택자
+		$("선택자"): 명령규칙
+	2) action 메서드
+		- 선택자형 action 메서드
+			.eq(0), .first(), .last()
+		- 이벤트 처리
+			click, key, mouseover, mouseout
+		- 화면 추가 처리
+			html(), text(), append(), wrap()
+		- 화면 controller
+			show()/hide()
+		- 데이터 처리
+			filter(), map(), each(), ...
+	3) ajax처리
+		- backend(jsp/spring) 요청/반응에 의한 json데이터 처리
+		- 화면단에 연동하여 비동기적으로 jquery plugin에 연동하여 처리
+		- 처리 순서
+			plugin에 있는 핵심 json데이터
+			DB 테이블 설계 arraylist로 가져오기(dao)
+			spring지원 arrayList ==> json변경 viewresolver를 통해서 처리
+			연동되는 화면단 처리

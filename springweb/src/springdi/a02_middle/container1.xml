@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 
+	xmlns="http://www.springframework.org/schema/beans"
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/aop
+						http://www.springframework.org/schema/aop/spring-aop.xsd
+						http://www.springframework.org/schema/context
+						http://www.springframework.org/schema/context/spring-context.xsd
+						http://www.springframework.org/schema/mvc
+						http://www.springframework.org/schema/mvc/spring-mvc.xsd
+						http://www.springframework.org/schema/util
+						http://www.springframework.org/schema/util/spring-util.xsd
+						http://www.springframework.org/schema/websocket
+						http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
+<!-- 
+# annotation을 통한 JAVA 소스코드내에서 autowiring
+1. 의존관계는 XML을 통해서 설정할 수 있다.
+	- 특정한 패키지의 filtering을 통해서 컨테이너 안에 객체를 로딩처리한다.
+2. Java class를 통해 의존관계를 바로 설정하여 처리할 수 있다.
+	1) @Autowired 선언
+	2) private 자동 등록할 객체   참조변수
+		- 필드, 메서드, 생성자에 설정하여 할당할 수 있다.
+		  주의) 접근제어자에 상관없이 할당 가능
+		ex) controller 단에서
+			@Autowired
+			private BoardService service;
+			컨테이너 내용 BoardService가 선언되어 있으면,
+			객체가 생성이 되면 Controller에서 해당 autowire가 선언된 객체가 할당 된다.
+			service 참조변수에 객체가 자동으로 할당되어 처리된다.
+			접근제어자의 범위를 벗어난다.
+3. container 환경 구성
+	1) 특정 패키지 기준으로 객체가 로딩되게 처리한다.
+		[일반적인 조건]
+		ex) Controller, Service, Repository는 특정 package와 @annotation으로 메모리에 로딩한다.
+	2) 컨테이너 @@.xml의 상단에
+		context:annotation-config 태그를 통해 객체 내에서 autowire를 선언할 수 있게끔 한다.
+-->
+<!-- 
+1. 소스에서 @으로 autowired를 처리하기 위해서 annotation을 선언
+2. 객체 로딩
+3. 연관관계를 소스내에서 선언. @Autowired 이용
+-->
+	<context:annotation-config/>
+	<bean class="springdi.a02_middle.z01_vo.Product">
+		<constructor-arg value="사과"/>
+		<constructor-arg value="3000"/>
+		<constructor-arg value="2"/>
+	</bean>
+	<bean id="buyer01" class="springdi.a02_middle.z01_vo.Buyer">
+		<constructor-arg value="홍길동"/>
+	</bean>
+</beans>

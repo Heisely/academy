@@ -20,24 +20,18 @@
 						http://www.springframework.org/schema/util/spring-util.xsd
 						http://www.springframework.org/schema/websocket
 						http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
-	<context:property-placeholder location="classpath:/springweb/resource/properties/Info"/>
-	<!-- 스프링에서 사용하게 될 초기 로딩객체를 선언 
-	<bean class="springweb.a01_start.A01_StartController"/>
-	<bean class="springweb.z01_exp.A01_ExpController"/>
-	<bean class="springweb.z01_exp.A02_MemberController"/>
-	<bean class="springweb.a01_start.A02_EmpController"/>
-	<bean class="springweb.a01_start.A03_DeptController"/>
-	-->
-	<!-- 
-	특정한 패키지의 Controller단에 대한 객체 메모리 로딩
-	include-filter type="annotation"
-		expression="org.springframework.stereotype.Controller"
-	-->
-	<context:component-scan base-package="springweb">
-		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
-		<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+<!-- 
+1. component scan을 통해 객체 컨테이너 로딩과 autowire 설정
+	1) annotation으로 소스 안에 autowiring 옵션 설정을 가능하게 하고
+	2) component-scan으로 특정 패키지 기준 객체 컨테이너 메모리 로딩
+		type="regex"
+	3) autowiring 설정
+	4) main()에서 객체 호출 속성값 설정 처리
+2. 객체가 없을 때 autowiring에 대한 문제
+3. 여러 개의 객체가 메모리에 로딩될 때 처리 방법
+-->
+	<context:annotation-config/>
+	<context:component-scan base-package="springdi.a02_middle.z02_vo">
+		<context:include-filter type="regex" expression=".*"/>
 	</context:component-scan>
-	<bean class="jspexp.a03_database.A01_Dao"/>
-<!-- 	 -->
 </beans>

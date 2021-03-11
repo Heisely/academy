@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/jspexp/a00_com/a00_com.css">
+<script type="text/javascript" src="/jspexp/a00_com/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+/* 
+# slideUp 기능 메소드
+1. 해당 객체에 대한 화면에서 올라가는 형식으로 사라지게 처리하는 것
+*/
+//
+	$(document).ready(function(){
+		$("h2").text("slideUp");
+		// 이름 클릭 시 사라지게 처리
+		$("p").click(function(){
+			$(this).slideUp();
+		});
+	});
+</script>
+</head>
+<body>
+	<h2></h2>
+	<p>홍길동</p>
+	<p>이순신</p>
+	<p>유관순</p>
+</body>

@@ -20,24 +20,10 @@
 						http://www.springframework.org/schema/util/spring-util.xsd
 						http://www.springframework.org/schema/websocket
 						http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
-	<context:property-placeholder location="classpath:/springweb/resource/properties/Info"/>
-	<!-- 스프링에서 사용하게 될 초기 로딩객체를 선언 
-	<bean class="springweb.a01_start.A01_StartController"/>
-	<bean class="springweb.z01_exp.A01_ExpController"/>
-	<bean class="springweb.z01_exp.A02_MemberController"/>
-	<bean class="springweb.a01_start.A02_EmpController"/>
-	<bean class="springweb.a01_start.A03_DeptController"/>
-	-->
-	<!-- 
-	특정한 패키지의 Controller단에 대한 객체 메모리 로딩
-	include-filter type="annotation"
-		expression="org.springframework.stereotype.Controller"
-	-->
-	<context:component-scan base-package="springweb">
-		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
-		<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
-	</context:component-scan>
-	<bean class="jspexp.a03_database.A01_Dao"/>
-<!-- 	 -->
+	<bean id="b01" class="springdi.z01_vo.Book">
+		<constructor-arg value="알고리즘 문제"/>
+		<constructor-arg value="23000"/>
+		<constructor-arg value="알고맨"/>
+		<constructor-arg value="IT서적"/>
+	</bean>
 </beans>

@@ -20,24 +20,17 @@
 						http://www.springframework.org/schema/util/spring-util.xsd
 						http://www.springframework.org/schema/websocket
 						http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
-	<context:property-placeholder location="classpath:/springweb/resource/properties/Info"/>
-	<!-- 스프링에서 사용하게 될 초기 로딩객체를 선언 
-	<bean class="springweb.a01_start.A01_StartController"/>
-	<bean class="springweb.z01_exp.A01_ExpController"/>
-	<bean class="springweb.z01_exp.A02_MemberController"/>
-	<bean class="springweb.a01_start.A02_EmpController"/>
-	<bean class="springweb.a01_start.A03_DeptController"/>
-	-->
-	<!-- 
-	특정한 패키지의 Controller단에 대한 객체 메모리 로딩
-	include-filter type="annotation"
-		expression="org.springframework.stereotype.Controller"
-	-->
-	<context:component-scan base-package="springweb">
-		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
-		<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
-	</context:component-scan>
-	<bean class="jspexp.a03_database.A01_Dao"/>
-<!-- 	 -->
+<!-- 
+ex) springdi.a02_middle.z01_vo안에
+Bus (버스번호, Passenger) Passenger(이름, 나이)
+source상에 autowire 처리되게 하세요.
+-->
+	<context:annotation-config/>
+	<bean class="springdi.a02_middle.z01_vo.Passenger">
+		<constructor-arg value="홍길동"/>	
+		<constructor-arg value="25"/>	
+	</bean>
+	<bean id="bus" class="springdi.a02_middle.z01_vo.Bus">
+		<constructor-arg value="6004"/>
+	</bean>
 </beans>

@@ -8,8 +8,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import jspexp.z01_vo.*;
+import org.springframework.stereotype.Repository;
 
+import jspexp.z01_vo.*;
+@Repository
 public class A01_Dao { // DAO: Database Access Object
 	// 1. 데이터베이스 연결
 	private Connection con;

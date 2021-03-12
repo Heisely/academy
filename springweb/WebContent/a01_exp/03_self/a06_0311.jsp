@@ -18,65 +18,44 @@
 <script src="${path}/a00_com/jquery-ui.js"></script>
 <script type="text/javascript">
 <%--
- 
+[스프링]
+[하] 1. controller와 view를 만들고, controller에 공통 model데이터 ArrayList형태로
+        사과 2000
+        바나나 3000
+        딸기  12000 으로 설정한 뒷, 화면에 select로 출력하게 하세요.
+[하] 2. 스프링 데이터베이스 연결을 위한 환경 설정 작업을 컨테이너 기술하세요.
+[하] 3. dao인터페이스와 XXXmapper.xml과 구성요소가 연동관계에 대하여 기술하세요
+[하] 4. 오늘 마지막 모델 데이터 emplist 화면 출력.
+[중] 5. springweb2 프로젝트에 mybatis가 설정되어 emp list를 출력하게 하세요.(캡쳐)
 --%>
 //
 	$(document).ready(function(){
-		$("[name=deptno]").val("${sch.deptno}");
-		$("[name=mgr]").val("${sch.mgr}");
+		
 	});
 </script>
 </head>
 <body>
 <div class="jumbotron text-center">
-  <h2>부트스트랩 form</h2>
+  <h2>0311 Spring 과제1번</h2>
 </div>
 <div class="container">
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-	<form class="form-inline" method="post" action="${path}/empList.do">
-		<input class="form-control mr-sm-2" type="text"
-			   name="ename" value="${sch.ename}" style="width:20%" placeholder="사원명">
-		<input class="form-control mr-sm-2" type="text" 
-			   name="job" value="${sch.job}" style="width:20%" placeholder="직책명">
-		<!-- deptList -->
-		<select name="deptno" class="form-control mr-sm-2">
-			<option value="0">부서선택</option>
-			<c:forEach var="dept" items="${deptList}">
-				<option value="${dept.deptno}">${dept.dname}</option>
-			</c:forEach>
-		</select>
-		<!-- mgrList -->
-		<select name="mgr" class="form-control mr-sm-2">
-			<option value="0">관리자선택</option>
-			<c:forEach var="emp" items="${mgrList}">
-				<option value="${emp.mgr}">${emp.ename}</option>
-			</c:forEach>
-		</select>
+	<form class="form-inline" method="post" action="${path}/">
+		<input class="form-control mr-sm-2" type="text" name="ename" value="" placeholder="사원명">
+		<input class="form-control mr-sm-2" type="text" name="job" value="" placeholder="직책명">
 		<button class="btn btn-success" type="submit">Search</button>
 	</form>
 </nav>
 <table class="table table-hover">
 	<thead>
 		<tr class="table-success text-center">
-			<th>사원번호</th>
-			<th>사원명</th>
-			<th>관리자명</th>
-			<th>직책</th>
-			<th>급여</th>
-			<th>부서이름</th>
+			<th>타이틀</th>
 		</tr>
 	</thead>
 	<tbody>
-		<c:forEach var="emp" items="${emplist}">
 		<tr class="text-center">
-			<td>${emp.empno}</td>
-			<td>${emp.ename}</td>
-			<td>${emp.mname}</td>
-			<td>${emp.job}</td>
-			<td>${emp.sal}</td>
-			<td>${emp.dname}</td>
+			<td>내용</td>
 		</tr>
-		</c:forEach>
 	</tbody>
 </table>    
 </div>

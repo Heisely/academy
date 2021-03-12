@@ -12,6 +12,7 @@ public class Emp {
 	private double sal;
 	private double comm;
 	private int deptno;
+	private String dname;
 
 	// default 생성자
 	public Emp() {
@@ -22,7 +23,14 @@ public class Emp {
 		super();
 		this.deptno = deptno;
 		this.hiredate = hiredate;
-		this.sal = sal;		
+		this.sal = sal;
+	}
+
+	// mgrList를 위한 생성자
+	public Emp(int mgr, String ename) {
+		super();
+		this.mgr = mgr;
+		this.ename = ename;
 	}
 
 	public Emp(int empno, String ename, String job, int mgr, String hiredate_s, double sal, double comm, int deptno) {
@@ -48,6 +56,24 @@ public class Emp {
 		this.sal = sal;
 		this.comm = comm;
 		this.deptno = deptno;
+	}
+
+	// dname 추가 생성자(spring)
+	private String mname;
+
+	public Emp(int empno, String ename, String job, int mgr, Date hiredate, double sal, double comm, int deptno,
+			String dname, String mname) {
+		super();
+		this.empno = empno;
+		this.ename = ename;
+		this.job = job;
+		this.mgr = mgr;
+		this.hiredate = hiredate;
+		this.sal = sal;
+		this.comm = comm;
+		this.deptno = deptno;
+		this.dname = dname;
+		this.mname = mname;
 	}
 
 	public String getHiredate_s() {
@@ -130,4 +156,19 @@ public class Emp {
 		this.deptno = deptno;
 	}
 
+	public String getDname() {
+		return dname;
+	}
+
+	public void setDname(String dname) {
+		this.dname = dname;
+	}
+
+	public String getMname() {
+		return mname;
+	}
+
+	public void setMname(String mname) {
+		this.mname = mname;
+	}
 }

@@ -1,0 +1,31 @@
+# 스프링에서 데이터베이스 연결
+1. 환경설정
+	1) 컨테이너 선언(dispatcher-servlet.xml)
+		- DB연결
+		- MyBatis 공통 XML 선언
+		- 사용할 DAO 인터페이스 패키지 위치 선언
+	2) MyBatis 공통 XML
+		- 사용할 VO/DTO 등록
+		- 개별 업무별 SQL을 저장할 mapper.xml 등록
+	3) XXXMapper.xml
+		- nameSpace
+		- resultMap/resultType
+		- id
+		- parameterType
+2. DB연결 화면 구현 순서
+	1) Controller 선언
+	2) View단 선언
+	3) DAO선언 (DB 처리)
+	4) MyBatis 공통 XML 처리
+	5) XXXMapper.xml
+	6) service 처리
+	7) Controller에 model 선언
+	8) View단에서 Model 처리
+	
+3. DB 처리 시 익숙해야 할 내용
+	1) DAO 선언과 XXXMapper.xml 연동관계(★★★★)
+		DAO인터페이스명	== namespace
+		메서드명		== id
+		리턴할 객체		== resultMap/resultType
+		매개변수/매개객체	== parameterType
+	2) Controller -- Service -- DAO 연동 처리 관계

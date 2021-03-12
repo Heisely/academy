@@ -26,7 +26,7 @@ Computer(제조사/Ram/Cpu/Ssd), Ram/Cpu/Ssd(제조사/성능) 설정 후
 package 단위로 메모리에 로딩되게 하고(component-scan),
 소스 상 autowired 처리하여 출력되게 하세요.
 -->
-	<context:annotation-config/>
+<!--<context:annotation-config/> -->
 	<context:component-scan base-package="springdi.a02_middle.z03_vo">
 		<context:include-filter type="regex" expression=".*"/>
 	</context:component-scan>

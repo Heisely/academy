@@ -9,8 +9,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 
-import jspexp.z01_vo.Product2;
+import org.springframework.stereotype.Repository;
 
+import jspexp.z01_vo.Product2;
+@Repository
 public class A03_ShopDao {
 	// DAO: Database Access Object
 	// 1. 데이터베이스 연결

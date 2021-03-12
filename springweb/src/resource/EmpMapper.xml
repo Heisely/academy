@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="springweb.a02_mvc.a03_dao.A01_EmpDao">
+<!-- 
+// springweb.a02_mvc.a03_dao.A01_EmpDao: namespace
+// emplist: id
+// ArrayList<Emp>(returnType): resultMap
+// (Emp sch): parameterType
+ -->
+	<resultMap type="emp" id="empResult"/>
+	<select id="emplist" resultMap="empResult" parameterType="emp">
+		SELECT * FROM EMP2
+	</select>
+</mapper>

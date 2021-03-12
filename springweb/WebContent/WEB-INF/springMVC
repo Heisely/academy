@@ -32,8 +32,6 @@
 
 
 
-
-
 # 스프링 핵심 구현
 1. front controller 선언
 	DispatcherServlet	
@@ -48,8 +46,9 @@
 	
 3. spring MVC
 	- Controller: Java 클래스로 선언
-		Controller --> service --> DAO
-		Controller <-- service <-- DAO
+		Controller --> service --> DAO(인터페이스) ==> DB 서버
+					 비즈니스로직처리
+		Controller <-- service <-- DAO(실객체)
 	- Model: controller 안에 선언
 		화면단에 보내줄 핵심 데이터 처리
 		# Model데이터를 만들기 위해 도와주는 process 객체들
@@ -66,8 +65,13 @@
 	
 5. 데이터베이스 처리(DAO-MyBatis프레임웍 활용)
 	1) 컨테이너 선언 방법(connection)
+		- 연결객체
+		- MyBatis 공통 XML 위치
+		- dao 인터페이스 위치
 	2) MyBatis 공통 설정 XML
 	3) 기능별 SQL XML 설정 방법
+	4) MyBatis 프레임웍을 통해서 실제 객체를 만들어주는	DAO Interface 선언 패키지
+	5) XXXmapper.xml vs DAO인터페이스 mapping
 	
 6. MVC 중급
 	1) 여러 가지 Viewer 활용
@@ -91,8 +95,6 @@
 	4) Vue와 연동하여 데이터 처리
 
 
-
-	
 	
 # 환경 설정 순서
 1. lib 복사
@@ -108,8 +110,6 @@
 4. /start.do url을 통해 mapping되어 있는 controller의 기능 메서드 호출
 
 5. controller단에서는 해당 기능 메서드의 return "view 자원 위치"; 를 통해 view를 호출 
-
-
 
 
 
@@ -129,8 +129,6 @@
 
 
 
-
-
 # 요청값 처리
 &name=홍길동
 1. request.getParameter("name")
@@ -138,8 +136,14 @@
    요청값을 name의 key String name에 할당하여 가져올 수 있다.
 2. 객체로 요청값 처리
 
+
+
 # ModelAttribute
 1. controller단의 공통 모델데이터에 대한 선언
+	- 하나의 업무 단위로 Controller를 쓰고
+	- 하나의 기능 단위로 mapping 처리
+	ex) 사원정보 처리 - 리스트, 상세화면, 등록/수정/삭제
+		부서정보 콤보박스, 관리자정보 콤보박스
 2. 요청값+모델데이터를 동시에 처리
 
 

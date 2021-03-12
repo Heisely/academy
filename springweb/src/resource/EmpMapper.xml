@@ -4,13 +4,75 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="springweb.a02_mvc.a03_dao.A01_EmpDao">
 <!-- 
-// springweb.a02_mvc.a03_dao.A01_EmpDao: namespace
-// emplist: id
-// ArrayList<Emp>(returnType): resultMap
+// springweb.a02_mvc.a03_dao.A01_EmpDao(인터페이스명): namespace
+// emplist(메서드명): id
+// ArrayList<Emp>(리턴값): resultMap
+//		SQL 결과의 property가 동일할 때 자동으로 mapping
+//			SELECT ename, setEname(String s) column과 property를 mapping
+//		ps) Emp/int/boolean: resultType
 // (Emp sch): parameterType
  -->
 	<resultMap type="emp" id="empResult"/>
 	<select id="emplist" resultMap="empResult" parameterType="emp">
 		SELECT * FROM EMP2
+		WHERE 1=1
+		AND ename LIKE '%'||#{ename}||'%'
+		AND job LIKE '%'||#{job}||'%'
+	</select>
+<!-- 	<select id="emplist" resultMap="empResult" parameterType="emp">
+		SELECT * FROM EMP2
+		WHERE 1=1
+		<if test="ename !=null">
+			AND ename LIKE '%'||#{ename}||'%'
+		</if>
+		<if test="job !=null">
+			AND job LIKE '%'||#{job}||'%'
+		</if>
+	</select> -->
+<!-- 이렇게 if문을 쓰는 것보다 Service단에 처리하는 것이 더 효율적이다. -->
+
+	<!-- ex1: public int totCnt() -->
+	<select id="totCnt" resultType="int">
+		SELECT COUNT(*) FROM EMP
+	</select>
+	<!-- ex2: public Emp getEmp(int empno) -->
+	<select id="getEmp" resultType="emp" parameterType="int">
+		SELECT * FROM EMP
+		WHERE empno = #{empno}
+	</select>
+	<!-- ex3:
+	public ArrayList<Emp2> searchEmp1(Emp2 sch);
+	public ArrayList<Integer> searchEmp2(Emp2 sch);
+	public ArrayList<Integer> searchEmp3(HashMap<String, Object> hm); -->
+	<resultMap type="emp2" id="emp2Result"/>
+	<select id="searchEmp1" resultMap="emp2Result" parameterType="emp2">
+		SELECT empno FROM emp
+		WHERE sal BETWEEN #{start} AND #{end}
+	</select>
+	<resultMap type="int" id="intRs"></resultMap>
+	<select id="searchEmp2" resultMap="intRs" parameterType="emp2">
+		SELECT empno FROM emp
+		WHERE sal BETWEEN #{start} AND #{end}
+	</select>
+	<select id="searchEmp3" resultMap="intRs" parameterType="hashmap">
+		SELECT empno FROM emp
+		WHERE sal BETWEEN #{start} AND #{end}
+	</select>
+	
+	<!-- ex1: public Dept getDept(int deptno) -->
+	<select id="getDept" resultType="dept" parameterType="int">
+		SELECT * FROM dept WHERE deptno=#{deptno}
+	</select>
+	<!-- ex2: public ArrayList<Emp> maxSal() -->
+	<select id="maxSal" resultMap="empResult">
+		SELECT deptno, max(sal) sal FROM emp GROUP BY deptno
+	</select>
+	<!-- ex3: public ArrayList<Emp> searchJob(String job) -->
+	<select id="searchJob" resultMap="empResult" parameterType="String">
+		SELECT * FROM emp WHERE job = #{job}
+	</select>
+	<!-- ex4: public int maxSalDeptno(int deptno) -->
+	<select id="maxSalDeptno" resultType="int" parameterType="int">
+		SELECT max(sal) FROM emp WHERE deptno = ${deptno}
 	</select>
 </mapper>

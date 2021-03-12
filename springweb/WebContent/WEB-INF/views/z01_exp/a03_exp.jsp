@@ -27,10 +27,18 @@
 </script>
 </head>
 <body>
-	<h3>2021년 03월 04일 Spring 과제 3번입니다.</h3>
+<!-- 	<h3>2021년 03월 04일 Spring 과제 3번입니다.</h3> -->
+	<h3>스프링 컨트롤러 선언</h3>
 	<table>
 		<tr><th>타이틀</th></tr>
-		<tr><td>내용</td></tr>
+		<tr><td>
+			<select> <!-- fruits -->
+				<option value="0">물건선택</option>
+				<c:forEach var="fruit" items="${fruits}">
+					<option value="${fruit.price}">${fruit.name}(${fruit.price})</option>
+				</c:forEach>
+			</select>		
+		</td></tr>
 	</table>
 </body>
 </html>

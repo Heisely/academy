@@ -20,6 +20,30 @@
 						http://www.springframework.org/schema/util/spring-util.xsd
 						http://www.springframework.org/schema/websocket
 						http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
+	<!-- 공통 설정 파일 선언 -->
+	<context:property-placeholder location="classpath:/resource/properties/info"/>
+	<context:component-scan base-package="springweb2">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+	</context:component-scan>
+	<!-- 1. 연결 객체 선언 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${driver}"/>
+		<property name="url" value="${dburl}"/>
+		<property name="username" value="${user}"/>
+		<property name="password" value="${pass}"/>
+	</bean>
+	<!-- 2. MyBatis Framework 설정 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="configLocation" value="classpath:resource/mybatis.Spring.xml"/>
+	</bean>
+	<!-- 3. DAO 위치 선언 springweb2.a01_mvc.a03_dao -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="springweb2.a01_mvc.a03_dao"/>
+	</bean>
+	
 	<!-- 스프링에서 사용하게 될 초기 로딩객체를 선언 -->
-	<bean class="springweb2.z01_exp.A01_ExpController"></bean>
+<!-- 	<bean class="springweb2.z01_exp.A01_ExpController"></bean> -->
 </beans>

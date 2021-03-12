@@ -29,3 +29,51 @@
 		리턴할 객체		== resultMap/resultType
 		매개변수/매개객체	== parameterType
 	2) Controller -- Service -- DAO 연동 처리 관계
+	
+4. DAO와 XXXMapper.xml
+	1) DAO가 새로 추가될 때
+		mybatis.Spring.xml안에 사용할 VO객체 추가, 사용할 업무단위 XXX.xml추가
+	2) DAO를 기준으로 연동 처리 관계 설정
+		// springweb.a02_mvc.a03_dao.A01_EmpDao
+		   ArrayList<Emp> emplist(Emp sch);
+		   - 인터페이스명 - namespace: 가능한 한 interface명과 패키지명을 복사해 붙인다.
+		   - 리턴할 객체/변수
+				> 단일 데이터: resultType으로 설정
+					ex) public int totAll();
+						<select resultType="int"
+					ex) public Emp getEmp(int empno);
+						<select resultType="emp"> mypatis.Spring.xml안 alias로 선언된 emp
+				> 배열/ArrayList<VO>: resultMap을 일단 상단에 선언한 후, id 값으로 설정
+					ex) public ArrayLIst<Emp> empList();
+						<resultMap type="emp" id="empResult"/>
+						<select resultMap="empResult">
+					ex) public String[] getEnames();
+						<resultMap type="java.lang.String" id="strResult"/>
+						<select resultMap = "strResult">
+			- 입력할 매개변수 - parameterType
+				> 없을 때: 선언하지 않는다.
+					ex) emplist();
+						<select>
+				> 단일 데이터:
+					ex) emplist(int empno); 
+						<select parameterType="int">
+				> 단일 객체
+					ex)	emplist(Emp sch);
+						<select parameterType="emp">
+				> 배열형 - parameterMap: 입력값이 배열형 객체일 때
+					ex) public void insert(HashMap<String, Object> ins);
+						<insert parameterType="hashmap" ${키값}>
+			- id: 메서드명..
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					

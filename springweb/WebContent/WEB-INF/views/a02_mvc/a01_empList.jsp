@@ -32,22 +32,28 @@
 </div>
 <div class="container">
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-	<form class="form-inline" method="post" action="${path}/empList2.do">
-		<input class="form-control mr-sm-2" type="text" name="ename" value="" placeholder="사원명">
-		<input class="form-control mr-sm-2" type="text" name="job" value="" placeholder="직책명">
+	<form class="form-inline" method="post">
+		<input class="form-control mr-sm-2" type="text" name="ename" value="${sch.ename}" placeholder="사원명">
+		<input class="form-control mr-sm-2" type="text" name="job" value="${sch.job}" placeholder="직책명">
 		<button class="btn btn-success" type="submit">Search</button>
 	</form>
 </nav>
 <table class="table table-hover">
 	<thead>
 		<tr class="table-success text-center">
-			<th>타이틀</th>
+			<th>사원번호</th><th>사원명</th><th>직책</th><th>급여</th><th>입사일</th>
 		</tr>
 	</thead>
 	<tbody>
+		<c:forEach var="emp" items="${emplist}">
 		<tr class="text-center">
-			<td>내용</td>
+			<td>${emp.empno}</td>
+			<td>${emp.ename}</td>
+			<td>${emp.job}</td>
+			<td>${emp.sal}</td>
+			<td><fmt:formatDate value="${emp.hiredate}"/></td>
 		</tr>
+		</c:forEach>
 	</tbody>
 </table>    
 </div>

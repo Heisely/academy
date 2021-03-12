@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+   
+<!-- springweb2.a01_mvc.a03_dao.A01_EmpDao -->
+<mapper namespace="springweb2.a01_mvc.a03_dao.A01_EmpDao">
+	<!-- ArrayList<Emp> empList(Emp sch); -->
+	<resultMap type="emp" id="empMap"/>
+	<select id="empList" resultMap="empMap" parameterType="emp">
+		SELECT * FROM EMP
+		WHERE ename LIKE '%'||#{ename}||'%'
+		AND job LIKE '%'||#{job}||'%'
+	</select>
+	<!-- ArrayList<Dept> deptList(Dept sch) -->
+	<resultMap type="dept" id="deptMap"/>
+	<select id="deptList" resultMap="deptMap" parameterType="dept">
+		SELECT * FROM DEPT
+	</select>
+</mapper>

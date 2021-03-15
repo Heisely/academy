@@ -107,6 +107,87 @@
 				 WHERE to_char(HIREDATE, 'YYYY')= '1980'
 				 
 [하] 4. mybatis기준으로 부서정보 조회 화면을 만드세요(웹화면까지)   DeptDao(인터페이스), DeptMapper.xml 추가
+		[VO - Dept.java]: deptno, dname, loc 선언 후 생성자, getter/setter 메서드 생성
+		[mybatis.Spring.xml]: <typeAlias alias="dept" type="springweb.z02_vo.Dept"/> 추가
+		[DAO - A02_DeptDao.java]: public ArrayList<Dept> deptlist(Dept sch);
+		[Service - A02_DeptService.java]
+			@Service
+			public class A02_DeptService {
+				@Autowired(required = false)
+				private A02_DeptDao dao;
+				
+				public ArrayList<Dept> deptlist(Dept sch){
+					if(sch.getDname()==null)
+						sch.setDname("");
+					if(sch.getLoc()==null)
+						sch.setLoc("");
+					
+					return dao.deptlist(sch);
+				}
+			}
+			
+		[DeptMapper.xml]
+			<?xml version="1.0" encoding="UTF-8"?>
+			<!DOCTYPE mapper
+			   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+			   "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+			<mapper namespace="springweb.a02_mvc.a03_dao.A02_DeptDao">
+				<resultMap type="dept" id="deptResult"/>
+				<select id="deptlist" resultMap="deptResult" parameterType="dept">
+					SELECT * FROM DEPT
+					WHERE 1=1
+					AND DNAME LIKE '%'||#{dname}||'%'
+					AND LOC LIKE '%'||#{loc}||'%'
+				</select>
+			</mapper>
+			
+		[Controller - A02_DeptController.java]
+			@Controller
+			public class A02_DeptController {
+				@Autowired(required = false)
+				private A02_DeptService service;
+				
+				// http://localhost:7080/springweb/deptlist.do
+				@RequestMapping("/deptlist.do")
+				public String deptlist(@ModelAttribute("sch") Dept sch, Model d) {
+					System.out.println("데이터 건수: "+service.deptlist(sch).size());
+					d.addAttribute("deptlist", service.deptlist(sch));
+					return "WEB-INF\\views\\a02_mvc\\a02_deptList.jsp";
+				}
+			}
+		[View - a02_deptList.jsp]		
+			<body>
+			<div class="jumbotron text-center">
+			  <h2>부서정보검색(MyBatis)</h2>
+			</div>
+			<div class="container">
+			<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+				<form class="form-inline" method="post">
+					<input class="form-control mr-sm-2" type="text" name="dname" value="${sch.dname}" placeholder="부서명">
+					<input class="form-control mr-sm-2" type="text" name="loc" value="${sch.loc}" placeholder="부서위치">
+					<button class="btn btn-success" type="submit">Search</button>
+				</form>
+			</nav>
+			<table class="table table-hover">
+				<thead>
+					<tr class="table-success text-center">
+						<th>부서번호</th>
+						<th>부서명</th>
+						<th>부서위치</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="dept" items="${deptlist}">
+					<tr class="text-center">
+						<td>${dept.deptno}</td>
+						<td>${dept.dname}</td>
+						<td>${dept.loc}</td>
+					</tr>
+					</c:forEach>
+				</tbody>
+			</table>    
+			</div>
+			</body>		
 		
 [중] 5. mybatis기준으로 사원정보+부서정보+급여등급 조회(직책/부서명/급여등급) 화면을 만드세요(웹화면까지)
 --%>

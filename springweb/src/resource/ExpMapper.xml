@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="springweb.a02_mvc.a03_dao.Z01_ExpDao">
+	<resultMap type="dept" id="deptMap"/>
+	<select id="deptList" resultMap="deptMap" parameterType="dept">
+		SELECT * FROM DEPT
+		WHERE DNAME LIKE '%'||#{DNAME}||'%'
+		AND LOC LIKE '%'||${LOC}||'%'
+	</select>
+
+	<resultMap type="empg" id="empgMap"/>
+	<select id="empGrade" resultMap="empgMap" parameterType="double">
+		SELECT empno, ename, sal, grade
+        FROM emp, salgrade
+        WHERE sal BETWEEN losal AND hisal
+        AND sal>=#{sal}
+	</select>
+	
+	<resultMap type="emp" id="empMap"/>
+	<select id="empSch2" resultMap="empMap" parameterType="hashmap">
+		SELECT empno, ename, job, sal
+        FROM EMP e 
+        WHERE (sal ge #{start} AND sal le #{end}) <!-- ge: greater equal(>=), le: less equal(<=) -->
+        OR job = #{job}
+	</select>
+
+	<resultMap type="empp" id="emppMap"/>
+	<select id="empSch3" resultMap="emppMap" parameterType="hashmap">
+		SELECT ename, loc, to_char(hiredate, 'Q') part
+        FROM emp e, dept d
+        WHERE e.deptno = d.deptno
+        AND to_char(hiredate, 'Q') IN (#{p01},#{p02})
+	</select>
+	
+	<resultMap type="empdept" id="edMap"/>
+    <select id="empSch4" resultMap="edMap" parameterType="int">
+        select e.empno, e.ename, d.dname, e.sal
+        from emp e, dept d
+        where e.deptno = d.deptno
+        and deptno = #{deptno}
+    </select>
+    
+    <resultMap type="String" id="strMap"/>
+    <select id="empMgrSch" resultMap="strMap" parameterType="String">
+       	select e.ename
+       	from emp e, emp m
+       	where e.mgr = m.empno
+       	and m.ename = #{ename}
+    </select>
+         	
+	<parameterMap type="String" id="strParams"/>
+    <select id="emgMaxSal" resultType="double" parameterMap="strParams">
+      	select max(sal)
+       	from emp
+       	where ename in (#enames[0], #enames[1], #enames[2])
+    </select>
+    
+    <!-- resultMap은 위에 선언한 <resultMap id="empMap"> 사용 -->
+    <select id="empSch5" resultMap="empMap" parameterType="String">
+    	select * from emp
+       	where to_char(hiredate,'YYYY')=#{year}
+    </select>	
+</mapper>

@@ -6,6 +6,7 @@ import java.util.HashMap;
 import springweb.z02_vo.Dept;
 import springweb.z02_vo.Emp;
 import springweb.z02_vo.Emp2;
+import springweb.z03_vo.EmpDept;
 // springweb.a02_mvc.a03_dao.A01_EmpDao: namespace
 // emplist: id
 // ArrayList<Emp>(returnType): resultMap
@@ -39,4 +40,12 @@ public interface A01_EmpDao {
 	public ArrayList<Emp> searchJob(String job);
 //	ex4) SELECT max(sal) FROM emp WHERE deptno = ${deptno}
 	public int maxSalDeptno(int deptno);
+	
+//	0312 과제
+	public ArrayList<EmpDept> schEDGList(EmpDept sch);
+	
+//	InsertDao
+	public void empInsert(Emp dto);
+	
+	public ArrayList<Emp> mgrSearch(Emp sch);
 }

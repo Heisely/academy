@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import springweb.a02_mvc.a03_dao.A01_EmpDao;
 import springweb.z02_vo.Emp;
+import springweb.z03_vo.EmpDept;
 
 @Service
 public class A01_EmpService {
@@ -29,8 +30,16 @@ public class A01_EmpService {
 		for (int empno : dao.searchEmp3(hm)) {
 			System.out.println(empno);
 		}
-
-
+//		dao.schEDGList(new EmpDept()); // test용 -> 정상작동 확인
+//		dao.empInsert(new Emp("마길동(연습)", "CLERK", 7902,3500,100,10));
+		dao.mgrSearch(new Emp(7902));
+		
 		return dao.emplist(sch);
+	}
+	
+	public ArrayList<EmpDept> schEDGList(EmpDept sch){
+		
+		
+		return dao.schEDGList(sch);
 	}
 }

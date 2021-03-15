@@ -60,14 +60,53 @@
 				> 단일 객체
 					ex)	emplist(Emp sch);
 						<select parameterType="emp">
+						public void insert(HashMap<String, Object> ins);
+						<insert parameterType="hashmap">
+							${키값}
 				> 배열형 - parameterMap: 입력값이 배열형 객체일 때
-					ex) public void insert(HashMap<String, Object> ins);
-						<insert parameterType="hashmap" ${키값}>
+					ex) 승진할 사원 전체정보를 다중의 사원정보를 통해 검색
+						SELECT * FROM EMP WHERE EMPNO IN (7800, 7801, 7802);
+						public ArrayList<Emp> schEmp(ArrayList<Integer> empnos);
+						<parameterMap type="int" id="intParam">
+						<select parameterMap="intParam">
 			- id: 메서드명..
 					
-					
-					
-					
+# 사원정보 등록 철
+1. SQL insert
+	SELECT max(empno)+1 FROM emp01;
+	CREATE SEQUENCE emp01_seq
+		START WITH 7935
+		MINVALUE 1000
+		MAXVALUE 9999
+		CYCLE;
+	INSERT INTO emp01 VALUES (emp01_seq.nextval,'홍길동','CLERK','7902',sysdate, 3000, 1000, 10)
+2. DTO 확인
+3. DAO 작성 - public void empInsert(Emp dto);
+4. EmpMapper.xml 작성
+5. 등록 인터페이스 Emplist 화면(jsp)
+	- 이벤트 처리
+	- 등록할 form url 호출 /insEmpForm.do
+6. Controller 추가
+	- /insEmpForm.do
+7. view단 작성
+	[DB] 사원번호
+	[입력] 사원명
+	[입력] 직책(select)
+	[입력] 관리자(select)
+	[DB] 입사일
+	[입력] 급여			
+	[입력] 보너스			
+	[입력] 부서명(select)
+	/insertEmp.do
+8. Controller 추가
+	/insertEmp.do			
+9. service
+	- DAO 호출
+10. Controller
+	1) 등록 Service 호출
+	2) 등록처리 완료 모델 처리
+11. view
+	등록 완료. 계속 등록 여부 처리
 					
 					
 					

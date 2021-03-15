@@ -8,11 +8,15 @@
 		<typeAlias alias="emp" type="springweb.z02_vo.Emp"/>
 		<typeAlias alias="emp2" type="springweb.z02_vo.Emp2"/>
 		<typeAlias alias="dept" type="springweb.z02_vo.Dept"/>
+		<typeAlias alias="empg" type="springweb.z03_vo.EmpGrade"/>
+		<typeAlias alias="empp" type="springweb.z03_vo.EmpPart"/>
+		<typeAlias alias="empdept" type="springweb.z03_vo.EmpDept"/>
 	</typeAliases>
 	<!-- 3. SQL이 저장되는 mapper.xml 등록
 		 4. 주로 업무 단위(DAO 단위) 하나의 mapper.xml을 만든다. -->
 	<mappers>
 		<mapper resource="resource/EmpMapper.xml"/>
 		<mapper resource="resource/DeptMapper.xml"/>
+		<mapper resource="resource/ExpMapper.xml"/>
 	</mappers>
 </configuration>

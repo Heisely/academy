@@ -14,11 +14,23 @@
  -->
 	<resultMap type="emp" id="empResult"/>
 	<select id="emplist" resultMap="empResult" parameterType="emp">
-		SELECT * FROM EMP2
+		SELECT * FROM emp01
 		WHERE 1=1
 		AND ename LIKE '%'||#{ename}||'%'
 		AND job LIKE '%'||#{job}||'%'
+		ORDER BY empno DESC
 	</select>
+	<!-- Insert: public void empInsert(Emp dto) -->
+	<insert id="empInsert" parameterType="emp">
+		INSERT INTO emp01 
+		VALUES (emp01_seq.nextval, #{ename}, #{job}, ${mgr}, sysdate, #{sal}, #{comm}, #{deptno})
+	</insert>
+	<select id="mgrSearch" resultMap="empResult" parameterType="emp">
+		SELECT DISTINCT e.empno, e.ename
+		FROM emp01 e, emp01 m
+		WHERE e.empno = m.mgr
+		ORDER BY empno DESC
+	</select>  
 <!-- 	<select id="emplist" resultMap="empResult" parameterType="emp">
 		SELECT * FROM EMP2
 		WHERE 1=1
@@ -33,11 +45,11 @@
 
 	<!-- ex1: public int totCnt() -->
 	<select id="totCnt" resultType="int">
-		SELECT COUNT(*) FROM EMP
+		SELECT COUNT(*) FROM emp01
 	</select>
 	<!-- ex2: public Emp getEmp(int empno) -->
 	<select id="getEmp" resultType="emp" parameterType="int">
-		SELECT * FROM EMP
+		SELECT * FROM emp01
 		WHERE empno = #{empno}
 	</select>
 	<!-- ex3:
@@ -46,16 +58,16 @@
 	public ArrayList<Integer> searchEmp3(HashMap<String, Object> hm); -->
 	<resultMap type="emp2" id="emp2Result"/>
 	<select id="searchEmp1" resultMap="emp2Result" parameterType="emp2">
-		SELECT empno FROM emp
+		SELECT empno FROM emp01
 		WHERE sal BETWEEN #{start} AND #{end}
 	</select>
 	<resultMap type="int" id="intRs"></resultMap>
 	<select id="searchEmp2" resultMap="intRs" parameterType="emp2">
-		SELECT empno FROM emp
+		SELECT empno FROM emp01
 		WHERE sal BETWEEN #{start} AND #{end}
 	</select>
 	<select id="searchEmp3" resultMap="intRs" parameterType="hashmap">
-		SELECT empno FROM emp
+		SELECT empno FROM emp01
 		WHERE sal BETWEEN #{start} AND #{end}
 	</select>
 	
@@ -65,14 +77,34 @@
 	</select>
 	<!-- ex2: public ArrayList<Emp> maxSal() -->
 	<select id="maxSal" resultMap="empResult">
-		SELECT deptno, max(sal) sal FROM emp GROUP BY deptno
+		SELECT deptno, max(sal) sal FROM emp01 GROUP BY deptno
 	</select>
 	<!-- ex3: public ArrayList<Emp> searchJob(String job) -->
 	<select id="searchJob" resultMap="empResult" parameterType="String">
-		SELECT * FROM emp WHERE job = #{job}
+		SELECT * FROM emp01 WHERE job = #{job}
 	</select>
 	<!-- ex4: public int maxSalDeptno(int deptno) -->
 	<select id="maxSalDeptno" resultType="int" parameterType="int">
-		SELECT max(sal) FROM emp WHERE deptno = ${deptno}
+		SELECT max(sal) FROM emp01 WHERE deptno = ${deptno}
 	</select>
+	
+	<!-- 0312 과제: public ArrayList<EmpDept> schEDGList(EmpDept sch) -->
+	<resultMap type="empdept" id="edMap"/>
+	<select id="schEDGList" resultMap="edMap" parameterType="empdept">
+		SELECT e.*, dname, loc, grade
+		FROM emp01 e, dept d, salgrade s
+		WHERE e.deptno = d.deptno
+		AND e.sal BETWEEN s.losal AND s.hisal
+		<if test="job != null and job != '' ">
+			AND job = #{job}
+		</if>
+		<if test="deptno!=0">
+			AND e.deptno = #{deptno}
+		</if>
+		<if test="grade != null and grade != '' ">
+			AND grade = #{grade}		
+		</if>	
+	</select>
+	
+
 </mapper>

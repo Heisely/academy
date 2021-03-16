@@ -146,7 +146,21 @@
 		부서정보 콤보박스, 관리자정보 콤보박스
 2. 요청값+모델데이터를 동시에 처리
 
-
+# 스프링에서 사용되는 form 태그
+1. 스프링에서는 <form:form 형식으로 태그의 form을 효과적으로 처리할 수 있도록 tag lib를 사용할 수 있다.
+2. form의 구성요소별 설정 내용
+	1) lib 선언
+		<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+	2) <form:form commandName="모델명">
+		하위에 있는 요소들을 setXXX property와 연동해준다.
+			<form:input path="property명">
+			
+		ex) 컨트롤러에 model로 d.addAttribute("emp", new Emp()) 라고 하면
+			<form:form commandName="emp">
+				<form:input path="empno">
+			==> <input type="text" id="empno" name="empno" value="${emp.empno}"/> 자동 설정
+			
+	
 
 
 

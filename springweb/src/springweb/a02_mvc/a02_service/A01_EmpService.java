@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import springweb.a02_mvc.a03_dao.A01_EmpDao;
+import springweb.z02_vo.Dept;
 import springweb.z02_vo.Emp;
 import springweb.z03_vo.EmpDept;
 
@@ -23,23 +24,41 @@ public class A01_EmpService {
 
 		System.out.println("## 데이터 건수: " + dao.totCnt());
 		System.out.println("## 데이터 객체: " + dao.getEmp(7499).getEname());
+
 		HashMap<String, Integer> hm = new HashMap<String, Integer>();
 		hm.put("start", 1000);
 		hm.put("end", 3000);
+
 		System.out.println("## 검색된 사원 번호 ##");
 		for (int empno : dao.searchEmp3(hm)) {
 			System.out.println(empno);
 		}
 //		dao.schEDGList(new EmpDept()); // test용 -> 정상작동 확인
-//		dao.empInsert(new Emp("마길동(연습)", "CLERK", 7902,3500,100,10));
-		dao.mgrSearch(new Emp(7902));
-		
+//		dao.empInsert(new Emp("김길동(연습)", "CLERK", 7902,4000,200,10));
+//		dao.getMgrs();
+
 		return dao.emplist(sch);
 	}
+
+	public void empInsert(Emp dto) {
+		dao.empInsert(dto);
+	}
 	
-	public ArrayList<EmpDept> schEDGList(EmpDept sch){
-		
-		
+	public ArrayList<EmpDept> schEDGList(EmpDept sch) {
+
 		return dao.schEDGList(sch);
 	}
+
+	public ArrayList<Dept> getDepts(){
+		return dao.getDepts();
+	}
+	
+	public ArrayList<Emp> getMgrs() {
+		return dao.getMgrs();
+	}
+
+	public ArrayList<String> getJobs() {
+		return dao.getJobs();
+	}
+
 }

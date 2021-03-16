@@ -14,6 +14,10 @@ import springweb.z03_vo.EmpDept;
 public interface A01_EmpDao {
 	// 여기에 있는 구성요소 하나하나가 EmpMapper.xml에 있는 구성요소와 연동해서 MyBatis 프레임워크에서 실제 객체를 생성해준다.
 	public ArrayList<Emp> emplist(Emp sch);
+//	InsertDao
+	public void empInsert(Emp dto);
+	
+
 	/*
 	# dao, mapper 연습예제
 	ex1) SELECT count(*) FROM emp;
@@ -44,8 +48,8 @@ public interface A01_EmpDao {
 //	0312 과제
 	public ArrayList<EmpDept> schEDGList(EmpDept sch);
 	
-//	InsertDao
-	public void empInsert(Emp dto);
-	
-	public ArrayList<Emp> mgrSearch(Emp sch);
+//	0315 과제	
+	public ArrayList<Dept> getDepts();
+	public ArrayList<Emp> getMgrs();
+	public ArrayList<String> getJobs();
 }

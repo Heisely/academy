@@ -20,25 +20,22 @@
 <%--
 [스프링]
 [하] 1. 데이터 처리가된 리스트 화면 개발 처리 순서를 간단하게 기술하세요
-		1) mybatis.Spring.xml에 VO 및 XXXMapper.xml 등록
-		2) interface Dao파일에 메서드 선언
-		3) Mapper에서 사용할 SQL 정의
-		4) Service단에서 메서드 정의
-		5) view단 작성(jsp파일)
-		6) 컨트롤러에서 DAO를 호출하고 view단 호출
-		 
+	   1) 조건과 출력 내용에 맞는 sql 작성
+	      select *  ==> resultType, resultMap
+	      from 테이블
+	      where 조건문 ==> parameterType, parameterMap(권장하지 않음)
+	   2)   출력 결과를 위치하는 VO, 입력 처리를 위한 VO/DTO
+	   3)   DAO 메서드 선언 : public ArrayList<VO> 메서드명(매개 객체);
+	   4)   공통 vo선언, alias, XXXMapper.xml 선언
+	   5)   Service단 dao 호출
+	   6)   Controller 선언
+	      service단 호출 model 데이터 매핑
+	   7)   View 호출(jsp)
+	      모델 데이터 mapping
+
+
 [하] 2. 관리자 정보(관리자번호,관리자명)를 가져오는 dao 하위 메서드를 정의하고, EmpMapper.xml를 추가하고,
-        현재 모델 데이터를 dao에서 service로 가져온 것을 처리해보세요.
-        [DAO]
-        public ArrayList<Emp> mgrSearch(Emp sch);
-        
-        [EmpMapper.xml]
-		<select id="mgrSearch" resultMap="empResult" parameterType="emp">
-			SELECT DISTINCT e.empno, e.ename
-			FROM emp01 e, emp01 m
-			WHERE e.empno = m.mgr
-			ORDER BY empno DESC
-		</select>       
+        현재 모델 데이터를 dao에서 service로 가져온 것을 처리해보세요. 
 --%>
 //
 	$(document).ready(function(){

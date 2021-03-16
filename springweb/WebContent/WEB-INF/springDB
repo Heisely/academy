@@ -80,15 +80,16 @@
 		MAXVALUE 9999
 		CYCLE;
 	INSERT INTO emp01 VALUES (emp01_seq.nextval,'홍길동','CLERK','7902',sysdate, 3000, 1000, 10)
-2. DTO 확인
+2. DTO 확인(VO - getter/setter)
 3. DAO 작성 - public void empInsert(Emp dto);
 4. EmpMapper.xml 작성
-5. 등록 인터페이스 Emplist 화면(jsp)
+----------------------------------------------------------------
+5. 등록 인터페이스 Emplist 화면(a02_mvc\a01_empList.jsp)
 	- 이벤트 처리
 	- 등록할 form url 호출 /insEmpForm.do
-6. Controller 추가
+6. Controller 추가(A01_EmpController)
 	- /insEmpForm.do
-7. view단 작성
+7. view단 작성(a02_mvc\a01_empInsertForm.jsp)
 	[DB] 사원번호
 	[입력] 사원명
 	[입력] 직책(select)
@@ -97,12 +98,14 @@
 	[입력] 급여			
 	[입력] 보너스			
 	[입력] 부서명(select)
-	/insertEmp.do
-8. Controller 추가
+	action="${path}/insertEmp.do
+-----------------------------------------------------------------
+8. Controller(A01_EmpController.java) 추가
 	/insertEmp.do			
 9. service
-	- DAO 호출
-10. Controller
+	- 입력 메서드 선언
+	- DAO 호출	empInsert(Emp dto)
+10. Controller(A01_EmpController.java)
 	1) 등록 Service 호출
 	2) 등록처리 완료 모델 처리
 11. view

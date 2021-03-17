@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/springweb/a00_com/a00_com.css">
+<script type="text/javascript" src="/springweb/a00_com/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+/* 
+# wrap()
+1. 특정 요소객체로 포함시킬 때 활용
+	ex) 요소객체.wrap("<h2></h2>"): 해당 요소객체를 h2로 포함시켜서 처리
+	
+# parent()
+2. 해당 요소객체의 상위(부모) 객체를 선택하여 처리
+	ex) 요소객체.parent().css("color","red"): 해당 요소객체의 부모객체의 글자색상을 빨강으로 설정
+
+# :속성
+3. input의 type 속성만 지정해서 특정한 form 객체의 하위 요소객체를 선택할 때 활용
+	ex) $("input:checkbox"): input의 type이 checkbox인 것을 선택
+		$(":text"): type이 text인 것을 선택
+
+cf) :이벤트 - 이벤트가 발생한 특정요소객체를 선택할 때 활용
+	ex) $("input:focus"): input중에 focus된 것을 선택
+*/
+//
+	$(document).ready(function(){
+		$("h2").text(":선택자, wrap(), parent()");
+		$("input:checkbox").wrap("<span></span>").parent().css("border","3px dotted red");
+		$(":text").val($("input:checked").val());
+		
+		$("input:checkbox").click(function(){
+			$(":text").val("");
+			// .prop("checked"): 체크 여부를 true/false
+			if($(this).prop("checked")){
+				$(":text").val($(this).val());
+			}
+		});
+		// ex) <input type="text" class="ckExp">를 하단에 추가하고,
+		//		해당내용 클릭 시, 배경색상 변경, wrap을 div, border 1px solid green으로 설정 
+		$(".ckExp:text").click(function(){
+			$(this).css("background-color","yellow").wrap("<div></div>").css("border","3px solid green");
+		});
+// :이벤트형속성 관련 예제
+		$("select").change(function(){
+			var data = $(":selected").text();
+			$("span").text(data);
+		});
+	});
+</script>
+</head>
+<body>
+	<h2></h2>
+	<fieldset>
+		사과<input type="checkbox" checked="checked" value="사과"/><br>
+		배<input type="checkbox" value="배"/><br>
+		바나나<input type="checkbox" value="바나나"/><br>
+		<input type="text"/>
+		<input type="text" class="ckExp"/>
+		<input type="text" class="ckExp"/>
+		<input type="text" class="ckExp"/>
+		<input type="text" class="ckExp"/>
+	</fieldset>
+	<select name="phone">
+		<option>010</option>
+		<option selected="selected">011</option>
+		<option>02</option>
+	</select>
+	선택된 값: <span></span>
+</body>

@@ -23,7 +23,8 @@
 --%>
 //
 	$(document).ready(function(){
-		$("[name=job]").val("${sch.job}"); // 검색 후, 다음 페이지에서 확인
+//		$("[name=job]").val("${sch.job}");
+		// 등록 controller 호출
 		$("#regBtn").click(function(){
 			location.href="${path}/insEmpForm.do"; // 등록 Controller 호출
 		});

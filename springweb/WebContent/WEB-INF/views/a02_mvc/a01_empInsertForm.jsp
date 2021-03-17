@@ -37,77 +37,49 @@
   <h2>사원 등록</h2>
 </div>
 <div class="container">
- <%-- <form:form commandName="emp" action="${path}/insertEmp.do">
-  <table class="table table-hover">
-    <tbody>
-      <tr class="text-center">
-        <th class="table-success">사원명</th> 
-        <td><form:input path="ename"/></td>
-      </tr>
-    </tbody>
-  </table>
-  </form:form>  --%> 
-  <form action="${path}/insertEmp.do" method="post">
-  <table class="table table-hover">
-    <tbody>
-    <col width="50">
-    <col width="50">
-      <tr class="text-center">
-        <th class="table-success">사원명</th> 
-        <td><input type="text" name="ename" class="form-control"/></td>
-      </tr>
-       <tr class="text-center">
-        <th class="table-success">직책</th> 
-        <td>
-        
-        <select name="job" class="form-control mr-sm-2">
-         <option value="">직책선택</option>
-         <c:forEach var="job" items="${jobs}">
-         <option>${job}</option>
-         </c:forEach>
-      </select>
-      
-        </td>
-      </tr>
-       <tr class="text-center">
-        <th class="table-success">관리자</th> 
-        <td>
-           <select name="mgr" class="form-control mr-sm-2">
-         <option value="0">관리자선택</option>
-         <c:forEach var="mgr" items="${mgrs}">
-         <option value="${mgr.mgr}">${mgr.ename}</option>
-         </c:forEach>
-      </select>
-        </td>
-      </tr>
-       <tr class="text-center">
-        <th class="table-success">급여</th> 
-        <td><input type="number" name="sal" class="form-control"/></td>
-      </tr>
-       <tr class="text-center">
-        <th class="table-success">보너스</th> 
-        <td><input type="number" name="comm" class="form-control"/></td>
-      </tr>
-       <tr class="text-center">
-        <th class="table-success">부서</th> 
-        <td>
-        
-           <select name="deptno" class="form-control mr-sm-2">
-         <option value="0">부서선택</option>
-         <c:forEach var="dept" items="${depts}">
-         <option value="${dept.deptno}">${dept.dname}</option>
-         </c:forEach>
-      </select>
-        </td>
-      </tr>
-      <tr>
-      <td colspan="2">
-      <button class="btn btn-info" type="submit" id="regBtn">등록</button>
-      </td>
-      </tr>
-    </tbody>
-  </table>
-  </form>  
+<form:form modelAttribute="emp" action="${path}/insertEmp.do" method="post">
+	<table class="table table-hover">
+		<tbody>
+			<col width="50"><col width="50">
+				<tr class="text-center">
+					<th class="table-success">사원명</th> 
+					<td><form:input path="ename" class="form-control"/></td>
+				</tr>
+				<tr class="text-center">
+					<th class="table-success">직책</th> 
+					<td>
+					<%-- option에 대한 default 설명이나 항목이 없는 경우 --%>
+						<form:select path="job" class="form-control mr-sm=2" items="${jobs}"/>
+					</td>
+				</tr>
+				<tr class="text-center">
+					<th class="table-success">관리자</th> 
+					<td>
+						<%-- option에 대한 default 설명이나 항목이 없는 경우 --%>
+						<form:select path="mgr" class="form-control mr-sm=2" items="${mgrs}" itemLabel="ename" itemValue="mgr"/>
+					</td>
+				</tr>
+			<tr class="text-center">
+				<th class="table-success">급여</th>
+				<td><input type="number" name="sal" class="form-control"/></td>
+			</tr>
+			<tr class="text-center">
+				<th class="table-success">보너스</th>
+				<td><input type="number" name="comm" class="form-control"/></td>
+			</tr>
+			<tr class="text-center">
+				<th class="table-success">관리자</th>
+				<td>
+				<%-- option에 대한 default 설명이나 항목이 없는 경우 --%>
+				<form:select path="deptno" class="form-control mr-sm=2" items="${depts}" itemLabel="dname" itemValue="deptno"/>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2"><button class="btn btn-info" type="submit" id="regBtn">등록</button></td>
+			</tr>
+		</tbody>
+	</table>
+</form:form> 
 </div>
 </body>
 </html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/springweb/a00_com/a00_com.css">
+<script type="text/javascript" src="/springweb/a00_com/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+/* 
+# 선택자 선언
+1. 요소객체:not(:checked)
+	not > 해당 속성값이 아닐 때
+	:checked > checked속성을 가질 때
+2. 요소객체1 + 요소객체2
+	형제관계에 있는 두 개의 요소객체가 나열되어 있고, 요소객체2에 대한 선택처리
+*/
+//
+	$(document).ready(function(){
+ 		$("h2").text(":not() Filter Selector");
+		// input 요소객체 가운대 checked가 안 된 것의 옆에 있는 span의 배경색상을 green으로 설정
+		$("input:not(:checked)+span").css("background-color","green");
+		$("[type=checkbox]").click(function(){
+			// 배경 색상 초기화
+			$("input + span").css("background-color","");
+			// check가 되지 않은 것만 배경색상을 green으로 설정
+			$("input:not(:checked)+span").css("background-color","green");
+		});
+
+
+</script>
+</head>
+<body>
+	<h2></h2>
+ 	<div>
+		<input type="checkbox" name="a"/>
+		<span>홍길동</span>
+	</div>
+	<div>
+		<input type="checkbox" name="b"/>
+		<span>이순신</span>
+	</div>
+	<div>
+		<input type="checkbox" name="c" checked="checked"/>
+		<span>유관순</span>
+	</div>
+
+</body>

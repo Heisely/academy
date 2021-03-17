@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/springweb/a00_com/a00_com.css">
+<script type="text/javascript" src="/springweb/a00_com/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+/* 
+
+*/
+//
+	$(document).ready(function(){
+		/*
+		ex) 아래와 같이 물건 정보의 합산 처리를 하세요
+			장바구니
+		[] 물건명		가격		개수
+		[] 사과		3000	2
+		[] 바나나		4000	3
+		[] 딸기		12000	5
+			총계: @@@ ==> checked가 된 것만 배경색상을 노란색으로 설정하고 하단에 총계 계산 출력
+		*/
+		$("h2").text("장바구니");
+		$("[type=checkbox]").click(function(){
+			// input ~ span: input 옆에 있는 span이 같은 형제객체일때, 모두 다 배경색상을 노란색으로 설정
+			$("input ~ span").css("background-color","");
+			// check된 input 옆에 있는 span의 배경색상을 모두 노란색으로 설정
+			$("input:checked ~ span").css("background-color","yellow");
+			// 가격을 가져오는 배열
+			var priceArry = $("input:checked + span + span");
+			// 개수를 가져오는 배열
+			var cntArry = $("input:checked + span + span + span");
+			var tot = 0;
+			$(priceArry).each(function(idx, obj){
+				var price = $(obj).text();
+				// 가격과 index가 동일한 cnt값을 가져와서 반복문으로 tot값 누적 처리
+				var cnt = $(cntArry).eq(idx).text();
+				tot += price*cnt;
+			});
+			$("#tot").text(tot+"원");
+		});
+	});
+</script>
+</head>
+<body>
+	<h2></h2>
+	<div>
+		<input type="checkbox" name="a">
+		<span>사과</span>
+		<span>3000</span>
+		<span>2</span>
+	</div>
+	<div>
+		<input type="checkbox" name="b">
+		<span>바나나</span>
+		<span>4000</span>
+		<span>3</span>
+	</div>
+	<div>
+		<input type="checkbox" name="c">
+		<span>딸기</span>
+		<span>12000</span>
+		<span>5</span>
+	</div>
+	<div>
+		총계: <span id="tot"></span>
+	</div>
+</body>

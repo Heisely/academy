@@ -159,6 +159,13 @@
 			<form:form commandName="emp">
 				<form:input path="empno">
 			==> <input type="text" id="empno" name="empno" value="${emp.empno}"/> 자동 설정
+			select, checkbox, radio 옵션 중
+			1) 레이블에 보이는 데이터와 전송되는 데이터가 동일할 경우
+				<option>사과</option>
+				<form:options itesm="${ModelAttribute명}"/>
+			2) 레이블에 보이는 데이터와 전송되는 데이터가 다른 경우
+				key/value: <option value="ch01">사과</option>
+				<form:options itesm="${ModelAttribute명}" itemLabel="key값" itemValue="value값"/>
 			
 	
 

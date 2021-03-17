@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/springweb/a00_com/a00_com.css">
+<script type="text/javascript" src="/springweb/a00_com/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+/* 
+# :contains("포함내용")
+1. 해당 내용을 포함한 요소 객체를 선택
+	html(), text()로 포함된 내용
+	
+# :empty
+2. html(), text()로 포함된 내용이 없는 요소객체를 선택
+
+# :has(요소객체)
+3. 요소객체를 하위에 포함할 때 선택
+
+# 기타: :parent(부모), .parent(), .parents()
+*/
+//
+	$(document).ready(function(){
+		$("h2").text("시작");
+		$("h3#ch01").click(function(){
+			$("#div01>div:contains('John')").css("text-decoration","underline");
+		});
+		$("#ch02").click(function(){
+			$("#div02 td:empty").text("빈 문자열").css("background-color","green");
+		});
+		$("#ch03").click(function(){
+			$("#div03>div:has(p)").css("background-color","pink");
+		});
+		// ex) Math.floor(Math.random()*9+1) 이용해 4자리 비밀번호를 7개 만들어 table에 세로로 리스트하고,
+		//		이 중에 5가 포함된 것은 배경색상을 노란색으로 설정
+		$("#ch04").click(function(){
+			var addPass="";
+			for(var row=1; row<=7; row++){
+				addPass+="<tr><td>";
+				for(var col=1; col<=4; col++){ // 패스워드 4자리 1row 단위로 입력
+					var pass = Math.floor(Math.random()*9+1);
+					addPass += pass;
+				}
+				addPass += "</td></tr>";
+			}
+			$("#mkPass").html(addPass);
+			$("#mkPass").find("td:contains('5')").css("background-color","yellow");
+		});
+	});
+</script>
+</head>
+<body>
+	<h2></h2>
+	<h3 id="ch01">contains()</h3>
+	<div id="div01">
+		<div>John Resig</div>
+		<div>George Martin, John</div>
+		<div>Malcom John Sinclair</div>
+		<div>J. Ohn</div>
+		<div>
+			<span>Mr.John</span>
+		</div>
+	</div>
+	
+	<h3 id="ch02">empty()</h3>
+	<div id="div02">
+		<table border="1">
+			<tr><td>TD #0</td><td></td></tr>
+			<tr><td>TD #2</td><td></td></tr>
+			<tr><td></td><td>TD #5</td></tr>
+		</table>
+	</div>
+	
+	<h3 id="ch03">has()</h3>
+	<div id="div03">
+		<div>##<p>홍길동</p>##</div>
+		<div>이순신</div>
+	</div>
+	
+	<h3 id="ch04">비밀번호 생성 예제(클릭)</h3>
+	<div id="div04">
+		<table id="mkPass"></table>
+	</div>
+</body>

@@ -71,7 +71,7 @@
 						<select parameterMap="intParam">
 			- id: 메서드명..
 					
-# 사원정보 등록 철
+# 사원정보 등록 처리
 1. SQL insert
 	SELECT max(empno)+1 FROM emp01;
 	CREATE SEQUENCE emp01_seq
@@ -80,9 +80,9 @@
 		MAXVALUE 9999
 		CYCLE;
 	INSERT INTO emp01 VALUES (emp01_seq.nextval,'홍길동','CLERK','7902',sysdate, 3000, 1000, 10)
-2. DTO 확인(VO - getter/setter)
+2. VO/DTO 확인(VO - getter/setter)
 3. DAO 작성 - public void empInsert(Emp dto);
-4. EmpMapper.xml 작성
+4. EmpMapper.xml 작성: namespace, id, parameterType, resultType/resultMap
 ----------------------------------------------------------------
 5. 등록 인터페이스 Emplist 화면(a02_mvc\a01_empList.jsp)
 	- 이벤트 처리

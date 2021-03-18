@@ -50,6 +50,7 @@ ex) <form:form 과 ModelAttribute를 활용해서 사원검색 처리하기
 --%>
 	<form:form modelAttribute="sch" class="form-inline" method="post">
 		<form:input path="ename" class="form-control mr-sm-2" placeholder="사원명" style="width:30%"/>
+		<%-- {sch.job}을 가져와서 select중에 동일할 내용을 선택해준다.(재선택 가능) --%>
 		<form:select path="job" class="form-control mr-sm-2">
 			<option value="">직책선택</option>
 			<form:options items="${jobs}"/>

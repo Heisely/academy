@@ -53,7 +53,7 @@ public class A01_EmpController {
 
 /* EmpController를 처리하는 모든 url이 매핑된 메서드의 view단은 아래의 모델어트리뷰트를 공유한다. */
 	/* 공통 모델: CLERK, SALESMAN, PRESIDENT, MANAGER, ANALYST */	
-	@ModelAttribute("jobs")
+	@ModelAttribute("jobs") // 화면에 select option으로 리스트 데이터화
 	public ArrayList<String> getJobs(){
 		return service.getJobs();
 	}

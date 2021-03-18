@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/springweb/a00_com/a00_com.css">
+<script type="text/javascript" src="/springweb/a00_com/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+/* 
+# DOM 추가 기능 함수
+1. .append("추가할 태그(DOM)")
+	ex) $("div").append("<h3>안녕하세요</h3>");
+	ex) $("div").append($("h2").text("반가워요"));
+2. 추가할태그/DOM.appendTo(추가할 대상객체)
+	ex) $("<h2>좋은날</h2>").appendTo("div");
+3. 요소객체.prepend("요소객체의 접두로 추가처리")
+	"접두로 추가할 내용".prependTo(요소객체)
+*/
+//
+	$(document).ready(function(){
+		$("h2").text("추가처리 기능 함수들");
+		$("#appendFunc").click(function(){
+			$(".inner").append("<span>장군</span>");
+		});
+		$("#appendToFunc").click(function(){
+			$("<span>영웅</span>").appendTo(".inner");
+		});
+		$("#prependFunc").click(function(){
+			$(".inner").prepend("<span>멋진</span>");
+		});
+	});
+</script>
+</head>
+<body>
+	<h2></h2>
+	<h4 id="appendFunc">append 처리</h4>
+	<h4 id="appendToFunc">appendTo 처리</h4>
+	<h4 id="prependFunc">prepend 처리</h4>
+	<h3>영웅들</h3>
+	<div class="container">
+		<div class="inner">이순신</div>
+		<div class="inner">강감찬</div>
+	</div>
+</body>

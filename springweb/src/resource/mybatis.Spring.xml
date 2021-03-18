@@ -18,5 +18,6 @@
 		<mapper resource="resource/EmpMapper.xml"/>
 		<mapper resource="resource/DeptMapper.xml"/>
 		<mapper resource="resource/ExpMapper.xml"/>
+		<mapper resource="resource/AjaxMapper.xml"/>
 	</mappers>
 </configuration>

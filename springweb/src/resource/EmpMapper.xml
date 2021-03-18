@@ -115,6 +115,4 @@
 		FROM emp01 e, emp01 m
 		WHERE e.mgr = m.empno
 	</select>
-
-
 </mapper>

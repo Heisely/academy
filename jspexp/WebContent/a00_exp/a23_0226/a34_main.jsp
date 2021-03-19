@@ -34,10 +34,5 @@
 <body>
 	<h3>메인페이지</h3>
 	<h4 align="right">${mem.id} 로그인 중</h4>
-	<h5>세션값 확인</h5>
-	<h5>${mem.pass}</h5>
-	<h5>${mem.name}</h5>
-	<h5>${mem.point}</h5>
-	<a href="a00_exp\a23_0226\a34_main.jsp">페이지 이동</a>
 </body>
 </html>

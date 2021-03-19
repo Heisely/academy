@@ -10,20 +10,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import jspexp.a03_database.A04_MemberDao;
-import jspexp.z01_vo.Member;
-
 /**
  * Servlet implementation class A03_login
  */
 @WebServlet(name = "mvc4.do", urlPatterns = { "/mvc4.do" })
-public class A03_LoginCtrl extends HttpServlet {
+public class A03_LoginDBSessCtrl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public A03_LoginCtrl() {
+    public A03_LoginDBSessCtrl() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -47,19 +44,12 @@ himan/7777일 때는 view단(jsp)에 @@님 환영합니다. 그외에는 @@@님�
 		if(pass==null) pass="";
 		String page = "a32_loginFrm.jsp";
 		if(!id.equals("") && !pass.equals("")){
-			
-			A04_MemberDao dao = new A04_MemberDao();
-			Member mem = dao.login(new Member(id,pass));
-			
-			if(mem!=null) {
+			if(id.equals("himan")&&pass.equals("7777")) {
 				request.setAttribute("isSuccess",true);
 				// DB연도으이 경우, session값을 설정해서 model데이터를 매핑한다.
 				// HttpSession session = request.getSession();
 				// session.setAttribute("member", dao.login(id,pass));
 				// a00_exp\a23_0226\a32_loginFrm.jsp
-				HttpSession session = request.getSession();
-				session.setAttribute("mem", mem);
-				
 				page="a33_successFrm.jsp";
 			} else {
 				request.setAttribute("isSuccess", false);

@@ -1,0 +1,104 @@
+# 답변형 게시판
+1. 주요기능
+	1) 전체글 리스트
+		block단위 페이징
+			- 한 번에 보일 데이터 건수 설정(3/5/10/20...)			
+				[1][2][3][4][5] >>
+				<< [5][6][7][8][9]
+		검색
+		계층형 답글 달기
+	2) 글 등록
+		첨부파일
+	3) 상세화면
+		수정
+		삭제
+		파일 다운로드
+		답글
+		
+# DB 설계 및 VO 만들기		
+	1) DB 설계 및 테이블 구성
+		board: 번호, 상위 번호, 제목, 작성자, 등록일, 수정일, 조회수, 내용
+			   no, refno, subject, writer, regdte, uptdte, readcnt, content
+		boardfile: 번호, 파일명, 경로명, 내용, 생성일
+				   no, fname, pathname, content, credte
+		board_seq (sequence 만들기)		
+	2) VO 작성
+		리스트/입력 처리 VO(board.z01_vo.Board)
+		-- 조회처리 및 페이지 처리 관련 VO
+		첨부파일 VO(board.z01_vo.Boardfile)
+
+# 기본 조회 리스트 작성
+	1) SQL
+		SELECT * FROM BOARD
+		WHERE SUBJECT LIKE '%%'
+		AND WRITER LIKE '%%'
+		ORDER BY NO DESC;
+	2) DAO
+		public ArrayList<Board> boardList(Board sch);
+	3) MAPPER
+			
+	4) SERVICE
+		board.a02_service.A01_BoardService
+	5) CONTROLLER
+		modelattribute명 sch
+		model명 boardList
+	6) JSP(VIEW)
+	
+	
+# 기본 정보 등록
+	1) list화면에서 등록 버튼 클릭
+		/board.do?method=insForm 으로 등록 화면 이동
+	2) Controller 등록화면 선언
+	3) 등록 화면: 
+		a02_boardInsert.jsp
+		form 화면 구성(action=board.do?method=insert)
+		> 상위글번호(0, hidden), 글제목, 작성자, 내용, 첨부파일
+	4) 등록 SQL
+		INSERT INTO board VALUES (BOARD_seq.nextval, 0, '첫 번째 글', '내용', '홍길동', 0, sysdate, sysdate)
+	5) DAO
+		public void insertBoard(Board insert);
+	6) mapper.xml 작성
+	7) service
+	8) controller
+		등록 service 호출
+	9) 화면 등록 완료 처리 메시지 출력
+
+
+
+
+	5) 상세화면		
+		- 상세화면 보기
+		- 수정
+		- 삭제
+		- 답글
+	6) 계층형 리스트 처리하기
+		- 계층형 SQL 작성
+		- 조회 VO 할당
+		- SERVICE단에서 BUSINESS로직 처리
+		- 계층적 리스트 및 페이징
+		
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		

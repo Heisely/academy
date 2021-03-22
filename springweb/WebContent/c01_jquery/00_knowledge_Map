@@ -9,18 +9,22 @@
 			.eq(0), .first(), .last()
 			.find(), children()
 		- 이벤트 처리
-			click, keyup, keydown, mouseover, mouseout
+			click, keyup(event.keyCode), keydown, mouseover, mouseout
 			hover(함수1, 함수2): 대상요소객체에 함수1로는 mouseover했을 때, 함수2로는 mouseout 했을 때 처리
+			on.("이벤트명",function(){});
 		- 화면 추가 처리
-			html(), text(), append(), wrap()
+			html("태그랜더링"), text(), append("태그랜더링"), wrap()
 		- 화면 controller
-			show()/hide()
+			show()/hide(), toggle(), toggleClass()
 		- 데이터 처리
-			filter(함수 boolean 리턴), map(배열의 단위객체별로 데이터 처리), each(index, 단위객체, 배열), ...
+			$.each(배열, function(index, 단위객체, 배열){})...
+			filter(함수 boolean 리턴), 
+			map(배열의 단위객체별로 데이터 처리) 
 		- 속성처리
 			.attr("기본속성","속성값")
 			.css("css속성","css속성값")
-			ex) 
+			ps) {속성:속성값, 속성2:속성2값, 속성3:속성3값, ...} 
+			.val(): form하위 요소객체의 value를 설정
 	3) ajax처리
 		- backend(jsp/spring) 요청/반응에 의한 json데이터 처리
 		- 화면단에 연동하여 비동기적으로 jquery plugin에 연동하여 처리
@@ -29,3 +33,11 @@
 			DB 테이블 설계 arraylist로 가져오기(dao)
 			spring지원 arrayList ==> json변경 viewresolver를 통해서 처리
 			연동되는 화면단 처리
+		- 속성
+			$.ajax({
+				url:"주소",
+				data:
+				dataType:
+				success:function(){},
+				error:function(){}
+			});

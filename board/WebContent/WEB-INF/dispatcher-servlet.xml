@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 
+	xmlns="http://www.springframework.org/schema/beans"
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/aop
+						http://www.springframework.org/schema/aop/spring-aop.xsd
+						http://www.springframework.org/schema/context
+						http://www.springframework.org/schema/context/spring-context.xsd
+						http://www.springframework.org/schema/mvc
+						http://www.springframework.org/schema/mvc/spring-mvc.xsd
+						http://www.springframework.org/schema/util
+						http://www.springframework.org/schema/util/spring-util.xsd
+						http://www.springframework.org/schema/websocket
+						http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
+	<context:property-placeholder location="classpath:/resource/properties/info"/>
+	<!-- 스프링에서 사용하게 될 초기 로딩객체를 선언 
+	<bean class="springweb.a01_start.A01_StartController"/>
+	<bean class="springweb.z01_exp.A01_ExpController"/>
+	<bean class="springweb.z01_exp.A02_MemberController"/>
+	<bean class="springweb.a01_start.A02_EmpController"/>
+	<bean class="springweb.a01_start.A03_DeptController"/>
+	-->
+	<!-- 
+	특정한 패키지의 Controller단에 대한 객체 메모리 로딩
+	include-filter type="annotation"
+		expression="org.springframework.stereotype.Controller"
+	-->
+	<context:component-scan base-package="board">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+	</context:component-scan>
+	<!-- 
+	driver dburl user pass
+	
+	# Database 접속 처리
+	1. 연결 후, 자원해제 메서드 정의: destroy-method="close"
+	-->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${driver}"/>
+		<property name="url" value="${dburl}"/>
+		<property name="username" value="${user}"/>
+		<property name="password" value="${pass}"/>
+	</bean>
+	
+	<!-- 2. MyBatis 공통 XML파일 설정 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- BasicDataSource 연결 객체의 정보를 MyBatis에 할당 -->
+		<property name="dataSource" ref="dataSource"/>
+		<!-- 공통 MyBatis XML파일 설정 -->
+		<property name="configLocation" value="classpath:resource/mybatis.Spring.xml"/>
+	</bean>
+	
+	<!-- 3. 사용할 DAO 인터페이스 폴더 위치 지정 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="board.a03_dao"/>
+	</bean>
+	
+	<!-- # viewResolver 추가
+		 1. jsp/html만 처리하는 view는 자동(defalut)으로 설정
+		 2. 추가하는 View가 있으면 둘 다 선언하고, 우선 순위를 지정해야 한다. -->	
+	<!-- 1. 공통 bean으로 등록하는 뷰 등록: order 우선순위 첫 번째 -->
+	<bean id="btnViewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<property name="order" value="0"/>
+	</bean>
+	<!-- 2. JSP로 등록하는 뷰 등록 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!-- 접두어/접미어
+		"WEB-INF\\views\\a02_mvc\\a03_empDeptList.jsp";
+		접두어를 WEB-INF\\views 접미어를 .jsp로 설정하면 Controller의 메소드 리턴값으로
+			return "a02_mvc\\a03_empDeptList" 로만 설정할 수 있다.
+		<property name="prefix" value="WEB-INF\\views"/>
+		<property name="suffix" value=".jsp"/>
+		-->
+		<property name="prefix" value="WEB-INF\\views\\"/>
+		<property name="suffix" value=".jsp"/>
+		<property name="order" value="1"/>
+	</bean>
+	<!-- viewResolver의 우선순위를 설정하게 되면 먼저 bean이름으로 등록된 것을 먼저 search하고, 그 다음 내용이 없을 때 jsp를 호출하여 처리한다. -->
+	<!-- 1. JSON Viewer: ArrayList형/객체형의 모델데이터를 JSON문자열로 변환처리 -->
+	<bean id="pageJsonReport" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
+		<property name="contentType" value="text/html;charset=utf-8"/><!-- 한글 encoding -->
+	</bean>
+	<!-- 2. 파일업로드 뷰 Viewer -->
+	<!-- 3. 파일다운로드 뷰 Viewer -->
+</beans>

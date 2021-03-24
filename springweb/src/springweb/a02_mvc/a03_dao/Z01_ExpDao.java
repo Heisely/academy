@@ -8,6 +8,7 @@ import springweb.z02_vo.Emp;
 import springweb.z03_vo.EmpDept;
 import springweb.z03_vo.EmpGrade;
 import springweb.z03_vo.EmpPart;
+import springweb.z03_vo.FileVo;
 
 // springweb.a02_mvc.a03_dao.Z01_ExpDao
 public interface Z01_ExpDao {
@@ -19,4 +20,7 @@ public interface Z01_ExpDao {
     public ArrayList<String> empMgrSch(String ename);
     public double emgMaxSal(ArrayList<String> enames);
     public ArrayList<Emp> empSch5(String year);
+    
+    // 파일 업로드 처리
+    public void insertFile(FileVo ins);
 }

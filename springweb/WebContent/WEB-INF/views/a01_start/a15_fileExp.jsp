@@ -23,48 +23,24 @@
 --%>
 //
 	$(document).ready(function(){
-		$("#regBtn").click(function(){
-			location.href = "${path}/board.do?method=insForm";
-		});
+		
 	});
 </script>
 </head>
 <body>
 <div class="jumbotron text-center">
-  <h2>게시판 초기 화면</h2>
+  <h2>파일 업로드 연습</h2>
 </div>
 <div class="container">
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-	<form class="form-inline" method="post">
-		<input class="form-control mr-sm-2" type="text" name="subject" value="" placeholder="제목">
-		<input class="form-control mr-sm-2" type="text" name="writer" value="" placeholder="작성자">
-		<button class="btn btn-info" id="regBtn" type="button">등록</button>&nbsp;
-		<button class="btn btn-success" type="submit">Search</button>
+	<form class="form-inline" method="post" enctype="multipart/form-data">
+		<input class="form-control mr-sm-2" type="text" name="content" value="" placeholder="파일내용"><br>
+		<input class="form-control mr-sm-2" type="file" name="report"><br>
+		<input class="form-control mr-sm-2" type="file" name="report"><br>
+		<input class="form-control mr-sm-2" type="file" name="report"><br>
+		<button class="btn btn-success" type="submit">자료업로드</button>
 	</form>
-</nav>
-<table class="table table-hover table-striped">
-	<col width="10%">
-	<col width="50%">
-	<col width="15%">
-	<col width="15%">
-	<col width="10%">
-	<thead>
-		<tr class="table-success text-center">
-			<th>번호</th><th>제목</th><th>작성자</th><th>등록일</th><th>조회수</th>
-		</tr>
-	</thead>
-	<tbody>
-		<c:forEach var="bd" items="${boardList}">
-		<tr class="text-center">
-			<td>${bd.no}</td>
-			<td>${bd.subject}</td>
-			<td>${bd.writer}</td>
-			<td><fmt:formatDate value="${bd.regdte}" pattern="yyyy/MM/dd"/></td>
-			<td>${bd.readcnt}</td>
-		</tr>
-		</c:forEach>
-	</tbody>
-</table>    
+</nav>   
 </div>
 </body>
 </html>

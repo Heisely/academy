@@ -61,5 +61,10 @@
     <select id="empSch5" resultMap="empMap" parameterType="String">
     	select * from emp
        	where to_char(hiredate,'YYYY')=#{year}
-    </select>	
+    </select>
+    
+    <!-- public void insertFile(FileVo ins) -->
+    <insert id="insertFile" parameterType="filevo">
+    	insert into fileexp values (#{content}, #{fname})
+    </insert>    	
 </mapper>

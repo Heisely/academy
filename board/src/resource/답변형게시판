@@ -63,7 +63,41 @@
 		등록 service 호출
 	9) 화면 등록 완료 처리 메시지 출력
 
-
+# 파일 업로드
+1. 다중파일 업로드를 위한 화면 UI 구성(view)
+	<input type="file" name="report"/>
+2. form 객체의 속성 추가
+	<form enctype="multipart/form-data">
+3. container에 파일 업로드 view bean추가
+	org.springframework.web.multipart.commons.CommonsMultipartResolver
+4. VO에서 report라는 프로퍼티로 네트웍상 client에서 server로 전송 가능하게 해주는 MultipartFile 객체 속성 선언
+	private MultipartFile[] report;
+5. Controller에서 파일이 전송되었는지 확인
+6. service단에서 받은 MultipartFile을 File객체로 변환해서
+	1) 특정 위치에 저장
+		eclipse tomcat 웹 서비스를 사용하기 때문
+		- 임시 폴더: 임시 저장(tmpUpload) - info에 위치 설정(절대위치 지정)
+		- 파일을 다운로드할 폴더(upload): 임시 폴더에 있는 파일을 추후 다운로드할 폴더에 복사 
+			- info에 위치 설정(절대위치 지정)(WebContent\z01_upload)
+		- 다운로드 업로드 폴더 위치 지정(WebContent\z01_upload)
+		- 임시 폴더에 있는 모든 파일 삭제(예외 방지)
+		- MultipartFile 객체(메모리로 파일정보 저장)
+			==> File변환(메모리+하드웨어적으로 특정 위치에 파일 저장)
+			transfer()메서드 사용
+		- 임시파일 ==> 업로드할 위치로 복사
+			파일 카피 정책으로는 기존파일이 있으면 덮어쓰기
+	2) DB에 해당 파일 정보를 저장
+		(상세화면에서 다운로드 처리를 위해 파일 정보 저장)
+		- DB 구조 만들기
+			boardfile: 번호, 파일명, 경로명, 내용, 생성일
+				   	   no, fname, pathname, content, credte			
+		- SQL
+			INSERT INTO BOARDFILE(BOARD_SEQ.CURRVAL, #{fname}, #{pathname}, #{content}, sysdate)
+			board_seq.currval: 등록하는 main board테이블의 no(board_seq.nextval)와 동일하게 해줌
+		- VO만들기: BoardFile
+		- DAO
+		- 공통 VO 마이바티즈 공통파일 등록, mapper.xml에 SQL 등록
+		- Service단에서 호출
 
 
 	5) 상세화면		

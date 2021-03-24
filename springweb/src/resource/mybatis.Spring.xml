@@ -11,6 +11,7 @@
 		<typeAlias alias="empg" type="springweb.z03_vo.EmpGrade"/>
 		<typeAlias alias="empp" type="springweb.z03_vo.EmpPart"/>
 		<typeAlias alias="empdept" type="springweb.z03_vo.EmpDept"/>
+		<typeAlias alias="filevo" type="springweb.z03_vo.FileVo"/>
 	</typeAliases>
 	<!-- 3. SQL이 저장되는 mapper.xml 등록
 		 4. 주로 업무 단위(DAO 단위) 하나의 mapper.xml을 만든다. -->

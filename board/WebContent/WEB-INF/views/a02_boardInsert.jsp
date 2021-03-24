@@ -23,8 +23,25 @@
 --%>
 //
 	$(document).ready(function(){
-		
+		$("#mainBtn").click(function(){
+			location.href="${path}/board.do?method=list";
+		});
+		var isInsert = "${param.subject}";
+		if(isInsert!=""){
+			if(!confirm("등록완료\n계속 등록하시겠습니까?")){
+				location.href = "${path}/board.do?method=list";
+			}
+		}
+		$("#addFun").click(function(){
+			$("#fileArea").append($(".custom-file").eq(0).clone());
+		});
 	});
+	function rm(obj){
+		var len = $("[type=file]").length;
+		if(len > 1)
+			// $(obj).parent(): <div class="custom-file">
+			$(obj).parent().remove();
+	}
 </script>
 </head>
 <body>
@@ -32,7 +49,7 @@
   <h2>게시판 등록</h2>
 </div>
 <div class="container">
-<form method="post" action="${path}/board.do?method=insert">
+<form method="post" action="${path}/board.do?method=insert" enctype="multipart/form-data">
 <input type="hidden" name="refno" value="0"/>
 <table class="table table-hover">
 	<col width="30%">
@@ -43,7 +60,7 @@
 		</tr>
 		<tr class="text-center">
 			<th class="table-success">작성자</th>
-			<td><input type="text" name="writer" class="form-control"/></td>
+			<td><input type="text" name="writer" value="${mem.id}" class="form-control"/></td>
 		</tr>
 		<tr class="text-center">
 			<th class="table-success">내용</th>
@@ -52,8 +69,14 @@
 			</td>
 		</tr>
 		<tr class="text-center">
-			<th class="table-success">첨부파일</th>
-			<td><input type="file" name="" class="form-control"/></td>
+			<th class="table-success">첨부파일
+				<span class="badge badge-info" id="addFun">[추가]</span></th>
+			<td id="fileArea">
+				<div class="custom-file">
+					<span onclick="rm(this)" class="badge badge-danger"> [X] </span>&nbsp; <%-- 파일삭제버튼 --%>
+					<input name="report" type="file"/><br>
+				</div>
+			</td>
 		</tr>
 		<tr class="text-center">
 			<td colspan="2">

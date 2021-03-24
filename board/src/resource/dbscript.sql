@@ -20,8 +20,10 @@ SELECT * FROM board;
 
 CREATE TABLE boardfile(
 	NO NUMBER,
-	fname varchar2(50),
-	pathname varchar2(100),
-	content varchar2(1000),
+	fname varchar2(100),
+	pathname varchar2(500),
+	content varchar2(100),
 	credte DATE
 );
+INSERT INTO boardfile VALUES (1,'ojdbc8.jar','','첫 번째 글', sysdate);
+SELECT * FROM BOARDFILE;

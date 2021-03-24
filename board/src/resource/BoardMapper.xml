@@ -12,7 +12,14 @@
 		ORDER BY no DESC
 	</select>
 	<!-- public void insertBoard(Board insert)  -->
-	<insert id="boardInsert" parameterType="board">
-		INSERT INTO board VALUES (BOARD_seq.nextval, 0, #{subject}, #{content}, #{writer}, 0, sysdate, sysdate)
+	<insert id="insertBoard" parameterType="board">
+		INSERT INTO board 
+		VALUES (BOARD_seq.nextval, #{refno}, #{subject}, #{content}, #{writer}, 
+				0, sysdate, sysdate)
+	</insert>
+	<!-- public void uploadFile(BoardFile ins) -->
+	<!-- 상위 board의 번호와 첨부파일의 번호 동일 board_seq.nextval 후, board_seq.currval -->
+	<insert id="uploadFile" parameterType="boardfile">
+		INSERT INTO BOARDFILE VALUES (BOARD_SEQ.CURRVAL, #{fname}, #{pathname}, #{content}, sysdate)
 	</insert>
 </mapper>

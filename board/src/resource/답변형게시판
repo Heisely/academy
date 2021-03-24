@@ -83,7 +83,7 @@
 		- 임시 폴더에 있는 모든 파일 삭제(예외 방지)
 		- MultipartFile 객체(메모리로 파일정보 저장)
 			==> File변환(메모리+하드웨어적으로 특정 위치에 파일 저장)
-			transfer()메서드 사용
+			transferTo()메서드 사용
 		- 임시파일 ==> 업로드할 위치로 복사
 			파일 카피 정책으로는 기존파일이 있으면 덮어쓰기
 	2) DB에 해당 파일 정보를 저장
@@ -100,7 +100,85 @@
 		- Service단에서 호출
 
 
-	5) 상세화면		
+# 상세화면		
+1. 리스트 화면에서 특정한 row 클릭, no와 함께 Controller 상세화면 처리
+2. SQL 작성
+	SELECT * FROM BOARD WHERE NO = #{NO}
+3. DAO 작성
+4. XXXmapper.xml
+5. service 호출
+6. controller
+	- model
+	- 상세화면 호출
+7. 상세화면에 출력 리스트
+
+# 첨부파일 리스트 및 다운로드
+1. SQL 작성
+	SELECT * FROM BOARDFILE WHERE NO = #{NO}
+2. VO확인
+3. DAO
+	public ArrayList<BoardFile> getBoardFile(int no);
+4. mapper
+5. Board VO객체에 첨부파일을 처리할 수 있는 기능 추가 등록
+	private ArrayList<BoardFile> fileInfo; + setter/getter
+6. Service에서 Board VO에 할당
+7. JSP에서 처리
+
+# 조회수 count up 처리
+1. SQL
+	UPDATE BOARD
+		SET READCNT = READCNT+1
+	WHERE NO = #{NO}
+2. DAO
+	public void update(int no);
+3. mapper
+4. service단에서 호출
+	dao.updateBoard(no);
+	
+# 파일 다운로드
+1. 리스트
+	board의 FileInfo로 리스트 처리
+2. 파일 다운로드 view 등록
+	# 파일 다운로드 viewer 작성
+	1. API에서 지원되는 부분에서 model데이터로 특정한 파일을 지정해야 하기때문에 사용자 정의로 만들어야 한다.
+	2. 사용자 정의 viewer 작성 순서
+		- 1. 상속 AbstractView 선언
+			1) overriding 메서드 재정의
+				- renderMergedOutputModel
+					매개변수
+					Map<String, Object> model,: 다운로드할 파일명을 할당
+					HttpServletRequest request,
+					HttpServletResponse response
+		- 2. 다운로드
+			1) upload 된 파일 가져오기(서버가 가지고 있는 파일)
+				- 현재 viewer를 호출 시 사용되는 model 객체 가져오기
+				- File 객체 생성
+			2) 모델과 함께 있는 File객체 가져오기(서버가 가지고 있는 파일)
+			3) 반응 객체(response)로 전달(클라이언트의 파일)
+				- 전체 파일명
+				- 파일명
+				- 파일의 길이
+				- setContentType 설정: application/download;charset-utf-8
+				- setContentLength로 파일의 길이 설정
+				- 한글명된 파일은 Encoding
+				- 파일을 response에 탑재하기 위한 header부분 설정
+					Content-Disposition으로 attachment로 파일 설정
+					Content-Transfer-Encoding 설정. binary 설정
+				- 파일을 network로 전송하기 위해 Stream 객체로 변환
+					InputStream(읽어오는 객체) ==> OutputStream(보내는 객체)
+					FileInputStream(파일 객체)
+					FileCopyUtils.copy(InputStream, OutputStream)
+					OutputStream의 flush를 통해 자원 해제		
+3. 파일을 모델로 파일 다운로드 처리 controller 생성
+	- 요청값으로 파일명을 전송
+	- model값 파일을 설정. downloadFile로 설정해야 지정된 파일명을 viewer에서 인식
+	- return으로 컨테이너에서 선언한 bean id(downloadviewer)를 호출
+4. 상세화면 리스트에서 함수로 파일 다운 호출
+	다운로드 Controller 호출
+5. 해당 파일 클릭 시 다운로드 처리
+
+
+
 		- 상세화면 보기
 		- 수정
 		- 삭제

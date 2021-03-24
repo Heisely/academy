@@ -1,5 +1,6 @@
 package board.z01_vo;
 
+import java.util.ArrayList;
 // board.z01_vo.Board
 import java.util.Date;
 
@@ -15,6 +16,7 @@ public class Board {
 	private Date regdte; // 등록일
 	private Date uptdte; // 수정일
 	private MultipartFile[] report;
+	private ArrayList<BoardFile> fileInfo;
 
 	public Board() {
 		super();
@@ -97,6 +99,14 @@ public class Board {
 
 	public void setReport(MultipartFile[] report) {
 		this.report = report;
+	}
+
+	public ArrayList<BoardFile> getFileInfo() {
+		return fileInfo;
+	}
+
+	public void setFileInfo(ArrayList<BoardFile> fileInfo) {
+		this.fileInfo = fileInfo;
 	}
 
 }

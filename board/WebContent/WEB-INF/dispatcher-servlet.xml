@@ -92,4 +92,5 @@
 	<!-- 2. 파일업로드 뷰 Viewer -->
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 	<!-- 3. 파일다운로드 뷰 Viewer -->
+	<bean id="downloadviewer" class="board.z02_util.FileDownloadViewer"/>
 </beans>

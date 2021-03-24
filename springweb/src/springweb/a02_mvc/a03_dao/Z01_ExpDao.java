@@ -22,5 +22,6 @@ public interface Z01_ExpDao {
     public ArrayList<Emp> empSch5(String year);
     
     // 파일 업로드 처리
+    // FileVo: 내용과 파일명을 받을 수 있는 VO 객체 선언
     public void insertFile(FileVo ins);
 }

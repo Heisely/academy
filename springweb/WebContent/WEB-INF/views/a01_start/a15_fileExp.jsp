@@ -34,6 +34,7 @@
 <div class="container">
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 	<form class="form-inline" method="post" enctype="multipart/form-data">
+	<%-- 요청 url을 호출 url과 동일하게 처리했기 때문에 action을 생략할 수 있다. get/post --%>
 		<input class="form-control mr-sm-2" type="text" name="content" value="" placeholder="파일내용"><br>
 		<input class="form-control mr-sm-2" type="file" name="report"><br>
 		<input class="form-control mr-sm-2" type="file" name="report"><br>

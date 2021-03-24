@@ -22,4 +22,20 @@
 	<insert id="uploadFile" parameterType="boardfile">
 		INSERT INTO BOARDFILE VALUES (BOARD_SEQ.CURRVAL, #{fname}, #{pathname}, #{content}, sysdate)
 	</insert>
+	<!-- public Board getBoard(int no) -->
+	<select id="getBoard" resultType="board" parameterType="int">
+		SELECT * FROM BOARD WHERE NO = #{NO}
+	</select>
+	<!-- public ArrayList<BoardFile> fileInfo(int no); -->
+	<!-- resultMap: ArrayList형태의 데이터 중에 column명과 property가 다를 때 사용
+		 같을 때에는 ArrayList<BoardFile>의 단위 객체인 resultType(boardfile)만으로도 할당이 가능 -->
+	<select id="fileInfo" resultType="boardfile" parameterType="int">
+		SELECT * FROM BOARDFILE WHERE NO = #{NO}
+	</select>
+	<!-- public void uptReadCnt(int no) -->
+	<update id="uptReadCnt" parameterType="int">
+		UPDATE BOARD
+			SET READCNT = READCNT+1
+		WHERE NO = #{NO}
+	</update>
 </mapper>

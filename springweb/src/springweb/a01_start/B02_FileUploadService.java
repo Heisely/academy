@@ -28,22 +28,33 @@ public class B02_FileUploadService {
 		String fname = null;
 		File tmpFile = null;
 		File orgFile = null;
+		System.out.println("파일의 개수: " + rep.getReport().length);
+		// 임시파일 객체
+		File pathFile = new File(tmpUpload);
+		for (File f : pathFile.listFiles()) {
+			System.out.println("삭제할 파일: " + f.getName());
+			f.delete();
+		}
+
 		for (MultipartFile mpf : rep.getReport()) {
 			fname = mpf.getOriginalFilename();
 			if (fname != null && !fname.trim().equals("")) {
-				// 임시 파일 객체
 				tmpFile = new File(tmpUpload + fname);
 				try {
 					mpf.transferTo(tmpFile);
 					orgFile = new File(upload + fname);
 					Files.copy(tmpFile.toPath(), orgFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+					System.out.println("# 파일명: " + upload + fname);
+					System.out.println("# 내용: " + rep.getContent());
+					// 내용과 파일명을 데이터베이스에 입력
 					dao.insertFile(new FileVo(rep.getContent(), fname));
+					System.out.println("# DB처리 완료");
 				} catch (IllegalStateException e) {
 					e.printStackTrace();
-					System.out.println("에러: "+e.getMessage());
+					System.out.println("상태값 에러: " + e.getMessage());
 				} catch (IOException e) {
 					e.printStackTrace();
-					System.out.println("에러: "+e.getMessage());
+					System.out.println("파일 처리 에러: " + e.getMessage());
 				}
 			}
 		}

@@ -26,12 +26,9 @@ public class A07_FileUploadCtrl {
 	
 	@PostMapping("fileExp.do")
 	public String fileExp1(Repository rep) {
+		// Repository에 name="content"와 name="report"배열을 받을 수 있는 property 선언
+		System.out.println("### 실행 (파일 업로드) ###");
 		service.insertFile(rep);
-		// 파일 확인
-		System.out.println("## 파일명 ##");
-		System.out.println(rep.getReport()[0].getOriginalFilename());
-		System.out.println(rep.getReport()[1].getOriginalFilename());
-		System.out.println(rep.getReport()[2].getOriginalFilename());
 		
 		return "WEB-INF\\views\\a01_start\\a15_fileExp.jsp";
 	}

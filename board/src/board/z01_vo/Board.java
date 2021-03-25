@@ -4,7 +4,10 @@ import java.util.ArrayList;
 // board.z01_vo.Board
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
+
+import jdk.jfr.Timestamp;
 
 public class Board {
 	private int no; // 번호
@@ -15,8 +18,9 @@ public class Board {
 	private int readcnt; // 조회수
 	private Date regdte; // 등록일
 	private Date uptdte; // 수정일
-	private MultipartFile[] report;
-	private ArrayList<BoardFile> fileInfo;
+	private MultipartFile[] report; // 업로드 시 필요
+	private String[] fnames; // 파일 수정 시 필요
+	private ArrayList<BoardFile> fileInfo; // 다운로드 시 필요
 
 	public Board() {
 		super();
@@ -73,6 +77,8 @@ public class Board {
 		return readcnt;
 	}
 
+	// 문자열로 요청한 값을 Date 객체로 처리할 때 사용
+//	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	public void setReadcnt(int readcnt) {
 		this.readcnt = readcnt;
 	}
@@ -89,6 +95,7 @@ public class Board {
 		return uptdte;
 	}
 
+//	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	public void setUptdte(Date uptdte) {
 		this.uptdte = uptdte;
 	}
@@ -107,6 +114,14 @@ public class Board {
 
 	public void setFileInfo(ArrayList<BoardFile> fileInfo) {
 		this.fileInfo = fileInfo;
+	}
+
+	public String[] getFnames() {
+		return fnames;
+	}
+
+	public void setFnames(String[] fnames) {
+		this.fnames = fnames;
 	}
 
 }

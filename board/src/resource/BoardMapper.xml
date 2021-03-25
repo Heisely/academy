@@ -38,4 +38,22 @@
 			SET READCNT = READCNT+1
 		WHERE NO = #{NO}
 	</update>
+	<!-- public void updateBoard(Board upt) -->
+	<update id="updateBoard" parameterType="board">
+		UPDATE BOARD
+			SET SUBJECT = #{subject},
+				CONTENT = #{content},
+				UPTDTE = sysdate
+		WHERE NO = #{no}	
+	</update>
+	<!-- public void deleteBoard(Board del) -->
+	<delete id="deleteBoard" parameterType="board">
+		DELETE FROM BOARD WHERE NO = #{no}
+	</delete>
+	<!-- public void updateFile(HashMap<String, String> hs) -->
+	<update id="updateFile" parameterType="hashmap">
+		update boardfile
+			set fname = #{fname}
+		where no = #{no} and fname = #{orgFname}
+	</update>
 </mapper>

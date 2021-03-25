@@ -27,3 +27,10 @@ CREATE TABLE boardfile(
 );
 INSERT INTO boardfile VALUES (1,'ojdbc8.jar','','첫 번째 글', sysdate);
 SELECT * FROM BOARDFILE;
+
+CREATE TABLE fileexp(
+   content varchar2(200),
+   fname varchar2(100)
+);
+SELECT * FROM fileexp;
+INSERT INTO fileexp values('과제1','a.hwp');

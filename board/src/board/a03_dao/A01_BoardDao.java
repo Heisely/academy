@@ -2,6 +2,7 @@ package board.a03_dao;
 
 // board.a03_dao.A01_BoardDao
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.stereotype.Repository;
 
@@ -16,4 +17,7 @@ public interface A01_BoardDao {
 	public Board getBoard(int no);
 	public ArrayList<BoardFile> fileInfo(int no);
 	public void uptReadCnt(int no);
+	public void updateBoard(Board upt);
+	public void deleteBoard(Board del);
+	public void updateFile(HashMap<String, String> hs);
 }

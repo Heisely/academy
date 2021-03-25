@@ -66,5 +66,10 @@
     <!-- public void insertFile(FileVo ins) -->
     <insert id="insertFile" parameterType="filevo">
     	insert into fileexp values (#{content}, #{fname})
-    </insert>    	
+    </insert>    
+    
+    <!-- public ArrayList<FileVo> fileList() -->
+    <select id="fileList" resultType="filevo">
+    	SELECT * FROM FILEEXP ORDER BY CONTENT
+    </select>	
 </mapper>

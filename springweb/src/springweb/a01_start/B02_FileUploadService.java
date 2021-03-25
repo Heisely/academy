@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -58,5 +59,9 @@ public class B02_FileUploadService {
 				}
 			}
 		}
+	}
+	
+	public ArrayList<FileVo> fileList(){
+		return dao.fileList();
 	}
 }

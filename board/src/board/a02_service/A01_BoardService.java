@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 //board.a02_service.A01_BoardService
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -56,7 +57,7 @@ public class A01_BoardService {
 			// 단위 파일을 삭제
 			f.delete();
 		}
-		
+
 		// # 다중 파일 처리 / 반복문 수행
 		for (MultipartFile mpf : insert.getReport()) {
 			// 1) 파일명 지정
@@ -66,7 +67,7 @@ public class A01_BoardService {
 			if (fname != null && !fname.trim().equals("")) {
 				// 임시파일 객체 선언(경로명+파일명)
 				// ps) File 객체는 파일과 폴더를 처리할 수 있다.
-				tmpFile = new File(uploadTmp + fname);				
+				tmpFile = new File(uploadTmp + fname);
 
 				// MultipartFile ==> File로 변환 후 할당
 				try {
@@ -92,15 +93,88 @@ public class A01_BoardService {
 			}
 		}
 	}
-	
+
 	public Board getBoard(int no) {
 		// 1. 조회 cnt 수정(readcnt)증가
 		dao.uptReadCnt(no);
 		// 2. 기본 board정보 할당
 		Board board = dao.getBoard(no);
 		// 3. 첨부파일 정보 할당
+		// 메인 board정보와 연결되어 있는 파일리스트 정보를 VO객체에서 1:다 관계로 설정
 		board.setFileInfo(dao.fileInfo(no));
-		
+
 		return board;
+	}
+
+	public void updateBoard(Board upt) {
+		System.out.println("## 기존파일 개수: " + upt.getFnames().length);
+		System.out.println("## 수정할 파일 개수: " + upt.getReport().length);
+		int no = upt.getNo();
+
+		// 첨부파일 물리적 위치 지정
+		String fname = null; // 수정할 파일명
+		String orgFname = null; // 기존 파일명
+		File tmpFile = null;
+		File orgFile = null;
+		BoardFile uptFile = null; // 수정 파일 정보
+		// 변경할 파일
+		MultipartFile mpf = null;
+
+		// 임시파일 삭제 처리
+		File pathFile = new File(uploadTmp); // 폴더 객체 생성
+		for (File f : pathFile.listFiles()) {
+			System.out.println("삭제할 파일: " + f.getName());
+			f.delete();
+		}
+
+		for (int idx = 0; idx < upt.getReport().length; idx++) {
+			mpf = upt.getReport()[idx];
+			fname = mpf.getOriginalFilename();
+			// 기존 파일명
+			orgFname = upt.getFnames()[idx];
+			if (fname != null && !fname.trim().equals("")) {
+				// 해당 폴더의 기존 파일은 일단 삭제(임시폴더)
+				tmpFile = new File(uploadTmp + orgFname);
+				if (tmpFile.exists()) {
+					tmpFile.delete();
+				}
+				// 해당 폴더의 기존파일은 일단 삭제(대상폴드)
+				orgFile = new File(upload + orgFname);
+				if (orgFile.exists()) {
+					orgFile.delete();
+				}
+
+				tmpFile = new File(uploadTmp + fname);				
+				orgFile = new File(upload+fname);				
+				
+				try {
+					// MultipartFile을 임시파일객체로 변환
+					mpf.transferTo(tmpFile);
+					Files.copy(tmpFile.toPath(), orgFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+				} catch (IllegalStateException e) {
+					e.printStackTrace();
+					System.out.println("# 상태 에러: " + e.getMessage());
+				} catch (IOException e) {
+					e.printStackTrace();
+					System.out.println("# 파일 변환 에러: " + e.getMessage());
+				} catch (Exception e) {
+					System.out.println("# 기타 에러: " + e.getMessage());
+				}
+
+				HashMap<String, String> hs = new HashMap<String, String>();
+				hs.put("no", "" + no);
+				hs.put("fname", fname);
+				hs.put("orgFname", upt.getFnames()[idx]);
+				
+				// dao단 호출
+				dao.updateFile(hs);
+			}
+		}
+
+		dao.updateBoard(upt);
+	}
+
+	public void deleteBoard(Board del) {
+		dao.deleteBoard(del);
 	}
 }

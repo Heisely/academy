@@ -60,8 +60,21 @@ public class A01_BoardController {
 	}
 
 	// http://localhost:7080/board/board.do?method=update
-	// http://localhost:7080/board/board.do?method=delete
+	@RequestMapping(params = "method=update")
+	public String update(Board upt) {		
+		service.updateBoard(upt);		
+		// 수정 key인 no를 넘겨줘야 되기 떄문에 forward
+		return "forward:/board.do?method=detail";
+		// 수정 후 다시 조회 할 수 있게 하기 위해 forward로 해당 controller 메서드 호출
+	}
 	
+	// http://localhost:7080/board/board.do?method=delete
+	@RequestMapping(params = "method=delete")
+	public String delete(Board del) {
+		service.deleteBoard(del);
+		
+		return "forward:/board.do?method=list";
+	}
 	// http://loaclhost:7080/board/board.do?method=download
 	// 화면단 클릭 시, http://loaclhost:7080/board/board.do?method=download&fname=파일명으로 전송
 	@RequestMapping(params = "method=download")

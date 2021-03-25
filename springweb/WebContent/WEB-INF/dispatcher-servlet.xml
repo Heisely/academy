@@ -95,6 +95,7 @@
 	<!-- 2. 파일업로드 뷰 Viewer -->
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 	<!-- 3. 파일다운로드 뷰 Viewer -->
+	<bean id="downloadviewer" class="springweb.z04_util.FileDownloadViewer"/>
 	<!-- 4. 엑셀 뷰 Viewer -->
 	<!-- 4. PDF 뷰 Viewer -->
 </beans>

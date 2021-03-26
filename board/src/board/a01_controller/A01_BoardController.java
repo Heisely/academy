@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import board.a02_service.A01_BoardService;
 import board.z01_vo.Board;
+import board.z01_vo.BoardSch;
 import board.z01_vo.Member;
 
 @Controller
@@ -22,7 +23,7 @@ public class A01_BoardController {
 
 	// http://localhost:7080/board/board.do?method=list
 	@RequestMapping(params = "method=list")
-	public String boardList(@ModelAttribute("sch") Board sch, Model d, HttpServletRequest request) {
+	public String boardList(@ModelAttribute("sch") BoardSch sch, Model d, HttpServletRequest request) {
 		// session 설정
 		HttpSession session = request.getSession();
 		session.setAttribute("mem", new Member("himan", "7777"));
@@ -34,18 +35,19 @@ public class A01_BoardController {
 
 	// http://localhost:7080/board/board.do?method=insForm
 	@RequestMapping(params = "method=insForm")
-	public String insForm() {
+	public String insForm(@ModelAttribute("board") Board b) {
 		return "a02_boardInsert";
 	}
 
 	// http://localhost:7080/board/board.do?method=insert
 	@RequestMapping(params = "method=insert")
-	public String insertBoard(Board insert) {
+	public String insertBoard(Board insert, Model d) {
 		System.out.println("등록: " + insert.getSubject());
 		// 파일 전송 여부 확인
 		System.out.println("파일: " + insert.getReport()[0].getOriginalFilename());
-
 		service.insertBoard(insert);
+		
+		d.addAttribute("proc", "insert");
 		return "a02_boardInsert";
 	}
 
@@ -70,10 +72,9 @@ public class A01_BoardController {
 	
 	// http://localhost:7080/board/board.do?method=delete
 	@RequestMapping(params = "method=delete")
-	public String delete(Board del) {
-		service.deleteBoard(del);
-		
-		return "forward:/board.do?method=list";
+	public String delete(@RequestParam("no") int no) {
+		service.deleteBoard(no);		
+		return "a03_boardDetail";
 	}
 	// http://loaclhost:7080/board/board.do?method=download
 	// 화면단 클릭 시, http://loaclhost:7080/board/board.do?method=download&fname=파일명으로 전송

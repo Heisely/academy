@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import board.a03_dao.A01_BoardDao;
 import board.z01_vo.Board;
 import board.z01_vo.BoardFile;
+import board.z01_vo.BoardSch;
 
 @Service
 public class A01_BoardService {
@@ -27,13 +28,26 @@ public class A01_BoardService {
 	@Value("${uploadTmp}")
 	private String uploadTmp;
 
-	public ArrayList<Board> boardList(Board sch) {
-		if (sch.getSubject() == null)
-			sch.setSubject("");
-		if (sch.getWriter() == null)
-			sch.setWriter("");
-//		System.out.println("upload: " + upload);
-//		System.out.println("uploadTmp: " + uploadTmp);
+	public ArrayList<Board> boardList(BoardSch sch) {
+		if (sch.getSubject() == null) sch.setSubject("");
+		if (sch.getWriter() == null) sch.setWriter("");
+		// 1. 데이터 총 건수 할당
+		sch.setCount(dao.totCnt(sch));
+		// 2. 화면에서 요청값으로 가져온 pageSize로 총 페이지 수 할당
+		// 	  1) 초기 화면에 표시될 pageSize를 default로 설정
+		if(sch.getPageSize()==0) {
+			sch.setPageSize(5);
+		}
+		//    2) 총 페이지수: 올림(총 건수/페이지 당 건수)
+		int totPg = (int)(Math.ceil(sch.getCount()/(double)sch.getPageSize()));
+		sch.setPageCount(totPg);
+		// 3. 클릭한 현재 페이지(요청) default를 1로 선언
+		if(sch.getCurPage()==0) {
+			sch.setCurPage(1);
+		}		
+		// start, end 속성을 도출하기
+		sch.setStart((sch.getCurPage()-1)*sch.getPageSize()+1);
+		sch.setEnd(sch.getCurPage()*sch.getPageSize());
 
 		return dao.boardList(sch);
 	}
@@ -84,6 +98,7 @@ public class A01_BoardService {
 					dao.uploadFile(new BoardFile(fname, upload, insert.getSubject()));
 				} catch (IllegalStateException e) {
 					e.printStackTrace();
+					System.out.println("상태 예외 발생: " + e.getMessage());
 				} catch (IOException e) {
 					e.printStackTrace();
 					System.out.println("파일 생성 에러: " + e.getMessage());
@@ -138,15 +153,15 @@ public class A01_BoardService {
 				if (tmpFile.exists()) {
 					tmpFile.delete();
 				}
-				// 해당 폴더의 기존파일은 일단 삭제(대상폴드)
+				// 해당 폴더의 기존파일은 일단 삭제(대상폴더)
 				orgFile = new File(upload + orgFname);
 				if (orgFile.exists()) {
 					orgFile.delete();
 				}
 
-				tmpFile = new File(uploadTmp + fname);				
-				orgFile = new File(upload+fname);				
-				
+				tmpFile = new File(uploadTmp + fname);
+				orgFile = new File(upload + fname);
+
 				try {
 					// MultipartFile을 임시파일객체로 변환
 					mpf.transferTo(tmpFile);
@@ -160,21 +175,22 @@ public class A01_BoardService {
 				} catch (Exception e) {
 					System.out.println("# 기타 에러: " + e.getMessage());
 				}
-
+				// 변경된 파일 정보 수정
 				HashMap<String, String> hs = new HashMap<String, String>();
 				hs.put("no", "" + no);
 				hs.put("fname", fname);
 				hs.put("orgFname", upt.getFnames()[idx]);
-				
 				// dao단 호출
 				dao.updateFile(hs);
 			}
 		}
-
+		// 메일 게시판 정보 수정
 		dao.updateBoard(upt);
 	}
 
-	public void deleteBoard(Board del) {
-		dao.deleteBoard(del);
+	public void deleteBoard(int no) {
+		dao.deleteFile(no);
+		dao.deleteBoard(no);
+		// 파일 삭제는 생략
 	}
 }

@@ -3,7 +3,8 @@
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias alias="board" type="board.z01_vo.Board"/>
+		<typeAlias alias="board" type="board.z01_vo.Board"/>		
+		<typeAlias alias="boardsch" type="board.z01_vo.BoardSch"/>
 		<typeAlias alias="boardfile" type="board.z01_vo.BoardFile"/>
 	</typeAliases>
 	<mappers>

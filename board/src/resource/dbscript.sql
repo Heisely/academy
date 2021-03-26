@@ -34,3 +34,14 @@ CREATE TABLE fileexp(
 );
 SELECT * FROM fileexp;
 INSERT INTO fileexp values('과제1','a.hwp');
+
+SELECT * FROM (SELECT ROWNUM rn, a.* FROM board a)
+WHERE rn BETWEEN 11 AND 20;
+
+-- 페이징 최종 SQL
+SELECT * FROM (
+		SELECT rownum rn, level, a.* FROM BOARD a
+		start with refno = 0
+		connect by prior no = refno
+		order siblings by no DESC)
+WHERE rn BETWEEN 6 AND 10;

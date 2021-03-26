@@ -3,13 +3,26 @@
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="board.a03_dao.A01_BoardDao">
+	<!-- public int totCnt(BoardSch sch) -->
+	<select id="totCnt" resultType="int" parameterType="boardsch">
+		SELECT count(*) FROM BOARD
+		WHERE subject LIKE '%'||#{subject}||'%'
+		AND writer LIKE '%'||#{writer}||'%'		
+	</select>
 	<!-- public ArrayList<Board> boardList(Board sch) -->
 	<resultMap type="board" id="boardMap"/>
-	<select id="boardList" resultMap="boardMap" parameterType="board">
-		SELECT * FROM BOARD
-		WHERE subject LIKE '%'||#{subject}||'%'
-		AND writer LIKE '%'||#{writer}||'%'
-		ORDER BY no DESC
+	<select id="boardList" resultMap="boardMap" parameterType="boardsch">
+		select * 
+		from(
+			SELECT rownum rn, level, a.* 
+			FROM BOARD a
+			WHERE subject LIKE '%'||#{subject}||'%'
+			AND writer LIKE '%'||#{writer}||'%'
+			start with refno = 0
+			connect by prior no = refno
+			order siblings by no desc
+		)
+		where rn between #{start} and #{end}
 	</select>
 	<!-- public void insertBoard(Board insert)  -->
 	<insert id="insertBoard" parameterType="board">
@@ -46,14 +59,17 @@
 				UPTDTE = sysdate
 		WHERE NO = #{no}	
 	</update>
-	<!-- public void deleteBoard(Board del) -->
-	<delete id="deleteBoard" parameterType="board">
-		DELETE FROM BOARD WHERE NO = #{no}
-	</delete>
 	<!-- public void updateFile(HashMap<String, String> hs) -->
 	<update id="updateFile" parameterType="hashmap">
 		update boardfile
 			set fname = #{fname}
 		where no = #{no} and fname = #{orgFname}
 	</update>
+	<!-- public void deleteBoard(Board del) -->
+	<delete id="deleteBoard" parameterType="int">
+		DELETE FROM BOARD WHERE NO = #{no}
+	</delete>
+	<delete id="deleteFile" parameterType="int">
+		DELETE FROM BOARDFILE WHERE NO = #{no}
+	</delete>
 </mapper>

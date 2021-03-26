@@ -51,17 +51,32 @@
 		$("#delBtn").click(function(){
 			var writer = $("[name=writer]").val();
 //			alert(memId+":"+writer);
-			if(memId==writer){
+//			if(memId==writer){
 				if(confirm("삭제하시겠습니까?")){
-					var no = $("input[name=no]").val();
+//					var no = $("input[name=no]").val();
 					$("[name=proc]").val("del");
 					$("form").attr("action","${path}/board.do?method=delete");
 					$("form").submit();
 				}
-			} else {
-				alert("삭제 권한이 없습니다.\n작성자만 삭제가 가능합니다.")
+//			} else {
+//				alert("삭제 권한이 없습니다.\n작성자만 삭제가 가능합니다.")
+//			}
+		});
+		$("#reBtn").click(function(){
+			if(confirm("답글을 다시겠습니까?")){
+				// 답글 처리를 위한 데이터 처리
+				$("[name=refno]").val($("[name=no]").val());
+				$("[name=subject]").val("RE: "+$("[name=subject]").val());
+				$("[name=content]").val(
+						"\n\n\n\n\n\n\n\n"+
+						"====== 이전 글 ======\n"+
+						$("[name=content]").val());
+				$("form").attr("action","${path}/board.do?method=insForm");
+				$("form").submit();
 			}
 		});
+		
+		// 버튼 클릭에 따라 proc값 변경 후
 		var proc="${param.proc}";
 		if(proc=="upt"){
 			if(confirm("수정되었습니다.\n조회화면으로 이동하시겠습니까?")){
@@ -72,9 +87,13 @@
 			alert("삭제되었습니다.\n조회화면으로 이동합니다.");
 			$(location).attr("href","${path}/board.do?method=list");
 		}
+		
+		// 파일 업로드 시 파일명 표기
 		$(".custom-file-input").on("change",function(){
 			$(this).next(".custom-file-label").text($(this).val());
 		});
+		
+		// 파일 다운로드
 		$("[name=fnames]").click(function(){
 			var fname = $(this).val();
 			if(confirm(fname+" 파일을 다운로드 하시겠습니까?")){

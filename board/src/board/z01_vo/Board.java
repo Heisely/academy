@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import jdk.jfr.Timestamp;
 
 public class Board {
+	private int level;
 	private int no; // 번호
 	private int refno; // 상위번호
 	private String subject; // 제목
@@ -31,6 +32,14 @@ public class Board {
 		super();
 		this.subject = subject;
 		this.writer = writer;
+	}
+
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
 	}
 
 	public int getNo() {

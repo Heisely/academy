@@ -26,17 +26,24 @@
 		$("#mainBtn").click(function(){
 			location.href="${path}/board.do?method=list";
 		});
-		var isInsert = "${param.subject}";
-		if(isInsert!=""){
+		var proc="${proc}";
+		if(proc=="insert"){ // 등록 처리 후 화면
+			// 답글 처리 후 모델값을 초기화
+			$("[name=refno]").val("0");
+			$("[name=subject]").val("");
+			$("[name=content]").val("");
+			
 			if(!confirm("등록완료\n계속 등록하시겠습니까?")){
 				location.href = "${path}/board.do?method=list";
 			}
 		}
+		
 		$("#addFun").click(function(){
 			// .clone()으로 복사 후 DOM객체에 추가해 생성할 수 있게 한다.
 			$("#fileArea").append($(".custom-file").eq(0).clone());
 		});
 	});
+	
 	function rm(obj){
 		// 삭제 전에 validate check(유효성 체크)로 file객체가 한 개 초과하여 있을 때 가능하도록 설정 
 		var len = $("[type=file]").length;
@@ -52,14 +59,14 @@
   <h2>게시판 등록</h2>
 </div>
 <div class="container">
-<form method="post" action="${path}/board.do?method=insert" enctype="multipart/form-data">
-<input type="hidden" name="refno" value="0"/>
+<form:form modelAttribute="board" action="${path}/board.do?method=insert" enctype="multipart/form-data" method="post">
+<form:hidden path="refno"/>
 <table class="table table-hover">
 	<col width="30%">
 	<tbody>
 		<tr class="text-center">
 			<th class="table-success">제목</th>
-			<td><input type="text" name="subject" class="form-control"/></td>
+			<td><form:input path="subject" class="form-control"/></td>
 		</tr>
 		<tr class="text-center">
 			<th class="table-success">작성자</th>
@@ -68,7 +75,7 @@
 		<tr class="text-center">
 			<th class="table-success">내용</th>
 			<td>
-				<textarea  name="content" rows="10" cols="" class="form-control"></textarea>
+				<form:textarea path="content" rows="10" class="form-control"/>
 			</td>
 		</tr>
 		<tr class="text-center">
@@ -91,7 +98,7 @@
 		</tr>
 	</tbody>
 </table>    
-</form>
+</form:form>
 </div>
 </body>
 </html>

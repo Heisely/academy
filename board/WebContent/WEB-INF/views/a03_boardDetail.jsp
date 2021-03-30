@@ -31,6 +31,18 @@
 --%>
 //
 	$(document).ready(function(){
+		// 버튼 클릭에 따라 proc값 변경 후
+		var proc="${param.proc}";
+		if(proc=="upt"){
+			if(confirm("수정되었습니다.\n조회화면으로 이동하시겠습니까?")){
+				$(location).attr("href","${path}/board.do?method=list");
+			}
+		}
+		if(proc=="del"){
+			alert("삭제되었습니다.\n조회화면으로 이동합니다.");
+			$(location).attr("href","${path}/board.do?method=list");
+		}
+		
 		var memId = "${mem.id}";
 		$("#goMain").click(function(){
 			$(location).attr("href","${path}/board.do?method=list")
@@ -75,18 +87,6 @@
 				$("form").submit();
 			}
 		});
-		
-		// 버튼 클릭에 따라 proc값 변경 후
-		var proc="${param.proc}";
-		if(proc=="upt"){
-			if(confirm("수정되었습니다.\n조회화면으로 이동하시겠습니까?")){
-				$(location).attr("href","${path}/board.do?method=list");
-			}
-		}
-		if(proc=="del"){
-			alert("삭제되었습니다.\n조회화면으로 이동합니다.");
-			$(location).attr("href","${path}/board.do?method=list");
-		}
 		
 		// 파일 업로드 시 파일명 표기
 		$(".custom-file-input").on("change",function(){

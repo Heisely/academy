@@ -1,5 +1,8 @@
 package board.a01_controller;
 
+import java.util.Arrays;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -20,6 +23,10 @@ import board.z01_vo.Member;
 public class A01_BoardController {
 	@Autowired(required = false)
 	private A01_BoardService service;
+	@ModelAttribute("pageOp")
+	public List<String> tools(){
+		return Arrays.asList("3","5","10","20","30");
+	}
 
 	// http://localhost:7080/board/board.do?method=list
 	@RequestMapping(params = "method=list")
@@ -38,6 +45,7 @@ public class A01_BoardController {
 	public String insForm(@ModelAttribute("board") Board b) {
 		return "a02_boardInsert";
 	}
+	// 초기에 ModelAttribute에 객체가 데이터를 받지 못할 때 객체 형태는 null로, 숫자 형태는 0으로 default값이 설정된다.
 
 	// http://localhost:7080/board/board.do?method=insert
 	@RequestMapping(params = "method=insert")
@@ -82,7 +90,7 @@ public class A01_BoardController {
 	public String download(@RequestParam("fname") String fname, Model d) {
 		System.out.println("파일명: " + fname);
 		d.addAttribute("downloadFile", fname); // viewer안에 선언한 모델
-		// 컨테이너 안에 있는 viewer명
+		// 컨테이너 안에 선언되어 있는 viewer명
 		return "downloadviewer";
 	}
 }

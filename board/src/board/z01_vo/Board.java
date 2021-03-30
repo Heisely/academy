@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import jdk.jfr.Timestamp;
 
 public class Board {
+	private int cnt;
 	private int level;
 	private int no; // 번호
 	private int refno; // 상위번호
@@ -19,8 +20,8 @@ public class Board {
 	private int readcnt; // 조회수
 	private Date regdte; // 등록일
 	private Date uptdte; // 수정일
-	private MultipartFile[] report; // 업로드 시 필요
-	private String[] fnames; // 파일 수정 시 필요
+	private MultipartFile[] report; // 업로드 시 필요(파일 수정 시 업로드)
+	private String[] fnames; // 파일 수정 시 필요. report, fnames 인덱스가 동일
 	private ArrayList<BoardFile> fileInfo; // 다운로드 시 필요
 
 	public Board() {
@@ -32,6 +33,14 @@ public class Board {
 		super();
 		this.subject = subject;
 		this.writer = writer;
+	}
+
+	public int getCnt() {
+		return cnt;
+	}
+
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
 	}
 
 	public int getLevel() {

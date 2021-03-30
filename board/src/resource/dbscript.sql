@@ -16,7 +16,7 @@ CREATE SEQUENCE board_seq
 
 INSERT INTO board VALUES (BOARD_seq.nextval, 0, '첫 번째 글', '내용', '홍길동', 0, sysdate, sysdate);
 
-SELECT * FROM board;
+SELECT * FROM board ORDER BY no;
 
 CREATE TABLE boardfile(
 	NO NUMBER,

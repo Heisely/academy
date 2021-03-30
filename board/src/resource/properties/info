@@ -8,6 +8,6 @@ pass=tiger
 
 # driver dburl user pass
 # 파일 서버 정보
-upload=C:/a01_javaexp/academy/board/WebContent/z01_upload/
-uploadTmp=C:/a01_javaexp/academy/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/board/z01_upload/
+upload=D:/Java/workspace/board/WebContent/z01_upload/
+uploadTmp=D:/Java/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/board/z01_upload/
 

@@ -8,13 +8,16 @@
 		SELECT count(*) FROM BOARD
 		WHERE subject LIKE '%'||#{subject}||'%'
 		AND writer LIKE '%'||#{writer}||'%'		
+		start with refno = 0
+		connect by prior no = refno
 	</select>
+	
 	<!-- public ArrayList<Board> boardList(Board sch) -->
 	<resultMap type="board" id="boardMap"/>
 	<select id="boardList" resultMap="boardMap" parameterType="boardsch">
 		select * 
 		from(
-			SELECT rownum rn, level, a.* 
+			SELECT rownum cnt, level, a.* 
 			FROM BOARD a
 			WHERE subject LIKE '%'||#{subject}||'%'
 			AND writer LIKE '%'||#{writer}||'%'
@@ -22,35 +25,41 @@
 			connect by prior no = refno
 			order siblings by no desc
 		)
-		where rn between #{start} and #{end}
+		where cnt between #{start} and #{end}
 	</select>
+	
 	<!-- public void insertBoard(Board insert)  -->
 	<insert id="insertBoard" parameterType="board">
 		INSERT INTO board 
 		VALUES (BOARD_seq.nextval, #{refno}, #{subject}, #{content}, #{writer}, 
 				0, sysdate, sysdate)
 	</insert>
+	
 	<!-- public void uploadFile(BoardFile ins) -->
 	<!-- 상위 board의 번호와 첨부파일의 번호 동일 board_seq.nextval 후, board_seq.currval -->
 	<insert id="uploadFile" parameterType="boardfile">
 		INSERT INTO BOARDFILE VALUES (BOARD_SEQ.CURRVAL, #{fname}, #{pathname}, #{content}, sysdate)
 	</insert>
+	
 	<!-- public Board getBoard(int no) -->
 	<select id="getBoard" resultType="board" parameterType="int">
 		SELECT * FROM BOARD WHERE NO = #{NO}
 	</select>
+	
 	<!-- public ArrayList<BoardFile> fileInfo(int no); -->
 	<!-- resultMap: ArrayList형태의 데이터 중에 column명과 property가 다를 때 사용
 		 같을 때에는 ArrayList<BoardFile>의 단위 객체인 resultType(boardfile)만으로도 할당이 가능 -->
 	<select id="fileInfo" resultType="boardfile" parameterType="int">
 		SELECT * FROM BOARDFILE WHERE NO = #{NO}
 	</select>
+	
 	<!-- public void uptReadCnt(int no) -->
 	<update id="uptReadCnt" parameterType="int">
 		UPDATE BOARD
 			SET READCNT = READCNT+1
 		WHERE NO = #{NO}
 	</update>
+	
 	<!-- public void updateBoard(Board upt) -->
 	<update id="updateBoard" parameterType="board">
 		UPDATE BOARD
@@ -59,15 +68,21 @@
 				UPTDTE = sysdate
 		WHERE NO = #{no}	
 	</update>
+	
 	<!-- public void updateFile(HashMap<String, String> hs) -->
 	<update id="updateFile" parameterType="hashmap">
 		update boardfile
 			set fname = #{fname}
 		where no = #{no} and fname = #{orgFname}
 	</update>
+	
 	<!-- public void deleteBoard(Board del) -->
 	<delete id="deleteBoard" parameterType="int">
-		DELETE FROM BOARD WHERE NO = #{no}
+		DELETE FROM BOARD 
+		WHERE NO IN
+		(SELECT no FROM BOARD a
+		 START with no = #{no}
+		 CONNECT BY PRIOR NO = refno)
 	</delete>
 	<delete id="deleteFile" parameterType="int">
 		DELETE FROM BOARDFILE WHERE NO = #{no}

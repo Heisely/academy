@@ -47,6 +47,10 @@ public class A01_BoardService {
 		if (sch.getCurPage() == 0) {
 			sch.setCurPage(1);
 		}
+		//	마지막 페이지 블럭에서 next를 클릭할 때 예외 처리
+		if(sch.getCurPage()>sch.getPageCount()) {
+			sch.setCurPage(sch.getPageCount());
+		}
 		// start, end 속성을 도출하기
 		sch.setStart((sch.getCurPage() - 1) * sch.getPageSize() + 1);
 		sch.setEnd(sch.getCurPage() * sch.getPageSize());
@@ -57,6 +61,7 @@ public class A01_BoardService {
 		int blocknum = (int) Math.ceil(sch.getCurPage() / (double) sch.getBlocksize());
 		// 3. endblock
 		int endBlock = blocknum * sch.getBlocksize();
+		//		블럭의 마지막 페이지번호는 총페이지수보다 클 수 없다.
 		sch.setEndBlock(endBlock > sch.getPageCount() ? sch.getPageCount() : endBlock);
 		// 4. startblock
 		sch.setStartBlock((blocknum - 1) * sch.getBlocksize() + 1);

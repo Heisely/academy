@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="springweb.a02_mvc.a03_dao.A04_CalenDao">
+	<!-- public ArrayList<Calendar> calenList(); -->
+	<resultMap type="calen" id="calMap">
+		<result property="start" column="start1"/>
+		<result property="end" column="end1"/>
+	</resultMap>
+	<select id="calenList" resultMap="calMap">
+		SELECT id, title, 
+			   to_char(start1, 'YYYY-MM-DD"T"HH24:MI:SS') start1,
+			   to_char(end1, 'YYYY-MM-DD"T"HH24:MI:SS') end1,
+			   allDay,
+			   textColor,
+			   BACKGROUNDCOLOR,
+			   BORDERCOLOR
+		FROM CALENDAR		
+	</select>
+</mapper>

@@ -16,4 +16,7 @@ public class A04_CalenService {
 	public ArrayList<Calendar> calenList(){
 		return dao.calenList();
 	}
+	public void insertCalendar(Calendar ins) {
+		dao.insertCalendar(ins);
+	}
 }

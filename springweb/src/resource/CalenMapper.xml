@@ -12,10 +12,20 @@
 		SELECT id, title, 
 			   to_char(start1, 'YYYY-MM-DD"T"HH24:MI:SS') start1,
 			   to_char(end1, 'YYYY-MM-DD"T"HH24:MI:SS') end1,
+			   writer,
+			   content,
 			   allDay,
 			   textColor,
-			   BACKGROUNDCOLOR,
-			   BORDERCOLOR
+			   backgroundColor,
+			   borderColor
 		FROM CALENDAR		
 	</select>
+	
+	<!-- public void insertCalendar(Calendar ins); -->
+	<insert id="insertCalendar">
+		INSERT INTO calendar 
+		VALUES (cal_seq.nextval, '', #{title}, #{writer}, #{content},
+				to_date(#{start},'YYYY/MM/DD'),to_date(#{end},'YYYY/MM/DD'),#{allDay},
+				#{textColor},#{backgroundColor},#{borderColor});
+	</insert>
 </mapper>

@@ -119,7 +119,91 @@ create sequence cal_seq
 	maxvalue 9999999
 	no cycle;
 	
-
+# 캘린더 등록
+1. 화면 처리 방식 결정
+	1) 등록할 속성값 지정
+		id [DB]
+		groupId [DB]
+		title [입력]
+		writer [입력]
+		content [입력]
+		start [full api]
+		end [full api]
+		allDay  [full api]
+		textColor [입력]
+		backgroundColor [입력]
+		borderColor	[입력]
+	2) 등록할 화면 로딩(dialogue-jquery ui/bootstrap으로 처리)
+		위에 있는 입력 항목에 대해
+		ex1) form에 넣고, jquery ui dialogue 화면 처리
+		ex2) form에 넣고, bootstrap으로 dialogue 화면 처리
+		(1) 기본 화면 구성
+			<div id="schDialog" title="일정"> 
+				<form id="frm">
+					<input name="id" type="hidden" value="0"/>
+					<div class="input-group mb-3">			
+						<div class="input-group-prepend">
+							<span class="input-group-text">제목</span>
+						</div>
+						<input class="form-control" name="title" type="text"/>
+					</div>
+		(2) CSS 설정: (주의)다른 CSS 호출의 마지막 부분에 설정
+			<style>
+				input[type=text], select, label, textarea{
+					margin-bottom:12px; 
+					padding:.4em;
+					width:95%;
+				}
+				.input-group-text{
+					width:100%;
+					text-align:center;
+					background-color:linen;
+					color:black;
+					font-weight:bolder;
+				}
+				.input-group-prepend{
+					width:35%;
+				}
+			</style>					
+		(3) JQuery 설정
+			- 기본 옵션으로 dialogue 설정
+				document.addEventListener('DOMContentLoaded', function() {
+					var opts={
+							autoOpen:false, // 초기에 로딩하지 않게 처리
+							width:"350px",
+							modal:true
+					}
+					$("#schDialog").dialog(opts);		
+						
+			- 등록 처리할 때, 등록 버튼이 추가된 dialogue 설정 및 open 프로세스 구현
+				select : function(arg) {
+					opts.buttons={
+							"등록":function(){
+								
+							}
+					};
+					$("#schDialog").dialog(opts);
+					$("#schDialog").dialog("open");
+					// $("#btn01").click();
+					$("[name=start]").val(arg.start.toLocaleString());
+					$("[name=end]").val(arg.end.toLocaleString());
+					$("[name=allDay]").val(""+arg.allDay);		
+						
+	3) 등록 버튼 클릭 시, ajax 처리.
+	4) controller단 호출 및 작성
+2. SQL 작성
+INSERT INTO calendar VALUES (cal_seq.nextval, '', '일정등록3', '오길동', '내용',
+							 to_date(#{start},'YYYY/MM/DD'),to_date(#{end},'YYYY/MM/DD'),1,
+							 'yellow','green','green');
+3. SQL에 맞는 VO 확인
+4. DAO작성
+	public void insertCalendar(Calendar ins);
+5. mapper.xml 작성
+6. service 작성
+7. controller에서 service 호출
+	/calendar.do?method=insert
+8. 화면단 ajax 처리
+	/
 
 
 

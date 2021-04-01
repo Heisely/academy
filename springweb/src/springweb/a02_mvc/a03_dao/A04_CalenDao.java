@@ -11,4 +11,6 @@ public interface A04_CalenDao {
 //	springweb.a02_mvc.a03_dao.A04_CalenDao
 	public ArrayList<Calendar> calenList();
 	public void insertCalendar(Calendar ins);
+	public void updateCalen(Calendar upt);
+	public void deleteCalen(int id);
 }

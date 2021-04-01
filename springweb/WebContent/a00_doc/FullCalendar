@@ -87,37 +87,45 @@
 		ex2) events에 JSON으로 4월30일에 일정 등록. 제목은 수료일. 글자색상은 노란색, 배경색상은 초록색
 		
 # 속성을 이용한 테이블 구조 만들기
-id
-groupId
-title
-writer
-content
-start
-end
-allDay
-textColor
-backgroundColor
-borderColor										
-								
-create table calendar(
-	id number primary key,
-	groupId number,
-	title varchar2(50),
-	writer varchar2(50),
-	content varchar2(1000),
-	start1 date,
-	end1 date,
-	allDay number(1),
-	textColor varchar2(50),
-	backgroundColor varchar2(50),
-	borderColor	varchar2(50)
-);
-create sequence cal_seq
-	start with 1
-	increment by 1
-	minvalue 1
-	maxvalue 9999999
-	no cycle;
+	id
+	groupId
+	title
+	writer
+	content
+	start
+	end
+	allDay
+	textColor
+	backgroundColor
+	borderColor										
+									
+	create table calendar(
+		id number primary key,
+		groupId number,
+		title varchar2(50),
+		writer varchar2(50),
+		content varchar2(1000),
+		start1 varchar2(50),
+		end1 varchar2(50),
+		allDay number(1),
+		textColor varchar2(50),
+		backgroundColor varchar2(50),
+		borderColor	varchar2(50)
+	);
+	// start1 date: 조회/상세읽기(O) but 등록/수정/삭제 ==> bug when toISOString()
+	
+	create sequence cal_seq
+		start with 1
+		increment by 1
+		minvalue 1
+		maxvalue 9999999
+		no cycle;
+	
+	create sequence cal_gp_seq
+		start with 10000
+		increment by 1
+		minvalue 1
+		maxvalue 99999;
 	
 # 캘린더 등록
 1. 화면 처리 방식 결정
@@ -171,7 +179,11 @@ create sequence cal_seq
 					var opts={
 							autoOpen:false, // 초기에 로딩하지 않게 처리
 							width:"350px",
-							modal:true
+							modal:true // popup 로딩 시, 다른 요소객체 비활성화
+							,buttons:{
+								"버튼명1":function(){},								
+								"버튼명2":function(){}
+							} // 하단 opts.buttons와 같은 기능
 					}
 					$("#schDialog").dialog(opts);		
 						
@@ -179,22 +191,35 @@ create sequence cal_seq
 				select : function(arg) {
 					opts.buttons={
 							"등록":function(){
-								
+								// ajax 처리
+								// 등록 버튼 추가
+								// 등록 버튼 클릭 시 처리할 내용
 							}
 					};
-					$("#schDialog").dialog(opts);
-					$("#schDialog").dialog("open");
+					// 등록 버튼을 클릭 시 옵션을 다시 처리
+					$("#schDialog").dialog(opts); // 다이얼로그를 사용할 준비 > 이벤트를 통해서 처리
+					$("#schDialog").dialog("open"); // 다이얼로그 로딩
+					// $("#schDialog").dialog("close"); // 다이얼로그 창닫기
 					// $("#btn01").click();
+					// arg를 받은 기본 속성 값으로 특정한 form요소객체의 값을 설정
+					// 시간/날짜를 클릭하거나 드래그한 시간/날짜에 Date객체인 .toLocaleString()로 날짜 출력 형식 처리
 					$("[name=start]").val(arg.start.toLocaleString());
 					$("[name=end]").val(arg.end.toLocaleString());
-					$("[name=allDay]").val(""+arg.allDay);		
+					$("[name=allDay]").val(""+arg.allDay); // boolean값인데 문자열로 표기해야 하므로 ""로 처리
 						
 	3) 등록 버튼 클릭 시, ajax 처리.
+		"등록":function(){} 부분에 등록 버튼 클릭 시 처리할 ajax 선언
+		- 우선 전달할 데이터를 json형식으로 정리
+		- calendar.addEvent(추가할 json 데이터): 화면 반영
+		- $.ajax(); 를 통해서 서버에 요청값 전달
 	4) controller단 호출 및 작성
+		jsp로 호출하면 안 나옴
 2. SQL 작성
-INSERT INTO calendar VALUES (cal_seq.nextval, '', '일정등록3', '오길동', '내용',
-							 to_date(#{start},'YYYY/MM/DD'),to_date(#{end},'YYYY/MM/DD'),1,
-							 'yellow','green','green');
+	INSERT INTO calendar 
+	VALUES (cal_seq.nextval, '', 
+			#{title}, #{writer}, #{content},
+			#{start}, #{end}, 
+			#{allDay},#{textColor},#{backgroundColor},#{borderColor})
 3. SQL에 맞는 VO 확인
 4. DAO작성
 	public void insertCalendar(Calendar ins);
@@ -203,7 +228,65 @@ INSERT INTO calendar VALUES (cal_seq.nextval, '', '일정등록3', '오길동', 
 7. controller에서 service 호출
 	/calendar.do?method=insert
 8. 화면단 ajax 처리
-	/
+	1) 날짜를 클릭 시, 시작날짜와 종료날짜 객체를 전역변수에 할당.
+		var date = {};
+	2) 입력버튼 클릭 시, 날짜 ==> ISOString()형식으로 변환해 화면과 DB에 전송
+	3) ajax 처리
+		
+# 캘린더 상세화면
+1. 캘린더는 초기에 list할 때, 캘린더의 상세정보 데이터를 각 일정마다 가지고 있다.
+	해당 내용 클릭 시, 내부적으로 속성값을 호출해서, 원하는 화면 UI를 통해서 출력하면 된다.
+2. 프로그래밍
+	1) 클릭 시 처리되는 매개변수를 통해 일정을 가져옴
+	2) dialogue로 처리되는 div의 form 하위 요소의 값에 할당
+	3) 상세이기 때문에 dialogue 버튼 옵션을 수정/삭제 버튼으로 처리
+
+# 캘린더 수정/삭제
+1. 수정 삭제 SQL 작성
+	update calendar
+		set title = '',
+			start1 = '',
+			end1 = '',
+			content = '',
+			backgroundColor = '',
+			borderColor = '',
+			textColor = '',
+			allDay = ''
+	where id = '';
+	delete from calendar where id = '';
+2. DAO/mapper 작성
+	public void updateCalen(Calendar upt);
+	public void deleteCalen(int id);
+3. service/controller 호출
+4. controller 기능 메서드 선언
+	method=update
+	method=delete
+5. 화면단(event 처리)
+	화면처리/DB처리
+	0) 수정 이벤트 확인
+		상세 화면 수정
+		drag and drop 수정 (날짜와 시간 변경)
+		resize 수정(시간 변경)
+	1) 수정 클릭 시
+		변경된 부분을 json데이터로 가져오기
+		# 화면 변경
+		현재 이벤트의 데이터를 id값으로 가져와서 setPop을 통해 변경
+		# ajax 처리
+		
+	2) 삭제 클릭 시
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

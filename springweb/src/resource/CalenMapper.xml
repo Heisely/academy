@@ -9,23 +9,37 @@
 		<result property="end" column="end1"/>
 	</resultMap>
 	<select id="calenList" resultMap="calMap">
-		SELECT id, title, 
-			   to_char(start1, 'YYYY-MM-DD"T"HH24:MI:SS') start1,
-			   to_char(end1, 'YYYY-MM-DD"T"HH24:MI:SS') end1,
-			   writer,
-			   content,
-			   allDay,
-			   textColor,
-			   backgroundColor,
-			   borderColor
+		SELECT *
 		FROM CALENDAR		
 	</select>
 	
 	<!-- public void insertCalendar(Calendar ins); -->
 	<insert id="insertCalendar">
 		INSERT INTO calendar 
-		VALUES (cal_seq.nextval, '', #{title}, #{writer}, #{content},
-				to_date(#{start},'YYYY/MM/DD'),to_date(#{end},'YYYY/MM/DD'),#{allDay},
-				#{textColor},#{backgroundColor},#{borderColor});
+		VALUES (cal_seq.nextval, '', 
+				#{title}, #{writer}, #{content},
+				#{start}, 
+				#{end}, 
+				#{allDay},#{textColor},#{backgroundColor},
+				#{borderColor})
 	</insert>
+	
+	<!-- public void updateCalen(Calendar upt); -->
+	<update id="updateCalen">
+		update calendar
+			set title = #{title},
+				start1 = #{start},
+				end1 = #{end},
+				content = #{content},
+				backgroundColor = #{backgroundColor},
+				borderColor = #{borderColor},
+				textColor = #{textColor},
+				allDay = #{allDay}
+		where id = #{id}	
+	</update>
+	
+	<!-- public void deleteCalen(int id); -->
+	<delete id="deleteCalen">
+		delete from calendar where id = #{id}
+	</delete>
 </mapper>

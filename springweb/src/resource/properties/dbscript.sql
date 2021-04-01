@@ -1,25 +1,17 @@
 create table calendar(
-	id number primary key,
-	groupId number,
-	title varchar2(50),
-	writer varchar2(50),
-	content varchar2(1000),
-	start1 date,
-	end1 date,
-	allDay number(1),
-	textColor varchar2(50),
-	backgroundColor varchar2(50),
-	borderColor	varchar2(50)
-);
-INSERT INTO calendar VALUES (cal_seq.nextval, '', '일정등록3', '오길동', '내용',
-					 to_date('2021/04/03','YYYY/MM/DD'),to_date('2021/04/04','YYYY/MM/DD'),1,
-					 'yellow','green','green');
-INSERT INTO calendar VALUES (cal_seq.nextval, '', '일정등록4', '오길동', '내용',
-					 sysdate,sysdate,1,
-					 'yellow','green','green');
-INSERT INTO calendar VALUES (cal_seq.nextval, '', '4월 시작', '마길동', '내용',
-					 to_date('2021/04/01','YYYY/MM/DD'),to_date('2021/04/01','YYYY/MM/DD'),1,
-					 'pink','orange','orange');
+		id number primary key,
+		groupId number,
+		title varchar2(50),
+		writer varchar2(50),
+		content varchar2(1000),
+		start1 varchar2(50),
+		end1 varchar2(50),
+		allDay number(1), -- DB에서는 boolean형식이 없음. VO에서 boolean으로 설정해놓으면 0은 false, 1은 true로 입력이 됨
+		textColor varchar2(50),
+		backgroundColor varchar2(50),
+		borderColor	varchar2(50)
+	);
+
 create sequence cal_seq
 	start with 1
 	increment by 1
@@ -32,15 +24,13 @@ create sequence cal_gp_seq
 	maxvalue 99999;
 
 -- 2021-04-12T20:00:00
-SELECT id, title, 
-	   to_char(start1, 'YYYY-MM-DD"T"HH24:MI:SS') start1,
-	   to_char(end1, 'YYYY-MM-DD"T"HH24:MI:SS') end1,
-	   allDay,
-	   textColor,
-	   BACKGROUNDCOLOR,
-	   BORDERCOLOR
+SELECT *
 FROM CALENDAR;
 
+INSERT INTO calendar 
+VALUES (cal_seq.nextval, '', '프로젝트 시작', '이철수', '내용',
+		'2021-04-01T00:00:00.000Z', '2021-04-02T00:00:00.000Z',
+		1, 'yellow', 'navy', 'orange');
 
 
 

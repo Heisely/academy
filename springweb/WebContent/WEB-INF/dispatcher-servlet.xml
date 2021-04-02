@@ -97,5 +97,19 @@
 	<!-- 3. 파일다운로드 뷰 Viewer -->
 	<bean id="downloadviewer" class="springweb.z04_util.FileDownloadViewer"/>
 	<!-- 4. 엑셀 뷰 Viewer -->
-	<!-- 4. PDF 뷰 Viewer -->
+	<!-- 5. PDF 뷰 Viewer -->
+	<!-- SMTP 서버 설정 -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com"/>
+		<property name="port" value="587"/>
+		<property name="username" value="heisely93@gmail.com"/>
+		<property name="password" value="sogkswk44!#%&amp;"/>
+		<!-- 보안 관련 설정 -->
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+			</props>
+		</property>
+	</bean>	
 </beans>

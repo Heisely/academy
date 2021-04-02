@@ -128,13 +128,24 @@ var date = {};
 				$("[name=start]").val(arg.start.toLocaleString());
 				$("[name=end]").val(arg.end.toLocaleString());
 				$("[name=allDay]").val(""+arg.allDay);
-
+			},
+			eventDrop:function(arg){
+				//alert("드랍 이벤트");
+				//console.log("## 드랍 이벤트 ##");
+				//console.log(arg.event);
+				eventUpt(arg.event);
+			},
+			eventResize:function(arg){
+				//alert("날짜크기조절 이벤트");
+				//console.log("## 날짜크기조절 이벤트 ##");
+				//console.log(arg.event);
+				eventUpt(arg.event);
 			},
 			eventClick : function(arg) {
-				date.start = arg.start;
-				date.end = arg.end;
 				// 있는 일정을 클릭 시, 상세 화면 보이기(등록되어 있는 데이터 출력)
 				// ajax를 통해서 데이터 수정/삭제
+				date.start = arg.start;
+				date.end = arg.end;
 				console.log("# 등록된 일정 클릭 #");
 				console.log(arg.event);
 				detail(arg.event);
@@ -146,19 +157,43 @@ var date = {};
 						// 1. 화면단 변경
 						// 현재 캘린더 api 속성 변경
 						var event = calendar.getEventById(sch.id);
-						// 속성값 변경 setProp
+						/* 속성값 변경 setProp */
 						event.setProp("title", sch.title);			
 						event.setProp("textColor", sch.textColor);			
 						event.setProp("backgroundColor", sch.backgroundColor);			
 						event.setProp("borderColor", sch.borderColor);		
-						// 확장 속성
+						/* 확장 속성: writer, content */
 						event.setExtendedProp("writer", sch.writer);
 						event.setExtendedProp("content", sch.content);
 						event.setAllDay(sch.allDay);
 						
+						/* 2. DB 변경 */
+						updateCall(sch);
+						
 						$("#schDialog").dialog("close");
 					},
-					"삭제":function(){}
+					"삭제":function(){
+						var idVal = $("[name=id]").val();
+						// 화면에서 삭제
+						var event = calendar.getEventById(idVal);
+						event.remove();
+						// DB에서 삭제
+						$.ajax({
+							type:"post",
+							uri:"calendar.do?method=delete",
+							data:{id:idVal},
+							dataType:"json",
+							success:function(data){
+								if(data.success=="Y"){
+									alert("삭제 성공");
+								}
+							},
+							error:function(err){
+								alert("에러 발생");
+								console.log(err);
+							}
+						});
+					}
 				}
 				$("#schDialog").dialog(opts);
 				$("#schDialog").dialog("open"); // dialogue 로딩				
@@ -223,7 +258,22 @@ var date = {};
 		$("[name=textColor]").val(event.textColor);
 		$("[name=borderColor]").val(event.borderColor);
 	}
-
+	
+	function eventUpt(event){
+		var sch = {};
+		sch.id = event.id;
+		sch.title = arg.event.title;
+		sch.start = arg.event.start.toISOString();
+		sch.end = arg.event.end.toISOString();
+		sch.content = event.extendedProps.content;
+		sch.textColor = arg.event.textColor;
+		sch.backgroundColor = arg.event.backgroundColor;
+		sch.borderColor = arg.event.borderColor;
+		sch.allDay = arg.event.allDay;		
+		console.log("# 이벤트에 의한 수정 #");
+		console.log(sch);
+		updateCall(sch);
+	}
 	$(document).ready(function() {
 
 	});

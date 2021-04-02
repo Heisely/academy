@@ -14,7 +14,7 @@
 	</select>
 	
 	<!-- public void insertCalendar(Calendar ins); -->
-	<insert id="insertCalendar">
+	<insert id="insertCalendar" parameterType="calen">
 		INSERT INTO calendar 
 		VALUES (cal_seq.nextval, '', 
 				#{title}, #{writer}, #{content},
@@ -25,21 +25,21 @@
 	</insert>
 	
 	<!-- public void updateCalen(Calendar upt); -->
-	<update id="updateCalen">
+	<update id="updateCalen" parameterType="calen">
 		update calendar
 			set title = #{title},
 				start1 = #{start},
 				end1 = #{end},
 				content = #{content},
 				backgroundColor = #{backgroundColor},
-				borderColor = #{borderColor},
 				textColor = #{textColor},
+				borderColor = #{borderColor},
 				allDay = #{allDay}
 		where id = #{id}	
 	</update>
 	
 	<!-- public void deleteCalen(int id); -->
-	<delete id="deleteCalen">
+	<delete id="deleteCalen" parameterType="int">
 		delete from calendar where id = #{id}
 	</delete>
 </mapper>

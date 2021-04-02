@@ -275,9 +275,23 @@
 		
 	2) 삭제 클릭 시
 
-
-
-
+# Drag and Drop 수정(날짜와 시간 변경) / Resize 수정(시간 변경)
+1. arg값을 가져와서 변경값을 
+	0) 기존 수정 ajax처리와 모듈을 활용하기 위해 parameter 처리로 ajax 요청값을 변경한다.
+	1) arg.event로 변경 속성을 가져온다.
+	2) 날짜관련 내용은 ISO형식으로 변경시킨다.
+	3) ajax로 수정한다.
+2. 수정 데이터 변경
+	1) 기존 데이터에서 sch객체의 해당 요청값으로 데이터를 변경한다.
+		var sch = {};
+		sch.title = arg.event.title;
+		sch.start = arg.event.start.toISOString();
+		sch.end = arg.event.end.toISOString();
+		sch.content = arg.event.content;
+		sch.backgroundColor = arg.event.backgroundColor;
+		sch.borderColor = arg.event.borderColor;
+		sch.textColor = arg.event.textColor;
+		sch.allDay = arg.event.allDay;
 
 
 

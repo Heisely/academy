@@ -1,0 +1,21 @@
+# 스프링 환경 하에서 메일 발송
+1. 메일 발송을 위한 환경 구성
+	1) 메일 서버 구축
+		POP: 메일 수신을 위한 서버
+		SMTP: 메일 발송을 위한 서버
+		==> gmail/naver/daum에서 사용된 서버 차용
+		보안 설정 부분 변경
+	2) 스프링에서 메일 발송을 위한 객체 등록(container)
+		org.springframework.mail.javamail.JavaMailSenderImpl
+		- SMTP 등록: smtp.gmail.com
+		- port 등록: 587
+		- 계정/비밀번호: 계정명 비밀번호
+		- 보안 관련 설정
+2. 프로그래밍 처리 내용
+	1) 발송할 수 있는 초기 화면 호출
+		controller, view단 구현
+	2) 제목/수신자/내용으로 화면단 구성. 발송 클릭 시 처리할 controller 호출
+		view, controller 호출
+	3) service단에서
+		- 요청값과 container에서 선언된 JavaMailSender 객체 호출
+		- 제목/수신자/내용을 요청값으로 받아 JavaMailSender로 전송

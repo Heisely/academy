@@ -103,7 +103,7 @@
 		<property name="host" value="smtp.gmail.com"/>
 		<property name="port" value="587"/>
 		<property name="username" value="heisely93@gmail.com"/>
-		<property name="password" value="sogkswk44!#%&amp;"/>
+		<property name="password" value="sogkswk44"/>
 		<!-- 보안 관련 설정 -->
 		<property name="javaMailProperties">
 			<props>

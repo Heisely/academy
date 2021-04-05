@@ -2,7 +2,7 @@
 1. spring에서 지원하는 JSON Viewer를 이용, backend단의 데이터를 FullCalendar api와 연동하여 효과적인 calendar 데이터를 처리
 2. 개발 순서
 	1) FullCalendar lib 다운로드
-	2) JSP 환경으로 front end단 lib 호출
+	2) JSP 환경으로 front end단 lib 호출: CSS, JQuery, lib 공동 호출. JSP의 ${path}환경에서 호출
 	3) FullCalendar api의 JSON데이터와 주요 핵심 기능 메서드 확인
 	4) 주요 기능 정의
 	5) FullCalendar 기본 sample예제 및 api를 통해, JSON데이터를 테이블 구조로 변경하여 테이블 생성 및 sample데이터 입력

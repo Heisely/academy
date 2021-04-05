@@ -5,6 +5,7 @@
 		SMTP: 메일 발송을 위한 서버
 		==> gmail/naver/daum에서 사용된 서버 차용
 		보안 설정 부분 변경
+		==> 해당 사이트에서 설정
 	2) 스프링에서 메일 발송을 위한 객체 등록(container)
 		org.springframework.mail.javamail.JavaMailSenderImpl
 		- SMTP 등록: smtp.gmail.com

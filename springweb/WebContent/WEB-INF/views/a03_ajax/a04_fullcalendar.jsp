@@ -79,19 +79,20 @@ var date = {};
 			// 이벤트명:function(){}: 각 날짜에 대한 이벤트를 통해 처리할 내용
 			// 등록처리할 때, 등록 버튼이 추가된 dialogue 설정 및 open
 			select : function(arg) {
+				$("#schDialog>form")[0].reset();
 				// 화면에 보이는 형식 설정
 				// 클릭한 날짜를 전역변수에 할당 / 시작일과 마지막날을 date형식으로 할당
 				date.start = arg.start;
-				date.end = arg.end;
-				
+				date.end = arg.end;				
 				opts.buttons={
 					"등록":function(){
 						//alert("등록 처리");
 						var sch = callSch(); // 리턴값이 입력된 객체데이터
+						/* 데이터 확인 */
 						console.log("### 등록할 데이터 ###");
 						console.log(sch);
 						
-						// 화면에 출력
+						/* 화면에 출력 */
 						if(sch.title){
 							// 화면에 처리할 이벤트 할당 
 							calendar.addEvent(sch);
@@ -125,9 +126,13 @@ var date = {};
 				// alert("시작일: "+arg.start.toISOString());
 				// $("#btn01").click();
 				
+				// 화면에 보이는 날짜를 한국 표현식으로 처리
 				$("[name=start]").val(arg.start.toLocaleString());
 				$("[name=end]").val(arg.end.toLocaleString());
+				// allDay는 boolean값이므로 select의 형식에 맞게 처리하려면 ""+형식으로 문자열 처리가 필요
 				$("[name=allDay]").val(""+arg.allDay);
+				$("#schDialog").dialog(opts);
+				$("#schDialog").dialog("open");
 			},
 			eventDrop:function(arg){
 				//alert("드랍 이벤트");
@@ -144,12 +149,15 @@ var date = {};
 			eventClick : function(arg) {
 				// 있는 일정을 클릭 시, 상세 화면 보이기(등록되어 있는 데이터 출력)
 				// ajax를 통해서 데이터 수정/삭제
+				// arg.event: 해당 상세 정보를 가지고 있다.
+				/* event의 날짜 저장 */
 				date.start = arg.start;
 				date.end = arg.end;
-				console.log("# 등록된 일정 클릭 #");
-				console.log(arg.event);
-				detail(arg.event);
-				
+				/* 각 form에 값 추가 */
+				// 1. 화면 로딩
+				// 2번 이상 중복된 함수 사용이 필요한 부분은 모듈로 분리 처리
+				detail(arg.event);				
+				// 2. 
 				opts.buttons={
 					"수정":function(){
 						// 수정 후 json데이터 가져오기
@@ -231,7 +239,10 @@ var date = {};
 		sch.title=$("[name=title]").val();
 		sch.writer=$("[name=writer]").val();
 		sch.content=$("[name=content]").val();
-		//Date타입은 화면에서 사용되는 형식으로 설정하여야한다.
+		/* Date타입은 화면에서 사용되는 형식으로 설정하여야한다.
+		   전역변수에 할당한 data.start/date.end에 ISO형태로 속성 할당
+		   ?? calendar api에서 사용되는 날짜처리방식이 ISO문자열 형식이기 때문
+		   ex) Date ==> toISOString() 형식 */
 		sch.start = date.start.toISOString();
 		sch.end = date.end.toISOString();
 		// sch.allDay: calendar화면에 처리할 데이터를 boolean형식으로 true/false로 처리해야 하는데, 화면에 보이는 내용은 문자열로 돼있다.
@@ -240,20 +251,23 @@ var date = {};
 		sch.backgroundColor=$("[name=backgroundColor]").val();
 		sch.textColor=$("[name=textColor]").val();
 		sch.borderColor=$("[name=borderColor]").val();
+		
 		return sch;
 	}
 	
 	function detail(event){
-		// form 하위 객체에 할당
+		// event 안에 기본 속성 값을 초기에 데이터 로딩 시 가지고 있음
+		/* form 하위 객체에 할당 */
 		$("[name=id]").val(event.id);
 		$("[name=title]").val(event.title);
-		// calendar에서 추가된 속성들
+		/* calendar에서 추가된 속성들 */
 		var exProps = event.extendedProps;
 		$("[name=writer]").val(exProps.writer);
 		$("[name=content]").val(exProps.content);
 		$("[name=start]").val(event.start.toLocaleString());
 		$("[name=end]").val(event.end.toLocaleString());
 		$("[name=allDay]").val(""+event.allDay);
+		
 		$("[name=backgroundColor]").val(event.backgroundColor);
 		$("[name=textColor]").val(event.textColor);
 		$("[name=borderColor]").val(event.borderColor);

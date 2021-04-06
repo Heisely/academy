@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/springweb/a00_com/a00_com.css">
+<script type="text/javascript" src="/springweb/a00_com/jquery-3.5.1.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script type="text/javascript">
+/* 
+# Vue의 환경 설정
+1. js lib 처리
+	https://cdn.jsdelivr.net/npm/vue/dist/vue.js 로 로딩
+	
+2. webpack 환경 처리
+	1) node 설치
+	2) npm으로 vue cli 도구 설정
+	3) vue cli 도구를 통해서 프로젝트 설정
+	4) node 웹 서비스를 통해 vue 초기화면 구성
+
+3. MVVM패턴에 의한 화면 처리
+	1) View: 화면 DOM 객체 구성
+	2) Model: 화면에 처리할 모델 데이터 선언
+	3) VM(View Model): View와 Model을 연결하는 객체
+ */
+//
+	$(document).ready(function(){
+		// 모델 데이터 선언
+		var model = {name:"홍길동", age:25, loc:"서울 강남"};
+		// VM모델 객체 선언
+		// 1. el(element): 화면(View)에서 vue를 적용할 DOM객체 지정
+		// 2. data: 모델 데이터 연결
+		// 3. 모델데이터와 화면이 연결되었기 떄문에 model에 있는 속성을 vue에서 사용하는 표현 형식인 directive로 선언하여 사용할 수 있다.
+		// {{모델명}}: mustache
+		var vm = new Vue({
+			el : "#viewShow",
+			data: model
+		});
+	});
+</script>
+</head>
+<body>
+	<!-- View 화면 구성 -->
+	<h2></h2>
+	<div id = "viewShow">
+		<h3>이름: {{name}}</h3>
+		<h3>나이: {{age}}</h3>
+		<h3>사는 곳: {{loc}}</h3>
+	</div>
+</body>
+</html>

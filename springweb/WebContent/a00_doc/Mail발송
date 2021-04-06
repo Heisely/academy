@@ -20,3 +20,6 @@
 	3) service단에서
 		- 요청값과 container에서 선언된 JavaMailSender 객체 호출
 		- 제목/수신자/내용을 요청값으로 받아 JavaMailSender로 전송
+3. 활용 예제
+	1) 비밀번호 발송
+	2) 회사계정 생성 후 등록한 메일로 ID/임시비밀번호 발송

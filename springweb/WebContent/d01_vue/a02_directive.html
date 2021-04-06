@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/springweb/a00_com/a00_com.css">
+<script type="text/javascript" src="/springweb/a00_com/jquery-3.5.1.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script type="text/javascript">
+/* 
+# 기본 directive
+1. vue에서 모델 데이터를 화면에 처리하는 것을 directive라고 한다.
+2. directive는 데이터를 저장하는 것으로 크게 두 가지로 나뉜다.
+	1) 단방향
+		mustache: {{모델데이터}} 형식으로 화면에 해당 모델데이터를 바로 출력할 때 활용된다.
+					형식: <태그>{{모델데이터}}</태그>
+					ex) <h2>{{greet}}</h2>
+		v-text: 요소객체의 속성으로 선언하여, 해당 속성값으로 모델데이터를 처리한다.
+				형식: <태그 v-text="모델데이터"></태그>
+				ex) <h3 v-text="color"></h3>	
+		v-html: 요소객체의 속성으로 모델데이터에서 태그 내용이 포함되면 html 코드를 랜더링시켜 출력한다.
+				ex) var model = {"show","<h2>반가워요</h2>"};
+					<div v-html="show"></div>
+	2) 양방향
+		v-model: 입력요소객체에 모델데이터의 속성을 설정하면, 입력 할 때 모델데이터를 변경한다.
+				 이에 따라 모델데이터와 연결된 데이터를 바로 변경한다.
+ */
+//
+	$(document).ready(function(){
+//		$("h2").text("출력 directive");
+		var vm = new Vue({
+			el:"#show01",
+			data:{greet:"안녕하세요", color:"노랑", show:"<h2>반가워요</h2>", name:""}
+		});
+	});
+</script>
+</head>
+<body>
+	<div id="show01">
+		<h2>{{greet}}</h2>
+		<h3 v-text="color"></h3>
+		<div v-html="show"></div>
+		<div v-text="show"></div>
+		이름:<input v-model="name"/><br>
+		<h3>{{name}}</h3>
+		<h4>{{name}}</h4>
+		<h5>{{name}}</h5>
+		<h6>{{name}}</h6>
+	</div>
+</body>
+</html>

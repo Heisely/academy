@@ -30,7 +30,8 @@
 //		$("h2").text("출력 directive");
 		var vm = new Vue({
 			el:"#show01",
-			data:{greet:"안녕하세요", color:"노랑", show:"<h2>반가워요</h2>", name:""}
+			data:{greet:"안녕하세요", color:"노랑", show:"<h2>반가워요</h2>", name:"",
+				  price:0, cnt:0}
 		});
 	});
 </script>
@@ -44,8 +45,11 @@
 		이름:<input v-model="name"/><br>
 		<h3>{{name}}</h3>
 		<h4>{{name}}</h4>
-		<h5>{{name}}</h5>
-		<h6>{{name}}</h6>
+		가격: <input v-model="price"/><br>
+		개수: <input v-model="cnt"/><br>
+		<h4>가격: {{price}}</h4>
+		<h4>개수: {{cnt}}</h4>
+		<h4>총계: {{price*cnt}}</h4>
 	</div>
 </body>
 </html>

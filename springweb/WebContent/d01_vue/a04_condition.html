@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/springweb/a00_com/bootstrap.min.css" >
+<script type="text/javascript" src="/springweb/a00_com/jquery-3.5.1.js"></script>
+<script src="/springweb/a00_com/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script type="text/javascript">
+/* 
+# 조건문 directive
+1. 특정 요소객체에 속성을 선언하여 
+	해당 boolean값이 true일 때 해당 요소객체가 출력되고
+	false일 때에는 보이지 않게 처리할 때 활용
+2. 기본 형식
+	<요소객체 v-if="모델데이터 >= 데이터">: 해당 요소객체가 모델데이터의 특정한 범위에 있을 때(boolean) 보이게 처리
+	<요소객체 v-else-if="boolean">
+	<요소객체 v-else>
+*/
+//
+	$(document).ready(function(){
+		var vm = new Vue({
+			el: ".container",
+			data:{
+				title:"연습",
+				pay:0
+			}
+		});
+	});
+</script>
+</head>
+<body>
+<div class="container">
+	<div class="jumbotron text-center">
+		<h2>{{title}}</h2>
+	</div>
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+		<form class="form-inline" method="post">
+			<input class="form-control mr-sm-2" type="text" name="ename" v-model="pay">
+			<button class="btn btn-success" type="submit">Search</button>
+		</form>
+	</nav>
+	<table class="table table-hover table-striped">
+		<thead>
+			<tr class="table-success text-center">
+				<th>등급</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="text-center">
+				<td v-if="pay>=100000">VIP 고객</td>
+				<td v-else-if="pay>=50000">Normal 고객</td>
+				<td v-else>방문 고객</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+</body>
+</html>

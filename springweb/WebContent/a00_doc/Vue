@@ -1,0 +1,81 @@
+# Vue의 환경 설정
+1. js lib 처리
+	https://cdn.jsdelivr.net/npm/vue/dist/vue.js 로 로딩
+	
+2. webpack 환경 처리
+	1) node 설치
+	2) npm으로 vue cli 도구 설정
+	3) vue cli 도구를 통해서 프로젝트 설정
+	4) node 웹 서비스를 통해 vue 초기화면 구성
+
+3. MVVM패턴에 의한 화면 처리
+	1) View: 화면 DOM 객체 구성
+	2) Model: 화면에 처리할 모델 데이터 선언
+	3) VM(View Model): View와 Model을 연결하는 객체
+
+# Vue의 핵심 기능
+1. MVVM 패턴을 통해서 화면과 데이터 처리
+2. Component를 활용하여 가상 DOM으로 효과적인 화면 처리
+3. 비동기통신 ajax를 활용하여 데이터를 처리
+	- ajax 처리 모듈로 axios 사용
+	
+# 기본 directive
+1. vue에서 모델 데이터를 화면에 처리하는 것을 directive라고 한다.
+2. directive는 데이터를 저장하는 것으로 크게 두 가지로 나뉜다.
+	1) 단방향
+		mustache: {{모델데이터}} 형식으로 화면에 해당 모델데이터를 바로 출력할 때 활용된다.
+					형식: <태그>{{모델데이터}}</태그>
+					ex) <h2>{{greet}}</h2>
+		v-text: 요소객체의 속성으로 선언하여, 해당 속성값으로 모델데이터를 처리한다.
+				형식: <태그 v-text="모델데이터"></태그>
+				ex) <h3 v-text="color"></h3>	
+		v-html: 요소객체의 속성으로 모델데이터에서 태그 내용이 포함되면 html 코드를 랜더링시켜 출력한다.
+				ex) var model = {"show","<h2>반가워요</h2>"};
+					<div v-html="show"></div>
+	2) 양방향
+		v-model: 입력요소객체에 모델데이터의 속성을 설정하면, 입력 할 때 모델데이터를 변경한다.
+				 이에 따라 모델데이터와 연결된 데이터를 바로 변경한다.
+				 ex) var model = {price:0, cnt:0}
+				 	<input v-model="price"/>	가격: [ 0 ]
+				 	<input v-model="cnt"/>		개수: [ 0 ]
+				 	<h2>가격: {{price}}</h2> 화면에 입력요소 입력과 동시에 해당 내용 출력
+				 	<h2>개수: {{cnt}}</h2>
+				 	<h2>총계: {{price*cnt}}</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/springweb/a00_com/bootstrap.min.css" >
+<script type="text/javascript" src="/springweb/a00_com/jquery-3.5.1.js"></script>
+<script src="/springweb/a00_com/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script type="text/javascript">
+/* 
+# 속성 처리 directive
+1. directive에는 속성을 모델과 연동할 수 있다.
+	요소이름 v-bind:속성="모델"
+	요소이름 :속성="모델"
+2. 기본 코드와 비교
+	<input value="안녕"/>
+	var model = {greet:"반가워요!", img01:"img01.gif"}
+	<input v-bind:value="greet"/>
+	<img :src="img01"/>
+*/
+//
+	$(document).ready(function(){
+		var vm = new Vue({
+			el: ".container",
+			data:{
+				title:"v-bind:속성연습",
+				greet:"반가워요",
+				img01:"img01.PNG",
+				width01:"100px",
+				height01:"100px",
+				align01:"center"
+			}
+		});
+	});
+</script>
+</head>
+<body>
+<div class="container">
+	<div class="jumbotron text-center">
+		<h2 v-bind:align="align01">{{title}}</h2>
+	</div>
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+		<form class="form-inline" method="post">
+			<input class="form-control mr-sm-2" type="text" v-bind:value="greet">
+			<img :src="img01" :width="width01" :height="height01"/>
+			<select class="form-control" v-model="align01">
+				<option>center</option>				
+				<option>left</option>				
+				<option>right</option>				
+			</select>
+		</form>
+	</nav>
+	<table class="table table-hover table-striped">
+		<thead>
+			<tr class="table-success text-center">
+				<th>타이틀</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="text-center">
+				<td>내용</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+</body>
+</html>

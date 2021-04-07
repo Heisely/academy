@@ -33,10 +33,31 @@
 	});
 </script>
 </head>
+<%-- 
+multi_title = MultiLanguage experience
+ename = Ename
+job = Job
+search = Search
+title = Title
+content = Content
+
+multi_title = 다국어 처리
+ename = 사원명
+job = 직책명
+search = 검색
+title = 제목
+content = 내용
+
+<spring:message code='ename'/>
+<spring:message code='job'/>
+<spring:message code="search"/>
+<spring:message code="title"/>
+<spring:message code="content"/>
+ --%>
+<body>
 <div class="jumbotron text-center">
-	<h2>다국어 처리</h2>
+	<h2><spring:message code="multi_title"/></h2>
 	<h3><spring:message code="welcome"/></h3>
-	<h3><spring:message code="exemple"/></h3>
 	<select class="form-control" id="selectLan">
 		<option value=""><spring:message code="chlang"/></option>
 		<option value="ko"><spring:message code="ko"/></option>
@@ -46,20 +67,20 @@
 <div class="container">
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 		<form class="form-inline" method="post">
-			<input class="form-control mr-sm-2" type="text" name="ename" value="" placeholder="사원명">
-			<input class="form-control mr-sm-2" type="text" name="job"  value="" placeholder="직책명">
-			<button class="btn btn-success" type="submit">Search</button>
+			<input class="form-control mr-sm-2" type="text" name="ename" value="" placeholder="<spring:message code='ename'/>">
+			<input class="form-control mr-sm-2" type="text" name="job"  value="" placeholder="<spring:message code='job'/>">
+			<button class="btn btn-success" type="submit"><spring:message code="search"/></button>
 		</form>
 	</nav>
 	<table class="table table-hover">
 		<thead>
 			<tr class="table-success text-center">
-				<th>타이틀</th>
+				<th><spring:message code="title"/></th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr class="text-center">
-				<td>내용</td>
+				<td><spring:message code="content"/></td>
 			</tr>
 		</tbody>
 	</table>

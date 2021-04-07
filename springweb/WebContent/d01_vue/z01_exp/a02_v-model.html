@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/springweb/a00_com/a00_com.css">
+<script type="text/javascript" src="/springweb/a00_com/jquery-3.5.1.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script type="text/javascript">
+/* 
+물건명	가격	개수	계
+@@@		[ ]	[ ]	@@@
+@@@		[ ] [ ]	@@@
+@@@		[ ] [ ] @@@
+	총계 @@@
+v-model을 이용해서 단위 계와 총계가 출력되게 하세요
+*/
+//
+	$(document).ready(function(){
+		$("h2").text("v-model 연습");
+		var vm = new Vue({
+			el: ".container",
+			data: {
+				price1:2000, cnt1:0,
+				price2:3000, cnt3:0,
+				price3:4000, cnt2:0
+			}
+		});
+	});
+</script>
+</head>
+<body>
+	<h2></h2>
+	<div class="jumbotron text-center">
+		<div class="container">
+			<table class="table table-hover">
+				<tr class="text-center">
+					<td>사과</td>
+					<td><input class="form-control" v-model="price1"/></td>
+					<td><input class="form-control" v-model="cnt1"/></td>
+					<td>{{price1*cnt1}}</td>
+				</tr>
+				<tr class="text-center">
+					<td>바나나</td>
+					<td><input class="form-control" v-model="price2"/></td>
+					<td><input class="form-control" v-model="cnt2"/></td>
+					<td>{{price2*cnt2}}</td>
+				</tr>
+				<tr class="text-center">
+					<td>딸기</td>
+					<td><input class="form-control" v-model="price3"/></td>
+					<td><input class="form-control" v-model="cnt3"/></td>
+					<td>{{price3*cnt3}}</td>
+				</tr>
+				<tr class="text-center">
+					<td colspan="3">총계</td>
+					<td>{{price1*cnt1+price2*cnt2+price3*cnt3}}</td>
+				</tr>
+			</table>
+		</div>	
+	</div>
+</body>

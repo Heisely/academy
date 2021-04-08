@@ -35,12 +35,35 @@
 	2) 양방향
 		v-model: 입력요소객체에 모델데이터의 속성을 설정하면, 입력 할 때 모델데이터를 변경한다.
 				 이에 따라 모델데이터와 연결된 데이터를 바로 변경한다.
+				 <input v-model="모델명": 입력할 때 모델명에 해당하는 데이터를 변경
+				 	ex) <select <textarea
+				 {{모델명}}: 입력과 동시에 화면에 연동되어 있는 모델데이터에 영향을 받아 데이터 처리
 				 ex) var model = {price:0, cnt:0}
 				 	<input v-model="price"/>	가격: [ 0 ]
 				 	<input v-model="cnt"/>		개수: [ 0 ]
 				 	<h2>가격: {{price}}</h2> 화면에 입력요소 입력과 동시에 해당 내용 출력
 				 	<h2>개수: {{cnt}}</h2>
 				 	<h2>총계: {{price*cnt}}</h2>
+				 	
+# 속성 처리 directive
+1. directive에는 속성을 모델과 연동할 수 있다.
+	요소이름 v-bind:속성="모델명"
+	요소이름 :속성="모델"
+2. 기본 코드와 비교
+	<input value="안녕"/>
+	var model = {greet:"반가워요!", img01:"img01.gif"}
+	<input v-bind:value="greet"/>
+	<img :src="img01"/>
+	
+# 조건문 directive
+1. 특정 요소객체에 속성을 선언하여 
+	해당 boolean값이 true일 때 해당 요소객체가 출력되고
+	false일 때에는 보이지 않게 처리할 때 활용
+2. 기본 형식
+	<요소객체 v-if="모델데이터 >= 데이터">: 해당 요소객체가 모델데이터의 특정한 범위에 있을 때(boolean) 보이게 처리
+	<요소객체 v-else-if="boolean">
+	<요소객체 v-else>
+
 
 
 

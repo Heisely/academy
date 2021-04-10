@@ -17,6 +17,7 @@ import board.a03_dao.A01_BoardDao;
 import board.z01_vo.Board;
 import board.z01_vo.BoardFile;
 import board.z01_vo.BoardSch;
+import board.z01_vo.Member;
 
 @Service
 public class A01_BoardService {
@@ -210,5 +211,9 @@ public class A01_BoardService {
 		dao.deleteFile(no);
 		dao.deleteBoard(no);
 		// 파일 삭제는 생략
+	}
+	
+	public Member login(Member mem) {
+		return dao.login(mem);
 	}
 }

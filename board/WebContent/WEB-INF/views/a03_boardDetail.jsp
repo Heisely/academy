@@ -43,14 +43,14 @@
 			$(location).attr("href","${path}/board.do?method=list");
 		}
 		
-		var memId = "${mem.id}";
+		var sessId = "${sesMem.id}";
 		$("#goMain").click(function(){
 			$(location).attr("href","${path}/board.do?method=list")
 		});
 		$("#uptBtn").click(function(){
 			var writer = $("[name=writer]").val();
 //			alert(memId+":"+writer);
-			if(memId==writer){
+			if(sessId==writer){
 				if(confirm("수정하시겠습니까?")){	
 					$("[name=proc]").val("upt");
 					$("form").attr("action","${path}/board.do?method=update");
@@ -63,16 +63,16 @@
 		$("#delBtn").click(function(){
 			var writer = $("[name=writer]").val();
 //			alert(memId+":"+writer);
-//			if(memId==writer){
+			if(sessId==writer){
 				if(confirm("삭제하시겠습니까?")){
 //					var no = $("input[name=no]").val();
 					$("[name=proc]").val("del");
 					$("form").attr("action","${path}/board.do?method=delete");
 					$("form").submit();
 				}
-//			} else {
-//				alert("삭제 권한이 없습니다.\n작성자만 삭제가 가능합니다.")
-//			}
+			} else {
+				alert("삭제 권한이 없습니다.\n작성자만 삭제가 가능합니다.")
+			}
 		});
 		$("#reBtn").click(function(){
 			if(confirm("답글을 다시겠습니까?")){

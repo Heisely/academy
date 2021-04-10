@@ -87,4 +87,11 @@
 	<delete id="deleteFile" parameterType="int">
 		DELETE FROM BOARDFILE WHERE NO = #{no}
 	</delete>
+	
+	<!-- public Member login(Member mem) -->
+	<resultMap type="member" id="member"/>
+	<select id="login" parameterType="member" resultType="member">
+		SELECT * FROM MEMBER5
+		WHERE ID = #{id} AND PASS = #{pass}
+	</select>
 </mapper>

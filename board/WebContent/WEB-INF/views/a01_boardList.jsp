@@ -37,6 +37,15 @@
 			$("[name=curPage]").val(1);
 			$("form").submit();
 		});
+		$("#logout").click(function(){
+			alert("로그아웃되었습니다. 로그인화면으로 이동합니다.");
+			location.href = "${path}/board.do?method=logout";
+		});
+		var sessId = "${sesMem.id}";
+		if(sessId==""){
+			alert("로그인이 필요합니다.\n로그인화면으로 이동합니다.");
+			location.href = "${path}/board.do?method=login";
+		}
 	});
 	function goPage(page){
 		$("[name=curPage]").val(page);
@@ -47,6 +56,8 @@
 <body>
 <div class="jumbotron text-center">
   <h2>게시판 초기 화면</h2>
+  <h3 class="text-right">${sesMem.id}님 로그인 중</h3>
+  <h4 class="text-right" id="logout">로그아웃</h4>
 </div>
 <div class="container">
 <form:form modelAttribute="sch" method="post">

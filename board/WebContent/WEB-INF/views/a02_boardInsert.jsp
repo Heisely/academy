@@ -70,7 +70,7 @@
 		</tr>
 		<tr class="text-center">
 			<th class="table-success">작성자</th>
-			<td><input type="text" name="writer" value="${mem.id}" class="form-control"/></td>
+			<td><input type="text" name="writer" readonly value="${sesMem.id}" class="form-control"/></td>
 		</tr>
 		<tr class="text-center">
 			<th class="table-success">내용</th>

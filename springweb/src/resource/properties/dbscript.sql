@@ -24,13 +24,13 @@ create sequence cal_gp_seq
 	maxvalue 99999;
 
 -- 2021-04-12T20:00:00
-SELECT *
-FROM CALENDAR;
+SELECT * FROM CALENDAR;
 
 INSERT INTO calendar 
 VALUES (cal_seq.nextval, '', '프로젝트 시작', '이철수', '내용',
 		'2021-04-01T00:00:00.000Z', '2021-04-02T00:00:00.000Z',
 		1, 'yellow', 'navy', 'orange');
+
 
 
 

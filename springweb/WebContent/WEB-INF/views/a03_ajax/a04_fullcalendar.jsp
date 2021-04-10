@@ -79,14 +79,14 @@ var date = {};
 			// 이벤트명:function(){}: 각 날짜에 대한 이벤트를 통해 처리할 내용
 			// 등록처리할 때, 등록 버튼이 추가된 dialogue 설정 및 open
 			select : function(arg) {
+				// 등록 시, 기존 내용 로딩 방지 및 초기화
 				$("#schDialog>form")[0].reset();
 				// 화면에 보이는 형식 설정
 				// 클릭한 날짜를 전역변수에 할당 / 시작일과 마지막날을 date형식으로 할당
 				date.start = arg.start;
-				date.end = arg.end;				
+				date.end = arg.end;
 				opts.buttons={
 					"등록":function(){
-						//alert("등록 처리");
 						var sch = callSch(); // 리턴값이 입력된 객체데이터
 						/* 데이터 확인 */
 						console.log("### 등록할 데이터 ###");
@@ -117,9 +117,6 @@ var date = {};
 						$("#schDialog").dialog("close"); // dialogue 창닫기
 					}
 				};
-				$("#schDialog").dialog(opts);
-//				$("#btn01").click(); // bootstrap으로 진행 시 주석 풀고 밑 dialog 주석처리
-				$("#schDialog").dialog("open"); // dialogue 로딩
 				
 				// console.log("# 매개변수 arg의 속성 #");
 				// console.log(arg); // console을 통해 해당 속성 확인
@@ -147,23 +144,30 @@ var date = {};
 				eventUpt(arg.event);
 			},
 			eventClick : function(arg) {
+				/* event의 날짜 저장 */
+				date.start = arg.event.start;
+				date.end = arg.event.end;
 				// 있는 일정을 클릭 시, 상세 화면 보이기(등록되어 있는 데이터 출력)
 				// ajax를 통해서 데이터 수정/삭제
+				console.log("# 등록된 일정 클릭 #");
+				console.log(arg.event);
 				// arg.event: 해당 상세 정보를 가지고 있다.
-				/* event의 날짜 저장 */
-				date.start = arg.start;
-				date.end = arg.end;
+				
 				/* 각 form에 값 추가 */
 				// 1. 화면 로딩
 				// 2번 이상 중복된 함수 사용이 필요한 부분은 모듈로 분리 처리
 				detail(arg.event);				
-				// 2. 
+				// 2. 각 기능 별 버튼에 대한 처리
 				opts.buttons={
 					"수정":function(){
-						// 수정 후 json데이터 가져오기
+						/* 수정 후 json데이터 가져오기 */
+						// 화면에 form 하위에 있는 요소객체의 값을 가져오는 부분
 						var sch = callSch();
-						// 1. 화면단 변경
-						// 현재 캘린더 api 속성 변경
+						console.log("# 수정할 값 #");
+						console.log(sch);
+						
+						/* 1. 화면단 변경 */
+						/* 현재 캘린더 api 속성 변경 */
 						var event = calendar.getEventById(sch.id);
 						/* 속성값 변경 setProp */
 						event.setProp("title", sch.title);			
@@ -201,6 +205,7 @@ var date = {};
 								console.log(err);
 							}
 						});
+						$("#schDialog").dialog("close");
 					}
 				}
 				$("#schDialog").dialog(opts);
@@ -234,17 +239,20 @@ var date = {};
 		calendar.render();
 	});
 
+	// form 하위 요소 객체에서 사용할 데이터를 json형식으로 만들어준다.
 	function callSch(){
 		var sch={};
+		sch.id = $("[name=id]").val();
 		sch.title=$("[name=title]").val();
 		sch.writer=$("[name=writer]").val();
 		sch.content=$("[name=content]").val();
 		/* Date타입은 화면에서 사용되는 형식으로 설정하여야한다.
 		   전역변수에 할당한 data.start/date.end에 ISO형태로 속성 할당
-		   ?? calendar api에서 사용되는 날짜처리방식이 ISO문자열 형식이기 때문
+		   calendar api에서 사용되는 날짜처리방식이 ISO문자열 형식이기 때문
+		   
 		   ex) Date ==> toISOString() 형식 */
-		sch.start = date.start.toISOString();
-		sch.end = date.end.toISOString();
+		sch.start=date.start.toISOString();
+		sch.end=date.end.toISOString();
 		// sch.allDay: calendar화면에 처리할 데이터를 boolean형식으로 true/false로 처리해야 하는데, 화면에 보이는 내용은 문자열로 돼있다.
 		// option value="true"이 선택됐을 때는 비교연산자(==)를 통해 true로 boolean값을 넘기고, 그 외에는 false값을 넘긴다.
 		sch.allDay = $("[name=allDay]").val()=="true"; // 문자열이 "true"일 때, 그 외는 false
@@ -273,24 +281,43 @@ var date = {};
 		$("[name=borderColor]").val(event.borderColor);
 	}
 	
+	// 수정 ajax
+	function updateCall(sch){
+		// callSch(): 입력한 수정데이터를 요청값으로 전달.
+		$.ajax({
+			type:"post",
+			url:"calendar.do?method=update",
+			data:sch,
+			dataType:"json",
+			success:function(data){
+				if(data.success=="Y"){
+					alert("수정완료");
+				} else {
+					console.log("실패");
+				}
+			},
+			error:function(err){
+				alert("에러발생: "+err);
+				console.log(err);
+			}
+		});
+	}
+	
 	function eventUpt(event){
 		var sch = {};
 		sch.id = event.id;
-		sch.title = arg.event.title;
-		sch.start = arg.event.start.toISOString();
-		sch.end = arg.event.end.toISOString();
+		sch.title = event.title;
+		sch.start = event.start.toISOString();
+		sch.end = event.end.toISOString();
 		sch.content = event.extendedProps.content;
-		sch.textColor = arg.event.textColor;
-		sch.backgroundColor = arg.event.backgroundColor;
-		sch.borderColor = arg.event.borderColor;
-		sch.allDay = arg.event.allDay;		
+		sch.textColor = event.textColor;
+		sch.backgroundColor = event.backgroundColor;
+		sch.borderColor = event.borderColor;
+		sch.allDay = event.allDay;		
 		console.log("# 이벤트에 의한 수정 #");
 		console.log(sch);
 		updateCall(sch);
 	}
-	$(document).ready(function() {
-
-	});
 </script>
 </head>
 <body>

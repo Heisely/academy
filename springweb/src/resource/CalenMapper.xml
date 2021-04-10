@@ -14,9 +14,10 @@
 	</select>
 	
 	<!-- public void insertCalendar(Calendar ins); -->
+	<!-- groupId: 따로 id를 sequence로 mapping 처리. 반복 처리 일정이 나오면 같은 groupId로 설정 -->
 	<insert id="insertCalendar" parameterType="calen">
 		INSERT INTO calendar 
-		VALUES (cal_seq.nextval, '', 
+		VALUES (cal_seq.nextval, cal_seq.currval, 
 				#{title}, #{writer}, #{content},
 				#{start}, 
 				#{end}, 

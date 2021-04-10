@@ -261,8 +261,9 @@
 4. controller 기능 메서드 선언
 	method=update
 	method=delete
-5. 화면단(event 처리)
-	화면처리/DB처리
+5. 화면단(event시 처리)
+	# 화면처리 (캘린더 내부 api처리)
+	# ajax 처리(DB처리) - 
 	0) 수정 이벤트 확인
 		상세 화면 수정
 		drag and drop 수정 (날짜와 시간 변경)

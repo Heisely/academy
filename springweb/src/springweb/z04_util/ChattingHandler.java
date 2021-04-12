@@ -47,6 +47,7 @@ public class ChattingHandler extends TextWebSocketHandler {
 		System.out.println(session.getId() + "가 보낸 메시지: " + message.getPayload());
 		// 각 접속자에게 메시지를 전송(모두에게 전송)
 		// 특정한 접속자에게 전송 시 조건문 처리
+		// push방식으로 서버에서 클라이언트로 메시지를 보낸다
 		for (WebSocketSession ws : users.values()) {
 			ws.sendMessage(message);
 			log(ws.getId() + "에게 메시지 전송");

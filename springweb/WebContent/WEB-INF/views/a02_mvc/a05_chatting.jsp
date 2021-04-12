@@ -47,15 +47,16 @@
 				wsocket.onopen = function(evt){
 					// 채팅서버에 접속됐을 때 처리할 내용
 					console.log(evt);
-					// 접속메시지 전송
-					wsocket.send("msg: " + $("#id").val() + "님이 접속했습니다.");
+					// 접속메시지 전송: 그룹명:아이디명:메시지
+					wsocket.send($("#group").val()+":"+ $("#id").val() + "님이 접속했습니다.");
 				}
 				// 2. 서버에서 메시지 받기
 				wsocket.onmessage = function(evt){
 					var data = evt.data; // 메시지 수신
-					if(data.substring(0,4)=="msg:"){
-						// 메시지만 전달
-						revMsg(data.substring(4));
+					var user = data.split(":")
+					if(user[0]==$("#group").val()){ // 같은 그룹일 때에만
+						// 메시지 전달
+						revMsg(user[1]+":"+user[2]);
 					}			
 				}
 				// 3. 서버 종료
@@ -80,7 +81,7 @@
 		});
 		// 종료
 		$("#exitBtn").click(function(){
-			wsocket.send("msg: " + $("#id").val() + ": 연결을 종료합니다.");
+			wsocket.send($("#group").val() + ":" + $("#id").val() + ": 연결을 종료합니다.");
 			wsocket.close();
 		});
 		
@@ -88,7 +89,7 @@
 		function sendMsg(){
 			var id = $("#id").val();
 			var msg = $("#msg").val();
-			wsocket.send("msg: " + id + ": " + msg);
+			wsocket.send($("#group").val() + ":" + id + ": " + msg);
 		}
 		
 		function revMsg(msg){
@@ -107,8 +108,9 @@
 <div class="container">
 	<div class="input-group mb-3">
 		<div class="input-group-prepend">
-			<span class="input-group-text">아이디</span>
+			<span class="input-group-text">그룹/아이디</span>
 		</div>
+		<input id="group" class="form-control" placeholder="그룹을 입력하세요."/>
 		<input id="id" class="form-control" placeholder="접속할 아이디를 입력하세요."/>
 		<input type="button" class="btn btn-info" value="채팅입장" id="enterBtn"/>&nbsp;
 		<input type="button" class="btn btn-success" value="나가기" id="exitBtn"/>

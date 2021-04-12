@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/springweb/a00_com/bootstrap.min.css" >
+<script type="text/javascript" src="/springweb/a00_com/jquery-3.5.1.js"></script>
+<script src="/springweb/a00_com/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script type="text/javascript">
+/* 
+
+*/
+//
+	$(document).ready(function(){
+		var vm = new Vue({
+			el: ".container",
+			data:{
+				title:"예제",
+				msg:"반복문 예제",
+				rainbow:['red','orange','yellow','green','blue','navy'],
+				book:{title:"vue.js 기초", publisher:"Vue", writer:"에반유", price:20000}
+			}
+		});
+	});
+</script>
+</head>
+<body>
+<div class="container">
+	<div class="jumbotron text-center">
+		<h2>{{title}}</h2>
+	</div>
+	<h3 class="text-center">무지개</h3>
+	<h4 v-for="(color, idx) in rainbow" class="text-center">{{color}}</h4>
+	<h4 v-for="(color, idx) in rainbow" :style="{backgroundColor:color}" class="text-center">{{color}}</h4>
+
+	<table class="table table-hover table-striped">
+		<tbody>
+			<tr v-for="(val,pro) in book" class="text-center">
+				<th>{{pro}}</th><td>{{val}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/springweb/a00_com/bootstrap.min.css" >
+<style type="text/css">
+	[v-cloak]{display:none;}
+</style>
+<script type="text/javascript" src="/springweb/a00_com/jquery-3.5.1.js"></script>
+<script src="/springweb/a00_com/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script type="text/javascript">
+/* 
+# 기타 디렉티브
+1. v-pre: 
+	랜더링하지 않고 디렉티브 내용을 그대로 보여줄 때 활용
+	주로 테스트용으로 적용을 필요로 하지 않고 처리내용을 볼 때 활용
+2. v-once: 
+	초기에 랜더링되어 나타난 모델데이터를 v-model이나 다른 이벤트에 의해 변경되지 않게 처리할 때 사용
+3. v-clock: 
+	랜더링이 완전히 끝나기 전까지 directive를 보이지 않게 할 때 활용
+		1) difective의 원래 코드인 mustache가 보였다가 랜더링이 완전히 끝난 후 화면에 반영
+*/
+//
+	$(document).ready(function(){
+		var vm = new Vue({
+			el: ".container",
+			data:{
+				title:"기타 디렉티브",
+				oneMsg:"안녕하세요"
+			}
+		});
+	});
+</script>
+</head>
+<body>
+<div class="container">
+	<div class="jumbotron text-center">
+		<h2>{{title}}</h2>
+	</div>
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+		<form class="form-inline" method="post">
+			<input class="form-control mr-sm-2" type="text" name="msg" v-model="oneMsg" placeholder="메시지 입력">
+		</form>
+	</nav>
+	<table class="table table-hover table-striped">
+		<thead>
+			<tr class="table-success text-center">
+				<th>유형</th><th>처리결과</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="text-center">
+				<th>v-once 적용O</th><td v-once>{{oneMsg}}</td>
+			</tr>
+			<tr class="text-center">
+				<th>v-once 적용X</th><td>{{oneMsg}}</td>
+			</tr>
+			<tr class="text-center">
+				<th>v-cloak</th><td v-cloak>{{oneMsg}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/springweb/a00_com/bootstrap.min.css" >
+<script type="text/javascript" src="/springweb/a00_com/jquery-3.5.1.js"></script>
+<script src="/springweb/a00_com/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script type="text/javascript">
+/* 
+#   vue 객체를 통한 함수처리
+1.   이벤트나 함수 호출을 통해 데이터 처리를 할 수 있게 한다
+2.   기본 형식
+   methods:{
+      함수1:function(){
+         this.다른함수();
+         this.모델데이터의 할당과 변경을 통해 해당 함수를 호출할 때 동적처리
+      },
+      함수2:function(){},
+      함수3:function(){}
+   }
+*/
+//
+   $(document).ready(function(){
+      var vm = new Vue({
+         el:".container",
+         data:{
+            title:"methods 속성 활용",
+             id:'',
+             pass:'',
+             id2:'',
+             pass2:'',
+             result:''
+         },
+         methods:{
+            login:function(){
+               console.log("아이디 : " + this.id);      //모델 데이터 확인
+               console.log("비밀번호 : " + this.pass);   //모델 데이터 확인
+               var retData="아이디를 입력하세요";
+               if(this.id!=''){
+                   if(this.id=='himan'&&this.pass=='7777'){
+                      retData="로그인 성공"
+                   }else{
+                      retData="로그인 실패"
+                   }                  
+               }
+               return retData;
+            },
+	         login2:function(){
+	             console.log("아이디 : " + this.id2);      //모델 데이터 확인
+	             console.log("비밀번호 : " + this.pass2);   //모델 데이터 확인
+	             this.result="아이디를 입력하세요";
+	             if(this.id2!=''){
+	                 if(this.id2=='himan'&&this.pass2=='7777'){
+	                    this.result="로그인 성공"
+	                 }else{
+	                    this.result="로그인 실패"
+	                 }                  
+	             }
+	          }
+	         }
+	      });      
+      
+		});
+</script>
+</head>
+<body>
+<div class="container">
+  <div class="jumbotron text-center">
+   <h2>{{title}}</h2>
+  </div>
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+     <form class="form-inline" method="post">
+       <input class="form-control mr-sm-2" type="text" 
+          v-model="id2"
+          placeholder="아이디 입력">
+       <input class="form-control mr-sm-2" type="password" 
+          v-model="pass2"
+          placeholder="패스워드 입력">
+          <button type="button" v-on:click="login2">로그인</button>
+     </form>
+  </nav>
+  <table class="table table-hover table-striped">
+    <thead>
+      <tr class="table-success text-center">
+        <th>처리결과</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="text-center">
+        <td>{{result}}</td>
+      </tr>
+    </tbody>
+  </table>    
+</div>
+</body>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/springweb/a00_com/bootstrap.min.css" >
+<script type="text/javascript" src="/springweb/a00_com/jquery-3.5.1.js"></script>
+<script src="/springweb/a00_com/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script type="text/javascript">
+/* 
+ex) 학점: [point]
+	watch 속성을 이용해서 point에 따라 등급 A~F까지 입력과 동시에 출력
+*/
+//
+	$(document).ready(function(){
+		var vm = new Vue({
+			el: ".container",
+			data:{
+				title:"watch 예제",
+				point:'',
+				grade:''
+			},
+			watch:{
+				point:function(pt){
+					console.log("점수: "+pt);
+					if(pt>=90){
+						this.grade='A';
+					} else if(pt>=80){
+						this.grade='B';
+					} else if(pt>=70){
+						this.grade='C';
+					} else if(pt>=60){
+						this.grade='D';
+					} else {
+						this.grade='F';
+					}
+				}
+			}
+		});
+	});
+</script>
+</head>
+<body>
+<div class="container">
+	<div class="jumbotron text-center">
+		<h2>{{title}}</h2>
+	</div>
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+		<form class="form-inline" method="post">
+			<input class="form-control mr-sm-2" type="text" v-model="point">
+		</form>
+	</nav>
+	<table class="table table-hover table-striped">
+		<thead>
+			<tr class="table-success text-center">
+				<th>등급: {{grade}}</th>
+			</tr>
+		</thead>
+	</table>
+</div>
+</body>
+</html>

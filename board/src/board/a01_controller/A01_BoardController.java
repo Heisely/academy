@@ -30,7 +30,7 @@ public class A01_BoardController {
 		return Arrays.asList("3","5","10","20","30");
 	}
 
-	// http://localhost:7080/board/board.do?method=list
+	// http://localhost:6080/board/board.do?method=list
 	@RequestMapping(params = "method=list")
 	public String boardList(@ModelAttribute("sch") BoardSch sch, Model d, HttpServletRequest request) {
 		// session 설정

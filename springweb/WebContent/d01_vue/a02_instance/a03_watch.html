@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/springweb/a00_com/bootstrap.min.css" >
+<script type="text/javascript" src="/springweb/a00_com/jquery-3.5.1.js"></script>
+<script src="/springweb/a00_com/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script type="text/javascript">
+/* 
+# watcch
+1. watch속성은 모델 데이터의 변경에 따른 특정 함수형 프로세스가 필요할 때 활용
+2. 기본 형식
+	watch:{
+		선언된 모델명:function(입력된 값 할당 변수){
+			처리할 프로세스 정의
+		}
+	}
+*/
+//
+	$(document).ready(function(){
+		var vm = new Vue({
+			el: ".container",
+			data:{
+				title:"watch 연습",
+				num01:0,
+				num02:0,
+				cal:'',
+				sum:0
+			},
+			watch:{
+				cal:function(ch){
+					// cal의 데이터 값을 ch로 받음
+					console.log("# 선택된 연산자 #")
+					console.log(ch)
+					var num01 = Number(this.num01);
+					var num02 = Number(this.num02);
+					if(ch=='+') this.sum = num01+num02;
+					if(ch=='-') this.sum = num01-num02;
+					if(ch=='*') this.sum = num01*num02;
+					if(ch=='/') this.sum = num01/num02;
+				}
+			}
+		});
+	});
+</script>
+</head>
+<body>
+<div class="container">
+	<div class="jumbotron text-center">
+		<h2>{{title}}</h2>
+	</div>
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+		<form class="form-inline" method="post">
+			<input class="form-control mr-sm-2" type="text" v-model="num01">
+			<select class="form-control mr-sm-2" v-model="cal">
+				<option value=''>연산자 선택</option>
+				<option>+</option>
+				<option>-</option>
+				<option>*</option>
+				<option>/</option>
+			</select>
+			<input class="form-control mr-sm-2" type="text" v-model="num02">
+		</form>
+	</nav>
+	<table class="table table-hover table-striped">
+		<thead>
+			<tr class="table-success text-center">
+				<th>{{num01}} {{cal}} {{num02}} = {{sum}}</th>
+			</tr>
+		</thead>
+	</table>
+</div>
+</body>
+</html>

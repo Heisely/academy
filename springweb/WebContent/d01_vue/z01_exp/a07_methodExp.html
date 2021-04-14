@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/springweb/a00_com/bootstrap.min.css" >
+<script type="text/javascript" src="/springweb/a00_com/jquery-3.5.1.js"></script>
+<script src="/springweb/a00_com/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script type="text/javascript">
+/* 
+
+*/
+//
+	$(document).ready(function(){
+		var vm = new Vue({
+			el: ".container",
+			data:{
+				title:"methods 연습"
+			}
+		});
+	});
+</script>
+</head>
+<body>
+<div class="container">
+	<div class="jumbotron text-center">
+		<h2>{{title}}</h2>
+	</div>
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+		<form class="form-inline" method="post">
+			<input class="form-control mr-sm-2" type="text" v-model="price" placeholder="가격">
+			<input class="form-control mr-sm-2" type="text" v-model="cnt" placeholder="개수">
+		</form>
+	</nav>
+	<table class="table table-hover table-striped">
+		<thead>
+			<tr class="table-success text-center">
+				<th>총계</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="text-center">
+				<td>{{tot()}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+</body>
+</html>

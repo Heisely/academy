@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/springweb/a00_com/bootstrap.min.css" >
+<script type="text/javascript" src="/springweb/a00_com/jquery-3.5.1.js"></script>
+<script src="/springweb/a00_com/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script type="text/javascript">
+/* 
+ex) vue객체를 통한 반복 처리
+	아래와 같이 모델 데이터를 선언하고,
+	해당 모델 데이터를 select의 value와 화면 출력 내용
+		<option value="속성">속성값 형식으로 출력하세요
+	모델 데이터
+	var regions = {
+			"A":"Asia",
+			"B":"America",
+			"C":"Europe",
+			"D":"Africa",
+			"E":"Oceania"
+	};
+	지역:
+		<select class-"form-control mr-sm-2" type="text" name="loc">
+			<!-- vue로 반복 모델 데이터 호출 처리 -->
+			<option value=""></option>
+
+ex) 객체형 배열 처리
+	회원 정보
+	var members=[
+		{"no":100, "name":"설현", "tel":"010-3456-8299", "address":"서울"},
+		{"no":99, "name":"혜리", "tel":"010-3456-8298", "address":"서울"},
+		{"no":98, "name":"하니", "tel":"010-3456-8297", "address":"경기"},
+		{"no":97, "name":"성소", "tel":"010-3456-8296", "address":"제주"}
+	]
+	테이블로 v-for를 이용해서 출력
+*/
+//
+	$(document).ready(function(){
+		var vm = new Vue({
+			el:".container",
+			data:{
+				title:"반복문 연습",
+				options:{
+					"A":"Asia",
+					"B":"America",
+					"C":"Europe",
+					"D":"Africa",
+					"E":"Oceania"
+				},
+				member:[
+					{"no":100, "name":"설현", "tel":"010-3456-8299", "address":"서울"},
+					{"no":99, "name":"혜리", "tel":"010-3456-8298", "address":"서울"},
+					{"no":98, "name":"하니", "tel":"010-3456-8297", "address":"경기"},
+					{"no":97, "name":"성소", "tel":"010-3456-8296", "address":"제주"}
+				]
+			}
+		});
+	});
+</script>
+</head>
+<body>
+<div class="container">
+	<div class="jumbotron text-center">
+		<h2>{{title}}</h2>
+	</div>
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+		<form class="form-inline" method="post">
+			지역:<select class="form-control mr-sm-2" name="loc">
+					<option value="">지역 선택</option>
+					<!-- v-for="(속성값, 속성, index) in 모델명" -->
+					<!-- v-bind:속성="vue의 변수" -->
+					<!-- :속성="vue의 변수" -->
+					<option v-for="(val, key, idx) in options" v-bind:value="key">{{val}}</option>
+				</select>
+			<button class="btn btn-success" type="submit">Search</button>
+		</form>
+	</nav>
+	<table class="table table-hover table-striped">
+		<thead>
+			<tr class="table-success text-center">
+				<th>no</th><th>name</th><th>tel</th><th>address</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr v-for="(mem, idx) in member" class="text-center">
+				<td>{{mem.no}}</td>
+				<td>{{mem.name}}</td>
+				<td>{{mem.tel}}</td>
+				<td>{{mem.address}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+</body>
+</html>

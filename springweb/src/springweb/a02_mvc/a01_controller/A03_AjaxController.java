@@ -41,6 +41,12 @@ public class A03_AjaxController {
 		d.addAttribute("emp", service.emplist(sch));
 		return "pageJsonReport";
 	}
+	// http://localhost:7080/springweb/jsonEmp2.do
+	@RequestMapping("jsonEmp2.do")
+	public String ajaxStart2(Emp sch, Model d) {
+		d.addAttribute("empList", service.emplist(sch));
+		return "pageJsonReport";
+	}
 
 /*
 	ex) Dept기준 AJAX 처리

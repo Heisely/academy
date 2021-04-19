@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/springweb/a00_com/bootstrap.min.css" >
+<script type="text/javascript" src="/springweb/a00_com/jquery-3.5.1.js"></script>
+<script src="/springweb/a00_com/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script type="text/javascript">
+/* 
+# 스타일 적용
+1. style의 선언과 vue의 style적용 비교
+	1) inline 요소객체 style 적용 비교
+		<요소 style="color:red; background-color:yellow;"
+		<요소 :style="{color:'red', backgroundColor:'yellow'}"
+	2) inline 요소객체의 클래스 적용 비교
+		style
+			.클래스명1{...}
+		<요소 class="클래스명1 클래스명2 클래스명3"
+		<요소 :class="{클래스명1:true, 클래스명2:true}"
+2. 적용된 styel과 클래스의 속성을 모델 데이터와 연동
+	1) 속성: 모델로 설정
+		ex) data:{color1:'red', isAdapt:true}
+	2) 이벤트를 통한 핸들러 메서드에서 위의 속성을 모델 데이터를 통해 변경
+		methods:{
+			핸들러함수:function(){
+				this.color1="orange";
+				this.isAdapter=false;
+			}
+		}
+	3) 특정 요소객체 이벤트 처리와 핸들러 함수 호출
+		<요소 @click="핸들러함수()"
+	4) 모델 데이터와 속성값의 연동
+		<요소 :style="{backgroundColor:모델명}"
+		<요소 :class="{클래스명:모델명}"
+*/
+//
+	$(document).ready(function(){
+		var vm = new Vue({
+			el: ".container",
+			data:{
+				title:"스타일 적용",
+				col01:"orange",
+				isAdapter:true,
+				col02:"yellow",
+				cls01Adp:false
+			},
+			methods:{
+				chColor:function(){
+					// 색상을 클릭할 때마다 모델값 변경
+					this.col01=(this.col01=='orange')?'red':'orange';
+					// class 적용 여부 변경
+					this.isAdapter = !this.isAdapter;
+				},
+				chText:function(){
+					this.col02=(this.col02=='yellow')?'pink':'yellow';
+					this.cls01Adp = !this.cls01Adp;
+				}
+			}
+		});
+	});
+</script>
+<style type="text/css">
+	.cls01{border:3px solid blue;}
+	.cls02{color:green;}
+</style>
+</head>
+<body>
+<div class="container">
+	<div class="jumbotron text-center">
+		<h2 :style="{backgroundColor:col02}" :class="{cls02:cls01Adp}">{{title}}</h2>
+	</div>
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+		<input class="form-control mr-sm-2" type="text" name="ename" value="" placeholder="사원명" :style="{backgroundColor:col01}">
+		<input class="form-control mr-sm-2" type="text" name="job"  value="" placeholder="직책명" :class="{cls01:isAdapter}">
+		<button class="btn btn-success" @click="chColor()" type="button">Change Color</button>
+		<button class="btn btn-success" @click="chText()" type="button">Change Text</button>
+	</nav>
+<!-- ex) 버튼추가(글자변경) / 클래스 cls02: 글자색상 green, style 배경색상 노랑 / 모델데이터: cls01Adp:true/false, bkColor:yellow/pink-->
+	<table class="table table-hover table-striped">
+		<thead>
+			<tr class="table-success text-center">
+				<th>타이틀</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="text-center">
+				<td>내용</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+</body>
+</html>

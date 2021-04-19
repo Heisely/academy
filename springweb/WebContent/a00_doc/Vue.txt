@@ -74,8 +74,9 @@
 	1) html/css/js
 		<h3 class="클래스명">
 		<h2 style="속성:속성값; 속성:속성값;">
-		$("h3").addClass("클래스명");
 		$("h2").css("속성","속성값");
+		$("h3").addClass("클래스명");
+		$("h3").removeClass("클래스명");		
 	2) Vue: json형태의 객체형태도 속성/속성값을 모델에서 정의된 데이터로 처리한다.
 		<h3 :class="{클래스명:적용여부(true/false)...}">
 		<h2 :style="{backgroundColor:모델속성, color:모델속성...}

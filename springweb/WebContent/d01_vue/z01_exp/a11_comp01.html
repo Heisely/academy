@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/springweb/a00_com/bootstrap.min.css" >
+<script type="text/javascript" src="/springweb/a00_com/jquery-3.5.1.js"></script>
+<script src="/springweb/a00_com/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<template id="news">
+	<div>
+		<h2>오늘의 뉴스</h2>
+		<ol>
+			<li>뉴스1</li>
+			<li>뉴스2</li>
+			<li>뉴스3</li>
+		</ol>
+	</div>
+</template>
+<script type="text/javascript">
+/* 
+
+*/
+//
+	$(document).ready(function(){
+		Vue.component("prod-comp",{
+			template:"<input class='form-control mr-sm-2' type='text' name='' value='' placeholder='물건명'>"
+		});
+		Vue.component("news-comp",{
+			template:"#news"
+		});
+		var vm = new Vue({
+			el: ".container",
+			data:{
+				title:"컴포넌트연습"
+			}
+		});
+	});
+</script>
+</head>
+<body>
+<div class="container">
+	<div class="jumbotron text-center">
+		<h2>{{title}}</h2>
+		<news-comp></news-comp>
+		<news-comp></news-comp>
+		<news-comp></news-comp>
+	</div>
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+		<form class="form-inline" method="post">
+			<prod-comp></prod-comp>
+			<prod-comp></prod-comp>
+			<prod-comp></prod-comp>
+		</form>
+	</nav>
+	<table class="table table-hover table-striped">
+		<thead>
+			<tr class="table-success text-center">
+				<th>타이틀</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="text-center">
+				<td>내용</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+</body>
+</html>

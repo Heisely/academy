@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/springweb/a00_com/bootstrap.min.css" >
+<script type="text/javascript" src="/springweb/a00_com/jquery-3.5.1.js"></script>
+<script src="/springweb/a00_com/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script type="text/javascript">
+/* 
+# 컴포넌트의 데이터 전달
+1. 컴포넌트는 상/하위 계층관계로 설정하는데, 상위에서 대이테를 전달할 때 속성="전달할데이터" 형식으로 처리할 수 있다.
+	ex) 최상위가 body에 있는 화면
+		body에서 사용되는 템플릿을 정해서 처리하는 컴포넌트가 차상위 컴포넌트라고 할 수 있다.
+2. 이 때, 전달할 데이터는 props라는 속성으로 속성값을 설정하여 전달한다.
+*/
+//
+	$(document).ready(function(){
+		Vue.component("list-comp",{
+			template:'<li align="left">{{msg}}</li>', // 상위에서 전달된 데이터도 directive형식이 사용된다.
+			props:['msg'] // 상위에서 전달한 속성
+		});
+		// ex) select하위에 option 컴포넌트를 선언해서 [사과/바나나/딸기]로 선언할 수 있게 prop를 선언하고 출력
+		Vue.component("option-comp",{
+			template:'<option value="{fruits}">{{fruits}}</option>',
+			props:['fruits']
+		});
+		var vm = new Vue({
+			el: ".container",
+			data:{
+				title:"컴포넌트 데이터 전달(상위-->하위)"
+			}
+		});
+	});
+</script>
+</head>
+<body>
+<div class="container">
+	<div class="jumbotron text-center">
+		<h2>{{title}}</h2>
+		<ul>
+			<list-comp msg="hello"></list-comp>
+			<list-comp msg="你好"></list-comp>
+			<list-comp msg="안녕하세요."></list-comp>
+		</ul>
+		<select>
+			<option is="option-comp" fruits="사과"></option>
+			<option is="option-comp" fruits="바나나"></option>
+			<option is="option-comp" fruits="딸기"></option>
+		</select>
+	</div>
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+		<form class="form-inline" method="post">
+			<input class="form-control mr-sm-2" type="text" name="ename" value="" placeholder="사원명">
+			<input class="form-control mr-sm-2" type="text" name="job"  value="" placeholder="직책명">
+			<button class="btn btn-success" type="submit">Search</button>
+		</form>
+	</nav>
+	<table class="table table-hover table-striped">
+		<thead>
+			<tr class="table-success text-center">
+				<th>타이틀</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="text-center">
+				<td>내용</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+</body>
+</html>

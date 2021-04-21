@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/springweb/a00_com/bootstrap.min.css" >
+<script type="text/javascript" src="/springweb/a00_com/jquery-3.5.1.js"></script>
+<script src="/springweb/a00_com/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script type="text/javascript">
+/* 
+ex) 
+1. select 로 v-model을 설정하고,
+   빨/주/노 h2의 배경색상이 위에 select 선택에 따라서 변경되게 처리. inline스타일 변경. (style이용)
+2. 클래스 선언
+   input type="checkbox" value="true"
+   에약여부 []
+   [예약됨] // 체크를 했을 때, 파랑색(글자색), 언체크를 했을 때, 빨강색(글자색)
+*/
+//
+   $(document).ready(function(){
+      var vm = new Vue({
+         el:".container",
+         data:{
+            title:"연습",
+            cr01:'red', //선택
+            isTrue:false //예약처리
+           
+         }
+      });      
+      
+   });
+</script>
+<style type="text/css">
+   .cls01{background-color:blue; color:yellow;}
+   .cls02{background-color:red; color:yellow;}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="jumbotron text-center">
+   <h2>{{title}}</h2>
+   <h3 :style="{backgroundColor:cr01}"></h3>
+   <h3 v-if="isTrue" :class="{cls01:isTrue}">예약됨</h3>
+   <h3 v-else :class="{cls02:!isTrue}">예약안됨</h3>
+  </div>
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+     <form class="form-inline" method="post">
+       <select class="form-control mr-sm-2" type="checkbox" value="true" v-model="cr01">
+             <option>red</option>
+             <option>blue</option>
+             <option>green</option>
+       </select>
+       <input class="form-control mr-sm-2" type="checkbox" value="true" v-model="isTrue">
+       <button class="btn btn-success" type="submit">Search</button>
+     </form>
+  </nav>
+  <table class="table table-hover table-striped">
+    <thead>
+      <tr class="table-success text-center">
+        <th>타이틀</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="text-center">
+        <td>내용</td>
+      </tr>
+    </tbody>
+  </table>    
+</div>
+</body>
+</html>

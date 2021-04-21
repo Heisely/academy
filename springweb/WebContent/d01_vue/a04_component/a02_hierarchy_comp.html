@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/springweb/a00_com/bootstrap.min.css" >
+<script type="text/javascript" src="/springweb/a00_com/jquery-3.5.1.js"></script>
+<script src="/springweb/a00_com/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script type="text/javascript">
+	// 1. 최하위 컴포넌트
+	Vue.component("option-comp",{
+		template:"<option>안녕하세요</option>"
+	})
+</script>
+<!-- // 2. 컴포넌트의 템플릿(js) -->
+<script type="text/x-template" id="selectTemp">
+	<select class="form-control mr-sm-2">
+		<option-comp></option-comp>
+		<option-comp></option-comp>
+		<option-comp></option-comp>
+	</select>
+</script>
+<template id="selectTemp2">
+	<select class="form-control mr-sm-2">
+		<option-comp></option-comp>
+		<option-comp></option-comp>
+		<option-comp></option-comp>
+	</select>
+</template>
+<script type="text/javascript">
+/* 
+# 계층 구조 컴포넌트
+1. 컴포넌트는 계층 구조로 상하위 관계로 설정하여 사용할 수 있다.
+2. 최상위 컴포넌트는 body 부분에 호출하는 것이고, 이것으로 선언한 내용들이 계층 구조로 사용될 수 있다.
+3. 템플릿은 template 태그뿐만 아니라 script type="text/x-template" 형식으로도 사용할 수 있다.
+4. 구성요소로 된 내용은 is="컴포넌트"로 사용될 수 있다.
+5. 컴포넌트의 템플릿의 최상위는 한 개만 사용할 수 있다.
+*/
+//
+	$(document).ready(function(){
+		Vue.component("sel-comp",{
+			template:"#selectTemp"
+		});
+		
+		var vm = new Vue({
+			el: ".container",
+			data:{
+				title:"계층 구조 템플릿 연습"
+			}
+		});
+	});
+</script>
+</head>
+<body>
+<div class="container">
+	<div class="jumbotron text-center">
+		<h2>{{title}}</h2>
+	</div>
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+		<form class="form-inline" method="post">
+			<sel-comp></sel-comp>
+		</form>
+	</nav>
+	<table class="table table-hover table-striped">
+		<thead>
+			<tr class="table-success text-center">
+				<th>타이틀</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="text-center">
+				<td>내용</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/springweb/a00_com/bootstrap.min.css" >
+<script type="text/javascript" src="/springweb/a00_com/jquery-3.5.1.js"></script>
+<script src="/springweb/a00_com/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script type="text/javascript">
+/* 
+# 상하위 요소객체로 구성된 컴포넌트
+1. 상하위 요소객체 is="컴포넌트명" 형식으로 처리한다.
+	ex) select의 하위 option, tr의 하위 td
+*/
+//
+	$(document).ready(function(){
+		Vue.component("option-comp",{
+			template:"<option>안녕</option>"
+		})
+		Vue.component("sel-comp",{
+			template:`<select class="form-control mr-sm-2">
+						<option-comp></option-comp>
+						<option-comp></option-comp>
+						<option-comp></option-comp>
+					  </select>`
+		})
+		// ex) td 컴포넌트를 선언하고 아래 tr에 포함시켜 출력
+		Vue.component("td-comp",{
+			template:"<td>홍길동</td>"
+		})
+		// ex) tr 컴포넌트를 계층구조로 선언하고 출력
+		Vue.component("tr-comp",{
+			template:`<tr class="text-left">
+						<td-comp></td-comp>
+					  </tr>`
+		})
+		var vm = new Vue({
+			el: ".container",
+			data:{
+				title:"is 속성 컴포넌트"
+			}
+		});
+	});
+</script>
+</head>
+<body>
+<div class="container">
+	<div class="jumbotron text-center">
+		<h2>{{title}}</h2>
+	</div>
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+		<form class="form-inline" method="post">
+			<sel-comp></sel-comp>
+			<select class="form-control mr-sm-2">
+				<option is="option-comp"></option>
+				<option is="option-comp"></option>
+				<option is="option-comp"></option>
+			</select>
+		</form>
+	</nav>
+	<table class="table table-hover table-striped">
+		<thead>
+			<tr class="table-success text-center">
+				<th>타이틀</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="text-center">
+				<td is="td-comp"></td>
+			</tr>
+			<tr is="tr-comp"></tr-comp>
+			<tr is="tr-comp"></tr-comp>
+			<tr is="tr-comp"></tr-comp>
+		</tbody>
+	</table>
+</div>
+</body>
+</html>

@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/springweb/a00_com/bootstrap.min.css" >
+<script type="text/javascript" src="/springweb/a00_com/jquery-3.5.1.js"></script>
+<script src="/springweb/a00_com/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script type="text/javascript">
+ Vue.component("th-comp",{
+    template:"<th>사원명</th>"
+ });
+ Vue.component("td-comp",{
+    template:"<td>홍길동</td>"
+ });
+</script>
+<script type="text/javascript">
+/* 
+#계층 구조 컴포넌트
+1. th 컴포넌트, td 컴포넌트를 만들고,
+2. 이것을 포함하는 tr 컴포넌트를 만들어
+3. 마지막으로 table 컴포넌트에 호출하여 사용할 수 있도록 처리하세요.
+*/
+//
+</script>
+
+ <template id="trHTmp">
+   <tr class="table-success text-center">
+     <th is="th-comp"></th>
+   </tr>
+ </template>
+ 
+ <template id="trBTmp">
+  <tr class="text-center">
+    <td is="td-comp"></td>
+  </tr>
+ </template>
+ 
+ <script type="text/javascript">
+   Vue.component("trh-comp",{
+      template:"#trHTmp"
+   });
+   Vue.component("trb-comp",{
+      template:"#trBTmp"
+   });
+ 
+ </script>
+ <template id="tabTmp">
+  <table class="table table-hover table-striped">
+    <tr is="trh-comp"></tr>
+    <tr is="trb-comp"></tr>
+    <tr is="trb-comp"></tr>
+    <tr is="trb-comp"></tr>
+  </table>
+ </template>
+ 
+ <script type="text/javascript">
+  $(document).ready(function(){
+    
+     Vue.component("tab-comp",{
+        template:"#tabTmp"
+     });
+     var vm=new Vue({
+        el:".container",
+        data:{
+           title:"연습"
+        }
+     });
+  });
+  
+
+ //body 부분에서 <tab-comp></tab-comp> 호출.
+ 
+ </script>
+ 
+</head>
+<body>
+<div class="container">
+ <div class="jumbotron text-center">
+   <h2>{{title}}</h2>
+ </div>
+ <table class="table table-hover table-striped">
+   <thead>
+    <tr class="table-success text-center">
+     <th is="th-comp"></th>
+     <!-- 요소에 하위 객체일 떄, is="컴포넌트명" -->
+     </tr>
+    </thead>
+    <tbody>
+     <tr class="text-center">
+      <td is="td-comp"></td>
+    </tbody>
+    </table>
+
+
+</div>
+  <tab-comp></tab-comp>
+  <tab-comp></tab-comp>
+  <tab-comp></tab-comp>
+
+</body>
+</html>

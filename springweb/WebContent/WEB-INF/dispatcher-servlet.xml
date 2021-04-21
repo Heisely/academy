@@ -135,4 +135,18 @@
 	<websocket:handlers>
 		<websocket:mapping handler="chatHandler" path="/chat-ws.do"/>
 	</websocket:handlers>
+	
+	<!-- # AOP 처리 -->
+	<!-- 1. advice -->
+	<bean id="profiler" class="springweb.z04_util.Profiler"/>
+	<!-- 2. aop -->
+	<aop:config>
+		<aop:aspect id="traceAspect" ref="profiler">
+			<aop:pointcut expression="execution(public * springweb.a02_mvc.a03_dao..*(..))" id="publicMethod"/>
+			<aop:around method="tarce" pointcut-ref="publicMethod"/>
+		</aop:aspect>
+	</aop:config>
+	
+	
+	
 </beans>

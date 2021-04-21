@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/springweb/a00_com/bootstrap.min.css" >
+<script type="text/javascript" src="/springweb/a00_com/jquery-3.5.1.js"></script>
+<script src="/springweb/a00_com/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<template id="schTmp">
+ <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+     <form class="form-inline" method="post">
+       <input class="form-control mr-sm-2" type="text" 
+          name="ename" value=""
+          placeholder="사원명">
+       <input class="form-control mr-sm-2" type="text" 
+          name="job"  value=""
+          placeholder="직책명">
+       <button class="btn btn-success" type="submit">Search</button>
+     </form>
+  </nav>
+</template>
+<template id="listTmp">
+ <table class="table table-hover table-striped">
+    <thead>
+      <tr class="table-success text-center">
+        <th>타이틀</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="text-center">
+        <td>내용</td>
+      </tr>
+    </tbody>
+  </table>    
+</template>
+<script type="text/javascript">
+/* 
+   # 컴포넌트
+   1. vue컴포넌트는 작고 독립적인 코드 블력을 조합하여, 효율적으로 화면을 구성하는 것을 말한다.
+   레고 블럭을 조립하듯 컴포넌트를 조직하여 화면 구성을 효율적으로 할 수 있다.
+      ex) 조회 컴포넌트, 출력 컴포넌트를 태그를 조합을 통해 만들고,
+      해당 컴포넌트 호출하여 재활용 및 효율적 화면을 구성을 할 수 있다.
+   2. 컴포넌트는 조합해서 전체 애프릴케이션을 작성할 수 있다.
+   3. 컴포넌트 간의 데이트는 1단계 계층형으로
+    1) props 속성을 통해 부모 컴포넌트는 자식 컴포넌트에 데이터를 전달한다.
+    2) event 속성르 통해 이벤트와 이벤트에서 발생한 데이터르 자식 컴포넌트에서 부모 컴포넌트로 전달한다.
+   4. 컴포넌트 기본 형식
+    1) Vue.component("요소이름정의",{속성1:속성값, 속성2:속성값})
+       - 요소이름정의 :컴포넌트명으로 실제 화면엥서 사용할 사용자정의 컴포넌트 명이다. <요소명></요소명
+       - 속성 정의 : 컴포넌트에서 사용할 template, 모델데이터, 각종 기능 메서드들을 선언할 수 있다.
+*/
+//
+   $(document).ready(function(){
+      // 1. 바로 컴포넌트 선언.
+      Vue.component("hello-comp",{
+         template:"<div>안녕하세요! 컴포넌트 선언 1단계(바로 선언/사용)</div>"
+      })
+       Vue.component("hello-comp2",{
+         template:"<h2>안녕하세요! 컴포넌트 선언 1단계(바로 선언/사용)</h2>"
+      })
+      
+      // 2. 컴포넌트 템플릿 선언과 호출
+      Vue.component("sch-comp",{
+         template:"#schTmp" // 선언한 template의 id 호출
+      })
+      Vue.component("list-comp",{
+         template:"#listTmp" // 선언한 template의 id 호출
+      })
+      var vm = new Vue({
+         el:".container",
+         data:{
+            title:"연습"
+         }
+      });      
+      
+   });
+</script>
+</head>
+<body>
+<div class="container">
+  <div class="jumbotron text-center">
+   <h2>{{title}}</h2>
+   <hello-comp></hello-comp>
+   <hello-comp></hello-comp>
+   <hello-comp2></hello-comp2>
+   <hello-comp2></hello-comp2>
+  </div>
+  <sch-comp></sch-comp>
+  <list-comp></list-comp>
+  <sch-comp></sch-comp>
+  <sch-comp></sch-comp>
+  <list-comp></list-comp>
+  <list-comp></list-comp>
+  <list-comp></list-comp>
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+     <form class="form-inline" method="post">
+       <input class="form-control mr-sm-2" type="text" 
+          name="ename" value=""
+          placeholder="사원명">
+       <input class="form-control mr-sm-2" type="text" 
+          name="job"  value=""
+          placeholder="직책명">
+       <button class="btn btn-success" type="submit">Search</button>
+     </form>
+  </nav>
+  <table class="table table-hover table-striped">
+    <thead>
+      <tr class="table-success text-center">
+        <th>타이틀</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="text-center">
+        <td>내용</td>
+      </tr>
+    </tbody>
+  </table>    
+</div>
+</body>
+</html>
